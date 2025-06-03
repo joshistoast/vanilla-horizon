@@ -1,0 +1,45 @@
+{% comment %}
+  This snippet is used to render the unit price along with the measurement of a variant
+
+  Accepts:
+  - variant: {Object} Variant Liquid object
+  - price: {String} Unit's price to display
+{% endcomment %}
+<small class="unit-price">
+  <span class="visually-hidden">{{ 'accessibility.unit_price' | t }}</span>
+  {%- liquid
+    assign measurement = variant.unit_price_measurement
+    assign count = measurement.reference_value
+  -%}
+  {%- if measurement.measured_type == 'count' -%}
+    {%- if count == 1 -%}
+      {{- 'blocks.unit_price.per_item.single' | t: price: price -}}
+    {%- else -%}
+      {{- 'blocks.unit_price.per_item' | t: price: price, count: count -}}
+    {%- endif -%}
+  {%- else -%}
+    {%- liquid
+      assign unit = measurement.reference_unit
+      case measurement.reference_unit
+        when 'ml', 'cl', 'l', 'm3', 'pt', 'qt', 'gal', 'floz', 'mg', 'g', 'kg', 'oz', 'lb', 'mm', 'cm', 'm', 'ft', 'yd', 'in', 'm2', 'ft2', 'item'
+          # theme-check-disable TranslationKeyExists
+          assign unit = 'blocks.unit_price.unit.' | append: measurement.reference_unit | t
+          # theme-check-enable TranslationKeyExists
+      endcase
+    -%}
+    <span aria-hidden="true">
+      {%- if count == 1 -%}
+        {{- 'blocks.unit_price.per_unit.single' | t: price: price, unit: unit -}}
+      {%- else -%}
+        {{- 'blocks.unit_price.per_unit' | t: price: price, count: count, unit: unit -}}
+      {%- endif -%}
+    </span>
+    <span class="visually-hidden">
+      {%- if count == 1 -%}
+        {{- 'blocks.unit_price.per_unit_accessibility.single' | t: price: price, unit: unit -}}
+      {%- else -%}
+        {{- 'blocks.unit_price.per_unit_accessibility' | t: price: price, count: count, unit: unit -}}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+</small>

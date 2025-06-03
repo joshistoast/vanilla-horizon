@@ -1,0 +1,34 @@
+
+
+{% stylesheet %}
+  .social-icons__wrapper {
+    display: flex;
+    gap: var(--gap-sm);
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media screen and (width >= 750px) {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+{% endstylesheet %}
+
+<div
+  class="social-icons__wrapper"
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:names.social_media_links",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_social-link"
+    }
+  ]
+}
+{% endschema %}

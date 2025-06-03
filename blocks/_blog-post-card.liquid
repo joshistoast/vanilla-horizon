@@ -1,0 +1,111 @@
+
+
+{% stylesheet %}
+  .blog-post-card {
+    display: flex;
+    flex-direction: column;
+    text-align: var(--text-align);
+  }
+  .blog-post-item .blog-post-card__image-container,
+  .blog-post-item .blog-post-card__content {
+    width: 100%;
+  }
+  .blog-post-item:first-child .blog-post-card {
+    flex-direction: row;
+
+    @media screen and (width < 750px) {
+      flex-direction: column;
+    }
+  }
+  .blog-post-item:first-child .blog-post-card__image-container {
+    width: 70%;
+
+    @media screen and (width < 750px) {
+      width: 100%;
+    }
+  }
+  .blog-post-item:first-child:has(.blog-post-card__image-container) .blog-post-card__content {
+    padding-inline-start: var(--columns-gap);
+    width: 30%;
+
+    @media screen and (width < 750px) {
+      padding-inline-start: 0;
+      width: 100%;
+    }
+  }
+  .blog-post-card__content {
+    padding-block-start: 0.4rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .blog-post-card__content a,
+  .blog-post-card__content .blog-post-card__content-text {
+    display: block;
+    text-wrap: pretty;
+    text-decoration: none;
+    padding-block-start: 0.75rem;
+  }
+{% endstylesheet %}
+
+{% capture title %}
+  {% content_for 'block', id: 'heading', type: '_heading', text: article.title %}
+{% endcapture %}
+
+{% capture details %}
+  {% content_for 'block',
+    id: 'blog-post-details',
+    type: '_blog-post-info-text',
+    alignment: block.settings.alignment,
+    article: article
+  %}
+{% endcapture %}
+
+<div
+  class="blog-post-card"
+  style="--text-align: {{ block.settings.alignment }}"
+>
+  {%- if article.image -%}
+    <div class="blog-post-card__image-container">
+      <a href="{{ article.url }}">
+        {% content_for 'block', id: 'image', type: '_blog-post-image', image: article.image %}
+      </a>
+    </div>
+  {%- endif -%}
+
+  <div class="blog-post-card__content">
+    <a href="{{ article.url }}">{{ title }}</a>
+
+    {{ details }}
+
+    <div class="blog-post-card__content-text">
+      {% assign content = article.excerpt | default: article.content %}
+
+      {% if content %}
+        {% assign truncatewords = 30 %}
+        {% unless article.image %}
+          {% assign truncatewords = 90 %}
+        {% endunless %}
+
+        <rte-formatter>
+          {{ content | strip_html | truncatewords: truncatewords }}
+        </rte-formatter>
+      {% endif %}
+
+      <a href="{{ article.url }}">{{ 'content.read_more' | t }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:names.blog_post",
+  "settings": [
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left"
+    }
+  ]
+}
+{% endschema %}

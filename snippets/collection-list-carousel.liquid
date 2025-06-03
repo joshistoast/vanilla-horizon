@@ -1,0 +1,125 @@
+{% doc %}
+  Renders a carousel of predictive search results cards
+
+  @param {string} ref - The ref of the slideshow
+  @param {object} slide_content - An array of HTML for the slides to display in the carousel
+  @param {number} slide_count - The number of slides to display in the carousel
+  @param {object} settings - The block or sections settings from the parent block/section, includes settings.icons_style (the style of the icons) and settings.icons_shape (the shape of the icons)
+  @param {string} section_id - The id of the parentsection
+
+  @example
+  {% render 'collection-list-carousel', slides: slides, slide_count: slide_count, settings: block.settings %}
+{% enddoc %}
+
+{% liquid
+  assign slideshow_ref = ref | default: 'collectionListCarousel'
+  if settings.section_width == 'page-width'
+    assign slideshow_gutters = 'start end'
+  else
+    assign slideshow_gutters = null
+  endif
+%}
+
+{% style %}
+  .collection-list__carousel {
+    width: 100%;
+    position: relative;
+    /* Calculate slide width based on viewport size and desired columns */
+    container-type: inline-size;
+    container-name: collection-list-carousel;
+
+    --slide-width: 60vw;
+
+    @container collection-list-carousel (width < 750px) {
+      .collection-list__carousel .collection-list__slide {
+        --slide-width: clamp(150px, 60cqw, 450px);
+      }
+    }
+
+    @container collection-list-carousel (width >= 750px) {
+      .collection-list__carousel .collection-list__slide {
+        --section-slide-width: calc(
+          (100% - (var(--collection-list-column-gap) * (var(--column-count) - 1)) - var(--peek-next-slide-size)) /
+            var(--column-count)
+        );
+        --fallback-slide-width: clamp(150px, 60cqw, 450px);
+        --slide-width: var(--section-slide-width, var(--fallback-slide-width));
+      }
+    }
+  }
+
+  .collection-list--{{ section_id }} .collection-list__carousel {
+    {% if settings.section_width == 'page-width' %}
+      --gutter-slide-width: var(--util-page-margin-offset);
+    {% elsif settings.section_width == 'full-width' %}
+      --gutter-slide-width: 0px;
+    {% endif %}
+  }
+
+  .collection-list__carousel slideshow-slides {
+    gap: var(--collection-list-column-gap);
+  }
+
+  .collection-list__carousel slideshow-arrows {
+    padding-inline: var(--util-page-margin-offset);
+
+    @media screen and (width < 750px) {
+      display: none;
+    }
+  }
+
+  .collection-list__carousel .collection-list__slide {
+    width: var(--slide-width);
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+
+  {%- comment -%}
+    Customize slideshow controls
+    TODO: Add new styles to slideshow.css
+    - Style to turn off mix-blend-mode or arrows to get a solid background
+    - Style to hide disabled controls, and push the next control to the right
+  {%- endcomment -%}
+  .collection-list__carousel {
+    .slideshow-control[disabled] {
+      display: none;
+    }
+
+    .slideshow-control--next {
+      margin-inline-start: auto;
+    }
+  }
+{% endstyle %}
+
+{% capture slides %}
+  {% for item in slide_content  %}
+    {% render 'slideshow-slide'
+      index : forloop.index0,
+      children : item,
+      class : 'collection-list__slide',
+      ref : 'slides[]',
+      aria_hidden : false
+    %}
+  {% endfor %}
+{% endcapture %}
+
+{% capture slideshow_arrows %}
+  {% render 'slideshow-arrows', icon_style: settings.icons_style, icon_shape: settings.icons_shape %}
+{% endcapture %}
+
+<div
+  class="collection-list__carousel"
+>
+  {% render 'slideshow',
+    ref: slideshow_ref,
+    class: 'collection-list__carousel',
+    slides: slides,
+    slideshow_arrows: slideshow_arrows,
+    auto_hide_controls: false,
+    infinite: false,
+    initial_slide: 0,
+    slide_count: slide_count,
+    slideshow_gutters: slideshow_gutters
+  %}
+</div>

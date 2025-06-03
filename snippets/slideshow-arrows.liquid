@@ -1,0 +1,30 @@
+{% comment %}
+  Renders arrow controls for a slideshow component.
+  Assumes arrows are placed on top of media.
+  When icon shape is 'none', component uses mixed-blend-mode to ensure visibility.
+
+  Accepts:
+  - class: {String} (optional) -- the class name to apply to the slideshow-arrows component
+  - icon_style: {String} (optional) -- the style of the icon, defaults to 'arrow'
+  - icon_shape: {String} (optional) -- the shape of the icons background, defaults to 'none'
+  - arrows_position: {String} 'left' | 'center' | 'right' (optional) -- the position of the arrows, defaults to 'center'
+  Usage:
+  {%- render 'slideshow-arrows' -%}
+{% endcomment %}
+
+{%- liquid
+  if arrows_position == null
+    assign arrows_position = 'center'
+  endif
+-%}
+
+<slideshow-arrows
+  position="{{ arrows_position }}"
+  shape="{{ icon_shape | default: 'none' }}"
+  {% if class %}
+    class="{{ class }}"
+  {% endif %}
+>
+  {%- render 'slideshow-arrow', action: 'previous', icon_style: icon_style, icon_shape: icon_shape -%}
+  {%- render 'slideshow-arrow', action: 'next', icon_style: icon_style, icon_shape: icon_shape -%}
+</slideshow-arrows>

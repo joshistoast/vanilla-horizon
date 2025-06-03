@@ -1,0 +1,228 @@
+
+
+{% liquid
+  assign use_inverse_logo = false
+
+  if section.settings.enable_transparent_header_home and template.name == 'index' and section.settings.home_color_scheme == 'inverse'
+    assign use_inverse_logo = true
+  elsif section.settings.enable_transparent_header_product and template.name == 'product' and section.settings.product_color_scheme == 'inverse'
+    assign use_inverse_logo = true
+  elsif section.settings.enable_transparent_header_collection and template.name == 'collection' and section.settings.collection_color_scheme == 'inverse'
+    assign use_inverse_logo = true
+  endif
+
+  if use_inverse_logo
+    if settings.logo_inverse != blank
+      assign inverse_logo = settings.logo_inverse
+    else
+      assign inverse_logo = settings.logo
+    endif
+  endif
+%}
+
+{% comment %}
+  Output all logo variants, use CSS to hide/show the appropriate one
+  based on the .header[transparent] selector
+{% endcomment %}
+<a
+  {% if template.name == 'index' and block.settings.hide_logo_on_home_page %}
+    data-hidden-on-home-page
+  {% endif %}
+  href="/"
+  class="size-style spacing-style header-logo"
+  style="
+    {% render 'size-style', settings: block.settings %}
+    {% render 'spacing-style', settings: block.settings %}
+    --font-family: var(--font-body--family);
+    --font-style: var(--font-body--style);
+    --font-weight: 600;
+  "
+  {{ block.shopify_attributes }}
+>
+  <span
+    class="header-logo__original"
+    data-testid="header-logo"
+  >
+    {% render 'image',
+      image: settings.logo,
+      class: 'header-logo__image',
+      height: block.settings.custom_height,
+      text_fallback: shop.name
+    %}
+  </span>
+
+  {% if use_inverse_logo %}
+    <span
+      class="header-logo__inverse"
+      data-testid="header-logo-inverse"
+    >
+      {% render 'image',
+        image: inverse_logo,
+        class: 'header-logo__image',
+        height: block.settings.custom_height,
+        text_fallback: shop.name
+      %}
+    </span>
+  {% endif %}
+</a>
+
+<style>
+  .header-logo__image {
+    --header-logo-image-height: {{ block.settings.custom_height_mobile }}px;
+
+    @media screen and (width >= 750px) {
+      --header-logo-image-height: {{ block.settings.custom_height }}px;
+    }
+  }
+</style>
+
+{% stylesheet %}
+  .header-logo {
+    display: flex;
+    height: 100%;
+    font-size: var(--font-size--md);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    font-style: var(--font-style);
+    color: var(--color-foreground);
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    /* Make sure the logo visually hugs the left edge of the column when it is the first item in the left column */
+    margin-inline: calc(-1 * var(--padding-inline-start));
+
+    &[data-hidden-on-home-page] {
+      display: none;
+
+      #header-component:is(
+          [sticky='always']:not([data-scroll-direction='none']),
+          [sticky='scroll-up'][data-scroll-direction='up']
+        )
+        & {
+        display: flex;
+      }
+    }
+
+    @media screen and (width < 750px) {
+      padding: 0;
+    }
+
+    @media screen and (width >= 750px) {
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .header-logo__image {
+    height: var(--header-logo-image-height);
+    object-fit: contain;
+    /* For Safari with SVG logos */
+    width: auto;
+  }
+
+  .header-logo:has(.header-logo__inverse) .header-logo__original {
+    display: var(--header-logo-display, block);
+  }
+
+  .header-logo__inverse {
+    display: var(--header-logo-inverse-display, none);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.logo",
+  "tag": null,
+  "class": "header-logo",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.edit_logo_in_theme_settings"
+    },
+    {
+      "type": "header",
+      "content": "t:content.visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_logo_on_home_page",
+      "label": "t:settings.hide_logo_on_home_page"
+    },
+    {
+      "type": "header",
+      "content": "t:content.size",
+      "visible_if": "{{ settings.logo != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_height",
+      "label": "t:settings.desktop_height",
+      "min": 12,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ settings.logo != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_height_mobile",
+      "label": "t:settings.mobile_height",
+      "min": 12,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "visible_if": "{{ settings.logo != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding_desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

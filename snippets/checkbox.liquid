@@ -1,0 +1,50 @@
+{% comment %}
+  Renders a checkbox input and label
+
+  Accepts:
+  - name: @string - input name
+  - value: @string - input value
+  - label: @string - label text
+  - checked: @boolean - whether the input is checked
+  - id: @string - input id
+  - disabled: @boolean - whether the input is disabled
+  - inputRef (optional): @string - input ref for use with component framework
+  - labelRef (optional): @string - label ref for use with component framework
+  - autofocus: (optional) @boolean - whether the input should be autofocused
+{% endcomment %}
+<div
+  class="checkbox"
+  {{ events }}
+>
+  <input
+    type="checkbox"
+    name="{{ name }}"
+    value="{{ value }}"
+    id="{{ id }}"
+    class="checkbox__input"
+    data-label="{{ label }}"
+    {% if checked %}
+      checked
+    {% endif %}
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if inputRef != blank %}
+      ref="{{ inputRef }}"
+    {% endif %}
+    {% if autofocus %}
+      autofocus
+    {% endif %}
+  >
+  <label
+    class="checkbox__label"
+    for="{{ id }}"
+    {% if labelRef != blank %}
+      ref="{{ labelRef }}"
+    {% endif %}
+    role="checkbox"
+  >
+    {{ 'icon-checkmark.svg' | inline_asset_content }}
+    <span class="checkbox__label-text">{{- label -}}</span>
+  </label>
+</div>

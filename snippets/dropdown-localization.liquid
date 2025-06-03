@@ -1,0 +1,93 @@
+{% comment %}
+  Determines whether to wrap the localization-form in a dropdown-component.
+  Passes variables to the localization-form snippet.
+
+  Accepts:
+  - show_country: @boolean - Whether to show the country selector
+  - show_language: @boolean - Whether to show the language selector
+  - country_style: @string - The style of the country selector
+  - localization_picker_position: @string - The position of the localization component
+{% endcomment %}
+
+{% liquid
+  assign background_brightness = section.settings.color_scheme.settings.background | color_brightness
+  if background_brightness < 64
+    assign shadow_opacity = 0.25
+    assign flag_shadow_opacity = 0.6
+    assign shadow_size = 4
+  else
+    assign shadow_opacity = 0.1
+    assign flag_shadow_opacity = 0.3
+    assign shadow_size = 2
+  endif
+
+  assign form_style = '--color-shadow: rgb(from var(--color-foreground) r g b / ' | append: shadow_opacity | append: ');'
+%}
+
+{% if show_language and show_country == false %}
+  <div class="dropdown-localization mobile:hidden">
+    {% render 'localization-form',
+      show_country: show_country,
+      show_language: show_language,
+      country_style: country_style,
+      localization_style: 'dropdown'
+    %}
+  </div>
+{% elsif show_country %}
+  <dropdown-localization-component
+    class="dropdown-localization mobile:hidden"
+  >
+    <button
+      type="button"
+      class="button dropdown-localization__button localization-selector link link--text"
+      aria-expanded="false"
+      aria-controls="dropdown-localization-results"
+      ref="button"
+      on:click="/toggleSelector"
+    >
+      <span class="visually-hidden">{{ 'content.localization_region_and_language' | t }}</span>
+      {% if show_country %}
+        {% if country_style == true %}
+          <span
+            class="icon-flag"
+            style="
+              background-image: url({{- localization.country | image_url: width: 32 }});
+              --size-shadow: {{ shadow_size }}px;
+              --color-shadow: rgb(from var(--color-foreground) r g b / {{ flag_shadow_opacity }});
+            "
+          ></span>
+        {% endif %}
+        <span class="currency-code">
+          {{- localization.country.currency.iso_code -}}
+        </span>
+      {% endif %}
+
+      {%- if show_country and show_language -%}
+        <span>/</span>
+      {%- endif -%}
+
+      {%- if show_language -%}
+        <span>
+          {{ localization.language.iso_code | upcase }}
+        </span>
+      {%- endif -%}
+      <span class="svg-wrapper icon-caret">
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </span>
+    </button>
+
+    <div
+      class="localization-wrapper {{ localization_position }}-bound color-{{ settings.popover_color_scheme }}"
+      hidden
+      ref="panel"
+    >
+      {% render 'localization-form',
+        show_country: show_country,
+        show_language: show_language,
+        country_style: country_style,
+        localization_style: 'dropdown',
+        form_style: form_style
+      %}
+    </div>
+  </dropdown-localization-component>
+{% endif %}

@@ -1,0 +1,26 @@
+{%- liquid
+  assign class = class | strip | strip_newlines
+  assign style = style | strip | strip_newlines
+-%}
+
+<slideshow-slide
+  ref="slides[]"
+  aria-hidden="{% if index == 1 %}false{% else %}true{% endif %}"
+  style="view-timeline-name: --slide-{{ index }}; --product-media-fit: {{ media_fit | default: 'cover' }};"
+  {% if class != blank %}
+    class="{{ class }}"
+  {% endif %}
+  {{ attributes }}
+  {% if style != blank %}
+    style="{{ style }}"
+  {% endif %}
+  {% if slide_id != blank %}
+    slide-id="{{ slide_id }}"
+  {% endif %}
+  {% if hidden == true %}
+    hidden
+  {% endif %}
+  {{ attributes }}
+>
+  {{ children }}
+</slideshow-slide>

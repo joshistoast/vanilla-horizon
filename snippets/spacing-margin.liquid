@@ -1,0 +1,11 @@
+{%- comment -%}
+  Intended for blocks and sections that provide values for all the referenced settings.
+
+  <div style="{%  render 'spacing-margin', settings: section.settings %}">
+
+   Accepts:
+      settings: {block.settings || section.settings}
+{%- endcomment -%}
+
+--margin-block-start:{{ settings.margin-block-start | default: 0 }}px; --margin-block-end:{{- settings.margin-block-end | default: 0 -}}px; 
+--margin-inline-start:{{ settings.margin-inline-start | default: 0 }}px; --margin-inline-end:{{- settings.margin-inline-end | default: 0 -}}px;

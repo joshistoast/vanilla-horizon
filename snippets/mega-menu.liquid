@@ -1,0 +1,29 @@
+{% comment %}
+  Renders a mega menu list and optional "more" menu links.
+  When more menu links are present a duplicate instance of each submenu is also rendered.
+
+  Accepts:
+  - parent_link {linklist}: The linklist to render
+  - id {string}: Unique ID to assign ul in markup
+  - menu_content_type {string}: The type of content to render, options: ['featured_products', 'featured_collections', 'collection_images', 'text'] (default: 'text')
+  - content_aspect_ratio {number}: The aspect ratio to display the content if applicable (optional)
+  - image_border_radius {number}: The border radius used for the content images (optional)
+{% endcomment %}
+
+<div class="mega-menu section section--full-width-margin section--{{ section.settings.section_width }}">
+  <div
+    class="mega-menu__grid"
+    data-menu-grid-id="{{ id }}"
+  >
+    {% render 'mega-menu-list',
+      parent_link: parent_link,
+      id: id,
+      grid_columns_count: 6,
+      grid_columns_count_tablet: 4,
+      grid_columns_count_collection_images: 8,
+      menu_content_type: menu_content_type,
+      content_aspect_ratio: content_aspect_ratio,
+      image_border_radius: image_border_radius
+    %}
+  </div>
+</div>

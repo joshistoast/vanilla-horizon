@@ -1,0 +1,25 @@
+<cart-icon
+  class="
+    header-actions__cart-icon
+    {% unless cart == empty %} header-actions__cart-icon--has-cart{% endunless %}
+  "
+>
+  <span class="svg-wrapper">
+    {{ 'icon-cart.svg' | inline_asset_content }}
+  </span>
+
+  {% render 'cart-bubble', limit: 100, live_region: true %}
+</cart-icon>
+
+{% stylesheet %}
+  cart-icon:has(.cart-bubble__text-count:empty) {
+    --cart-bubble-size: 10px;
+    --cart-bubble-top: 9px;
+    --cart-bubble-right: 9px;
+
+    .svg-wrapper {
+      --cart-bubble-top: 4px;
+      --cart-bubble-right: 4px;
+    }
+  }
+{% endstylesheet %}

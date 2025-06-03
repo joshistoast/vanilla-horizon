@@ -1,0 +1,51 @@
+{% comment %}
+  Renders the search action
+
+  Accepts:
+  - style: @string - style of the search action
+  - class: @string - class of the search action
+{% endcomment %}
+
+{% stylesheet %}
+  .search-action {
+    --search-border-radius: var(--style-border-radius-inputs);
+    --search-border-width: var(--style-border-width-inputs);
+
+    display: flex;
+  }
+
+  .header__column--center .search-action {
+    width: auto;
+    flex-grow: 1;
+  }
+
+  :is(.header__column--left, .header__column--center) .search-action {
+    @media screen and (width >= 750px) {
+      margin-inline: calc(var(--padding-lg) * -1);
+    }
+  }
+
+  .header__column--right .search-action {
+    @media screen and (width >= 750px) {
+      margin-inline: calc(var(--gap-md) * -1) calc(var(--gap-xs) * -1);
+    }
+  }
+{% endstylesheet %}
+
+{% unless style == 'none' %}
+  <search-button class="search-action{% if class != blank %} {{ class | strip }}{% endif %}">
+    <button
+      on:click="#search-modal/showDialog"
+      class="button button-unstyled search-modal__button header-actions__action"
+      name="Search"
+    >
+      <span
+        aria-hidden="true"
+        class="svg-wrapper"
+      >
+        {{ 'icon-search.svg' | inline_asset_content }}
+      </span>
+      <span class="visually-hidden">Search</span>
+    </button>
+  </search-button>
+{% endunless %}

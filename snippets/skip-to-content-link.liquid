@@ -1,0 +1,14 @@
+{% comment %}
+  Renders a skip to content link, visible on focus only.
+  Parent element must have position: relative to ensure proper positioning.
+
+  Accepts:
+  - href: @string - The URL to skip to, usually an id like "#MainContent".
+  - text: @string - The text to display, in the form of a translation key for a locale file.
+{% endcomment %}
+<a
+  class="skip-to-content-link button-secondary"
+  href="{{ href }}"
+>
+  {{ text | t }}
+</a>

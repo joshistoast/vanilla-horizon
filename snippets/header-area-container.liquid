@@ -1,0 +1,56 @@
+{% comment %}
+  Accepts :
+    - area: The area of the header to render
+    - items: The named items to render in the header
+    - render_order: The order of the items to render in the header
+    - logo: Logo markup
+    - menu: Menu content markup
+    - desktop_drawer: Desktop menu drawer markup
+    - actions: Custom account and cart link markup
+    - localization: Localization inputs markup
+    - search: Search input markup
+{% endcomment %}
+
+<div class="header__container header__container--{{ area }}{% if items contains 'menu' %} header__container--has-menu{% endif %}">
+  {% if area == 'top-left' %}
+    {{ desktop_drawer }}
+  {% endif %}
+  {% for item in render_order %}
+    {% unless items contains item %}
+      {% continue %}
+    {% endunless %}
+
+    {% case item %}
+      {% when 'logo' %}
+        {{ logo }}
+      {% when 'menu' %}
+        {{ menu }}
+      {% when 'actions' %}
+        {{ actions }}
+      {% when 'localization' %}
+        {{ localization }}
+      {% when 'search' %}
+        {{ search }}
+    {% endcase %}
+  {% endfor %}
+</div>
+
+{%
+  # Nathan: I'd like to remove this dynamic styling. It's useful for the grid if it scales with more areas, but
+  # I'd rather have all the styles in one place if not based on custom properties that change based on user input.
+  # Leaving for now; to correct later.
+%}
+{% style %}
+  .header__container--{{ area }} {
+    grid-area: {{ area }};
+    {% case area %}
+      {% when 'top-left', 'bottom-left' %}
+        --grid-area-alignment: flex-start;
+      {% when 'top-center', 'bottom-center' %}
+        --grid-area-alignment: center;
+      {% when 'top-right', 'bottom-right' %}
+        --grid-area-alignment: flex-end;
+    {% endcase %}
+    justify-content: var(--grid-area-alignment);
+  }
+{% endstyle %}

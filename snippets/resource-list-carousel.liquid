@@ -1,0 +1,117 @@
+{% doc %}
+  Renders a carousel of predictive search results cards
+
+  @param {string} ref - The ref of the slideshow
+  @param {object} slides - An array of HTML for the slides to display in the carousel
+  @param {number} slide_count - The number of slides to display in the carousel
+  @param {object} settings - The block or sections settings from the parent block/section.
+  @param {string} [section_id] - section.id of the parent section
+
+  @example
+  {% render 'resource-list-carousel', slides: slides, slide_count: slide_count, settings: block.settings %}
+{% enddoc %}
+
+{% liquid
+  assign slideshow_ref = ref | default: 'resourceListCarousel'
+  if settings.section_width == 'page-width'
+    assign slideshow_gutters = 'start end'
+  else
+    assign slideshow_gutters = null
+  endif
+%}
+
+{% style %}
+  .resource-list__carousel {
+    width: 100%;
+    position: relative;
+    container-type: inline-size;
+    container-name: resource-list-carousel;
+    --slide-width: 60vw;
+  }
+
+  .resource-list--{{ section_id }} .resource-list__carousel {
+    {% if settings.section_width == 'page-width' %}
+      --gutter-slide-width: var(--util-page-margin-offset);
+    {% elsif settings.section_width == 'full-width' %}
+      --gutter-slide-width: 0px;
+    {% endif %}
+  }
+
+  @container resource-list-carousel (width < 750px) {
+    .resource-list__carousel .resource-list__slide {
+      --slide-width: clamp(150px, 60cqw, 300px);
+    }
+  }
+
+  @container resource-list-carousel (width >= 750px) {
+    .resource-list__carousel .resource-list__slide {
+      --section-slide-width: calc(
+        (100% - (var(--resource-list-column-gap) * (var(--column-count) - 1)) - var(--peek-next-slide-size)) /
+          var(--column-count)
+      );
+      --fallback-slide-width: clamp(150px, 60cqw, 300px);
+      --slide-width: var(--section-slide-width, var(--fallback-slide-width));
+    }
+  }
+
+  .resource-list__carousel slideshow-slides {
+    column-gap: var(--resource-list-column-gap);
+  }
+
+  .resource-list__carousel slideshow-arrows {
+    padding-inline: var(--util-page-margin-offset);
+
+    @media screen and (width < 750px) {
+      display: none;
+    }
+  }
+
+  .resource-list__carousel .resource-list__slide {
+    width: var(--slide-width);
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+
+  .resource-list__carousel {
+    .slideshow-control[disabled] {
+      display: none;
+    }
+
+    .slideshow-control--next {
+      margin-inline-start: auto;
+    }
+  }
+{% endstyle %}
+
+{% capture slides %}
+  {% for item in slides limit: slides.size %}
+    {% render 'slideshow-slide'
+      index : forloop.index0,
+      children : item,
+      class : 'resource-list__slide',
+      ref : 'slides[]',
+      aria_hidden : false
+    %}
+  {% endfor %}
+{% endcapture %}
+
+{% capture slideshow_arrows %}
+  {% render 'slideshow-arrows', icon_style: settings.icons_style, icon_shape: settings.icons_shape %}
+{% endcapture %}
+
+<div
+  class="resource-list__carousel"
+>
+  {% render 'slideshow',
+    ref: slideshow_ref,
+    class: 'resource-list__carousel',
+    slides: slides,
+    slideshow_arrows: slideshow_arrows,
+    auto_hide_controls: false,
+    infinite: false,
+    initial_slide: 0,
+    slide_count: slide_count,
+    slideshow_gutters: slideshow_gutters
+  %}
+</div>
