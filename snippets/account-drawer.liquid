@@ -2,6 +2,38 @@
   This snippet renders the account drawer, which is used for mobile users.
 {% endcomment %}
 
+<script
+  src="{{ 'dialog.js' | asset_url }}"
+  type="module"
+></script>
+
+<dialog-component
+  class="account-drawer"
+  {{ block.shopify_attributes }}
+>
+  {% render 'account-button', attributes: 'on:click="/showDialog"' %}
+  <dialog
+    ref="dialog"
+    class="color-{{ settings.popover_color_scheme }} dialog-modal dialog-drawer dialog-bottom-sheet account-drawer__dialog"
+    scroll-lock
+  >
+    <button
+      ref="closeButton"
+      on:click="/closeDialog"
+      class="button button-unstyled account-drawer__close-button"
+      aria-label="{{ 'actions.close_dialog' | t }}"
+    >
+      <span
+        class="svg-wrapper"
+        aria-hidden="true"
+      >
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </button>
+    {% render 'account-actions', autofocus_enabled: true %}
+  </dialog>
+</dialog-component>
+
 {% stylesheet %}
   .account-drawer {
     @media screen and (width >= 750px) {
@@ -68,32 +100,3 @@
     }
   }
 {% endstylesheet %}
-
-<script
-  src="{{ 'dialog.js' | asset_url }}"
-  type="module"
-></script>
-
-<dialog-component
-  class="account-drawer"
-  {{ block.shopify_attributes }}
->
-  {% render 'account-button', attributes: 'on:click="/showDialog"' %}
-  <dialog
-    ref="dialog"
-    class="color-{{ settings.popover_color_scheme }} dialog-modal dialog-drawer dialog-bottom-sheet account-drawer__dialog"
-    scroll-lock
-  >
-    <button
-      ref="closeButton"
-      on:click="/closeDialog"
-      class="button button-unstyled account-drawer__close-button"
-      aria-label="{{ 'actions.close_dialog' | t }}"
-    >
-      <span class="svg-wrapper">
-        {{- 'icon-close.svg' | inline_asset_content -}}
-      </span>
-    </button>
-    {% render 'account-actions', autofocus_enabled: true %}
-  </dialog>
-</dialog-component>

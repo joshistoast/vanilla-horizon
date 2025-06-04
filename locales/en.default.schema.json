@@ -111,19 +111,8 @@
     "variant_settings": "Variant settings",
     "visibility": "Visibility",
     "width": "Width",
-    "width_is_automatically_optimized": "Width is automatically optimized for mobile."
-  },
-  "github": {
-    "alternating_content_rows": "[Github Issue](https://github.com/Shopify/horizon/issues/2982)",
-    "announcement_bar": "[Github Issue](https://github.com/Shopify/horizon/issues/2987)",
-    "collection_list": "[Github Issue](https://github.com/Shopify/horizon/issues/2983)",
-    "content_swimlane": "[Github Issue](https://github.com/Shopify/horizon/issues/2986)",
-    "featured_product": "[Github Issue](https://github.com/Shopify/horizon/issues/2985)",
-    "hero": "[Github Issue](https://github.com/Shopify/horizon/issues/2978)",
-    "marquee": "[Github Issue](https://github.com/Shopify/horizon/issues/2979)",
-    "media_with_content": "[Github Issue](https://github.com/Shopify/horizon/issues/2981)",
-    "product_list": "[Github Issue](https://github.com/Shopify/horizon/issues/2984)",
-    "pull_quote": "[Github Issue](https://github.com/Shopify/horizon/issues/2980)"
+    "width_is_automatically_optimized": "Width is automatically optimized for mobile.",
+    "app_required_for_ratings": "An app is required for product ratings. [Learn more](https://help.shopify.com/manual/apps)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"

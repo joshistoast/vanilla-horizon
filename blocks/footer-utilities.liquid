@@ -1,5 +1,20 @@
 
 
+<div
+  class="footer-utilities spacing-style"
+  style="{% render 'spacing-style', settings: block.settings %} --border-width: {{ block.settings.divider_thickness }}px;"
+  {{ block.shopify_attributes }}
+>
+  <div class="footer-utilities__group footer-utilities__group--left">
+    {% content_for 'block', type: '_footer-copyright', id: 'copyright' %}
+    {% content_for 'block', type: '_footer-policy-list', id: 'policy_list' %}
+  </div>
+
+  <div class="footer-utilities__group footer-utilities__group--right">
+    {% content_for 'block', type: '_footer-social-icons', id: 'social_icons' %}
+  </div>
+</div>
+
 {% stylesheet %}
   .footer-utilities {
     width: 100%;
@@ -54,21 +69,6 @@
     }
   }
 {% endstylesheet %}
-
-<div
-  class="footer-utilities spacing-style"
-  style="{% render 'spacing-style', settings: block.settings %} --border-width: {{ block.settings.divider_thickness }}px;"
-  {{ block.shopify_attributes }}
->
-  <div class="footer-utilities__group footer-utilities__group--left">
-    {% content_for 'block', type: '_footer-copyright', id: 'copyright' %}
-    {% content_for 'block', type: '_footer-policy-list', id: 'policy_list' %}
-  </div>
-
-  <div class="footer-utilities__group footer-utilities__group--right">
-    {% content_for 'block', type: '_footer-social-icons', id: 'social_icons' %}
-  </div>
-</div>
 
 {% schema %}
 {

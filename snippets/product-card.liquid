@@ -5,54 +5,9 @@
 
   @param {object} product - The product object
   @param {object} children - The children of the product card
+  @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
 {% enddoc %}
-
-{% stylesheet %}
-  product-card-link {
-    width: 100%;
-  }
-
-  .product-card__placeholder-image svg {
-    height: 100%;
-  }
-
-  @media screen and (width < 750px) {
-    .product-card slideshow-arrows .slideshow-control {
-      display: none;
-    }
-  }
-
-  /* Hide the variant swatches for product cards that show a swatches variant picker */
-  :is(.product-card):has(swatches-variant-picker-component) .quick-add .variant-option--swatches {
-    display: none;
-  }
-
-  /* Hide "Add" button for single option product cards that show a swatches variant picker */
-  :is(.product-card):has(.quick-add__product-form-component--single-option):has(swatches-variant-picker-component)
-    .quick-add__button--choose {
-    display: none;
-  }
-
-  /* Hide "add" button for multi-variant product cards that don't show a swatches variant picker */
-  :is(.product-card):has(.quick-add__product-form-component--multi-variant):not(:has(swatches-variant-picker-component))
-    .quick-add__button--add {
-    display: none;
-  }
-
-  /* Hover effect for single variant product cards and product blocks */
-
-  /* stylelint-disable selector-max-specificity */
-  :is(.product-card):has(.quick-add__product-form-component--single-variant) .card-gallery:hover {
-    & .quick-add__button--choose {
-      display: none;
-    }
-
-    & .quick-add__button--add {
-      display: grid;
-    }
-  }
-{% endstylesheet %}
 
 {% style %}
   {% if request.visual_preview_mode %}
@@ -140,3 +95,49 @@
 {%- if settings.transition_to_main_product -%}
   </product-card-link>
 {%- endif -%}
+
+{% stylesheet %}
+  product-card-link {
+    width: 100%;
+  }
+
+  .product-card__placeholder-image svg {
+    height: 100%;
+  }
+
+  @media screen and (width < 750px) {
+    .product-card slideshow-arrows .slideshow-control {
+      display: none;
+    }
+  }
+
+  /* Hide the variant swatches for product cards that show a swatches variant picker */
+  :is(.product-card):has(swatches-variant-picker-component) .quick-add .variant-option--swatches {
+    display: none;
+  }
+
+  /* Hide "Add" button for single option product cards that show a swatches variant picker */
+  :is(.product-card):has(.quick-add__product-form-component--single-option):has(swatches-variant-picker-component)
+    .quick-add__button--choose {
+    display: none;
+  }
+
+  /* Hide "add" button for multi-variant product cards that don't show a swatches variant picker */
+  :is(.product-card):has(.quick-add__product-form-component--multi-variant):not(:has(swatches-variant-picker-component))
+    .quick-add__button--add {
+    display: none;
+  }
+
+  /* Hover effect for single variant product cards and product blocks */
+
+  /* stylelint-disable selector-max-specificity */
+  :is(.product-card):has(.quick-add__product-form-component--single-variant) .card-gallery:hover {
+    & .quick-add__button--choose {
+      display: none;
+    }
+
+    & .quick-add__button--add {
+      display: grid;
+    }
+  }
+{% endstylesheet %}

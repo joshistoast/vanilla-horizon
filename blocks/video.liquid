@@ -1,11 +1,5 @@
 
 
-{% stylesheet %}
-  .placeholder-video {
-    aspect-ratio: 5 / 3;
-  }
-{% endstylesheet %}
-
 {% capture video_style %}
   {%  render 'spacing-style', settings: block.settings %}
   {% render 'border-override', settings: block.settings %}
@@ -20,7 +14,8 @@
     video_loop: block.settings.video_loop,
     video_style: video_style,
     video_preview_image: block.settings.video.preview_image,
-    additional_attributes: block.shopify_attributes
+    additional_attributes: block.shopify_attributes,
+    section_id: section.id
   %}
 {% else %}
   {% render 'video',
@@ -31,9 +26,16 @@
     video_style: video_style,
     video_alt: block.settings.alt,
     video_preview_image: block.settings.cover_image,
-    additional_attributes: block.shopify_attributes
+    additional_attributes: block.shopify_attributes,
+    section_id: section.id
   %}
 {% endif %}
+
+{% stylesheet %}
+  .placeholder-video {
+    aspect-ratio: 5 / 3;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

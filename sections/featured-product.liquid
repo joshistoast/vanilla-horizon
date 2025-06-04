@@ -1,44 +1,5 @@
 
 
-{% stylesheet %}
-  .featured-product-section .section-content-wrapper {
-    grid-template-columns: 1fr;
-    display: grid;
-    overflow: hidden;
-
-    @media (width >= 750px) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* Here I should maybe set the width to auto when the ratio is set to adapt */
-  .featured-product-section .product-media-container.constrain-height {
-    /* arbitrary offset value based on average theme spacing and header height */
-    --viewport-offset: 400px;
-    --constrained-min-height: var(--visual-preview--height, 80dvh);
-
-    @media screen and (width >= 750px) {
-      --viewport-offset: 300px;
-    }
-  }
-
-  .featured-product-section .product-card__link {
-    --padding-block: 20px;
-    --padding-inline: 20px;
-
-    @media screen and (width >= 750px) {
-      --padding-block: 40px;
-      --padding-inline: 40px;
-    }
-  }
-
-  @media screen and (width < 750px) {
-    .featured-product-section .media-block {
-      order: -1;
-    }
-  }
-{% endstylesheet %}
-
 <script type="application/ld+json">
   {{ section.settings.product | structured_data }}
 </script>
@@ -82,6 +43,45 @@
     {% endif %}
   </div>
 </div>
+
+{% stylesheet %}
+  .featured-product-section .section-content-wrapper {
+    grid-template-columns: 1fr;
+    display: grid;
+    overflow: hidden;
+
+    @media (width >= 750px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Here I should maybe set the width to auto when the ratio is set to adapt */
+  .featured-product-section .product-media-container.constrain-height {
+    /* arbitrary offset value based on average theme spacing and header height */
+    --viewport-offset: 400px;
+    --constrained-min-height: var(--visual-preview--height, 80dvh);
+
+    @media screen and (width >= 750px) {
+      --viewport-offset: 300px;
+    }
+  }
+
+  .featured-product-section .product-card__link {
+    --padding-block: 20px;
+    --padding-inline: 20px;
+
+    @media screen and (width >= 750px) {
+      --padding-block: 40px;
+      --padding-inline: 40px;
+    }
+  }
+
+  @media screen and (width < 750px) {
+    .featured-product-section .media-block {
+      order: -1;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

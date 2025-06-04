@@ -1,19 +1,5 @@
 
 
-{% stylesheet %}
-  .policy_list {
-    display: flex;
-    gap: var(--gap-2xs) var(--gap-sm);
-    /* Depending on the content, some smaller desktop layouts will need to wrap the items to fit everything */
-    flex-wrap: wrap;
-    justify-content: center;
-
-    @media screen and (width >= 750px) {
-      justify-content: flex-start;
-    }
-  }
-{% endstylesheet %}
-
 <ul
   class="
     policy_list list-unstyled
@@ -36,6 +22,20 @@
     {%- endif -%}
   {%- endfor -%}
 </ul>
+
+{% stylesheet %}
+  .policy_list {
+    display: flex;
+    gap: var(--gap-2xs) var(--gap-sm);
+    /* Depending on the content, some smaller desktop layouts will need to wrap the items to fit everything */
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media screen and (width >= 750px) {
+      justify-content: flex-start;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

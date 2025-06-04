@@ -15,6 +15,8 @@
   @param {string} [video_type] - 'youtube' or 'vimeo'
   @param {boolean} [disable_controls] - Whether to disable controls. If true, only play/pause will be usable.
   @param {object} video - The Shopify video object or a string containing a YouTube ID or Vimeo ID
+  @param {string} section_id - The section ID
+  @param {object} [block] - The block object
 
   Video from URL:
 
@@ -22,7 +24,7 @@
   @param {string} [video_alt] - The video alt text
 
   @example
-  {% render 'video', video: section.settings.video, video_autoplay: true, video_loop: true %}
+  {% render 'video', video: section.settings.video, video_autoplay: true, video_loop: true, section_id: section.id %}
 {% enddoc %}
 
 {% assign video_alt = video_alt | default: video.alt %}
@@ -117,18 +119,6 @@
   {% endcapture %}
 {% endif %}
 
-{% stylesheet %}
-  .video-interaction-hint {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: var(--layer-flat);
-  }
-
-  .video-interaction-hint:hover {
-    opacity: 1;
-  }
-{% endstylesheet %}
-
 {% if video != blank %}
   <deferred-media
     class="{{ video_class }}"
@@ -205,7 +195,7 @@
     {% else %}
       <placeholder-image
         class="placeholder-video"
-        data-block-id="{{ section.id }}-{{ block.id }}"
+        data-block-id="{{ section_id }}-{{ block.id }}"
         data-type="general"
       ></placeholder-image>
     {% endif %}
@@ -215,3 +205,15 @@
     </span>
   </div>
 {% endif %}
+
+{% stylesheet %}
+  .video-interaction-hint {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: var(--layer-flat);
+  }
+
+  .video-interaction-hint:hover {
+    opacity: 1;
+  }
+{% endstylesheet %}

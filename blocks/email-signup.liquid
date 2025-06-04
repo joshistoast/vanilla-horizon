@@ -1,4 +1,96 @@
 
+
+<div
+  class="email-signup-block size-style spacing-style"
+  style="{% render 'size-style', settings: block.settings %}{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {%- form 'customer', class: 'email-signup__form spacing-style' %}
+    <div
+      class="email-signup__input-group {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %}"
+      style="--border-width: {{ block.settings.border_width }}px; --border-radius: {{ block.settings.border_radius }}px;"
+    >
+      <label
+        for="EmailInput-{{ block.id }}"
+        class="visually-hidden"
+      >
+        {{ 'blocks.email_signup.label' | t }}
+      </label>
+      <input
+        id="EmailInput-{{ block.id }}"
+        class="email-signup__input email-signup__input--{{ block.settings.border_style }} {{ block.settings.input_type_preset }} {{ block.settings.border_variation }}"
+        type="email"
+        name="contact[email]"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="email"
+        placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
+        required
+        {% if form.errors %}
+          autofocus
+          aria-invalid="true"
+          aria-describedby="Email-signup__message-error-{{ block.id }}"
+        {% elsif form.posted_successfully? %}
+          aria-describedby="Email-signup__message-success-{{ block.id }}"
+        {% endif %}
+      >
+      <button
+        class="email-signup__button {% if block.settings.integrated_button or block.settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block.settings.display_type }} {{ block.settings.button_type_preset }} {{ block.settings.style_class }} {{ block.settings.style_class }}--{{ block.id }} {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %}"
+        {% if block.settings.display_type != 'text' %}
+          aria-label="{{ 'actions.sign_up' | t }}"
+        {% endif %}
+      >
+        {% if block.settings.display_type == 'text' %}
+          {{ block.settings.label }}
+        {% else %}
+          <svg
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+            aria-hidden="true"
+            class="email-signup__button-icon"
+          >
+            {% render 'icon', icon: 'arrow' %}
+          </svg>
+        {% endif %}
+      </button>
+    </div>
+
+    {%- if form.errors -%}
+      <div
+        id="Email-signup__message-error-{{ block.id }}"
+        class="email-signup__message email-signup__message--error"
+        tabindex="-1"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+          focusable="false"
+          aria-hidden="true"
+          class="icon-error"
+        >
+          {%- render 'icon', icon: 'error'  -%}
+        </svg>
+        {{- form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email -}}
+      </div>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <div
+        id="Email-signup__message-success-{{ block.id }}"
+        class="email-signup__message email-signup__message--success"
+        tabindex="-1"
+      >
+        <span class="svg-wrapper icon-success">
+          {{ 'icon-checkmark.svg' | inline_asset_content }}
+        </span>
+        <p class="email-signup__message-text">{{ 'blocks.email_signup.success' | t }}</p>
+      </div>
+    {%- endif -%}
+  {% endform %}
+</div>
+
 {% stylesheet %}
   .email-signup-block {
     @media screen and (width < 750px) {
@@ -180,97 +272,6 @@
     margin: 0;
   }
 {% endstylesheet %}
-
-<div
-  class="email-signup-block size-style spacing-style"
-  style="{% render 'size-style', settings: block.settings %}{% render 'spacing-style', settings: block.settings %}"
-  {{ block.shopify_attributes }}
->
-  {%- form 'customer', class: 'email-signup__form spacing-style' %}
-    <div
-      class="email-signup__input-group {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %}"
-      style="--border-width: {{ block.settings.border_width }}px; --border-radius: {{ block.settings.border_radius }}px;"
-    >
-      <label
-        for="EmailInput-{{ block.id }}"
-        class="visually-hidden"
-      >
-        {{ 'blocks.email_signup.label' | t }}
-      </label>
-      <input
-        id="EmailInput-{{ block.id }}"
-        class="email-signup__input email-signup__input--{{ block.settings.border_style }} {{ block.settings.input_type_preset }} {{ block.settings.border_variation }}"
-        type="email"
-        name="contact[email]"
-        autocorrect="off"
-        autocapitalize="off"
-        autocomplete="email"
-        placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
-        required
-        {% if form.errors %}
-          autofocus
-          aria-invalid="true"
-          aria-describedby="Email-signup__message-error-{{ block.id }}"
-        {% elsif form.posted_successfully? %}
-          aria-describedby="Email-signup__message-success-{{ block.id }}"
-        {% endif %}
-      >
-      <button
-        class="email-signup__button {% if block.settings.integrated_button or block.settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block.settings.display_type }} {{ block.settings.button_type_preset }} {{ block.settings.style_class }} {{ block.settings.style_class }}--{{ block.id }} {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %}"
-        {% if block.settings.display_type != 'text' %}
-          aria-label="{{ 'actions.sign_up' | t }}"
-        {% endif %}
-      >
-        {% if block.settings.display_type == 'text' %}
-          {{ block.settings.label }}
-        {% else %}
-          <svg
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-            focusable="false"
-            aria-hidden="true"
-            class="email-signup__button-icon"
-          >
-            {% render 'icon', icon: 'arrow' %}
-          </svg>
-        {% endif %}
-      </button>
-    </div>
-
-    {%- if form.errors -%}
-      <div
-        id="Email-signup__message-error-{{ block.id }}"
-        class="email-signup__message email-signup__message--error"
-        tabindex="-1"
-      >
-        <svg
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-          focusable="false"
-          aria-hidden="true"
-          class="icon-error"
-        >
-          {%- render 'icon', icon: 'error'  -%}
-        </svg>
-        {{- form.errors.translated_fields.email | capitalize }}
-        {{ form.errors.messages.email -}}
-      </div>
-    {%- endif -%}
-
-    {%- if form.posted_successfully? -%}
-      <div
-        id="Email-signup__message-success-{{ block.id }}"
-        class="email-signup__message email-signup__message--success"
-        tabindex="-1"
-      >
-        <span class="svg-wrapper icon-success">
-          {{ 'icon-checkmark.svg' | inline_asset_content }}
-        </span>
-        <p class="email-signup__message-text">{{ 'blocks.email_signup.success' | t }}</p>
-      </div>
-    {%- endif -%}
-  {% endform %}
-</div>
 
 {% schema %}
 {

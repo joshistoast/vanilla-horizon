@@ -1,5 +1,22 @@
 
 
+<div
+  class="accordion accordion--{{ block.id }} accordion--{{ block.settings.icon }} border-style spacing-style{% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }}{% endif %}{% if block.settings.dividers %} accordion--dividers{% endif %}"
+  style="
+    --summary-font-family: var(--font-{{ block.settings.type_preset }}--family);
+     --summary-font-style: var(--font-{{ block.settings.type_preset }}--style);
+     --summary-font-weight: var(--font-{{ block.settings.type_preset }}--weight);
+     --summary-font-size: var(--font-{{ block.settings.type_preset }}--size);
+     --summary-font-line-height: var(--font-{{ block.settings.type_preset }}--line-height);
+     --summary-font-case: var(--font-{{ block.settings.type_preset }}--case);
+    {% render 'spacing-style', settings: block.settings %}
+    {% render 'border-override', settings: block.settings %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
 {% stylesheet %}
   .accordion {
     flex: 1;
@@ -38,23 +55,6 @@
     text-transform: var(--summary-font-case);
   }
 {% endstylesheet %}
-
-<div
-  class="accordion accordion--{{ block.id }} accordion--{{ block.settings.icon }} border-style spacing-style{% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }}{% endif %}{% if block.settings.dividers %} accordion--dividers{% endif %}"
-  style="
-    --summary-font-family: var(--font-{{ block.settings.type_preset }}--family);
-     --summary-font-style: var(--font-{{ block.settings.type_preset }}--style);
-     --summary-font-weight: var(--font-{{ block.settings.type_preset }}--weight);
-     --summary-font-size: var(--font-{{ block.settings.type_preset }}--size);
-     --summary-font-line-height: var(--font-{{ block.settings.type_preset }}--line-height);
-     --summary-font-case: var(--font-{{ block.settings.type_preset }}--case);
-    {% render 'spacing-style', settings: block.settings %}
-    {% render 'border-override', settings: block.settings %}
-  "
-  {{ block.shopify_attributes }}
->
-  {% content_for 'blocks' %}
-</div>
 
 {% schema %}
 {

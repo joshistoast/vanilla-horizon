@@ -3,11 +3,276 @@
 
   @param {boolean} show_country - Whether to show the country selector
   @param {boolean} show_language - Whether to show the language selector
+  @param {string} block_id - The block ID
   @param {string} [form_style] - The style tag string to be applied to the form
+  @param {string} [localization_style] - The style of the localization form
 
   @example
-  {% render 'localization-form', show_country: true, show_language: true %}
+  {% render 'localization-form', show_country: true, show_language: true, block_id: block.id %}
 {% enddoc %}
+
+{%- liquid
+  comment
+    From Tyler in July: Noting here that it might make sense for us to just be able to get localization.available_currencies and localization.popular_countries instead of needing this esoteric logic.
+  endcomment
+  assign currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
+  assign popular_countries = localization.available_countries | where: 'popular?' | sort: 'name'
+
+  assign show_country_filter = false
+  if localization.available_countries.size > 9
+    assign show_country_filter = true
+  endif
+
+  assign show_popular_countries = false
+  if localization.available_countries.size > 9 and popular_countries.size > 1
+    assign show_popular_countries = true
+  endif
+
+  assign show_currencies = false
+  if currencies.size > 1
+    assign show_currencies = true
+  endif
+
+  assign aliases_us = 'us,usa,america,united states of america'
+  assign aliases_uk = 'uk,gb,great britain'
+%}
+<localization-form-component
+  ref="localizationForm"
+  data-label-results-count="{{ 'accessibility.country_results_count' | t: count: '[count]' }}"
+  data-show-filter="{{ show_country_filter }}"
+  style="{{ form_style }}"
+>
+  {% assign localization_label = 'content.localization_region_and_language' | t %}
+
+  {%- form 'localization',
+    id: 'LocalizationForm',
+    class: 'localization-form',
+    ref: 'form',
+    aria-label: localization_label
+  -%}
+    {% if show_country %}
+      {% if show_country_filter %}
+        <div class="country-filter">
+          <div class="field">
+            <div class="country-filter__search-icon field__button motion-reduce">
+              <span class="svg-wrapper">
+                {{ 'icon-search.svg' | inline_asset_content }}
+              </span>
+            </div>
+            <input
+              class="country-filter__input"
+              id="country-filter-input"
+              type="search"
+              name="country_filter"
+              value=""
+              placeholder="{{ 'placeholders.search' | t }}"
+              role="combobox"
+              aria-owns="country-results"
+              aria-controls="country-results"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              aria-label="{{ 'accessibility.find_country' | t }}"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              ref="search"
+              on:keyup="/filterCountries"
+            >
+            <label
+              class="field__label visually-hidden"
+              for="country-filter-input"
+            >
+              {{- 'content.search' | t -}}
+            </label>
+            <button
+              type="reset"
+              class="button button-unstyled country-filter__reset-button field__button"
+              aria-label="{{ 'actions.reset' | t }}"
+              ref="resetButton"
+              hidden
+              on:click="/resetCountriesFilter"
+            >
+              <span class="svg-wrapper">
+                {{ 'icon-reset.svg' | inline_asset_content }}
+              </span>
+            </button>
+          </div>
+        </div>
+      {% endif %}
+      <div class="country-selector-form__wrapper">
+        <h2
+          class="visually-hidden"
+          id="{{ localization_style }}-CountryLabel"
+        >
+          Country/Region
+        </h2>
+        {% if show_country_filter %}
+          <div
+            id="sr-country-search-results-{{ block_id }}"
+            class="visually-hidden"
+            aria-live="polite"
+            ref="liveRegion"
+          ></div>
+        {% endif %}
+        <div
+          class="localization-form__list country-selector__list{% if show_currencies %} country-selector__list--with-multiple-currencies{% endif %}"
+          id="{{ localization_style }}-country-results"
+          ref="countryList"
+        >
+          {% if show_popular_countries %}
+            <ul
+              role="list"
+              class="list-unstyled popular-countries"
+              aria-label="{{ 'accessibility.country_region' | t }}"
+              ref="popularCountries"
+            >
+              {%- for country in popular_countries -%}
+                {% liquid
+                  assign aliases = ''
+                  case country.iso_code
+                    when 'US'
+                      assign aliases = aliases_us
+                    when 'GB'
+                      assign aliases = aliases_uk
+                  endcase
+                %}
+                <li
+                  class="localization-form__list-item"
+                  {% if country.iso_code == localization.country.iso_code %}
+                    aria-current="true"
+                  {% endif %}
+                  data-value="{{ country.iso_code }}"
+                  {% if aliases %}
+                    data-aliases="{{ aliases }}"
+                  {% endif %}
+                  id="{{ country.name }}"
+                  aria-label="{{ country.name }}"
+                  role="option"
+                  tabindex="-1"
+                  ref="countryListItems[]"
+                  on:click="/selectCountry/{{ country.iso_code }}"
+                >
+                  <span class="svg-wrapper icon-checkmark">
+                    {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                  </span>
+                  <span class="country">{{- country.name }}</span>
+                  <span
+                    class="localization-form__currency motion-reduce"
+                    {% unless show_currencies %}
+                      hidden
+                    {% endunless %}
+                  >
+                    {{ country.currency.iso_code }}
+                    {{ country.currency.symbol -}}
+                  </span>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {% endif %}
+          <ul
+            role="list"
+            class="list-unstyled countries"
+          >
+            <span
+              class="localization-form__list-item localization-form__list-item-disabled"
+              id="no-results-message"
+              ref="noResultsMessage"
+              hidden
+            >
+              {{- 'content.no_results_found' | t -}}
+            </span>
+            {%- for country in localization.available_countries -%}
+              {% liquid
+                assign aliases = ''
+                case country.iso_code
+                  when 'US'
+                    assign aliases = aliases_us
+                  when 'GB'
+                    assign aliases = aliases_uk
+                endcase
+              %}
+              <li
+                class="localization-form__list-item"
+                {% if country.iso_code == localization.country.iso_code %}
+                  aria-current="true"
+                {% endif %}
+                data-value="{{ country.iso_code }}"
+                {% if aliases %}
+                  data-aliases="{{ aliases }}"
+                {% endif %}
+                id="{{ country.name }}"
+                aria-label="{{ country.name }}"
+                role="option"
+                tabindex="-1"
+                ref="countryListItems[]"
+                on:click="/selectCountry/{{ country.iso_code }}"
+              >
+                <span class="svg-wrapper icon-checkmark">
+                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
+                </span>
+                <span class="country">{{- country.name }}</span>
+                <span
+                  class="localization-form__currency motion-reduce"
+                  {% unless show_currencies %}
+                    hidden
+                  {% endunless %}
+                >
+                  {{ country.currency.iso_code }}
+                  {{ country.currency.symbol -}}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        <div class="country-selector__overlay"></div>
+        <input
+          type="hidden"
+          name="country_code"
+          value="{{ localization.country.iso_code }}"
+          ref="countryInput"
+        >
+      </div>
+    {% endif %}
+
+    {% if show_language %}
+      <div class="language-selector{% if show_country %} top-shadow{% else %} language-selector--collapse-space{% endif %}{% if show_country == false and localization_style == 'drawer' %} h5{% endif %}">
+        <h2
+          class="visually-hidden"
+          id="{{ localization_style }}-LanguageLabel"
+        >
+          {{ 'content.language' | t }}
+        </h2>
+        {% if show_country == true %}
+          <span class="language-selector__label">{{ 'content.language' | t }}</span>
+        {% endif %}
+        <select
+          id="{{ localization_style }}Select"
+          class="localization-form__select"
+          name="language_code"
+          aria-label="{{ 'content.language' | t }}"
+          ref="languageInput"
+          on:change="/changeLanguage"
+        >
+          {%- for language in localization.available_languages -%}
+            <option
+              value="{{ language.iso_code }}"
+              lang="{{ language.iso_code }}"
+              {% if language.iso_code == localization.language.iso_code %}
+                selected
+              {% endif %}
+            >
+              {{ language.endonym_name | capitalize }}
+            </option>
+          {%- endfor -%}
+        </select>
+        <span class="svg-wrapper icon-caret">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+      </div>
+    {% endif %}
+  {%- endform -%}
+</localization-form-component>
 
 {% stylesheet %}
   /* Localization */
@@ -458,15 +723,21 @@
   dropdown-localization-component .localization-form__currency {
     width: max-content;
     opacity: 0;
+    display: none;
     transition: none;
   }
 
-  dropdown-localization-component .localization-form__list-item:hover .localization-form__currency,
-  dropdown-localization-component .localization-form__list-item[aria-selected='true'] .localization-form__currency,
-  dropdown-localization-component .localization-form__list-item[aria-current='true'] .localization-form__currency {
+  dropdown-localization-component
+    :is(
+      .localization-form__list-item:hover,
+      .localization-form__list-item[aria-selected='true'],
+      .localization-form__list-item[aria-current='true']
+    )
+    .localization-form__currency {
     opacity: 1;
     color: var(--color-foreground-muted);
     transition: opacity var(--animation-speed-slow) var(--animation-easing);
+    display: block;
   }
 
   .dropdown-localization .language-selector:where(:not(.top-shadow)) {
@@ -538,255 +809,3 @@
     transform: none;
   }
 {% endstylesheet %}
-
-{%- liquid
-  comment
-    From Tyler in July: Noting here that it might make sense for us to just be able to get localization.available_currencies and localization.popular_countries instead of needing this esoteric logic.
-  endcomment
-  assign currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
-  assign popular_countries = localization.available_countries | where: 'popular?' | sort: 'name'
-
-  assign show_country_filter = false
-  if localization.available_countries.size > 9
-    assign show_country_filter = true
-  endif
-
-  assign show_popular_countries = false
-  if localization.available_countries.size > 9 and popular_countries.size > 1
-    assign show_popular_countries = true
-  endif
-
-  assign show_currencies = false
-  if currencies.size > 1
-    assign show_currencies = true
-  endif
-
-  assign aliases_us = 'us,usa,america,united states of america'
-  assign aliases_uk = 'uk,gb,great britain'
-%}
-<localization-form-component
-  ref="localizationForm"
-  data-label-results-count="{{ 'accessibility.country_results_count' | t: count: '[count]' }}"
-  data-show-filter="{{ show_country_filter }}"
-  style="{{ form_style }}"
->
-  {%- form 'localization', id: 'LocalizationForm', class: 'localization-form', ref: 'form' -%}
-    {% if show_country %}
-      {% if show_country_filter %}
-        <div class="country-filter">
-          <div class="field">
-            <div class="country-filter__search-icon field__button motion-reduce">
-              <span class="svg-wrapper">
-                {{ 'icon-search.svg' | inline_asset_content }}
-              </span>
-            </div>
-            <input
-              class="country-filter__input"
-              id="country-filter-input"
-              type="search"
-              name="country_filter"
-              value=""
-              placeholder="{{ 'placeholders.search' | t }}"
-              role="combobox"
-              aria-owns="country-results"
-              aria-controls="country-results"
-              aria-haspopup="listbox"
-              aria-autocomplete="list"
-              autocorrect="off"
-              autocomplete="off"
-              autocapitalize="off"
-              spellcheck="false"
-              ref="search"
-              on:keyup="/filterCountries"
-            >
-            <label
-              class="field__label visually-hidden"
-              for="country-filter-input"
-              >Search</label
-            >
-            <button
-              type="reset"
-              class="button button-unstyled country-filter__reset-button field__button"
-              aria-label="{{ 'actions.reset' | t }}"
-              ref="resetButton"
-              hidden
-              on:click="/resetCountriesFilter"
-            >
-              <span class="svg-wrapper">
-                {{ 'icon-reset.svg' | inline_asset_content }}
-              </span>
-            </button>
-          </div>
-        </div>
-      {% endif %}
-      <div class="country-selector-form__wrapper">
-        <h2
-          class="visually-hidden"
-          id="{{ localization_style }}-CountryLabel"
-        >
-          Country/Region
-        </h2>
-        {% if show_country_filter %}
-          <div
-            id="sr-country-search-results-{{ block.id }}"
-            class="visually-hidden"
-            aria-live="polite"
-            ref="liveRegion"
-          ></div>
-        {% endif %}
-        <div
-          class="localization-form__list country-selector__list{% if show_currencies %} country-selector__list--with-multiple-currencies{% endif %}"
-          id="{{ localization_style }}-country-results"
-          ref="countryList"
-        >
-          {% if show_popular_countries %}
-            <ul
-              role="list"
-              class="list-unstyled popular-countries"
-              aria-label="{{ 'accessibility.country_region' | t }}"
-              ref="popularCountries"
-            >
-              {%- for country in popular_countries -%}
-                {% liquid
-                  assign aliases = ''
-                  case country.iso_code
-                    when 'US'
-                      assign aliases = aliases_us
-                    when 'GB'
-                      assign aliases = aliases_uk
-                  endcase
-                %}
-                <li
-                  class="localization-form__list-item"
-                  {% if country.iso_code == localization.country.iso_code %}
-                    aria-current="true"
-                  {% endif %}
-                  data-value="{{ country.iso_code }}"
-                  {% if aliases %}
-                    data-aliases="{{ aliases }}"
-                  {% endif %}
-                  id="{{ country.name }}"
-                  role="option"
-                  tabindex="-1"
-                  ref="countryListItems[]"
-                  on:click="/selectCountry/{{ country.iso_code }}"
-                >
-                  <span class="svg-wrapper icon-checkmark">
-                    {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                  </span>
-                  <span class="country">{{- country.name }}</span>
-                  <span
-                    class="localization-form__currency motion-reduce"
-                    {% unless show_currencies %}
-                      hidden
-                    {% endunless %}
-                  >
-                    {{ country.currency.iso_code }}
-                    {{ country.currency.symbol -}}
-                  </span>
-                </li>
-              {%- endfor -%}
-            </ul>
-          {% endif %}
-          <ul
-            role="list"
-            class="list-unstyled countries"
-          >
-            <span
-              class="localization-form__list-item localization-form__list-item-disabled"
-              id="no-results-message"
-              ref="noResultsMessage"
-              hidden
-            >
-              {{- 'content.no_results_found' | t -}}
-            </span>
-            {%- for country in localization.available_countries -%}
-              {% liquid
-                assign aliases = ''
-                case country.iso_code
-                  when 'US'
-                    assign aliases = aliases_us
-                  when 'GB'
-                    assign aliases = aliases_uk
-                endcase
-              %}
-              <li
-                class="localization-form__list-item"
-                {% if country.iso_code == localization.country.iso_code %}
-                  aria-current="true"
-                {% endif %}
-                data-value="{{ country.iso_code }}"
-                {% if aliases %}
-                  data-aliases="{{ aliases }}"
-                {% endif %}
-                id="{{ country.name }}"
-                role="option"
-                tabindex="-1"
-                ref="countryListItems[]"
-                on:click="/selectCountry/{{ country.iso_code }}"
-              >
-                <span class="svg-wrapper icon-checkmark">
-                  {{- 'icon-checkmark.svg' | inline_asset_content -}}
-                </span>
-                <span class="country">{{- country.name }}</span>
-                <span
-                  class="localization-form__currency motion-reduce"
-                  {% unless show_currencies %}
-                    hidden
-                  {% endunless %}
-                >
-                  {{ country.currency.iso_code }}
-                  {{ country.currency.symbol -}}
-                </span>
-              </li>
-            {%- endfor -%}
-          </ul>
-        </div>
-        <div class="country-selector__overlay"></div>
-        <input
-          type="hidden"
-          name="country_code"
-          value="{{ localization.country.iso_code }}"
-          ref="countryInput"
-        >
-      </div>
-    {% endif %}
-
-    {% if show_language %}
-      <div class="language-selector{% if show_country %} top-shadow{% else %} language-selector--collapse-space{% endif %}{% if show_country == false and localization_style == 'drawer' %} h5{% endif %}">
-        <h2
-          class="visually-hidden"
-          id="{{ localization_style }}-LanguageLabel"
-        >
-          Language
-        </h2>
-        {% if show_country == true %}
-          <span class="language-selector__label">{{ 'content.language' | t }}</span>
-        {% endif %}
-        <select
-          id="{{ localization_style }}Select"
-          class="localization-form__select"
-          name="language_code"
-          aria-labelledby="{{ localization_style }}-LanguageLabel"
-          ref="languageInput"
-          on:change="/changeLanguage"
-        >
-          {%- for language in localization.available_languages -%}
-            <option
-              value="{{ language.iso_code }}"
-              lang="{{ language.iso_code }}"
-              {% if language.iso_code == localization.language.iso_code %}
-                selected
-              {% endif %}
-            >
-              {{ language.endonym_name | capitalize }}
-            </option>
-          {%- endfor -%}
-        </select>
-        <span class="svg-wrapper icon-caret">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
-      </div>
-    {% endif %}
-  {%- endform -%}
-</localization-form-component>

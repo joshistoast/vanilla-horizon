@@ -7,6 +7,89 @@
   @param {object} block - block object
 {%- enddoc -%}
 
+{% liquid
+  assign plain_text = block.settings.text | strip_newlines | strip_html | strip
+  assign text_width = width | default: block.settings.width
+
+  if block.settings.font_size contains 'heading-lg' or block.settings.font_size contains 'heading-xl'
+    assign type = 'display'
+  elsif block.settings.font_size contains 'heading'
+    assign type = 'heading'
+  else
+    assign type = 'body'
+  endif
+  if block.settings.type_preset == 'rte' or block.settings.type_preset == 'paragraph'
+    assign is_rte = true
+  endif
+
+  capture text_block_classes
+    if text_width == '100%'
+      echo 'text-block--align-' | append: block.settings.alignment
+      if block.settings.max_width == 'none'
+        echo ' text-block--full-width '
+      endif
+    endif
+    if block.settings.type_preset == 'custom'
+      echo ' custom-typography '
+      if block.settings.font_size != ''
+        echo ' custom-font-size '
+      endif
+      if block.settings.color != ''
+        echo ' custom-color '
+      endif
+    endif
+    if block.settings.background
+      echo ' text-block--background '
+    endif
+    if is_rte
+      echo ' rte '
+    endif
+  endcapture
+%}
+
+{% capture attributes %}
+  class="{{ class }} spacing-style text-block text-block--{{ block.id }} {{ block.settings.type_preset }}
+    {{ text_block_classes }}
+  "
+
+  style="
+    {% render 'spacing-padding', settings: block.settings %}
+    {% render 'typography-style', settings: block.settings %}
+    --width: {{ text_width }};
+    --max-width: var(--max-width--{{ type }}-{{ block.settings.max_width }});
+    {% if text_width == "100%" %}
+      --text-align: {{ block.settings.alignment }};
+    {% endif %}
+    {% if block.settings.background %}
+      --text-background-color: {{ block.settings.background_color | default: 'rgb(255 255 255 / 1.0)' }};
+      --text-corner-radius: {{ block.settings.corner_radius }}px;
+      --text-padding: max(var(--padding-2xs), calc((var(--text-corner-radius) + var(--padding-xs)) * (1 - cos(45deg))));
+    {% endif %}
+  "
+
+  {{ block.shopify_attributes }}
+{% endcapture %}
+{% liquid
+  # {{ attributes }} must be on the immediate HTML parent of the text to preserve
+  # the click-to-edit connection in the theme editor. Any break between the text,
+  # including if-statements, will break the connection.
+
+  assign element = 'div'
+  if is_rte
+    assign element = 'rte-formatter'
+  endif
+%}
+
+{% if fallback_text != blank and plain_text == blank %}
+  <div {{ attributes }}>
+    {{ fallback_text }}
+  </div>
+{% elsif plain_text != blank %}
+  <{{ element }} {{ attributes }}>
+    {{ block.settings.text }}
+  </{{ element }}>
+{% endif %}
+
 {% stylesheet %}
   :root {
     --text-align-default: left;
@@ -132,86 +215,3 @@
     color: var(--color);
   }
 {% endstylesheet %}
-
-{% liquid
-  assign plain_text = block.settings.text | strip_newlines | strip_html | strip
-  assign text_width = width | default: block.settings.width
-
-  if block.settings.font_size contains 'heading-lg' or block.settings.font_size contains 'heading-xl'
-    assign type = 'display'
-  elsif block.settings.font_size contains 'heading'
-    assign type = 'heading'
-  else
-    assign type = 'body'
-  endif
-  if block.settings.type_preset == 'rte' or block.settings.type_preset == 'paragraph'
-    assign is_rte = true
-  endif
-
-  capture text_block_classes
-    if text_width == '100%'
-      echo 'text-block--align-' | append: block.settings.alignment
-      if block.settings.max_width == 'none'
-        echo ' text-block--full-width '
-      endif
-    endif
-    if block.settings.type_preset == 'custom'
-      echo ' custom-typography '
-      if block.settings.font_size != ''
-        echo ' custom-font-size '
-      endif
-      if block.settings.color != ''
-        echo ' custom-color '
-      endif
-    endif
-    if block.settings.background
-      echo ' text-block--background '
-    endif
-    if is_rte
-      echo ' rte '
-    endif
-  endcapture
-%}
-
-{% capture attributes %}
-  class="{{ class }} spacing-style text-block text-block--{{ block.id }} {{ block.settings.type_preset }}
-    {{ text_block_classes }}
-  "
-
-  style="
-    {% render 'spacing-padding', settings: block.settings %}
-    {% render 'typography-style', settings: block.settings %}
-    --width: {{ text_width }};
-    --max-width: var(--max-width--{{ type }}-{{ block.settings.max_width }});
-    {% if text_width == "100%" %}
-      --text-align: {{ block.settings.alignment }};
-    {% endif %}
-    {% if block.settings.background %}
-      --text-background-color: {{ block.settings.background_color | default: 'rgb(255 255 255 / 1.0)' }};
-      --text-corner-radius: {{ block.settings.corner_radius }}px;
-      --text-padding: max(var(--padding-2xs), calc((var(--text-corner-radius) + var(--padding-xs)) * (1 - cos(45deg))));
-    {% endif %}
-  "
-
-  {{ block.shopify_attributes }}
-{% endcapture %}
-{% liquid
-  # {{ attributes }} must be on the immediate HTML parent of the text to preserve
-  # the click-to-edit connection in the theme editor. Any break between the text,
-  # including if-statements, will break the connection.
-
-  assign element = 'div'
-  if is_rte
-    assign element = 'rte-formatter'
-  endif
-%}
-
-{% if fallback_text != blank and plain_text == blank %}
-  <div {{ attributes }}>
-    {{ fallback_text }}
-  </div>
-{% elsif plain_text != blank %}
-  <{{ element }} {{ attributes }}>
-    {{ block.settings.text }}
-  </{{ element }}>
-{% endif %}

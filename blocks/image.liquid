@@ -1,34 +1,5 @@
 
 
-{% stylesheet %}
-  .placeholder-image {
-    position: relative;
-    aspect-ratio: var(--ratio);
-    overflow: hidden;
-  }
-
-  placeholder-image img {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: var(--ratio);
-  }
-
-  .image-block {
-    display: flex;
-    /* When the image is nested in a group, section, etc, respect the parent's horizontal alignment */
-    justify-content: var(--horizontal-alignment, 'inline-start');
-  }
-
-  .image-block--height-fill .image-block__image {
-    height: 100%;
-  }
-
-  .image-block__image {
-    object-fit: cover;
-    aspect-ratio: var(--ratio);
-  }
-{% endstylesheet %}
-
 {% liquid
   assign ratio = 1
 
@@ -105,6 +76,35 @@
   </a>
 {% endif %}
 
+{% stylesheet %}
+  .placeholder-image {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    overflow: hidden;
+  }
+
+  placeholder-image img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: var(--ratio);
+  }
+
+  .image-block {
+    display: flex;
+    /* When the image is nested in a group, section, etc, respect the parent's horizontal alignment */
+    justify-content: var(--horizontal-alignment, 'inline-start');
+  }
+
+  .image-block--height-fill .image-block__image {
+    height: 100%;
+  }
+
+  .image-block__image {
+    object-fit: cover;
+    aspect-ratio: var(--ratio);
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.image",
@@ -146,7 +146,7 @@
         }
       ],
       "default": "adapt",
-      "label": "t:settings.image_ratio"
+      "label": "t:settings.aspect_ratio"
     },
     {
       "type": "select",

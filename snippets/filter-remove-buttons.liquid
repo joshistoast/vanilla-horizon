@@ -9,78 +9,6 @@
   @param {boolean} should_show_clear_all - Whether to show the clear all button
 {% enddoc %}
 
-{% stylesheet %}
-  /* Facets - Remove buttons */
-  .facets-remove {
-    --variant-picker-swatch-width: 20px;
-    --variant-picker-swatch-height: 20px;
-
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--gap-xs);
-    padding: 0 var(--drawer-padding);
-    margin-block-start: var(--margin-2xs);
-    margin-block-end: var(--margin-md);
-
-    @media screen and (width >= 750px) {
-      --variant-picker-swatch-width: 16px;
-      --variant-picker-swatch-height: 16px;
-
-      gap: var(--gap-2xs);
-    }
-  }
-
-  .facets__clear-all-link {
-    --button-color: var(--color-primary);
-
-    border: none;
-    background-color: transparent;
-    padding: var(--padding-xs);
-    min-width: fit-content;
-    color: var(--button-color);
-    transition: text-decoration-color var(--animation-speed) var(--animation-easing),
-      color var(--animation-speed) var(--animation-easing);
-  }
-
-  .facets__clear-all-link:hover {
-    --button-color: var(--color-primary-hover);
-
-    color: var(--button-color);
-    text-decoration-color: var(--button-color);
-  }
-
-  .facets:not(.facets--drawer) .facets-remove--mobile-and-vertical {
-    @media screen and (width >= 750px) {
-      padding: 0;
-    }
-  }
-
-  .facets--horizontal .facets-remove--mobile-and-vertical {
-    @media screen and (width >= 750px) {
-      display: none;
-    }
-  }
-
-  .facets-remove:not(:has(facet-remove-component)) {
-    display: none;
-    margin: 0;
-  }
-
-  .facets-remove__pill {
-    .svg-wrapper,
-    .swatch {
-      flex-shrink: 0;
-    }
-  }
-
-  .facets--horizontal .facets-remove {
-    @media screen and (width >= 750px) {
-      display: none;
-    }
-  }
-{% endstylesheet %}
-
 <div class="facets-remove facets-remove--mobile-and-vertical">
   {%- for filter in filters -%}
     {%- liquid
@@ -176,3 +104,75 @@
     </facet-remove-component>
   {% endif %}
 </div>
+
+{% stylesheet %}
+  /* Facets - Remove buttons */
+  .facets-remove {
+    --variant-picker-swatch-width: 20px;
+    --variant-picker-swatch-height: 20px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-xs);
+    padding: 0 var(--drawer-padding);
+    margin-block-start: var(--margin-2xs);
+    margin-block-end: var(--margin-md);
+
+    @media screen and (width >= 750px) {
+      --variant-picker-swatch-width: 16px;
+      --variant-picker-swatch-height: 16px;
+
+      gap: var(--gap-2xs);
+    }
+  }
+
+  .facets__clear-all-link {
+    --button-color: var(--color-primary);
+
+    border: none;
+    background-color: transparent;
+    padding: var(--padding-xs);
+    min-width: fit-content;
+    color: var(--button-color);
+    transition: text-decoration-color var(--animation-speed) var(--animation-easing),
+      color var(--animation-speed) var(--animation-easing);
+  }
+
+  .facets__clear-all-link:hover {
+    --button-color: var(--color-primary-hover);
+
+    color: var(--button-color);
+    text-decoration-color: var(--button-color);
+  }
+
+  .facets:not(.facets--drawer) .facets-remove--mobile-and-vertical {
+    @media screen and (width >= 750px) {
+      padding: 0;
+    }
+  }
+
+  .facets--horizontal .facets-remove--mobile-and-vertical {
+    @media screen and (width >= 750px) {
+      display: none;
+    }
+  }
+
+  .facets-remove:not(:has(facet-remove-component)) {
+    display: none;
+    margin: 0;
+  }
+
+  .facets-remove__pill {
+    .svg-wrapper,
+    .swatch {
+      flex-shrink: 0;
+    }
+  }
+
+  .facets--horizontal .facets-remove {
+    @media screen and (width >= 750px) {
+      display: none;
+    }
+  }
+{% endstylesheet %}

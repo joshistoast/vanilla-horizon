@@ -5,23 +5,6 @@
   - id {id}: Unique ID of block or section
 {% endcomment %}
 
-{% stylesheet %}
-  .divider {
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    justify-content: var(--divider-justify-content);
-  }
-
-  .divider__line {
-    border-bottom: var(--divider-border-thickness) solid var(--color-border);
-    border-right: var(--divider-border-thickness) solid var(--color-border);
-    border-radius: calc(var(--style-border-radius-sm) * var(--divider-border-rounded));
-    flex-basis: var(--divider-flex-basis);
-    min-height: var(--divider-flex-basis);
-  }
-{% endstylesheet %}
-
 <div
   class="divider divider-{{ id }} spacing-style"
   style="
@@ -43,3 +26,20 @@
     "
   ></span>
 </div>
+
+{% stylesheet %}
+  .divider {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: var(--divider-justify-content);
+  }
+
+  .divider__line {
+    border-bottom: var(--divider-border-thickness) solid var(--color-border);
+    border-right: var(--divider-border-thickness) solid var(--color-border);
+    border-radius: calc(var(--style-border-radius-sm) * var(--divider-border-rounded));
+    flex-basis: var(--divider-flex-basis);
+    min-height: var(--divider-flex-basis);
+  }
+{% endstylesheet %}

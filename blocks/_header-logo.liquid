@@ -39,42 +39,43 @@
   "
   {{ block.shopify_attributes }}
 >
+  {% liquid
+    assign logo_width = block.settings.custom_height | times: settings.logo.aspect_ratio | ceil
+    assign logo_width_mobile = block.settings.custom_height_mobile | times: settings.logo.aspect_ratio | ceil
+    assign inverse_logo_width = block.settings.custom_height | times: inverse_logo.aspect_ratio | ceil
+    assign inverse_logo_width_mobile = block.settings.custom_height_mobile | times: inverse_logo.aspect_ratio | ceil
+    assign logo_style = '--header-logo-image-width: ' | append: logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: block.settings.custom_height | append: 'px; --header-logo-image-height-mobile: ' | append: block.settings.custom_height_mobile | append: 'px;'
+    assign inverse_logo_style = '--header-logo-image-width: ' | append: inverse_logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: inverse_logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: block.settings.custom_height | append: 'px; --header-logo-image-height-mobile: ' | append: block.settings.custom_height_mobile | append: 'px;'
+  %}
+
   <span
-    class="header-logo__original"
+    class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
     {% render 'image',
       image: settings.logo,
       class: 'header-logo__image',
       height: block.settings.custom_height,
-      text_fallback: shop.name
+      text_fallback: shop.name,
+      style: logo_style
     %}
   </span>
 
   {% if use_inverse_logo %}
     <span
-      class="header-logo__inverse"
+      class="header-logo__image-container header-logo__image-container--inverse"
       data-testid="header-logo-inverse"
     >
       {% render 'image',
         image: inverse_logo,
         class: 'header-logo__image',
         height: block.settings.custom_height,
-        text_fallback: shop.name
+        text_fallback: shop.name,
+        style: inverse_logo_style
       %}
     </span>
   {% endif %}
 </a>
-
-<style>
-  .header-logo__image {
-    --header-logo-image-height: {{ block.settings.custom_height_mobile }}px;
-
-    @media screen and (width >= 750px) {
-      --header-logo-image-height: {{ block.settings.custom_height }}px;
-    }
-  }
-</style>
 
 {% stylesheet %}
   .header-logo {
@@ -118,17 +119,21 @@
   }
 
   .header-logo__image {
-    height: var(--header-logo-image-height);
     object-fit: contain;
-    /* For Safari with SVG logos */
-    width: auto;
+    height: var(--header-logo-image-height-mobile);
+    width: var(--header-logo-image-width-mobile);
+
+    @media screen and (width >= 750px) {
+      height: var(--header-logo-image-height);
+      width: var(--header-logo-image-width);
+    }
   }
 
-  .header-logo:has(.header-logo__inverse) .header-logo__original {
+  .header-logo:has(.header-logo__image-container--inverse) .header-logo__image-container--original {
     display: var(--header-logo-display, block);
   }
 
-  .header-logo__inverse {
+  .header-logo__image-container--inverse {
     display: var(--header-logo-inverse-display, none);
   }
 {% endstylesheet %}

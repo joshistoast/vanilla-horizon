@@ -17,6 +17,24 @@
   endif
 %}
 
+<div
+  class="accelerated-checkout-block"
+  ref="acceleratedCheckoutButtonContainer"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-shopify-visual-preview
+  {% endif %}
+  {% unless can_add_to_cart %}
+    hidden
+  {% endunless %}
+>
+  {% if product != blank %}
+    {%- form 'product', product -%}
+      {{ form | payment_button }}
+    {%- endform -%}
+  {% endif %}
+</div>
+
 {% stylesheet %}
   .accelerated-checkout-block[data-shopify-visual-preview] {
     width: 300px;
@@ -38,24 +56,6 @@
     display: none;
   }
 {% endstylesheet %}
-
-<div
-  class="accelerated-checkout-block"
-  ref="acceleratedCheckoutButtonContainer"
-  {{ block.shopify_attributes }}
-  {% if request.visual_preview_mode %}
-    data-shopify-visual-preview
-  {% endif %}
-  {% unless can_add_to_cart %}
-    hidden
-  {% endunless %}
->
-  {% if product != blank %}
-    {%- form 'product', product -%}
-      {{ form | payment_button }}
-    {%- endform -%}
-  {% endif %}
-</div>
 
 {% schema %}
 {

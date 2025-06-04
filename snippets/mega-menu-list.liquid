@@ -207,7 +207,7 @@
   endif
 %}
 
-<style>
+{% style %}
   [data-menu-grid-id="{{ id }}"] {
     {% if menu_content_type == 'collection_images' and parent_link.links.size < 5 %}
       --menu-columns-desktop: {{ grid_columns_count_collection_images }};
@@ -227,7 +227,7 @@
       --menu-columns-tablet: {{ max_menu_columns_tablet }};
     {% endif %}
   }
-</style>
+{% endstyle %}
 
 {% case menu_content_type %}
   {% when 'featured_products' %}
@@ -264,7 +264,6 @@
         style="--menu-content-columns-desktop: {{ max_featured_collections }}; --menu-content-columns-tablet: {{ max_featured_collections_tablet }};"
       >
         {% for handle in collection_handles limit: max_featured_collections %}
-          {% # todo: ensure the hidden iamge assets don't get lazy loaded initially %}
           <li class="mega-menu__content-list-item{% if forloop.index > max_featured_collections_tablet %} mega-menu__content-list-item--hidden-tablet{% endif %}">
             {% render 'resource-card',
               resource: collections[handle],

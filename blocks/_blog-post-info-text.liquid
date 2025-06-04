@@ -1,20 +1,12 @@
 
+{% doc %}
+  Renders the blog post info text block.
+
+  @param {object} [article] - The article object
+  @param {string} [alignment] - The alignment of the text. Defaults to the block's alignment setting.
+{% enddoc %}
 
 {% assign alignment = alignment | default: block.settings.alignment %}
-
-{% stylesheet %}
-  .blog-post-details {
-    display: flex;
-    gap: var(--gap-sm);
-    font-size: var(--font-size--paragraph);
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
-    white-space: nowrap;
-  }
-  .blog-post-details > span {
-    text-overflow: clip;
-    overflow: hidden;
-  }
-{% endstylesheet %}
 
 {%- if block.settings.show_date or block.settings.show_author -%}
   <div
@@ -39,6 +31,20 @@
     {%- endif -%}
   </div>
 {% endif %}
+
+{% stylesheet %}
+  .blog-post-details {
+    display: flex;
+    gap: var(--gap-sm);
+    font-size: var(--font-size--paragraph);
+    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    white-space: nowrap;
+  }
+  .blog-post-details > span {
+    text-overflow: clip;
+    overflow: hidden;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

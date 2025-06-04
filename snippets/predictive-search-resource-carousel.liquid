@@ -9,19 +9,6 @@
     {% render 'predictive-search-resource-carousel', title: 'Collections', resources: predictive_search.resources.collections %}
 {% endcomment %}
 
-{% stylesheet %}
-  .predictive-search-results__wrapper slideshow-slides {
-    /* Add padding to prevent hover animations from being clipped in slideshow
-       15px accommodates:
-       - Scale effect (9px on each side from 1.03 scale)
-       - Lift effect (4px upward movement)
-       - Shadow (15px spread with -5px offset)
-       Using 16px for better alignment with our spacing scale */
-    padding: 16px;
-    margin-block: -16px;
-  }
-{% endstylesheet %}
-
 {% liquid
   capture slides
     for resource in resources
@@ -66,3 +53,16 @@
   icon_style: 'chevron',
   slideshow_gutters: 'start end'
 %}
+
+{% stylesheet %}
+  .predictive-search-results__wrapper slideshow-slides {
+    /* Add padding to prevent hover animations from being clipped in slideshow
+       15px accommodates:
+       - Scale effect (9px on each side from 1.03 scale)
+       - Lift effect (4px upward movement)
+       - Shadow (15px spread with -5px offset)
+       Using 16px for better alignment with our spacing scale */
+    padding: 16px;
+    margin-block: -16px;
+  }
+{% endstylesheet %}

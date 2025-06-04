@@ -1,54 +1,5 @@
 
 
-{% stylesheet %}
-  .blog-post-comments-container {
-    width: 100%;
-    max-width: var(--normal-content-width);
-    margin: 0 auto;
-  }
-
-  .blog-post-comments {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-3xl);
-  }
-
-  .blog-post-comment__author {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-2xs);
-    margin-top: var(--margin-md);
-    font-size: var(--font-size--body-sm);
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
-  }
-
-  .blog-post-comments-pagination {
-    display: flex;
-    justify-content: center;
-    gap: var(--gap-2xs);
-  }
-
-  .blog-post-comments-pagination,
-  .blog-post-comments-pagination a {
-    color: var(--color-foreground);
-  }
-
-  .blog-post-comments-pagination .current {
-    color: var(--color-foreground);
-  }
-
-  .blog-post-comments-pagination .current,
-  .blog-post-comments-pagination a {
-    display: block;
-    padding: var(--padding-2xs) var(--padding-xs);
-  }
-
-  .blog-post-comments-pagination .current,
-  .blog-post-comments-pagination a:hover {
-    border-bottom: 1px solid var(--color-foreground);
-  }
-{% endstylesheet %}
-
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div class="section color-{{ section.settings.color_scheme }}">
   <div
@@ -97,7 +48,7 @@
           {% endpaginate %}
         </div>
 
-        {% render 'blog-comment-form', article: article %}
+        {% render 'blog-comment-form', article: article, section_id: section.id %}
       </div>
     {% endif %}
   </div>
@@ -106,6 +57,55 @@
 <script type="application/ld+json">
   {{ article | structured_data }}
 </script>
+
+{% stylesheet %}
+  .blog-post-comments-container {
+    width: 100%;
+    max-width: var(--normal-content-width);
+    margin: 0 auto;
+  }
+
+  .blog-post-comments {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3xl);
+  }
+
+  .blog-post-comment__author {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2xs);
+    margin-top: var(--margin-md);
+    font-size: var(--font-size--body-sm);
+    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+  }
+
+  .blog-post-comments-pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-2xs);
+  }
+
+  .blog-post-comments-pagination,
+  .blog-post-comments-pagination a {
+    color: var(--color-foreground);
+  }
+
+  .blog-post-comments-pagination .current {
+    color: var(--color-foreground);
+  }
+
+  .blog-post-comments-pagination .current,
+  .blog-post-comments-pagination a {
+    display: block;
+    padding: var(--padding-2xs) var(--padding-xs);
+  }
+
+  .blog-post-comments-pagination .current,
+  .blog-post-comments-pagination a:hover {
+    border-bottom: 1px solid var(--color-foreground);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

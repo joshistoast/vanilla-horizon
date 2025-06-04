@@ -19,12 +19,7 @@
 
 {% if show_language and show_country == false %}
   <div class="menu-drawer__localization color-{{ settings.popover_color_scheme }}">
-    {% render 'localization-form',
-      show_country: show_country,
-      show_language: show_language,
-      country_style: country_style,
-      localization_style: 'dropdown'
-    %}
+    {% render 'localization-form', show_country: show_country, show_language: show_language, block_id: block.id %}
   </div>
 {% else %}
   <drawer-localization-component class="menu-drawer__localization">
@@ -108,9 +103,9 @@
         {% render 'localization-form',
           show_country: show_country,
           show_language: show_language,
-          country_style: section.settings.country_selector_style,
           localization_style: 'drawer',
-          form_style: form_style
+          form_style: form_style,
+          block_id: block.id
         %}
       </div>
     </details>

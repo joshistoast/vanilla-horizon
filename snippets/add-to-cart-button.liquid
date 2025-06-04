@@ -5,10 +5,59 @@
   @param {string} can_add_to_cart - Whether the product can be added to the cart
   @param {string} add_to_cart_text - The text of the add to cart button
   @param {string} product - The product to add to the cart
-  @param {string} icon_only_on_mobile - Whether the icon is only visible on mobile
-  @param {string} text_only_on_mobile - Whether the text is only visible on mobile
+  @param {boolean} [icon_only_on_mobile] - Whether the icon is only visible on mobile
   @param {string} class - The class of the button
+  @param {string} [id] - The id of the button
 {% enddoc %}
+
+{%- liquid
+  assign default_add_to_cart_text = 'actions.add_to_cart' | t
+  assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100
+  if product.selected_or_first_available_variant.featured_media.preview_image == blank
+    assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
+  endif
+-%}
+
+<add-to-cart-component
+  ref="addToCartButtonContainer"
+  data-product-variant-media="{{ product_variant_media }}"
+>
+  <button
+    id="{{ id }}"
+    type="submit"
+    name="add"
+    ref="addToCartButton"
+    on:click="/handleClick"
+    class="button {{ class }}"
+    {% unless can_add_to_cart %}
+      disabled
+    {% endunless %}
+  >
+    <span
+      class="add-to-cart-text"
+    >
+      {% if can_add_to_cart %}
+        <span class="svg-wrapper add-to-cart-icon">
+          {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+        </span>
+      {% endif %}
+      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
+        {{- add_to_cart_text | default: default_add_to_cart_text -}}
+      </span>
+    </span>
+    <span
+      aria-hidden="true"
+      class="add-to-cart-text--added"
+    >
+      <span class="svg-wrapper add-to-cart-icon--added">
+        {{- 'icon-checkmark.svg' | inline_asset_content -}}
+      </span>
+      <span class="{% if icon_only_on_mobile %}is-visually-hidden-mobile{% endif %}">
+        {{- 'actions.added' | t -}}
+      </span>
+    </span>
+  </button>
+</add-to-cart-component>
 
 {% stylesheet %}
   .add-to-cart-text {
@@ -68,52 +117,3 @@
     }
   }
 {% endstylesheet %}
-
-{%- liquid
-  assign default_add_to_cart_text = 'actions.add_to_cart' | t
-  assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100, crop: center
-  if product.selected_or_first_available_variant.featured_media.preview_image == blank
-    assign product_variant_media = product.featured_media.preview_image | image_url: width: 100, crop: center
-  endif
--%}
-
-<add-to-cart-component
-  ref="addToCartButtonContainer"
-  data-product-variant-media="{{ product_variant_media }}"
->
-  <button
-    id="{{ id }}"
-    type="submit"
-    name="add"
-    ref="addToCartButton"
-    on:click="/handleClick"
-    class="button {{ class }}"
-    {% unless can_add_to_cart %}
-      disabled
-    {% endunless %}
-  >
-    <span
-      class="add-to-cart-text"
-    >
-      {% if can_add_to_cart %}
-        <span class="svg-wrapper add-to-cart-icon{% if text_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
-          {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-        </span>
-      {% endif %}
-      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
-        {{- add_to_cart_text | default: default_add_to_cart_text -}}
-      </span>
-    </span>
-    <span
-      aria-hidden="true"
-      class="add-to-cart-text--added"
-    >
-      <span class="svg-wrapper add-to-cart-icon--added">
-        {{- 'icon-checkmark.svg' | inline_asset_content -}}
-      </span>
-      <span class="{% if icon_only_on_mobile %}is-visually-hidden-mobile{% endif %}">
-        {{- 'actions.added' | t -}}
-      </span>
-    </span>
-  </button>
-</add-to-cart-component>

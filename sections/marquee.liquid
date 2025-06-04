@@ -7,6 +7,32 @@
 
 {% assign gap_between_elements = section.settings.gap_between_elements %}
 
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<marquee-component
+  class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+  style="
+    {%- render 'spacing-style', settings: section.settings %};
+    {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
+    --marquee-direction: {{ section.settings.movement_direction }};
+  "
+  data-speed-factor="20"
+  data-movement-direction="{{ section.settings.movement_direction }}"
+>
+  <div
+    class="marquee__wrapper"
+    ref="wrapper"
+  >
+    <div
+      class="marquee__content"
+      ref="content"
+    >
+      <div class="marquee__repeated-items">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</marquee-component>
+
 {% stylesheet %}
   marquee-component {
     display: block;
@@ -59,32 +85,6 @@
     }
   }
 {% endstylesheet %}
-
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<marquee-component
-  class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
-  style="
-    {%- render 'spacing-style', settings: section.settings %};
-    {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
-    --marquee-direction: {{ section.settings.movement_direction }};
-  "
-  data-speed-factor="20"
-  data-movement-direction="{{ section.settings.movement_direction }}"
->
-  <div
-    class="marquee__wrapper"
-    ref="wrapper"
-  >
-    <div
-      class="marquee__content"
-      ref="content"
-    >
-      <div class="marquee__repeated-items">
-        {% content_for 'blocks' %}
-      </div>
-    </div>
-  </div>
-</marquee-component>
 
 {% schema %}
 {

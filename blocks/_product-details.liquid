@@ -1,5 +1,28 @@
 
 
+<div
+  id="ProductInformation-{{ section.id }}"
+  class="product-details{% if block.settings.sticky_details_desktop %} sticky-content--desktop{% endif %}"
+  data-testid="product-information-details"
+  {% if settings.transition_to_main_product %}
+    data-view-transition-type="product-details"
+  {% endif %}
+>
+  <div class="view-product-title">
+    <a
+      href="{{ product.selected_or_first_available_variant.url }}"
+      class="link"
+    >
+      {{- product.title }}
+    </a>
+  </div>
+  {% capture children %}
+    {% content_for 'blocks' %}
+  {% endcapture %}
+
+  {% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
+</div>
+
 {% stylesheet %}
   /* Clear padding on mobile, if not full-width */
   @media screen and (width < 750px) {
@@ -25,29 +48,6 @@
     }
   }
 {% endstylesheet %}
-
-<div
-  id="ProductInformation-{{ section.id }}"
-  class="product-details{% if block.settings.sticky_details_desktop %} sticky-content--desktop{% endif %}"
-  data-testid="product-information-details"
-  {% if settings.transition_to_main_product %}
-    data-view-transition-type="product-details"
-  {% endif %}
->
-  <div class="view-product-title">
-    <a
-      href="{{ product.selected_or_first_available_variant.url }}"
-      class="link"
-    >
-      {{- product.title }}
-    </a>
-  </div>
-  {% capture children %}
-    {% content_for 'blocks' %}
-  {% endcapture %}
-
-  {% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
-</div>
 
 {% schema %}
 {

@@ -78,11 +78,7 @@
             {% endif %}
           >
           {% if variant_style == 'swatch' %}
-            {% render 'swatch',
-              swatch: product_option_value.swatch,
-              variant_image: featured_media,
-              show_variant_image: settings.show_variant_image
-            %}
+            {% render 'swatch', swatch: product_option_value.swatch, variant_image: featured_media %}
           {% else %}
             <span>{{ product_option_value | escape }}</span>
           {% endif %}
@@ -90,11 +86,11 @@
         </label>
       {%- endfor -%}
       {% if option_id_attribute %}
-        <style>
+        {% style %}
           [data-option-id="{{ fieldset_id }}"] {
             --variant-ch: {{ longest_value }}ch;
           }
-        </style>
+        {% endstyle %}
       {% endif %}
     </fieldset>
   {%- endfor -%}

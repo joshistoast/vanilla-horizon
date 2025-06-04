@@ -1,23 +1,10 @@
 
 
-{% style %}
-  .blog-post-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    height: calc(var(--blog-post-card-img-height) * var(--blog-post-card-scale));
-  }
-  .blog-post-card__image--small {
-    --blog-post-card-img-height: 280px;
-  }
-  .blog-post-card__image--medium {
-    --blog-post-card-img-height: 340px;
-  }
-  .blog-post-card__image--large {
-    --blog-post-card-img-height: 400px;
-  }
-{% endstyle %}
+{% doc %}
+  Renders the blog post image block.
+
+  @param {object} image - The image object
+{% enddoc %}
 
 <img
   srcset="
@@ -40,6 +27,28 @@
   "
   style="{% render 'border-override', settings: block.settings %}"
 >
+
+{% stylesheet %}
+  .blog-post-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    height: calc(var(--blog-post-card-img-height) * var(--blog-post-card-scale));
+  }
+
+  .blog-post-card__image--small {
+    --blog-post-card-img-height: 280px;
+  }
+
+  .blog-post-card__image--medium {
+    --blog-post-card-img-height: 340px;
+  }
+
+  .blog-post-card__image--large {
+    --blog-post-card-img-height: 400px;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

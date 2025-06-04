@@ -6,6 +6,69 @@
   type="module"
 ></script>
 
+{% if block.settings.inherit_color_scheme == false %}
+  {% assign color_scheme = block.settings.color_scheme | prepend: ' color-' %}
+{% endif %}
+
+<form
+  action="{{ routes.search_url }}"
+  method="get"
+  role="search"
+  class="search-page-input__parent"
+>
+  <search-page-input-component
+    style="{% render 'size-style', settings: block.settings %}{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    <label
+      for="SearchPageInput--{{ block.id }}"
+      class="visually-hidden"
+    >
+      {{ 'content.search_input_label' | t }}
+    </label>
+    <span class="svg-wrapper search__icon{{ color_scheme }}">
+      {{ 'icon-search.svg' | inline_asset_content }}
+    </span>
+    <input
+      name="type"
+      value="product"
+      type="hidden"
+    >
+    <input
+      class="search-page-input{{ color_scheme }}"
+      id="SearchPageInput--{{ block.id }}"
+      type="search"
+      name="q"
+      ref="searchPageInput"
+      on:keydown="/handleKeyDown"
+      value="{{ search.terms | escape }}"
+      placeholder="{{ 'content.search_input_placeholder' | t }}"
+    >
+    <button
+      type="button"
+      name="reset"
+      class="button-unstyled search__reset-button{{ color_scheme }}"
+      aria-label="{{ 'accessibility.reset_search' | t }}"
+      on:click="/handleClearClick"
+    >
+      <span class="svg-wrapper search__reset-button-icon">
+        {{ 'icon-reset.svg' | inline_asset_content }}
+      </span>
+      <span class="search__reset-button-text">
+        {{ 'actions.clear' | t }}
+      </span>
+    </button>
+  </search-page-input-component>
+
+  {% if search.results.size == 0 and search.terms != blank %}
+    <div class="search-results__no-results">
+      <p>
+        {{ 'content.search_results_no_results_check_spelling' | t: terms: search.terms }}
+      </p>
+    </div>
+  {% endif %}
+</form>
+
 {% stylesheet %}
   .search-page-input {
     width: 100%;
@@ -134,69 +197,6 @@
     display: none;
   }
 {% endstylesheet %}
-
-{% if block.settings.inherit_color_scheme == false %}
-  {% assign color_scheme = block.settings.color_scheme | prepend: ' color-' %}
-{% endif %}
-
-<form
-  action="{{ routes.search_url }}"
-  method="get"
-  role="search"
-  class="search-page-input__parent"
->
-  <search-page-input-component
-    style="{% render 'size-style', settings: block.settings %}{% render 'spacing-style', settings: block.settings %}"
-    {{ block.shopify_attributes }}
-  >
-    <label
-      for="SearchPageInput--{{ block.id }}"
-      class="visually-hidden"
-    >
-      {{ 'content.search_input_label' | t }}
-    </label>
-    <span class="svg-wrapper search__icon{{ color_scheme }}">
-      {{ 'icon-search.svg' | inline_asset_content }}
-    </span>
-    <input
-      name="type"
-      value="product"
-      type="hidden"
-    >
-    <input
-      class="search-page-input{{ color_scheme }}"
-      id="SearchPageInput--{{ block.id }}"
-      type="search"
-      name="q"
-      ref="searchPageInput"
-      on:keydown="/handleKeyDown"
-      value="{{ search.terms | escape }}"
-      placeholder="{{ 'content.search_input_placeholder' | t }}"
-    >
-    <button
-      type="button"
-      name="reset"
-      class="button-unstyled search__reset-button{{ color_scheme }}"
-      aria-label="{{ 'accessibility.reset_search' | t }}"
-      on:click="/handleClearClick"
-    >
-      <span class="svg-wrapper search__reset-button-icon">
-        {{ 'icon-reset.svg' | inline_asset_content }}
-      </span>
-      <span class="search__reset-button-text">
-        {{ 'actions.clear' | t }}
-      </span>
-    </button>
-  </search-page-input-component>
-
-  {% if search.results.size == 0 and search.terms != blank %}
-    <div class="search-results__no-results">
-      <p>
-        {{ 'content.search_results_no_results_check_spelling' | t: terms: search.terms }}
-      </p>
-    </div>
-  {% endif %}
-</form>
 
 {% schema %}
 {

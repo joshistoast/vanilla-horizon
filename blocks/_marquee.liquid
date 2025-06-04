@@ -7,6 +7,36 @@
 
 {% assign gap_between_elements = block.settings.gap_between_elements %}
 
+<marquee-component
+  class="
+    spacing-style
+    gap-style
+    {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %}
+  "
+  style="
+    {%- render 'spacing-style', settings: block.settings %};
+    {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
+    --marquee-direction: {{ block.settings.movement_direction }};
+    {%- if block.settings.transparent_background == true -%}background-color: transparent;{%- endif -%}
+  "
+  data-speed-factor="20"
+  data-movement-direction="{{ block.settings.movement_direction }}"
+>
+  <div
+    class="marquee__wrapper"
+    ref="wrapper"
+  >
+    <div
+      class="marquee__content"
+      ref="content"
+    >
+      <div class="marquee__repeated-items">
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</marquee-component>
+
 {% stylesheet %}
   marquee-component {
     display: block;
@@ -66,36 +96,6 @@
     }
   }
 {% endstylesheet %}
-
-<marquee-component
-  class="
-    spacing-style
-    gap-style
-    {% if block.settings.inherit_color_scheme == false %}color-{{ block.settings.color_scheme }}{% endif %}
-  "
-  style="
-    {%- render 'spacing-style', settings: block.settings %};
-    {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
-    --marquee-direction: {{ block.settings.movement_direction }};
-    {%- if block.settings.transparent_background == true -%}background-color: transparent;{%- endif -%}
-  "
-  data-speed-factor="20"
-  data-movement-direction="{{ block.settings.movement_direction }}"
->
-  <div
-    class="marquee__wrapper"
-    ref="wrapper"
-  >
-    <div
-      class="marquee__content"
-      ref="content"
-    >
-      <div class="marquee__repeated-items">
-        {% content_for 'blocks' %}
-      </div>
-    </div>
-  </div>
-</marquee-component>
 
 {% schema %}
 {

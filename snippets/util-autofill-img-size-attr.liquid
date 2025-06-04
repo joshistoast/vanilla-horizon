@@ -1,7 +1,6 @@
 {% doc %}
   Echo a sizes attribute for an <img> tag based on a minimum image size.
 
-  @param {object} section - The section to get the product card size from.
   @param {number} card_size - The minimum pixel-width of the product card.
   @param {number} [card_gap] - The pixel-width of the gap between product cards.
   @param {number} [max_breakpoint] - The maximum pixel-width to calculate breakpoints for.
@@ -9,7 +8,7 @@
 
   @example
   {% capture size_attribute %}
-    {% render 'util-autofill-img-size-attr' section: section, card_size: 400 %}
+    {% render 'util-autofill-img-size-attr' card_size: 400 %}
   {% endcapture %}
   {% assign size_attribute = size_attribute | strip %}
   {{ image_url | image_tag: sizes: size_attribute }}

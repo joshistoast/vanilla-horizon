@@ -1,26 +1,5 @@
 
 
-{% stylesheet %}
-  .payment-icons {
-    width: 100%;
-  }
-
-  .payment-icons__list {
-    display: flex;
-    align-items: center;
-    justify-content: var(--alignment);
-    flex-wrap: wrap;
-    gap: var(--icon-gap);
-    margin: 0;
-    padding: 0;
-  }
-
-  .payment-icons__item {
-    display: flex;
-    align-items: center;
-  }
-{% endstylesheet %}
-
 <div
   class="
     payment-icons
@@ -45,6 +24,27 @@
     {%- endfor -%}
   </ul>
 </div>
+
+{% stylesheet %}
+  .payment-icons {
+    width: 100%;
+  }
+
+  .payment-icons__list {
+    display: flex;
+    align-items: center;
+    justify-content: var(--alignment);
+    flex-wrap: wrap;
+    gap: var(--icon-gap);
+    margin: 0;
+    padding: 0;
+  }
+
+  .payment-icons__item {
+    display: flex;
+    align-items: center;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

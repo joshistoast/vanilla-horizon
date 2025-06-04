@@ -1,5 +1,12 @@
 
 
+<div
+  class="social-icons__wrapper"
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</div>
+
 {% stylesheet %}
   .social-icons__wrapper {
     display: flex;
@@ -13,13 +20,6 @@
     }
   }
 {% endstylesheet %}
-
-<div
-  class="social-icons__wrapper"
-  {{ block.shopify_attributes }}
->
-  {% content_for 'blocks' %}
-</div>
 
 {% schema %}
 {

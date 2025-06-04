@@ -4,7 +4,7 @@
   {% unless block.settings.product == blank %}
     {% render 'product-card-badges', product: block.settings.product %}
     {%  if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: block.settings.product %}
+      {% render 'quick-add', product: block.settings.product, section_id: section.id %}
     {% endif %}
   {% endunless %}
 {% endcapture %}
@@ -57,7 +57,7 @@
         }
       ],
       "default": "portrait",
-      "label": "t:settings.image_ratio",
+      "label": "t:settings.aspect_ratio",
       "info": "t:info.aspect_ratio_adjusted"
     },
     {

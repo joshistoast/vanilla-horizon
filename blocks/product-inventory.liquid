@@ -1,37 +1,5 @@
 
 
-{% stylesheet %}
-  .product-inventory__status {
-    display: flex;
-    align-items: center;
-    font-size: var(--font-paragraph--size);
-    line-height: var(--font-paragraph--line-height);
-    gap: var(--padding-xs);
-  }
-
-  .product-inventory__icon,
-  .product-inventory__icon svg {
-    width: var(--icon-size-sm);
-    height: var(--icon-size-sm);
-  }
-
-  .product-inventory__icon-low {
-    color: var(--color-lowstock);
-  }
-
-  .product-inventory__icon-in_stock {
-    color: var(--color-instock);
-  }
-
-  .product-inventory__icon-out_of_stock {
-    color: var(--color-outofstock);
-  }
-
-  .product-inventory__icon circle:first-of-type {
-    opacity: 0.3;
-  }
-{% endstylesheet %}
-
 {%- liquid
   assign variant = block.settings.product.selected_or_first_available_variant
   if variant.inventory_management == 'shopify'
@@ -104,6 +72,38 @@
     </span>
   </span>
 </product-inventory>
+
+{% stylesheet %}
+  .product-inventory__status {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-paragraph--size);
+    line-height: var(--font-paragraph--line-height);
+    gap: var(--padding-xs);
+  }
+
+  .product-inventory__icon,
+  .product-inventory__icon svg {
+    width: var(--icon-size-sm);
+    height: var(--icon-size-sm);
+  }
+
+  .product-inventory__icon-low {
+    color: var(--color-lowstock);
+  }
+
+  .product-inventory__icon-in_stock {
+    color: var(--color-instock);
+  }
+
+  .product-inventory__icon-out_of_stock {
+    color: var(--color-outofstock);
+  }
+
+  .product-inventory__icon circle:first-of-type {
+    opacity: 0.3;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

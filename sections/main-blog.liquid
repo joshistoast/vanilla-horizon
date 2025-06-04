@@ -5,6 +5,42 @@
   type="module"
 ></script>
 
+<blog-posts-list section-id="{{ section.id }}">
+  <div class="section-background color-{{ section.settings.color_scheme }}"></div>
+  <div
+    class="
+      section
+      color-{{ section.settings.color_scheme }}
+      blog-posts
+      spacing-style
+      size-style
+    "
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {% content_for 'blocks' %}
+
+    {%- paginate blog.articles by 12 -%}
+      <span ref="viewMorePrevious"></span>
+      <div
+        ref="grid"
+        last-page="{{ paginate.pages }}"
+        class="blog-posts-container"
+      >
+        {% for article in blog.articles %}
+          <div
+            class="blog-post-item"
+            ref="cards[]"
+            data-page="{{ paginate.current_page }}"
+          >
+            {% content_for 'block', id: 'static-blog-post-card', type: '_blog-post-card', article: article %}
+          </div>
+        {% endfor %}
+      </div>
+      <span ref="viewMoreNext"></span>
+    {%- endpaginate -%}
+  </div>
+</blog-posts-list>
+
 {% stylesheet %}
   /**
    * Blog posts page layout
@@ -87,42 +123,6 @@
     padding: 0;
   }
 {% endstylesheet %}
-
-<blog-posts-list section-id="{{ section.id }}">
-  <div class="section-background color-{{ section.settings.color_scheme }}"></div>
-  <div
-    class="
-      section
-      color-{{ section.settings.color_scheme }}
-      blog-posts
-      spacing-style
-      size-style
-    "
-    style="{% render 'spacing-style', settings: section.settings %}"
-  >
-    {% content_for 'blocks' %}
-
-    {%- paginate blog.articles by 12 -%}
-      <span ref="viewMorePrevious"></span>
-      <div
-        ref="grid"
-        last-page="{{ paginate.pages }}"
-        class="blog-posts-container"
-      >
-        {% for article in blog.articles %}
-          <div
-            class="blog-post-item"
-            ref="cards[]"
-            data-page="{{ paginate.current_page }}"
-          >
-            {% content_for 'block', id: 'static-blog-post-card', type: '_blog-post-card', article: article %}
-          </div>
-        {% endfor %}
-      </div>
-      <span ref="viewMoreNext"></span>
-    {%- endpaginate -%}
-  </div>
-</blog-posts-list>
 
 {% schema %}
 {

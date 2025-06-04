@@ -5,20 +5,6 @@
   assign selected_variant = product_resource.selected_or_first_available_variant
 -%}
 
-{% stylesheet %}
-  .tax-note:empty {
-    display: none;
-  }
-
-  form.payment-terms {
-    padding-top: 0.5em;
-  }
-
-  .installments:not(:has(.shopify-payment-terms)) {
-    display: none;
-  }
-{% endstylesheet %}
-
 {% liquid
   if block.settings.type_preset == 'rte' or block.settings.type_preset == 'paragraph'
     assign is_rte = true
@@ -98,6 +84,20 @@
 </product-price>
 
 {% # theme-check-disable %}
+{% stylesheet %}
+  .tax-note:empty {
+    display: none;
+  }
+
+  form.payment-terms {
+    padding-top: 0.5em;
+  }
+
+  .installments:not(:has(.shopify-payment-terms)) {
+    display: none;
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.product_price",

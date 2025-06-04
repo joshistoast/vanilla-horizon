@@ -8,62 +8,12 @@
   @param {string} children - List or grid of product cards
 {% enddoc %}
 
-{% stylesheet %}
-  .product-grid {
-    --product-grid-gap: var(--product-grid-gap-mobile);
-
-    @media screen and (width >= 750px) {
-      --product-grid-gap: var(--product-grid-gap-desktop);
-    }
-  }
-
-  .product-grid slideshow-arrows .slideshow-control {
-    display: none;
-
-    @media screen and (width >= 750px) {
-      display: grid;
-    }
-  }
-
-  .main-collection-grid {
-    padding: var(--grid--margin--mobile);
-
-    @media screen and (width >= 750px) {
-      padding: var(--padding-block-start) var(--padding-inline-end) var(--padding-block-end) var(--padding-inline-start);
-    }
-  }
-
-  .main-collection-grid__empty {
-    padding-block: var(--padding-6xl);
-    padding-inline: var(--page-margin);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--padding-sm);
-  }
-
-  .main-collection-grid__empty-title {
-    margin: 0;
-  }
-
-  .collection-wrapper--full-width .main-collection-grid__title {
-    margin-left: var(--page-margin);
-  }
-
-  .collection-wrapper--full-width-on-mobile .main-collection-grid__title {
-    @media screen and (width < 750px) {
-      margin-left: var(--page-margin);
-    }
-  }
-{% endstylesheet %}
-
 {% capture product_card_size %}
   {% render 'util-product-grid-card-size' section: section %}
 {% endcapture %}
 {% assign product_card_size = product_card_size | strip %}
 
-<style>
+{% style %}
   @media (min-width: 750px) {
     {% case section.settings.layout_type %}
       {% when 'grid' %}
@@ -119,7 +69,7 @@
       padding-block-end: var(--zoom-out-padding-block-end, 0);
     }
   }
-</style>
+{% endstyle %}
 
 <div
   id="ResultsList"
@@ -203,3 +153,54 @@
     })();
   </script>
 {% endunless %}
+
+{% stylesheet %}
+  .product-grid {
+    --product-grid-gap: var(--product-grid-gap-mobile);
+    isolation: isolate;
+
+    @media screen and (width >= 750px) {
+      --product-grid-gap: var(--product-grid-gap-desktop);
+    }
+  }
+
+  .product-grid slideshow-arrows .slideshow-control {
+    display: none;
+
+    @media screen and (width >= 750px) {
+      display: grid;
+    }
+  }
+
+  .main-collection-grid {
+    padding: var(--grid--margin--mobile);
+
+    @media screen and (width >= 750px) {
+      padding: var(--padding-block-start) var(--padding-inline-end) var(--padding-block-end) var(--padding-inline-start);
+    }
+  }
+
+  .main-collection-grid__empty {
+    padding-block: var(--padding-6xl);
+    padding-inline: var(--page-margin);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--padding-sm);
+  }
+
+  .main-collection-grid__empty-title {
+    margin: 0;
+  }
+
+  .collection-wrapper--full-width .main-collection-grid__title {
+    margin-left: var(--page-margin);
+  }
+
+  .collection-wrapper--full-width-on-mobile .main-collection-grid__title {
+    @media screen and (width < 750px) {
+      margin-left: var(--page-margin);
+    }
+  }
+{% endstylesheet %}

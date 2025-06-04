@@ -1,14 +1,70 @@
-{% comment %}
+{% doc %}
   Renders the sorting component.
 
-  Accepts:
-    - enable_filtering: Whether to enable filtering
-    - enable_sorting: Whether to enable sorting
-    - enable_grid_density: Whether to enable grid density
-    - padding-block-start: The padding-block-start value
-    - padding-block-end: The padding-block-end value
-    - total_active_values: The total number of active values
-{% endcomment %}
+  @param {boolean} enable_filtering - Whether to enable filtering
+  @param {number} padding-block-start - The padding-block-start value
+  @param {number} padding-block-end - The padding-block-end value
+  @param {number} total_active_values - The total number of active values
+  @param {object} block - The block object
+  @param {string} section_id - The section ID
+  @param {object} results - The results of the search
+  @param {string} sort_by - The current sort by
+{% enddoc %}
+
+<div
+  class="facets-toggle{% if block.settings.enable_filtering == false %} facets-toggle--no-filters{% endif %}"
+  style="--facets-inner-padding-block: {{ padding-block-start }}px {{ padding-block-end }}px; --facets-inner-padding-inline: var(--padding-lg);"
+>
+  {% if enable_filtering %}
+    <div class="facets-toggle__wrapper">
+      <button
+        class="button facets-toggle__button button-unstyled button-unstyled--with-icon"
+        on:click="#filters-drawer/showDialog"
+        type="button"
+      >
+        <span class="svg-wrapper">
+          {{ 'icon-filter.svg' | inline_asset_content }}
+        </span>
+
+        {{ 'actions.show_filters' | t }}
+
+        {% if total_active_values > 0 %}
+          <div
+            id="filter-count-bubble-toggle"
+            class="filter-count-bubble"
+            aria-label="{{ 'accessibility.filter_count' | t: count: total_active_values }}"
+          >
+            <span class="filter-count-bubble__background"></span>
+
+            <span
+              ref="cartBubbleText"
+              class="filter-count-bubble__text"
+              aria-hidden="true"
+            >
+              {{ total_active_values }}
+            </span>
+          </div>
+        {% endif %}
+      </button>
+    </div>
+  {% endif %}
+
+  <div class="facets-mobile-wrapper facets-controls-wrapper">
+    {% if block.settings.enable_filtering == false and block.settings.enable_sorting %}
+      {% render 'sorting',
+        results: results,
+        sort_by: sort_by,
+        filter_style: block.settings.filter_style,
+        suffix: 'mobile',
+        section_id: section_id,
+        should_use_select_on_mobile: false
+      %}
+    {% endif %}
+    {% if block.settings.enable_grid_density %}
+      {% render 'grid-density-controls', viewport: 'mobile' %}
+    {% endif %}
+  </div>
+</div>
 
 {% stylesheet %}
   /* Facets - Toggle */
@@ -92,57 +148,3 @@
     }
   }
 {% endstylesheet %}
-
-<div
-  class="facets-toggle{% if block.settings.enable_filtering == false %} facets-toggle--no-filters{% endif %}"
-  style="--facets-inner-padding-block: {{ padding-block-start }}px {{ padding-block-end }}px; --facets-inner-padding-inline: var(--padding-lg);"
->
-  {% if enable_filtering %}
-    <div class="facets-toggle__wrapper">
-      <button
-        class="button facets-toggle__button button-unstyled button-unstyled--with-icon"
-        on:click="#filters-drawer/showDialog"
-        type="button"
-      >
-        <span class="svg-wrapper">
-          {{ 'icon-filter.svg' | inline_asset_content }}
-        </span>
-
-        {{ 'actions.show_filters' | t }}
-
-        {% if total_active_values > 0 %}
-          <div
-            id="filter-count-bubble-toggle"
-            class="filter-count-bubble"
-            aria-label="{{ 'accessibility.filter_count' | t: count: total_active_values }}"
-          >
-            <span class="filter-count-bubble__background"></span>
-
-            <span
-              ref="cartBubbleText"
-              class="filter-count-bubble__text"
-              aria-hidden="true"
-            >
-              {{ total_active_values }}
-            </span>
-          </div>
-        {% endif %}
-      </button>
-    </div>
-  {% endif %}
-
-  <div class="facets-mobile-wrapper facets-controls-wrapper">
-    {% if block.settings.enable_filtering == false and block.settings.enable_sorting %}
-      {% render 'sorting',
-        results: results,
-        sort_by: sort_by,
-        filter_style: block.settings.filter_style,
-        suffix: 'mobile',
-        mobile_should_display_single_caret: mobile_should_display_single_caret
-      %}
-    {% endif %}
-    {% if block.settings.enable_grid_density %}
-      {% render 'grid-density-controls', viewport: 'mobile' %}
-    {% endif %}
-  </div>
-</div>

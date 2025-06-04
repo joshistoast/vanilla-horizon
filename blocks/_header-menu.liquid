@@ -1,4 +1,85 @@
 
+{% doc %}
+  Renders a header menu block.
+
+  @param {string} [variant] - What version of the menu to render. Defaults to header menu.
+  @param {string} [transparent] - Show a transparent menu
+{% enddoc %}
+
+{% liquid
+  assign animation_speed = 200
+
+  if block.settings.menu_style == 'featured_products' and block.settings.product_title_case == 'uppercase'
+    assign title_case_style = ' --title-case: uppercase;'
+  elsif block.settings.menu_style == 'featured_collections' and block.settings.collection_title_case == 'uppercase'
+    assign title_case_style = ' --title-case: uppercase;'
+  elsif block.settings.menu_style == 'collection_images' and block.settings.collection_title_case == 'uppercase'
+    assign title_case_style = ' --title-case: uppercase;'
+  endif
+%}
+
+{% case variant %}
+  {% when 'mobile' %}
+    <div
+      class="header__drawer desktop:hidden"
+      ref="headerDrawerContainer"
+      style="{{ title_case_style }}"
+      {{ block.shopify_attributes }}
+    >
+      {% render 'header-drawer',
+        class: 'header__drawer--mobile',
+        linklist: block.settings.menu,
+        data_header_drawer_type: 'mobile-drawer'
+      %}
+    </div>
+
+  {% when 'navigation_bar' %}
+    {% if block.settings.navigation_bar == true %}
+      <div
+        class="menu-list menu-list--mobile{% if transparent == blank %} color-{{ block.settings.color_scheme_navigation_bar }}{% endif %}"
+        style="--menu-horizontal-gap: 15px; --mobile-nav-margin: auto;{{ title_case_style }}"
+      >
+        <div class="menu-list__scroll-container">
+          <ul
+            class="menu-list__list list-unstyled"
+            role="list"
+          >
+            {% for link in block.settings.menu.links %}
+              <li>
+                <a
+                  href="{{ link.url }}"
+                  id="MenuItem-{{ link.handle }}"
+                  class="menu-list__item"
+                  {% if link.current %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  {{- link.title -}}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <header-menu
+      ref="headerMenu"
+      class="header-menu mobile:hidden"
+      data-animation-delay="{{ animation_speed }}"
+      {{ block.shopify_attributes }}
+      style="--submenu-animation-speed: {{ animation_speed }}ms;{{ title_case_style }}"
+    >
+      <div class="header-menu__inner">
+        {%- render 'header-menu' %}
+      </div>
+
+      <script
+        src="{{ 'header-menu.js' | asset_url }}"
+        type="module"
+      ></script>
+    </header-menu>
+{% endcase %}
 
 {% stylesheet %}
   .menu-list--mobile {
@@ -477,81 +558,6 @@
   }
 {% endstylesheet %}
 
-{% liquid
-  assign animation_speed = 200
-
-  if block.settings.menu_style == 'featured_products' and block.settings.product_title_case == 'uppercase'
-    assign title_case_style = ' --title-case: uppercase;'
-  elsif block.settings.menu_style == 'featured_collections' and block.settings.collection_title_case == 'uppercase'
-    assign title_case_style = ' --title-case: uppercase;'
-  elsif block.settings.menu_style == 'collection_images' and block.settings.collection_title_case == 'uppercase'
-    assign title_case_style = ' --title-case: uppercase;'
-  endif
-%}
-
-{% case variant %}
-  {% when 'mobile' %}
-    <div
-      class="header__drawer desktop:hidden"
-      ref="headerDrawerContainer"
-      style="{{ title_case_style }}"
-      {{ block.shopify_attributes }}
-    >
-      {% render 'header-drawer',
-        class: 'header__drawer--mobile',
-        linklist: block.settings.menu,
-        data_header_drawer_type: 'mobile-drawer'
-      %}
-    </div>
-
-  {% when 'navigation_bar' %}
-    {% if block.settings.navigation_bar == true %}
-      <div
-        class="menu-list menu-list--mobile{% if transparent == blank %} color-{{ block.settings.color_scheme_navigation_bar }}{% endif %}"
-        style="--menu-horizontal-gap: 15px; --mobile-nav-margin: auto;{{ title_case_style }}"
-      >
-        <div class="menu-list__scroll-container">
-          <ul
-            class="menu-list__list list-unstyled"
-            role="list"
-          >
-            {% for link in block.settings.menu.links %}
-              <li>
-                <a
-                  href="{{ link.url }}"
-                  id="MenuItem-{{ link.handle }}"
-                  class="menu-list__item"
-                  {% if link.current %}
-                    aria-current="page"
-                  {% endif %}
-                >
-                  {{- link.title -}}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    {% endif %}
-  {% else %}
-    <header-menu
-      ref="headerMenu"
-      class="header-menu mobile:hidden"
-      data-animation-delay="{{ animation_speed }}"
-      {{ block.shopify_attributes }}
-      style="--submenu-animation-speed: {{ animation_speed }}ms;{{ title_case_style }}"
-    >
-      <div class="header-menu__inner">
-        {%- render 'header-menu' %}
-      </div>
-
-      <script
-        src="{{ 'header-menu.js' | asset_url }}"
-        type="module"
-      ></script>
-    </header-menu>
-{% endcase %}
-
 {% schema %}
 {
   "name": "t:names.menu",
@@ -594,7 +600,7 @@
       "options": [
         {
           "value": "adapt",
-          "label": "t:options.adapt_to_image"
+          "label": "t:options.auto"
         },
         {
           "value": "4 / 5",
@@ -615,7 +621,7 @@
       "options": [
         {
           "value": "adapt",
-          "label": "t:options.adapt_to_image"
+          "label": "t:options.auto"
         },
         {
           "value": "16 / 9",

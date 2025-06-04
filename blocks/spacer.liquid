@@ -1,5 +1,32 @@
 
 
+<div
+  class="
+    spacer-block
+    spacer-block--size-{{ block.settings.size }}
+    {% if block.settings.custom_mobile_size %}
+      spacer-block--size-mobile-{{ block.settings.size_mobile }}
+    {% endif %}
+  "
+  style="
+    {% if block.settings.size == 'percent' %}
+      --spacer-size: {{ block.settings.percent_size | divided_by: 100.00 }};
+    {% else %}
+      --spacer-size: {{ block.settings.pixel_size }}px;
+    {% endif %}
+
+    {% if block.settings.custom_mobile_size %}
+      {% if block.settings.size_mobile == 'percent' %}
+        --spacer-size-mobile: {{ block.settings.percent_size_mobile }}%;
+      {% else %}
+        --spacer-size-mobile: {{ block.settings.pixel_size_mobile }}px;
+      {% endif %}
+    {% endif %}
+  "
+  {{ block.shopify_attributes }}
+  data-testid="spacer-block"
+></div>
+
 {% stylesheet %}
   /* Fill opposite direction */
   .layout-panel-flex--column > .spacer-block {
@@ -52,33 +79,6 @@
     }
   }
 {% endstylesheet %}
-
-<div
-  class="
-    spacer-block
-    spacer-block--size-{{ block.settings.size }}
-    {% if block.settings.custom_mobile_size %}
-      spacer-block--size-mobile-{{ block.settings.size_mobile }}
-    {% endif %}
-  "
-  style="
-    {% if block.settings.size == 'percent' %}
-      --spacer-size: {{ block.settings.percent_size | divided_by: 100.00 }};
-    {% else %}
-      --spacer-size: {{ block.settings.pixel_size }}px;
-    {% endif %}
-
-    {% if block.settings.custom_mobile_size %}
-      {% if block.settings.size_mobile == 'percent' %}
-        --spacer-size-mobile: {{ block.settings.percent_size_mobile }}%;
-      {% else %}
-        --spacer-size-mobile: {{ block.settings.pixel_size_mobile }}px;
-      {% endif %}
-    {% endif %}
-  "
-  {{ block.shopify_attributes }}
-  data-testid="spacer-block"
-></div>
 
 {% schema %}
 {

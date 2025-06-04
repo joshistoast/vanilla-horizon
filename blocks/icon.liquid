@@ -1,16 +1,5 @@
 
 
-{% stylesheet %}
-  .icon-block {
-    display: flex;
-    fill: currentcolor;
-    flex-shrink: 0;
-  }
-  .icon-block__media {
-    height: auto;
-  }
-{% endstylesheet %}
-
 {% assign icon_block_class = 'icon-block__media icon-block-' | append: block.id %}
 
 {% capture icon %}
@@ -61,6 +50,17 @@
 {%- else -%}
   {{ icon }}
 {%- endif -%}
+
+{% stylesheet %}
+  .icon-block {
+    display: flex;
+    fill: currentcolor;
+    flex-shrink: 0;
+  }
+  .icon-block__media {
+    height: auto;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

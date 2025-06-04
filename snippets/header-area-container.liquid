@@ -35,11 +35,6 @@
   {% endfor %}
 </div>
 
-{%
-  # Nathan: I'd like to remove this dynamic styling. It's useful for the grid if it scales with more areas, but
-  # I'd rather have all the styles in one place if not based on custom properties that change based on user input.
-  # Leaving for now; to correct later.
-%}
 {% style %}
   .header__container--{{ area }} {
     grid-area: {{ area }};

@@ -1,58 +1,5 @@
 
 
-{% stylesheet %}
-  .rating-wrapper {
-    width: 100%;
-    gap: var(--gap-xs);
-    flex-wrap: wrap;
-  }
-
-  .rating-color--primary {
-    --star-fill-color: var(--color-primary);
-  }
-
-  .rating-color--foreground {
-    --star-fill-color: var(--color-foreground);
-  }
-
-  .rating-wrapper,
-  .rating {
-    display: flex;
-    align-items: center;
-  }
-
-  .rating-wrapper.justify-right {
-    flex-direction: row-reverse;
-  }
-
-  .rating {
-    gap: var(--gap-3xs);
-  }
-
-  .rating-wrapper .rating-text,
-  .rating-wrapper .rating-count,
-  .rating-wrapper .rating-count-separator {
-    color: var(--star-fill-color);
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  .rating-count-separator {
-    opacity: 0.2;
-    padding-left: calc(var(--padding-xs) / 2);
-    padding-right: var(--padding-xs);
-  }
-
-  .stars {
-    height: var(--star-size);
-    fill: var(--empty-star-fill-color);
-  }
-
-  .filled-star {
-    fill: var(--star-fill-color);
-  }
-{% endstylesheet %}
-
 {% liquid
   assign product = block.settings.product
   assign rating = product.metafields.reviews.rating.value.rating
@@ -152,11 +99,68 @@
   </div>
 {%- endif -%}
 
+{% stylesheet %}
+  .rating-wrapper {
+    width: 100%;
+    gap: var(--gap-xs);
+    flex-wrap: wrap;
+  }
+
+  .rating-color--primary {
+    --star-fill-color: var(--color-primary);
+  }
+
+  .rating-color--foreground {
+    --star-fill-color: var(--color-foreground);
+  }
+
+  .rating-wrapper,
+  .rating {
+    display: flex;
+    align-items: center;
+  }
+
+  .rating-wrapper.justify-right {
+    flex-direction: row-reverse;
+  }
+
+  .rating {
+    gap: var(--gap-3xs);
+  }
+
+  .rating-wrapper .rating-text,
+  .rating-wrapper .rating-count,
+  .rating-wrapper .rating-count-separator {
+    color: var(--star-fill-color);
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .rating-count-separator {
+    opacity: 0.2;
+    padding-left: calc(var(--padding-xs) / 2);
+    padding-right: var(--padding-xs);
+  }
+
+  .stars {
+    height: var(--star-size);
+    fill: var(--empty-star-fill-color);
+  }
+
+  .filled-star {
+    fill: var(--star-fill-color);
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.product_review_stars",
   "tag": null,
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:content.app_required_for_ratings"
+    },
     {
       "type": "product",
       "id": "product",

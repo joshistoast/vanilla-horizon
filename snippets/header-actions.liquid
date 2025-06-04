@@ -3,6 +3,27 @@
   src="{{ 'cart-icon.js' | asset_url }}"
 ></script>
 
+<header-actions
+  {{- block.shopify_attributes -}}
+>
+  {% if shop.customer_accounts_enabled %}
+    {% render 'account-popover' %}
+    {% render 'account-drawer' %}
+  {% endif %}
+
+  {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
+    {% render 'cart-drawer' %}
+  {% else %}
+    <a
+      href="{{ routes.cart_url }}"
+      class="header-actions__action action__cart"
+      aria-label="{{ 'accessibility.cart' | t }} {{ 'accessibility.cart_count' | t }}: {{ cart.item_count }}"
+    >
+      {% render 'cart-icon-component' %}
+    </a>
+  {% endif %}
+</header-actions>
+
 {% stylesheet %}
   .cart-drawer {
     --cart-drawer-padding: var(--padding-lg) var(--padding-xl);
@@ -106,13 +127,6 @@
   .cart-drawer__summary .cart__summary-totals:not(:has(.cart__original-total-container:empty)) {
     border-block-start: var(--style-border-width) solid var(--color-border);
     padding-block-start: var(--padding-2xl);
-  }
-
-  .cart-items__wrapper,
-  .cart-drawer__summary {
-    --cart-primary-font-family: var(--font-body--family);
-    --cart-primary-font-style: var(--font-body--style);
-    --cart-primary-font-weight: var(--font-body--weight);
   }
 
   .cart-drawer__summary .cart-note {
@@ -256,24 +270,3 @@
     animation: cartBubbleSlideIn var(--animation-speed) var(--animation-easing);
   }
 {% endstylesheet %}
-
-<header-actions
-  {{- block.shopify_attributes -}}
->
-  {% if shop.customer_accounts_enabled %}
-    {% render 'account-popover' %}
-    {% render 'account-drawer' %}
-  {% endif %}
-
-  {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
-    {% render 'cart-drawer' %}
-  {% else %}
-    <a
-      href="{{ routes.cart_url }}"
-      class="header-actions__action action__cart"
-      aria-label="{{ 'accessibility.cart' | t }}"
-    >
-      {% render 'cart-icon-component' %}
-    </a>
-  {% endif %}
-</header-actions>

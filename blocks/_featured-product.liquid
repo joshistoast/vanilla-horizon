@@ -1,18 +1,5 @@
 
 
-{% stylesheet %}
-  .featured-product-content-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--gap-sm);
-  }
-
-  .featured-product-content-bottom:not(:has(product-swatches)) {
-    display: none;
-  }
-{% endstylesheet %}
-
 {% capture product_card_children %}
   <div class="featured-product-content-top">
     {% content_for 'block', type: 'product-title', id: 'featured-product-title' %}
@@ -26,6 +13,19 @@
 {% endcapture %}
 
 {% render 'product-card', children: product_card_children, product: closest.product, product_card_gap: 8 %}
+
+{% stylesheet %}
+  .featured-product-content-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--gap-sm);
+  }
+
+  .featured-product-content-bottom:not(:has(product-swatches)) {
+    display: none;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

@@ -1,5 +1,30 @@
 
 
+{%- capture cart_summary_inner_class -%}
+  cart__summary-inner
+  {% if block.settings.extend_summary == false and block.settings.inherit_color_scheme == false -%}
+    color-{{ block.settings.color_scheme }} inherit-parent-scheme--mobile
+  {%- endif %}
+  {% if block.settings.extend_summary == false and block.settings.border_radius > 0 -%}
+    has-border-radius
+  {%- endif -%}
+{%- endcapture -%}
+
+{% if block.settings.extend_summary %}
+  <div
+    class="section-background {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }} inherit-parent-scheme--mobile{% endif %}"
+  ></div>
+{% endif %}
+<div
+  class="cart__summary-container border-style{% if block.settings.extend_summary == true %} cart__container--extend {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }} inherit-parent-scheme--mobile{% endif %}{% endif %}{% if block.settings.border_radius > 0 %} has-border-radius{% endif %}"
+  style="{% render 'border-override', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="{{ cart_summary_inner_class }}">
+    {% render 'cart-summary' %}
+  </div>
+</div>
+
 {% stylesheet %}
   .cart__summary-item {
     display: flex;
@@ -130,39 +155,6 @@
     }
   }
 {% endstylesheet %}
-
-<style>
-  .cart__summary-inner {
-    --cart-secondary-font-family: var(--font-{{ settings.cart_price_font }}--family);
-    --cart-secondary-font-style: var(--font-{{ settings.cart_price_font }}--style);
-    --cart-secondary-font-weight: var(--font-{{ settings.cart_price_font }}--weight);
-  }
-</style>
-
-{%- capture cart_summary_inner_class -%}
-  cart__summary-inner
-  {% if block.settings.extend_summary == false and block.settings.inherit_color_scheme == false -%}
-    color-{{ block.settings.color_scheme }} inherit-parent-scheme--mobile
-  {%- endif %}
-  {% if block.settings.extend_summary == false and block.settings.border_radius > 0 -%}
-    has-border-radius
-  {%- endif -%}
-{%- endcapture -%}
-
-{% if block.settings.extend_summary %}
-  <div
-    class="section-background {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }} inherit-parent-scheme--mobile{% endif %}"
-  ></div>
-{% endif %}
-<div
-  class="cart__summary-container border-style{% if block.settings.extend_summary == true %} cart__container--extend {% if block.settings.inherit_color_scheme == false %} color-{{ block.settings.color_scheme }} inherit-parent-scheme--mobile{% endif %}{% endif %}{% if block.settings.border_radius > 0 %} has-border-radius{% endif %}"
-  style="{% render 'border-override', settings: block.settings %}"
-  {{ block.shopify_attributes }}
->
-  <div class="{{ cart_summary_inner_class }}">
-    {% render 'cart-summary' %}
-  </div>
-</div>
 
 {% schema %}
 {

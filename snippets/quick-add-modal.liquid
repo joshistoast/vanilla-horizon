@@ -1,3 +1,26 @@
+
+
+<quick-add-dialog id="quick-add-dialog">
+  <dialog
+    class="quick-add-modal dialog-modal color-{{ settings.popover_color_scheme }}"
+    ref="dialog"
+    scroll-lock
+  >
+    <button
+      ref="closeButton"
+      on:click="/closeDialog"
+      class="button quick-add-modal__close"
+      aria-label="{{ 'accessibility.close_dialog' | t }}"
+    >
+      {{- 'icon-close.svg' | inline_asset_content -}}
+    </button>
+    <div
+      id="quick-add-modal-content"
+      class="quick-add-modal__content"
+    ></div>
+  </dialog>
+</quick-add-dialog>
+
 {% stylesheet %}
   .quick-add-modal {
     padding: 0;
@@ -358,24 +381,3 @@
     }
   }
 {% endstylesheet %}
-
-<quick-add-dialog id="quick-add-dialog">
-  <dialog
-    class="quick-add-modal dialog-modal color-{{ settings.popover_color_scheme }}"
-    ref="dialog"
-    scroll-lock
-  >
-    <button
-      ref="closeButton"
-      on:click="/closeDialog"
-      class="button quick-add-modal__close"
-      aria-label="{{ 'accessibility.close_dialog' | t }}"
-    >
-      {{- 'icon-close.svg' | inline_asset_content -}}
-    </button>
-    <div
-      id="quick-add-modal-content"
-      class="quick-add-modal__content"
-    ></div>
-  </dialog>
-</quick-add-dialog>

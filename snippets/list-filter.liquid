@@ -11,362 +11,6 @@
   @param {boolean} [in_drawer] - Whether the filter is in a drawer
 {% enddoc %}
 
-{% stylesheet %}
-  .facets input:checked + label {
-    font-weight: 500;
-  }
-
-  .facets .checkbox .icon-checkmark {
-    transition: border-color 0.2s ease, background-color 0.2s ease;
-  }
-
-  .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
-    border-color: rgb(from var(--color-foreground) r g b / 40%);
-    background-color: rgb(from var(--color-foreground) r g b / 5%);
-  }
-
-  .facets .checkbox:has(.checkbox__input:checked):not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
-    background-color: rgb(from var(--color-foreground) r g b / 85%);
-  }
-
-  .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .checkbox__label-text {
-    color: rgb(from var(--color-foreground) r g b / 90%);
-  }
-
-  .facets .checkbox .checkbox__label-text {
-    transition: color 0.2s ease, font-weight 0.2s ease;
-  }
-
-  /* Pill style */
-  .facets__pill-label {
-    --pill-label-padding-inline: var(--padding-xs);
-    --pill-label-border-radius: var(--style-border-radius-md);
-    --pill-label-border-width: var(--variant-picker-button-border-width);
-    --pill-label-height: var(--button-size-md);
-    --pill-label-focus-outline-color: var(--color-foreground);
-    --pill-label-color: var(--color-foreground);
-    --pill-label-background-color: var(--color-background);
-    --pill-label-border-opacity: var(--facets-low-opacity);
-
-    display: inline-flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 0 var(--pill-label-border-width)
-      rgb(from var(--pill-label-color) r g b / var(--pill-label-border-opacity));
-    border-radius: var(--pill-label-border-radius);
-    height: var(--pill-label-height);
-    width: 100%;
-    padding-inline: var(--pill-label-padding-inline);
-    color: rgb(from var(--pill-label-color) r g b / 100%);
-    background-color: rgb(from var(--pill-label-background-color) r g b / 100%);
-    cursor: pointer;
-    transition: color var(--animation-speed) var(--animation-easing),
-      background-color var(--animation-speed) var(--animation-easing);
-    outline-color: var(--pill-label-focus-outline-color);
-
-    &:hover {
-      --pill-label-border-opacity: 100%;
-    }
-  }
-
-  .facets__pill-input {
-    &:checked + .facets__pill-label {
-      --pill-label-color: var(--color-background);
-      --pill-label-background-color: var(--color-foreground);
-      --pill-label-border-opacity: 0;
-      font-weight: 500;
-    }
-
-    &:disabled + .facets__pill-label {
-      opacity: var(--disabled-opacity);
-      cursor: not-allowed;
-
-      &:hover {
-        --pill-label-border-opacity: var(--facets-low-opacity);
-      }
-    }
-  }
-
-  .facets__status-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .facets--drawer .facets__status-wrapper {
-    @media screen and (width < 750px) {
-      gap: var(--gap-3xs);
-    }
-  }
-
-  .facets--vertical .facets__status-wrapper {
-    gap: var(--gap-xs);
-  }
-
-  .facets--horizontal .facets__status-wrapper {
-    gap: 0;
-  }
-
-  .facets__pill-input:disabled + .facets__pill-label svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: var(--style-border-radius-md);
-  }
-
-  .facets__pill-label svg line {
-    stroke-width: 1.5px;
-    stroke: rgb(from var(--color-foreground) r g b / var(--facets-low-opacity));
-  }
-
-  .facets__pill-wrapper {
-    position: relative;
-  }
-
-  .facets__pill-input {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-
-  /* Swatches */
-  .facets__status--swatches {
-    display: none;
-  }
-
-  .facets__swatch-wrapper {
-    display: flex;
-  }
-
-  .facets__inputs-list--swatches .variant-option__button-label {
-    --color-variant-text: var(--color-foreground);
-  }
-
-  .facets__inputs-list--swatches {
-    --variant-picker-swatch-width: 32px;
-    --variant-picker-swatch-height: 32px;
-
-    @media screen and (width >= 750px) {
-      --variant-picker-swatch-width: 26px;
-      --variant-picker-swatch-height: 26px;
-    }
-  }
-
-  .facets--vertical .facets__inputs-wrapper .facets__inputs-list--swatches-grid {
-    gap: var(--gap-sm);
-  }
-
-  .facets--vertical .facets__inputs-list--swatches .facets__inputs-list-item {
-    display: flex;
-  }
-
-  .facets__inputs-wrapper .facets__inputs-list--swatches-grid {
-    --columns: 2;
-    display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
-  }
-
-  .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option--swatches {
-    cursor: pointer;
-    overflow: visible;
-
-    &.variant-option--swatches-disabled,
-    &:has(input:disabled) {
-      cursor: not-allowed;
-    }
-  }
-
-  .facets__inputs-wrapper .facets__inputs-list--swatches-grid label {
-    cursor: pointer;
-    word-break: break-word;
-    white-space: normal;
-
-    .variant-option--swatches-disabled &,
-    .variant-option--swatches:has(input:disabled) & {
-      cursor: not-allowed;
-    }
-  }
-
-  .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option__button-label--has-swatch {
-    align-items: center;
-    overflow: visible;
-    justify-content: flex-start;
-    display: flex;
-    width: 100%;
-    flex-basis: unset;
-    gap: var(--gap-sm);
-  }
-
-  .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option__button-label:has(:checked) {
-    color: rgb(from var(--color-foreground) r g b / 100%);
-    background-color: rgb(from var(--color-background) r g b / 100%);
-    font-weight: 500;
-    transition: font-weight 0.2s ease;
-  }
-
-  .facets .variant-option--swatches {
-    --options-border-radius: var(--variant-picker-swatch-radius);
-    width: auto;
-  }
-
-  .facets--horizontal .facets__status--swatches {
-    @media screen and (width >= 750px) {
-      display: flex;
-    }
-  }
-
-  .facets--horizontal .sorting-filter .facets__status {
-    @media screen and (width >= 750px) {
-      display: none;
-    }
-  }
-
-  .facets__status--swatches .swatch {
-    width: calc(var(--variant-picker-swatch-width) / 1.5);
-    height: calc(var(--variant-picker-swatch-height) / 1.5);
-  }
-
-  .facets__status--swatches .swatch + .swatch {
-    margin-left: calc(var(--variant-picker-swatch-width) / -3);
-    outline: 1px solid rgb(from var(--color-background) r g b / 100%);
-  }
-
-  .variant-option--images {
-    position: relative;
-  }
-
-  .variant-option--images {
-    --image-facet-border-width: var(--variant-picker-button-border-width);
-    --image-facet-border-opacity: var(--facets-low-opacity);
-    --image-facet-border-radius: var(--style-border-radius-xs);
-
-    border-radius: var(--image-facet-border-radius);
-    box-shadow: inset 0 0 0 var(--image-facet-border-width)
-      rgb(from var(--color-foreground) r g b / var(--image-facet-border-opacity));
-
-    &:hover:not(:has(input:disabled)),
-    &:has(input:checked) {
-      --image-facet-border-opacity: 100%;
-    }
-
-    &:has(input:checked) {
-      font-weight: 500;
-      transition: font-weight 0.2s ease;
-    }
-
-    &:has(input:checked):hover {
-      --image-facet-border-width: calc(var(--variant-picker-button-border-width) + 0.5px);
-    }
-
-    &:has(input:focus-visible) {
-      outline: var(--focus-outline-width) solid currentcolor;
-      outline-offset: var(--focus-outline-offset);
-    }
-
-    &:has(input:disabled),
-    &:has(input:disabled):hover {
-      --image-facet-border-opacity: 0;
-      opacity: var(--disabled-opacity);
-      cursor: not-allowed;
-
-      img {
-        opacity: var(--disabled-opacity);
-      }
-
-      input,
-      label,
-      .facets__image-label {
-        cursor: not-allowed;
-      }
-
-      .facets__image-wrapper {
-        border: var(--style-border-width) solid rgba(from var(--color-foreground) r g b / 0.3);
-        border-radius: var(--image-facet-border-radius);
-      }
-    }
-  }
-
-  .facets__inputs-wrapper .facets__inputs-list--images {
-    display: grid;
-    grid-template-columns: repeat(var(--image-columns), 125px);
-    gap: var(--gap-sm);
-  }
-
-  .facets--drawer .facets__inputs-wrapper .facets__inputs-list--images {
-    grid-template-columns: repeat(3, 1fr);
-
-    @media screen and (width >= 750px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .facets--vertical .facets__inputs-wrapper .facets__inputs-list--images {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .facets--drawer .facets__inputs-list--images {
-    padding-top: var(--padding-xs);
-  }
-
-  .facets__image-wrapper {
-    aspect-ratio: 1/1;
-    width: 100%;
-    padding: var(--padding-xs);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .facets__image-wrapper img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    border-radius: calc(var(--border-radius) / 2);
-  }
-
-  /* Position disabled-svg */
-  .variant-option--images svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    stroke-width: var(--border-width);
-    stroke: rgb(from var(--color-foreground) r g b / 0.3);
-  }
-
-  /* Position label text and handle overflow */
-  .facets__inputs-list-item,
-  .variant-option--images {
-    min-width: 0;
-  }
-
-  .facets__image-label {
-    width: 100%;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-block-end: var(--padding-xs);
-    cursor: pointer;
-
-    .variant-option--images:has(input:disabled) & {
-      cursor: not-allowed;
-    }
-  }
-
-  .facets__inputs-list--swatches .variant-option__button-label:hover:not(:has(input:disabled)) {
-    font-weight: 500;
-  }
-
-  .variant-option--images:not(:has(input:disabled)) .facets__image-label:hover {
-    font-weight: 500;
-  }
-{% endstylesheet %}
-
 {% liquid
   assign is_swatch = false
   assign swatch_index = filter.values | find_index: 'swatch'
@@ -776,3 +420,359 @@
     </floating-panel-component>
   </details>
 </accordion-custom>
+
+{% stylesheet %}
+  .facets input:checked + label {
+    font-weight: 500;
+  }
+
+  .facets .checkbox .icon-checkmark {
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
+    border-color: rgb(from var(--color-foreground) r g b / 40%);
+    background-color: rgb(from var(--color-foreground) r g b / 5%);
+  }
+
+  .facets .checkbox:has(.checkbox__input:checked):not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
+    background-color: rgb(from var(--color-foreground) r g b / 85%);
+  }
+
+  .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .checkbox__label-text {
+    color: rgb(from var(--color-foreground) r g b / 90%);
+  }
+
+  .facets .checkbox .checkbox__label-text {
+    transition: color 0.2s ease, font-weight 0.2s ease;
+  }
+
+  /* Pill style */
+  .facets__pill-label {
+    --pill-label-padding-inline: var(--padding-xs);
+    --pill-label-border-radius: var(--style-border-radius-md);
+    --pill-label-border-width: var(--variant-picker-button-border-width);
+    --pill-label-height: var(--button-size-md);
+    --pill-label-focus-outline-color: var(--color-foreground);
+    --pill-label-color: var(--color-foreground);
+    --pill-label-background-color: var(--color-background);
+    --pill-label-border-opacity: var(--facets-low-opacity);
+
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 var(--pill-label-border-width)
+      rgb(from var(--pill-label-color) r g b / var(--pill-label-border-opacity));
+    border-radius: var(--pill-label-border-radius);
+    height: var(--pill-label-height);
+    width: 100%;
+    padding-inline: var(--pill-label-padding-inline);
+    color: rgb(from var(--pill-label-color) r g b / 100%);
+    background-color: rgb(from var(--pill-label-background-color) r g b / 100%);
+    cursor: pointer;
+    transition: color var(--animation-speed) var(--animation-easing),
+      background-color var(--animation-speed) var(--animation-easing);
+    outline-color: var(--pill-label-focus-outline-color);
+
+    &:hover {
+      --pill-label-border-opacity: 100%;
+    }
+  }
+
+  .facets__pill-input {
+    &:checked + .facets__pill-label {
+      --pill-label-color: var(--color-background);
+      --pill-label-background-color: var(--color-foreground);
+      --pill-label-border-opacity: 0;
+      font-weight: 500;
+    }
+
+    &:disabled + .facets__pill-label {
+      opacity: var(--disabled-opacity);
+      cursor: not-allowed;
+
+      &:hover {
+        --pill-label-border-opacity: var(--facets-low-opacity);
+      }
+    }
+  }
+
+  .facets__status-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .facets--drawer .facets__status-wrapper {
+    @media screen and (width < 750px) {
+      gap: var(--gap-3xs);
+    }
+  }
+
+  .facets--vertical .facets__status-wrapper {
+    gap: var(--gap-xs);
+  }
+
+  .facets--horizontal .facets__status-wrapper {
+    gap: 0;
+  }
+
+  .facets__pill-input:disabled + .facets__pill-label svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--style-border-radius-md);
+  }
+
+  .facets__pill-label svg line {
+    stroke-width: 1.5px;
+    stroke: rgb(from var(--color-foreground) r g b / var(--facets-low-opacity));
+  }
+
+  .facets__pill-wrapper {
+    position: relative;
+  }
+
+  .facets__pill-input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* Swatches */
+  .facets__status--swatches {
+    display: none;
+  }
+
+  .facets__swatch-wrapper {
+    display: flex;
+  }
+
+  .facets__inputs-list--swatches .variant-option__button-label {
+    --color-variant-text: var(--color-foreground);
+  }
+
+  .facets__inputs-list--swatches {
+    --variant-picker-swatch-width: 32px;
+    --variant-picker-swatch-height: 32px;
+
+    @media screen and (width >= 750px) {
+      --variant-picker-swatch-width: 26px;
+      --variant-picker-swatch-height: 26px;
+    }
+  }
+
+  .facets--vertical .facets__inputs-wrapper .facets__inputs-list--swatches-grid {
+    gap: var(--gap-sm);
+  }
+
+  .facets--vertical .facets__inputs-list--swatches .facets__inputs-list-item {
+    display: flex;
+  }
+
+  .facets__inputs-wrapper .facets__inputs-list--swatches-grid {
+    --columns: 2;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+  }
+
+  .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option--swatches {
+    cursor: pointer;
+    overflow: visible;
+
+    &.variant-option--swatches-disabled,
+    &:has(input:disabled) {
+      cursor: not-allowed;
+    }
+  }
+
+  .facets__inputs-wrapper .facets__inputs-list--swatches-grid label {
+    cursor: pointer;
+    word-break: break-word;
+    white-space: normal;
+
+    .variant-option--swatches-disabled &,
+    .variant-option--swatches:has(input:disabled) & {
+      cursor: not-allowed;
+    }
+  }
+
+  .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option__button-label--has-swatch {
+    align-items: center;
+    overflow: visible;
+    justify-content: flex-start;
+    display: flex;
+    width: 100%;
+    flex-basis: unset;
+    gap: var(--gap-sm);
+  }
+
+  .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option__button-label:has(:checked) {
+    color: rgb(from var(--color-foreground) r g b / 100%);
+    background-color: rgb(from var(--color-background) r g b / 100%);
+    font-weight: 500;
+    transition: font-weight 0.2s ease;
+  }
+
+  .facets .variant-option--swatches {
+    --options-border-radius: var(--variant-picker-swatch-radius);
+    width: auto;
+  }
+
+  .facets--horizontal .facets__status--swatches {
+    @media screen and (width >= 750px) {
+      display: flex;
+    }
+  }
+
+  .facets--horizontal .sorting-filter .facets__status {
+    @media screen and (width >= 750px) {
+      display: none;
+    }
+  }
+
+  .facets__status--swatches .swatch {
+    width: calc(var(--variant-picker-swatch-width) / 1.5);
+    height: calc(var(--variant-picker-swatch-height) / 1.5);
+  }
+
+  .facets__status--swatches .swatch + .swatch {
+    margin-left: calc(var(--variant-picker-swatch-width) / -3);
+    outline: 1px solid rgb(from var(--color-background) r g b / 100%);
+  }
+
+  .variant-option--images {
+    position: relative;
+  }
+
+  .variant-option--images {
+    --image-facet-border-width: var(--variant-picker-button-border-width);
+    --image-facet-border-opacity: var(--facets-low-opacity);
+    --image-facet-border-radius: var(--style-border-radius-xs);
+
+    border-radius: var(--image-facet-border-radius);
+    box-shadow: inset 0 0 0 var(--image-facet-border-width)
+      rgb(from var(--color-foreground) r g b / var(--image-facet-border-opacity));
+
+    &:hover:not(:has(input:disabled)),
+    &:has(input:checked) {
+      --image-facet-border-opacity: 100%;
+    }
+
+    &:has(input:checked) {
+      font-weight: 500;
+      transition: font-weight 0.2s ease;
+    }
+
+    &:has(input:checked):hover {
+      --image-facet-border-width: calc(var(--variant-picker-button-border-width) + 0.5px);
+    }
+
+    &:has(input:focus-visible) {
+      outline: var(--focus-outline-width) solid currentcolor;
+      outline-offset: var(--focus-outline-offset);
+    }
+
+    &:has(input:disabled),
+    &:has(input:disabled):hover {
+      --image-facet-border-opacity: 0;
+      opacity: var(--disabled-opacity);
+      cursor: not-allowed;
+
+      img {
+        opacity: var(--disabled-opacity);
+      }
+
+      input,
+      label,
+      .facets__image-label {
+        cursor: not-allowed;
+      }
+
+      .facets__image-wrapper {
+        border: var(--style-border-width) solid rgba(from var(--color-foreground) r g b / 0.3);
+        border-radius: var(--image-facet-border-radius);
+      }
+    }
+  }
+
+  .facets__inputs-wrapper .facets__inputs-list--images {
+    display: grid;
+    grid-template-columns: repeat(var(--image-columns), 125px);
+    gap: var(--gap-sm);
+  }
+
+  .facets--drawer .facets__inputs-wrapper .facets__inputs-list--images {
+    grid-template-columns: repeat(3, 1fr);
+
+    @media screen and (width >= 750px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .facets--vertical .facets__inputs-wrapper .facets__inputs-list--images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .facets--drawer .facets__inputs-list--images {
+    padding-top: var(--padding-xs);
+  }
+
+  .facets__image-wrapper {
+    aspect-ratio: 1/1;
+    width: 100%;
+    padding: var(--padding-xs);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .facets__image-wrapper img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: calc(var(--border-radius) / 2);
+  }
+
+  /* Position disabled-svg */
+  .variant-option--images svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    stroke-width: var(--border-width);
+    stroke: rgb(from var(--color-foreground) r g b / 0.3);
+  }
+
+  /* Position label text and handle overflow */
+  .facets__inputs-list-item,
+  .variant-option--images {
+    min-width: 0;
+  }
+
+  .facets__image-label {
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-block-end: var(--padding-xs);
+    cursor: pointer;
+
+    .variant-option--images:has(input:disabled) & {
+      cursor: not-allowed;
+    }
+  }
+
+  .facets__inputs-list--swatches .variant-option__button-label:hover:not(:has(input:disabled)) {
+    font-weight: 500;
+  }
+
+  .variant-option--images:not(:has(input:disabled)) .facets__image-label:hover {
+    font-weight: 500;
+  }
+{% endstylesheet %}
