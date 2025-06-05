@@ -1,23 +1,4 @@
-{% stylesheet %}
-  .cart-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-2xs);
-    border-block: 1px solid var(--color-border);
-    padding-block: var(--padding-sm);
-    margin-block-start: var(--margin-3xs);
-  }
 
-  .cart__summary-totals:not(:has(.cart-actions)) {
-    margin-block-start: var(--margin-3xs);
-    border-block-start: 1px solid var(--color-border);
-    padding-block-start: var(--margin-xl);
-  }
-
-  .cart__installments {
-    color: var(--color-foreground);
-  }
-{% endstylesheet %}
 
 <div class="cart__summary-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
@@ -58,7 +39,7 @@
       {% endif %}
 
       {% if settings.show_add_discount_code %}
-        {% render 'cart-discount' %}
+        {% render 'cart-discount', section_id: section.id %}
       {% endif %}
     </div>
   {% endif %}
@@ -120,3 +101,24 @@
     </div>
   {% endif %}
 </div>
+
+{% stylesheet %}
+  .cart-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2xs);
+    border-block: 1px solid var(--color-border);
+    padding-block: var(--padding-sm);
+    margin-block-start: var(--margin-3xs);
+  }
+
+  .cart__summary-totals:not(:has(.cart-actions)) {
+    margin-block-start: var(--margin-3xs);
+    border-block-start: 1px solid var(--color-border);
+    padding-block-start: var(--margin-xl);
+  }
+
+  .cart__installments {
+    color: var(--color-foreground);
+  }
+{% endstylesheet %}

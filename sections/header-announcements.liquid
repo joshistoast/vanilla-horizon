@@ -1,5 +1,42 @@
 
 
+{% if section.blocks.size > 1 %}
+  <script
+    src="{{ 'announcement-bar.js' | asset_url }}"
+    type="module"
+  ></script>
+{% endif %}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<aside
+  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
+>
+  {% liquid
+    assign autoplay = false
+    assign show_arrows = false
+    if section.blocks.size > 1
+      assign autoplay = true
+      assign show_arrows = true
+    endif
+  %}
+
+  <announcement-bar-component
+    class="announcement-bar__slider"
+    {% if autoplay == true %}
+      autoplay="{{ section.settings.speed }}" aria-live="polite"
+    {% endif %}
+  >
+    {% if show_arrows %}
+      {% render 'slideshow-arrows', icon_style: 'chevron' %}
+    {% endif %}
+
+    <div class="announcement-bar__slides">
+      {% content_for 'blocks' %}
+    </div>
+  </announcement-bar-component>
+</aside>
+
 {% stylesheet %}
   .announcement-bar {
     border-block-end: var(--border-bottom-width) solid var(--color-border);
@@ -86,43 +123,6 @@
     inset: 0;
   }
 {% endstylesheet %}
-
-{% if section.blocks.size > 1 %}
-  <script
-    src="{{ 'announcement-bar.js' | asset_url }}"
-    type="module"
-  ></script>
-{% endif %}
-
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<aside
-  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
-  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
->
-  {% liquid
-    assign autoplay = false
-    assign show_arrows = false
-    if section.blocks.size > 1
-      assign autoplay = true
-      assign show_arrows = true
-    endif
-  %}
-
-  <announcement-bar-component
-    class="announcement-bar__slider"
-    {% if autoplay == true %}
-      autoplay="{{ section.settings.speed }}" aria-live="polite"
-    {% endif %}
-  >
-    {% if show_arrows %}
-      {% render 'slideshow-arrows', icon_style: 'chevron' %}
-    {% endif %}
-
-    <div class="announcement-bar__slides">
-      {% content_for 'blocks' %}
-    </div>
-  </announcement-bar-component>
-</aside>
 
 {% schema %}
 {

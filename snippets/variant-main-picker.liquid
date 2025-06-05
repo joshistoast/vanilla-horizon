@@ -4,6 +4,186 @@
   @param {product} product_resource - The product resource object.
 {% endcomment %}
 
+{% unless product_resource.has_only_default_variant %}
+  {% liquid
+    assign button_background_brightness = section.settings.color_scheme.settings.foreground | color_brightness
+    if button_background_brightness < 105
+      assign strikethrough_color_mix = '#000'
+    else
+      assign strikethrough_color_mix = '#fff'
+    endif
+  %}
+  <variant-picker
+    class="variant-picker spacing-style variant-picker--{{ block.settings.alignment }}"
+    style="--color-strikethrough-mix: {{ strikethrough_color_mix }}; {% render 'spacing-style', settings: block.settings %}"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product_resource.id }}"
+    data-block-id="{{ block.id }}"
+    data-product-url="{{ product_resource.url }}"
+    ref="mainVariantPicker"
+    {% if product.id == product_resource.id %}
+      data-template-product-match="true"
+    {% endif %}
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-shopify-visual-preview
+    {% endif %}
+  >
+    <form class="variant-picker__form">
+      {%- for product_option in product_resource.options_with_values -%}
+        {%- liquid
+          assign swatch_count = product_option.values | map: 'swatch' | compact | size
+          assign variant_style = block.settings.variant_style
+
+          if swatch_count > 0 and block.settings.show_swatches
+            if block.settings.variant_style == 'dropdown'
+              assign variant_style = 'swatch_dropdown'
+            else
+              assign variant_style = 'swatch'
+            endif
+          endif
+
+          if variant_style == 'buttons' and settings.variant_button_width == 'equal-width-buttons'
+            assign fieldset_id = section.id | append: '-' | append: product_resource.id | append: '-' | append: product_option.name | handleize
+            assign option_id_attribute = 'data-option-id="' | append: fieldset_id | append: '"'
+            assign longest_value = 0
+          endif
+        -%}
+
+        {%- if variant_style == 'swatch' or block.settings.variant_style == 'buttons' -%}
+          <fieldset
+            class="variant-option variant-option--buttons{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}"
+            {{ option_id_attribute }}
+          >
+            <legend>
+              {{ product_option.name | escape -}}
+              {%- if variant_style == 'swatch' -%}
+                <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
+              {%- endif %}
+            </legend>
+            {%- for product_option_value in product_option.values -%}
+              {% if product_option_value.size > longest_value and option_id_attribute %}
+                {% assign longest_value = product_option_value.size %}
+              {% endif %}
+              <label class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}">
+                <input
+                  type="radio"
+                  name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+                  value="{{ product_option_value | escape }}"
+                  aria-label="{{ product_option_value.name }}"
+                  {% if product_option_value.available == false %}
+                    aria-disabled="true"
+                  {% endif %}
+                  data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+                  data-option-value-id="{{ product_option_value.id }}"
+                  data-option-available="{{ product_option_value.available }}"
+                  data-connected-product-url="{{ product_option_value.product_url }}"
+                  {% if product_option_value.variant.id %}
+                    data-variant-id="{{ product_option_value.variant.id }}"
+                  {% endif %}
+                  {% if product_option_value.selected %}
+                    checked
+                  {% endif %}
+                >
+                {% if variant_style == 'swatch' %}
+                  {% liquid
+                    assign featured_media = product_option_value.variant.featured_media
+
+                    # If the variant has no featured media, and we have a combined listing product, then fall back to
+                    # using the featured media of the child product that is linked to this option value.
+                    if featured_media == blank and product_option_value.product_url
+                      assign featured_media = product_option_value.variant.product.featured_media
+                    endif
+                  %}
+
+                  {% render 'swatch',
+                    swatch: product_option_value.swatch,
+                    variant_image: featured_media,
+                    mode: 'unscaled'
+                  %}
+                {% else %}
+                  <span class="variant-option__button-label__text">{{ product_option_value | escape }}</span>
+                {% endif %}
+                {% render 'strikethrough-variant', product_option: product_option_value %}
+              </label>
+            {%- endfor -%}
+            {% if option_id_attribute %}
+              {% style %}
+                [data-option-id="{{ fieldset_id }}"] {
+                  --variant-ch: {{ longest_value }}ch;
+                }
+              {% endstyle %}
+            {% endif %}
+          </fieldset>
+        {%- elsif block.settings.variant_style == 'dropdowns' -%}
+          {%
+            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
+            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
+            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
+          %}
+          {% liquid
+            assign property_being_updated = false
+            if settings.variant_swatch_width != settings.variant_swatch_height
+              assign property_being_updated = true
+              # (original width / original height) x new height (20px at the moment) = new width
+              assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
+            endif
+          %}
+
+          <div class="variant-option variant-option--dropdowns">
+            <label for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ product_option.name | escape }}</label>
+            <div
+              class="variant-option__select-wrapper"
+              style="
+                {%- if property_being_updated  -%}
+                  --variant-picker-swatch-width: clamp(10px,{{ new_width }}px, 50px);
+                {%- endif -%}
+              "
+            >
+              <select
+                id="Option-{{ block.id }}-{{ forloop.index0 }}"
+                name="options[{{ product_option.name | escape }}]"
+                class="variant-option__select"
+              >
+                {%- for product_option_value in product_option.values -%}
+                  <option
+                    value="{{ product_option_value | escape }}"
+                    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+                    data-option-value-id="{{ product_option_value.id }}"
+                    data-variant-id="{{ product_option_value.variant.id }}"
+                    data-connected-product-url="{{ product_option_value.product_url }}"
+                    {% if product_option_value.selected %}
+                      selected="selected"
+                    {% endif %}
+                  >
+                    {% if product_option_value.available == false %}
+                      {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
+                    {% else %}
+                      {{ product_option_value | escape }}
+                    {% endif %}
+                  </option>
+                {%- endfor -%}
+              </select>
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                class="icon icon-caret"
+                viewBox="0 0 10 6"
+              >
+                {%- render 'icon', icon: 'caret' -%}
+              </svg>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <script type="application/json">
+        {{ product_resource.selected_or_first_available_variant | json }}
+      </script>
+    </form>
+  </variant-picker>
+{% endunless %}
+
 {% stylesheet %}
   .variant-picker {
     width: 100%;
@@ -295,184 +475,3 @@
     justify-content: right;
   }
 {% endstylesheet %}
-
-{% unless product_resource.has_only_default_variant %}
-  {% liquid
-    assign button_background_brightness = section.settings.color_scheme.settings.foreground | color_brightness
-    if button_background_brightness < 105
-      assign strikethrough_color_mix = '#000'
-    else
-      assign strikethrough_color_mix = '#fff'
-    endif
-  %}
-  <variant-picker
-    class="variant-picker spacing-style variant-picker--{{ block.settings.alignment }}"
-    style="--color-strikethrough-mix: {{ strikethrough_color_mix }}; {% render 'spacing-style', settings: block.settings %}"
-    data-section-id="{{ section.id }}"
-    data-product-id="{{ product_resource.id }}"
-    data-block-id="{{ block.id }}"
-    data-product-url="{{ product_resource.url }}"
-    ref="mainVariantPicker"
-    {% if product.id == product_resource.id %}
-      data-template-product-match="true"
-    {% endif %}
-    {{ block.shopify_attributes }}
-    {% if request.visual_preview_mode %}
-      data-shopify-visual-preview
-    {% endif %}
-  >
-    <form class="variant-picker__form">
-      {%- for product_option in product_resource.options_with_values -%}
-        {%- liquid
-          assign swatch_count = product_option.values | map: 'swatch' | compact | size
-          assign variant_style = block.settings.variant_style
-
-          if swatch_count > 0 and block.settings.show_swatches
-            if block.settings.variant_style == 'dropdown'
-              assign variant_style = 'swatch_dropdown'
-            else
-              assign variant_style = 'swatch'
-            endif
-          endif
-
-          if variant_style == 'buttons' and settings.variant_button_width == 'equal-width-buttons'
-            assign fieldset_id = section.id | append: '-' | append: product_resource.id | append: '-' | append: product_option.name | handleize
-            assign option_id_attribute = 'data-option-id="' | append: fieldset_id | append: '"'
-            assign longest_value = 0
-          endif
-        -%}
-
-        {%- if variant_style == 'swatch' or block.settings.variant_style == 'buttons' -%}
-          <fieldset
-            class="variant-option variant-option--buttons{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}"
-            {{ option_id_attribute }}
-          >
-            <legend>
-              {{ product_option.name | escape -}}
-              {%- if variant_style == 'swatch' -%}
-                <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
-              {%- endif %}
-            </legend>
-            {%- for product_option_value in product_option.values -%}
-              {% if product_option_value.size > longest_value and option_id_attribute %}
-                {% assign longest_value = product_option_value.size %}
-              {% endif %}
-              <label class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}">
-                <input
-                  type="radio"
-                  name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
-                  value="{{ product_option_value | escape }}"
-                  aria-label="{{ product_option_value.name }}"
-                  {% if product_option_value.available == false %}
-                    aria-disabled="true"
-                  {% endif %}
-                  data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                  data-option-value-id="{{ product_option_value.id }}"
-                  data-option-available="{{ product_option_value.available }}"
-                  data-connected-product-url="{{ product_option_value.product_url }}"
-                  {% if product_option_value.variant.id %}
-                    data-variant-id="{{ product_option_value.variant.id }}"
-                  {% endif %}
-                  {% if product_option_value.selected %}
-                    checked
-                  {% endif %}
-                >
-                {% if variant_style == 'swatch' %}
-                  {% liquid
-                    assign featured_media = product_option_value.variant.featured_media
-
-                    # If the variant has no featured media, and we have a combined listing product, then fall back to
-                    # using the featured media of the child product that is linked to this option value.
-                    if featured_media == blank and product_option_value.product_url
-                      assign featured_media = product_option_value.variant.product.featured_media
-                    endif
-                  %}
-
-                  {% render 'swatch',
-                    swatch: product_option_value.swatch,
-                    variant_image: featured_media,
-                    show_variant_image: settings.show_variant_image,
-                    mode: 'unscaled'
-                  %}
-                {% else %}
-                  <span class="variant-option__button-label__text">{{ product_option_value | escape }}</span>
-                {% endif %}
-                {% render 'strikethrough-variant', product_option: product_option_value %}
-              </label>
-            {%- endfor -%}
-            {% if option_id_attribute %}
-              <style>
-                [data-option-id="{{ fieldset_id }}"] {
-                  --variant-ch: {{ longest_value }}ch;
-                }
-              </style>
-            {% endif %}
-          </fieldset>
-        {%- elsif block.settings.variant_style == 'dropdowns' -%}
-          {%
-            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
-            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
-            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
-          %}
-          {% liquid
-            assign property_being_updated = false
-            if settings.variant_swatch_width != settings.variant_swatch_height
-              assign property_being_updated = true
-              # (original width / original height) x new height (20px at the moment) = new width
-              assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
-            endif
-          %}
-
-          <div class="variant-option variant-option--dropdowns">
-            <label for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ product_option.name | escape }}</label>
-            <div
-              class="variant-option__select-wrapper"
-              style="
-                {%- if property_being_updated  -%}
-                  --variant-picker-swatch-width: clamp(10px,{{ new_width }}px, 50px);
-                {%- endif -%}
-              "
-            >
-              <select
-                id="Option-{{ block.id }}-{{ forloop.index0 }}"
-                name="options[{{ product_option.name | escape }}]"
-                class="variant-option__select"
-              >
-                {%- for product_option_value in product_option.values -%}
-                  <option
-                    value="{{ product_option_value | escape }}"
-                    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                    data-option-value-id="{{ product_option_value.id }}"
-                    data-variant-id="{{ product_option_value.variant.id }}"
-                    data-connected-product-url="{{ product_option_value.product_url }}"
-                    {% if product_option_value.selected %}
-                      selected="selected"
-                    {% endif %}
-                  >
-                    {% if product_option_value.available == false %}
-                      {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
-                    {% else %}
-                      {{ product_option_value | escape }}
-                    {% endif %}
-                  </option>
-                {%- endfor -%}
-              </select>
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                class="icon icon-caret"
-                viewBox="0 0 10 6"
-              >
-                {%- render 'icon', icon: 'caret' -%}
-              </svg>
-            </div>
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
-
-      <script type="application/json">
-        {{ product_resource.selected_or_first_available_variant | json }}
-      </script>
-    </form>
-  </variant-picker>
-{% endunless %}

@@ -1,55 +1,10 @@
-{% stylesheet %}
-  .blog-post-comments__form-container {
-    --comment-form-gap: var(--gap-md);
+{% doc %}
+  Renders a comment form for a blog post.
 
-    width: 100%;
-    max-width: var(--normal-content-width);
-    margin: var(--margin-4xl) auto 0;
-  }
-
-  .blog-post-comments__form {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--comment-form-gap);
-
-    @media screen and (width >= 750px) {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .blog-post-comments__form-input {
-    padding: var(--padding-lg) var(--padding-xl);
-    border: var(--style-border-width-inputs) solid var(--color-input-border);
-  }
-
-  .blog-post-comments__form-input--textarea {
-    resize: vertical;
-    min-height: var(--input-textarea-min-height);
-  }
-
-  .blog-post-comments__form-message {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-xs);
-  }
-
-  .blog-post-comments__form-body {
-    grid-column: 1 / -1;
-  }
-
-  .blog-post-comments__form-input:focus-visible {
-    outline: var(--focus-outline-width) solid currentcolor;
-    outline-offset: var(--focus-outline-offset);
-  }
-
-  .blog-post-comments__form-moderated {
-    font-size: var(--font-size--xs);
-  }
-
-  .blog-post-comments__form-submit {
-    margin-block-start: var(--comment-form-gap);
-  }
-{% endstylesheet %}
+  @param {object} [form] - The form object
+  @param {object} article - The article object
+  @param {string} section_id - The section ID
+{% enddoc %}
 
 {% form 'new_comment', article %}
   <div class="blog-post-comments__form-container">
@@ -107,7 +62,7 @@
       <div class="field">
         <label
           class="visually-hidden"
-          for="{{ section.id }}-blog-post-comment-author"
+          for="{{ section_id }}-blog-post-comment-author"
         >
           {{ 'blogs.comment_form.name' | t }}
         </label>
@@ -115,7 +70,7 @@
         <input
           type="text"
           name="comment[author]"
-          id="{{ section.id }}-blog-post-comment-author"
+          id="{{ section_id }}-blog-post-comment-author"
           class="blog-post-comments__form-input field__input"
           autocomplete="name"
           value="{{- form.author -}}"
@@ -132,7 +87,7 @@
       <div class="field">
         <label
           class="visually-hidden"
-          for="{{ section.id }}-blog-post-comment-email"
+          for="{{ section_id }}-blog-post-comment-email"
         >
           {{ 'blogs.comment_form.email' | t }}
         </label>
@@ -140,7 +95,7 @@
         <input
           type="email"
           name="comment[email]"
-          id="{{ section.id }}-blog-post-comment-email"
+          id="{{ section_id }}-blog-post-comment-email"
           autocomplete="email"
           class="blog-post-comments__form-input field__input"
           value="{{ form.email }}"
@@ -159,7 +114,7 @@
       <div class="field blog-post-comments__form-body">
         <label
           class="visually-hidden"
-          for="{{ section.id }}-blog-post-comment-body"
+          for="{{ section_id }}-blog-post-comment-body"
         >
           {{ 'blogs.comment_form.message' | t }}
         </label>
@@ -167,7 +122,7 @@
         <textarea
           rows="5"
           name="comment[body]"
-          id="{{ section.id }}-blog-post-comment-body"
+          id="{{ section_id }}-blog-post-comment-body"
           class="blog-post-comments__form-input blog-post-comments__form-input--textarea field__input"
           aria-required="true"
           placeholder="{{ 'blogs.comment_form.message' | t }}"
@@ -196,3 +151,56 @@
     </button>
   </div>
 {% endform %}
+
+{% stylesheet %}
+  .blog-post-comments__form-container {
+    --comment-form-gap: var(--gap-md);
+
+    width: 100%;
+    max-width: var(--normal-content-width);
+    margin: var(--margin-4xl) auto 0;
+  }
+
+  .blog-post-comments__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--comment-form-gap);
+
+    @media screen and (width >= 750px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .blog-post-comments__form-input {
+    padding: var(--padding-lg) var(--padding-xl);
+    border: var(--style-border-width-inputs) solid var(--color-input-border);
+  }
+
+  .blog-post-comments__form-input--textarea {
+    resize: vertical;
+    min-height: var(--input-textarea-min-height);
+  }
+
+  .blog-post-comments__form-message {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .blog-post-comments__form-body {
+    grid-column: 1 / -1;
+  }
+
+  .blog-post-comments__form-input:focus-visible {
+    outline: var(--focus-outline-width) solid currentcolor;
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  .blog-post-comments__form-moderated {
+    font-size: var(--font-size--xs);
+  }
+
+  .blog-post-comments__form-submit {
+    margin-block-start: var(--comment-form-gap);
+  }
+{% endstylesheet %}

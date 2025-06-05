@@ -12,106 +12,6 @@
   type="module"
 ></script>
 
-{% stylesheet %}
-  .block-resource-list {
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--gap);
-    min-width: 0;
-    min-height: 0;
-  }
-
-  .resource-list--carousel-mobile {
-    display: block;
-
-    @media screen and (width >= 750px) {
-      display: none;
-    }
-  }
-
-  .resource-list {
-    --resource-list-mobile-gap-max: 12px;
-    --resource-list-column-gap: min(var(--resource-list-column-gap-desktop), var(--resource-list-mobile-gap-max));
-    --resource-list-row-gap: min(var(--resource-list-row-gap-desktop), var(--resource-list-mobile-gap-max));
-
-    width: 100%;
-
-    @media screen and (width >= 750px) {
-      --resource-list-column-gap: var(--resource-list-column-gap-desktop);
-      --resource-list-row-gap: var(--resource-list-row-gap-desktop);
-    }
-  }
-
-  .block-resource-list {
-    container-type: inline-size;
-    container-name: resource-list;
-  }
-
-  .resource-list--grid {
-    display: grid;
-    column-gap: var(--resource-list-column-gap);
-    row-gap: var(--resource-list-row-gap);
-
-    @container resource-list (width < 750px) {
-      grid-template-columns: var(--resource-list-columns-mobile);
-    }
-
-    @container resource-list (width >= 750px) {
-      grid-template-columns: repeat(var(--resource-list-columns-per-row), 1fr);
-
-      &:has(.resource-list__item:first-child:nth-last-child(n + 9)) {
-        --resource-list-columns-per-row: 5;
-      }
-
-      &:has(.resource-list__item:first-child:nth-last-child(n + 7):nth-last-child(-n + 8)) {
-        --resource-list-columns-per-row: 4;
-      }
-
-      &:has(.resource-list__item:first-child:nth-last-child(6)) {
-        --resource-list-columns-per-row: 3;
-      }
-
-      &:has(.resource-list__item:first-child:nth-last-child(5)) {
-        --resource-list-columns-per-row: 5;
-      }
-
-      &:has(.resource-list__item:first-child:nth-last-child(-n + 4)) {
-        --resource-list-columns-per-row: 4;
-      }
-    }
-
-    @container resource-list (width >= 1200px) {
-      &:has(.resource-list__item:first-child:nth-last-child(6)) {
-        --resource-list-columns-per-row: 6;
-      }
-    }
-  }
-
-  .resource-list__item {
-    color: var(--color-foreground);
-    text-decoration: none;
-  }
-
-  .product-recommendations-wrapper {
-    width: 100%;
-  }
-
-  .product-recommendations-wrapper:has(product-recommendations[data-shopify-editor-preview]) {
-    width: 100vw;
-  }
-
-  .product-recommendations {
-    display: block;
-  }
-
-  .product-recommendations__skeleton-item {
-    aspect-ratio: 3 / 4;
-    background-color: var(--color-foreground);
-    opacity: var(--skeleton-opacity);
-    border-radius: 4px;
-  }
-{% endstylesheet %}
-
 {% liquid
   case block.settings.layout_type
     when 'grid'
@@ -151,7 +51,7 @@
       {%  render 'gap-style', value: block.settings.gap %}
       --resource-list-column-gap-desktop: {{ block.settings.columns_gap }}px;
       --resource-list-row-gap-desktop: {{ block.settings.rows_gap }}px;
-      --resource-list-columns-mobile: repeat(auto-fill, minmax(9.25rem, 1fr));'
+      --resource-list-columns-mobile: repeat(auto-fill, minmax(9.25rem, 1fr));
     "
   >
     <div class="section-resource-list__content">
@@ -203,11 +103,17 @@
         # Create an array from the list items to be used in the carousel
         assign slide_content = list_items | strip
         assign slides = slide_content | split: '<!--@list/split-->'
+
+        if products != blank and products.size > 0
+          assign has_recommendations = 'true'
+        else
+          assign has_recommendations = 'false'
+        endif
       %}
 
       <div
         class="
-          resource-list resource-list--{{ block.id }}
+          resource-list
           {% if block.settings.carousel_on_mobile and block.settings.layout_type != 'carousel' %}
             hidden--mobile
           {% endif %}
@@ -216,7 +122,7 @@
         {% if block.settings.layout_type == 'grid' %}
           data-testid="resource-list-grid"
         {% endif %}
-        data-has-recommendations="{% if products.size > 0 %}true{% else %}false{% endif %}"
+        data-has-recommendations="{{ has_recommendations }}"
       >
         {% case block.settings.layout_type %}
           {% when 'grid' %}
@@ -237,7 +143,7 @@
         %}
         <div
           class="
-            resource-list resource-list--{{ block.id }}
+            resource-list
             hidden--desktop
             force-full-width
           "
@@ -253,7 +159,7 @@
       {% endif %}
     {%- else -%}
       <div class="resource-list resource-list--grid">
-        {% for i in (1..2) %}
+        {% for i in (1..block.settings.max_products) %}
           <div
             class="resource-list__item product-recommendations__skeleton-item"
             aria-label="{{ 'accessibility.loading_product_recommendations' | t }}"
@@ -263,6 +169,27 @@
     {%- endif -%}
   </div>
 </product-recommendations>
+
+{% stylesheet %}
+  .product-recommendations-wrapper {
+    width: 100%;
+  }
+
+  .product-recommendations-wrapper:has(product-recommendations[data-shopify-editor-preview]) {
+    width: 100vw;
+  }
+
+  .product-recommendations {
+    display: block;
+  }
+
+  .product-recommendations__skeleton-item {
+    aspect-ratio: 3 / 4;
+    background-color: var(--color-foreground);
+    opacity: var(--skeleton-opacity);
+    border-radius: 4px;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

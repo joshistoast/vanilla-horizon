@@ -5,7 +5,7 @@
   @param {object} slides - An array of HTML for the slides to display in the carousel
   @param {number} slide_count - The number of slides to display in the carousel
   @param {object} settings - The block or sections settings from the parent block/section.
-  @param {string} [section_id] - section.id of the parent section
+  @param {string} [slide_width_max] - The maximum width of the slides in the carousel.
 
   @example
   {% render 'resource-list-carousel', slides: slides, slide_count: slide_count, settings: block.settings %}
@@ -19,70 +19,6 @@
     assign slideshow_gutters = null
   endif
 %}
-
-{% style %}
-  .resource-list__carousel {
-    width: 100%;
-    position: relative;
-    container-type: inline-size;
-    container-name: resource-list-carousel;
-    --slide-width: 60vw;
-  }
-
-  .resource-list--{{ section_id }} .resource-list__carousel {
-    {% if settings.section_width == 'page-width' %}
-      --gutter-slide-width: var(--util-page-margin-offset);
-    {% elsif settings.section_width == 'full-width' %}
-      --gutter-slide-width: 0px;
-    {% endif %}
-  }
-
-  @container resource-list-carousel (width < 750px) {
-    .resource-list__carousel .resource-list__slide {
-      --slide-width: clamp(150px, 60cqw, 300px);
-    }
-  }
-
-  @container resource-list-carousel (width >= 750px) {
-    .resource-list__carousel .resource-list__slide {
-      --section-slide-width: calc(
-        (100% - (var(--resource-list-column-gap) * (var(--column-count) - 1)) - var(--peek-next-slide-size)) /
-          var(--column-count)
-      );
-      --fallback-slide-width: clamp(150px, 60cqw, 300px);
-      --slide-width: var(--section-slide-width, var(--fallback-slide-width));
-    }
-  }
-
-  .resource-list__carousel slideshow-slides {
-    column-gap: var(--resource-list-column-gap);
-  }
-
-  .resource-list__carousel slideshow-arrows {
-    padding-inline: var(--util-page-margin-offset);
-
-    @media screen and (width < 750px) {
-      display: none;
-    }
-  }
-
-  .resource-list__carousel .resource-list__slide {
-    width: var(--slide-width);
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    min-width: 0;
-  }
-
-  .resource-list__carousel {
-    .slideshow-control[disabled] {
-      display: none;
-    }
-
-    .slideshow-control--next {
-      margin-inline-start: auto;
-    }
-  }
-{% endstyle %}
 
 {% capture slides %}
   {% for item in slides limit: slides.size %}
@@ -102,6 +38,14 @@
 
 <div
   class="resource-list__carousel"
+  style="
+    {% if settings.section_width == 'page-width' %}
+      --gutter-slide-width: var(--util-page-margin-offset);
+    {% elsif settings.section_width == 'full-width' %}
+      --gutter-slide-width: 0px;
+    {% endif %}
+    --slide-width-max: {{ slide_width_max | default: '300px' }};
+  "
 >
   {% render 'slideshow',
     ref: slideshow_ref,

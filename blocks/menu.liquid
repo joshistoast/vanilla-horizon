@@ -1,67 +1,5 @@
 
 
-{% stylesheet %}
-  .menu {
-    width: 100%;
-  }
-
-  .menu:not(:has(.menu__heading--empty)) .details-content {
-    margin-block-start: var(--spacing--size);
-  }
-
-  .menu__item + .menu__item {
-    margin-block-start: var(--spacing--size);
-  }
-
-  .menu .menu__heading--empty {
-    display: none;
-  }
-
-  .menu__heading__default {
-    display: contents;
-  }
-
-  .menu__heading__accordion {
-    display: none;
-  }
-
-  @media screen and (width < 750px) {
-    /* Always show the fallback heading on mobile when accordion is enabled */
-    .menu--accordion .menu__heading--empty {
-      display: flex;
-    }
-
-    .menu--accordion .menu__heading__accordion {
-      display: contents;
-    }
-
-    .menu--accordion .menu__heading__default {
-      display: none;
-    }
-
-    .menu--accordion .details-content {
-      margin-block-start: var(--spacing--size);
-    }
-
-    .menu--accordion .menu__details {
-      padding-inline: 0;
-    }
-
-    .menu--dividers .menu__details {
-      border-block-end: var(--style-border-width) solid var(--color-border);
-    }
-
-    .menu--dividers .details-content {
-      padding-block-end: var(--padding-sm);
-    }
-  }
-
-  .menu--caret .icon-plus,
-  .menu--plus .icon-caret {
-    display: none;
-  }
-{% endstylesheet %}
-
 {% liquid
   assign menu = block.settings.menu
   assign heading = block.settings.heading
@@ -127,6 +65,68 @@
     </details>
   </accordion-custom>
 {% endif %}
+
+{% stylesheet %}
+  .menu {
+    width: 100%;
+  }
+
+  .menu:not(:has(.menu__heading--empty)) .details-content {
+    margin-block-start: var(--spacing--size);
+  }
+
+  .menu__item + .menu__item {
+    margin-block-start: var(--spacing--size);
+  }
+
+  .menu .menu__heading--empty {
+    display: none;
+  }
+
+  .menu__heading__default {
+    display: contents;
+  }
+
+  .menu__heading__accordion {
+    display: none;
+  }
+
+  @media screen and (width < 750px) {
+    /* Always show the fallback heading on mobile when accordion is enabled */
+    .menu--accordion .menu__heading--empty {
+      display: flex;
+    }
+
+    .menu--accordion .menu__heading__accordion {
+      display: contents;
+    }
+
+    .menu--accordion .menu__heading__default {
+      display: none;
+    }
+
+    .menu--accordion .details-content {
+      margin-block-start: var(--spacing--size);
+    }
+
+    .menu--accordion .menu__details {
+      padding-inline: 0;
+    }
+
+    .menu--dividers .menu__details {
+      border-block-end: var(--style-border-width) solid var(--color-border);
+    }
+
+    .menu--dividers .details-content {
+      padding-block-end: var(--padding-sm);
+    }
+  }
+
+  .menu--caret .icon-plus,
+  .menu--plus .icon-caret {
+    display: none;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

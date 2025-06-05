@@ -7,73 +7,6 @@
   type="module"
 ></script>
 
-<style>
-  .cart-items__wrapper,
-  .cart-drawer__summary {
-    --cart-secondary-font-family: var(--font-{{settings.cart_price_font}}--family);
-    --cart-secondary-font-style: var(--font-{{settings.cart_price_font}}--style);
-    --cart-secondary-font-weight: var(--font-{{settings.cart_price_font}}--weight);
-  }
-
-  .cart-items-component {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cart-drawer__heading .cart-bubble {
-    width: fit-content;
-    border-radius: var(--style-border-radius-buttons-primary);
-    aspect-ratio: auto;
-    padding: var(--cart-padding);
-  }
-
-  .cart-drawer__heading .cart-bubble[data-maintain-ratio] {
-    aspect-ratio: 1;
-    min-width: 26px;
-  }
-
-  .cart-drawer__header {
-    background-color: var(--color-background);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: var(--cart-drawer-padding);
-    border-bottom: var(--style-border-width) solid none;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-
-    @media screen and (width >= 750px) {
-      padding: var(--cart-drawer-padding-desktop);
-    }
-  }
-
-  .cart-drawer__dialog {
-    overflow: hidden;
-  }
-
-  .cart-drawer__inner {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .cart-drawer__content {
-    height: calc(100% - var(--header-height));
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cart-drawer__summary {
-    background-color: var(--color-background);
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
-  }
-</style>
-
 <cart-drawer-component
   class="cart-drawer"
   {{ block.shopify_attributes }}
@@ -85,7 +18,7 @@
   <button
     class="button header-actions__action button-unstyled"
     on:click="/open"
-    aria-label="{{ 'accessibility.open_cart_drawer' | t }}"
+    aria-label="{{ 'accessibility.open_cart_drawer' | t }} {{ 'accessibility.cart_count' | t}}: {{ cart.item_count }}"
   >
     {% render 'cart-icon-component' %}
   </button>
@@ -170,3 +103,63 @@
     </div>
   </dialog>
 </cart-drawer-component>
+
+{% stylesheet %}
+  .cart-items-component {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-drawer__heading .cart-bubble {
+    width: fit-content;
+    border-radius: var(--style-border-radius-buttons-primary);
+    aspect-ratio: auto;
+    padding: var(--cart-padding);
+  }
+
+  .cart-drawer__heading .cart-bubble[data-maintain-ratio] {
+    aspect-ratio: 1;
+    min-width: 26px;
+  }
+
+  .cart-drawer__header {
+    background-color: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--cart-drawer-padding);
+    border-bottom: var(--style-border-width) solid none;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    @media screen and (width >= 750px) {
+      padding: var(--cart-drawer-padding-desktop);
+    }
+  }
+
+  .cart-drawer__dialog {
+    overflow: hidden;
+  }
+
+  .cart-drawer__inner {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .cart-drawer__content {
+    height: calc(100% - var(--header-height));
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-drawer__summary {
+    background-color: var(--color-background);
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+  }
+{% endstylesheet %}

@@ -1,5 +1,75 @@
 
 
+{% doc %}
+  Renders a collection link block.
+
+  @param {number} index
+  @param {boolean} [selected]
+  @param {boolean} [image_only]
+{% enddoc %}
+
+{% unless selected %}
+  {% assign loading = 'lazy' %}
+{% endunless %}
+
+{% if closest.collection.url == block.settings.collection.url %}
+  {% assign is_current = true %}
+{% endif %}
+
+{% if block.settings.show_count %}
+  {% assign count = block.settings.collection.all_products_count %}
+  {%- capture count -%}
+    &nbsp;<sup class="collection-links__count">{{ count }}</sup>
+  {%- endcapture -%}
+
+  {% if block.settings.collection == empty %}
+    {%- capture count -%}
+      &nbsp;<sup class="collection-links__count">5</sup>
+    {%- endcapture -%}
+  {% endif %}
+{% endif %}
+
+{% capture title_block %}
+  {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
+{% endcapture %}
+
+{% capture image_block %}
+  {% content_for 'block', type: '_image', id: 'image', loading: loading %}
+{% endcapture %}
+
+{% if image_only %}
+  <a
+    href="{{ closest.collection.url }}"
+    class="collection-links__image"
+    size="{{ section.settings.image_height }}"
+  >
+    {{ image_block }}
+  </a>
+{% else %}
+  <a
+    href="{{ closest.collection.url }}"
+    class="collection-links__link"
+    ref="links[]"
+    on:pointerenter="/select/{{ index }}"
+    on:focus="/select/{{ index }}"
+    aria-selected="{{ selected }}"
+    aria-current="{{ is_current }}"
+    {{ block.shopify_attributes }}
+  >
+    {{ title_block }}
+
+    {% if section.settings.layout == 'text' %}
+      <div
+        class="collection-links__image"
+        ref="images[]"
+        hidden
+      >
+        {{ image_block }}
+      </div>
+    {% endif %}
+  </a>
+{% endif %}
+
 {% stylesheet %}
   .collection-links__link {
     --min-font-size: var(--font-size--4xl);
@@ -75,68 +145,6 @@
     }
   }
 {% endstylesheet %}
-
-{% unless selected %}
-  {% assign loading = 'lazy' %}
-{% endunless %}
-
-{% if closest.collection.url == block.settings.collection.url %}
-  {% assign is_current = true %}
-{% endif %}
-
-{% if block.settings.show_count %}
-  {% assign count = block.settings.collection.all_products_count %}
-  {%- capture count -%}
-    &nbsp;<sup class="collection-links__count">{{ count }}</sup>
-  {%- endcapture -%}
-
-  {% if block.settings.collection == empty %}
-    {%- capture count -%}
-      &nbsp;<sup class="collection-links__count">5</sup>
-    {%- endcapture -%}
-  {% endif %}
-{% endif %}
-
-{% capture title_block %}
-  {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
-{% endcapture %}
-
-{% capture image_block %}
-  {% content_for 'block', type: '_image', id: 'image', loading: loading %}
-{% endcapture %}
-
-{% if image_only %}
-  <a
-    href="{{ closest.collection.url }}"
-    class="collection-links__image"
-    size="{{ section.settings.image_height }}"
-  >
-    {{ image_block }}
-  </a>
-{% else %}
-  <a
-    href="{{ closest.collection.url }}"
-    class="collection-links__link"
-    ref="links[]"
-    on:pointerenter="/select/{{ index }}"
-    on:focus="/select/{{ index }}"
-    aria-selected="{{ selected }}"
-    aria-current="{{ is_current }}"
-    {{ block.shopify_attributes }}
-  >
-    {{ title_block }}
-
-    {% if section.settings.layout == 'text' %}
-      <div
-        class="collection-links__image"
-        ref="images[]"
-        hidden
-      >
-        {{ image_block }}
-      </div>
-    {% endif %}
-  </a>
-{% endif %}
 
 {% schema %}
 {

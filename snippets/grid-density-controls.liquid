@@ -4,6 +4,79 @@
   @param {string} viewport - The viewport to render the grid density controls for.
 {% endcomment %}
 
+<div class="column-options-wrapper">
+  <fieldset class="column-options">
+    <legend class="column-options__legend visually-hidden">
+      {{ 'content.grid_view.grid_fieldset' | t }}
+    </legend>
+
+    {% if viewport == 'mobile' %}
+      <label class="column-options__option">
+        <input
+          type="radio"
+          name="grid-mobile"
+          value="mobile-single"
+          class="column-options__option-input"
+          aria-label="{{ 'content.grid_view.single_item' | t }}"
+          on:change="results-list/updateLayout"
+        >
+        <span class="column-picker column-picker-mobile--single">
+          {{- 'icon-one-col-mobile.svg' | inline_asset_content -}}
+        </span>
+      </label>
+
+      <label class="column-options__option">
+        <input
+          type="radio"
+          class="column-options__option-input"
+          name="grid-mobile"
+          value="default"
+          checked
+          aria-label="{{ 'content.grid_view.default_view' | t }}"
+          data-grid-layout="mobile-option"
+          on:change="results-list/updateLayout"
+        >
+        <span class="column-picker column-picker-mobile--double">
+          {{- 'icon-grid-default.svg' | inline_asset_content -}}
+        </span>
+      </label>
+
+    {% elsif viewport == 'desktop' %}
+      <label class="column-options__option">
+        <input
+          type="radio"
+          name="grid"
+          value="default"
+          class="column-options__option-input"
+          checked
+          aria-label="{{ 'content.grid_view.default_view' | t }}"
+          data-grid-layout="desktop-default-option"
+          on:change="results-list/updateLayout"
+          data-skip-node-update
+        >
+        <span class="column-picker column-picker--default">
+          {{- 'icon-grid-default.svg' | inline_asset_content -}}
+        </span>
+      </label>
+
+      <label class="column-options__option">
+        <input
+          type="radio"
+          name="grid"
+          value="zoom-out"
+          class="column-options__option-input"
+          aria-label="{{ 'content.grid_view.zoom_out' | t }}"
+          on:change="results-list/updateLayout"
+          data-skip-node-update
+        >
+        <span class="column-picker column-picker--zoom-out">
+          {{- 'icon-grid-dense.svg' | inline_asset_content -}}
+        </span>
+      </label>
+    {% endif %}
+  </fieldset>
+</div>
+
 {% stylesheet %}
   .column-options-wrapper {
     --icon-offset: -3px;
@@ -101,76 +174,3 @@
     background-color: rgba(from var(--color-foreground) r g b / 6%);
   }
 {% endstylesheet %}
-
-<div class="column-options-wrapper">
-  <fieldset class="column-options">
-    <legend class="column-options__legend visually-hidden">
-      {{ 'content.grid_view.grid_fieldset' | t }}
-    </legend>
-
-    {% if viewport == 'mobile' %}
-      <label class="column-options__option">
-        <input
-          type="radio"
-          name="grid-mobile"
-          value="mobile-single"
-          class="column-options__option-input"
-          aria-label="{{ 'content.grid_view.single_item' | t }}"
-          on:change="results-list/updateLayout"
-        >
-        <span class="column-picker column-picker-mobile--single">
-          {{- 'icon-one-col-mobile.svg' | inline_asset_content -}}
-        </span>
-      </label>
-
-      <label class="column-options__option">
-        <input
-          type="radio"
-          class="column-options__option-input"
-          name="grid-mobile"
-          value="default"
-          checked
-          aria-label="{{ 'content.grid_view.default_view' | t }}"
-          data-grid-layout="mobile-option"
-          on:change="results-list/updateLayout"
-        >
-        <span class="column-picker column-picker-mobile--double">
-          {{- 'icon-grid-default.svg' | inline_asset_content -}}
-        </span>
-      </label>
-
-    {% elsif viewport == 'desktop' %}
-      <label class="column-options__option">
-        <input
-          type="radio"
-          name="grid"
-          value="default"
-          class="column-options__option-input"
-          checked
-          aria-label="{{ 'content.grid_view.default_view' | t }}"
-          data-grid-layout="desktop-default-option"
-          on:change="results-list/updateLayout"
-          data-skip-node-update
-        >
-        <span class="column-picker column-picker--default">
-          {{- 'icon-grid-default.svg' | inline_asset_content -}}
-        </span>
-      </label>
-
-      <label class="column-options__option">
-        <input
-          type="radio"
-          name="grid"
-          value="zoom-out"
-          class="column-options__option-input"
-          aria-label="{{ 'content.grid_view.zoom_out' | t }}"
-          on:change="results-list/updateLayout"
-          data-skip-node-update
-        >
-        <span class="column-picker column-picker--zoom-out">
-          {{- 'icon-grid-dense.svg' | inline_asset_content -}}
-        </span>
-      </label>
-    {% endif %}
-  </fieldset>
-</div>

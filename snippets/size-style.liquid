@@ -13,11 +13,6 @@
   --size-style-width: {{ settings.width }};
 {%- endif -%}
 
-{%- comment -%}
-  TODO: Need to validate if width @ 100% gives us what we want…
-  inside a stack it's more like doing `flex-grow: 1`
-  For a section we'll want `100svh` or something
-{%- endcomment -%}
 {%- if settings.height == 'custom' -%}
   --size-style-height:
   {{- settings.custom_height }}%;

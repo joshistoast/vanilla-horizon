@@ -9,7 +9,7 @@
 */
 {
   "accessibility": {
-    "account": "Account",
+    "account": "Open account dropdown",
     "cart": "Cart",
     "cart_count": "Total items in cart",
     "close_dialog": "Close dialog",
@@ -23,9 +23,11 @@
       "other": "{{ count }} filters applied"
     },
     "inventory_status": "Inventory status",
+    "localization_region_and_language": "Open region and language selector",
     "menu": "Menu",
     "new_window": "Opens in a new window.",
     "open_cart_drawer": "Open cart drawer",
+    "open_search_modal": "Open search modal",
     "pause_video": "Pause video",
     "play_model": "Play 3D model",
     "play_video": "Play video",
@@ -43,7 +45,8 @@
     "slideshow_pause": "Pause slideshow",
     "slideshow_play": "Play slideshow",
     "slideshow_previous": "Previous slide",
-    "unit_price": "Unit price"
+    "unit_price": "Unit price",
+    "find_country": "Find country"
   },
   "actions": {
     "add": "Add",
@@ -81,7 +84,8 @@
     "enter_using_password": "Enter using password",
     "sign_up": "Sign up",
     "submit": "Submit",
-    "view_store_information": "View store information"
+    "view_store_information": "View store information",
+    "sort": "Sort"
   },
   "blocks": {
     "contact_form": {
@@ -164,6 +168,7 @@
     }
   },
   "content": {
+    "discount": "Discount",
     "account_title": "Account",
     "account_title_personalized": "Hi {{ first_name }}",
     "account_orders": "Orders",
@@ -218,6 +223,7 @@
     "pickup_available_in": "Pickup available, {{ pickup_time }}",
     "pickup_not_available": "Pickup currently not available",
     "pickup_ready_in": "{{ pickup_time }}",
+    "powered_by": "This shop will be powered by",
     "price": "Price",
     "price_compare_at": "Compare at price",
     "price_from": "From {{ price }}",
@@ -256,6 +262,7 @@
     "seller_note": "Special instructions",
     "shipping_policy": "Shipping calculated at checkout.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+    "store_owner_link_html": "Are you the store owner? <a href=\"{{ link }}\">Log in here</a>",
     "taxes_at_checkout_shipping_at_checkout_with_policy_html": "Taxes, discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
     "taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "Taxes and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",
     "taxes_at_checkout_shipping_at_checkout_without_policy": "Taxes, discounts and shipping calculated at checkout.",

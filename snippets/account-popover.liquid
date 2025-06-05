@@ -2,6 +2,20 @@
   This snippet renders the account popover, which is used for desktop users.
 {% endcomment %}
 
+<details
+  class="account-popover mobile:hidden"
+  data-auto-close-details="desktop"
+>
+  <summary class="account-popover__summary">
+    {% render 'account-button', tag: 'span' %}
+  </summary>
+  <floating-panel-component
+    class="account-popover__panel details-content color-{{ settings.popover_color_scheme }}"
+  >
+    {% render 'account-actions' %}
+  </floating-panel-component>
+</details>
+
 {% stylesheet %}
   .account-popover {
     --account-popover-layer: var(--layer-temporary);
@@ -51,17 +65,3 @@
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
 {% endstylesheet %}
-
-<details
-  class="account-popover mobile:hidden"
-  data-auto-close-details="desktop"
->
-  <summary class="account-popover__summary">
-    {% render 'account-button', tag: 'span' %}
-  </summary>
-  <floating-panel-component
-    class="account-popover__panel details-content color-{{ settings.popover_color_scheme }}"
-  >
-    {% render 'account-actions' %}
-  </floating-panel-component>
-</details>

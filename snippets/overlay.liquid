@@ -4,6 +4,17 @@
   @param {string} layer - The z-index layer to place the overlay on, defaults to var(--layer-flat)
 {% endcomment %}
 
+<div
+  class="overlay overlay--{{ settings.overlay_style | default: 'gradient' }}"
+  style="
+    --overlay-layer: {{ layer | default: 'var(--layer-flat)' }};
+    --overlay-color: {{ settings.overlay_color | default: 'rgba(0,0,0,0.25)' }};
+    --overlay-color--end: {{ settings.overlay_color | color_modify: 'alpha', 0 | default: 'rgba(0,0,0,0)' }};
+    --overlay-direction: {{ settings.gradient_direction | default: 'to top' }};
+    {%- if settings.border_radius %} --overlay-border-radius: {{ settings.border_radius | default: '0' }}px;{% endif -%}
+  "
+></div>
+
 {% stylesheet %}
   .overlay {
     position: absolute;
@@ -21,14 +32,3 @@
     background: linear-gradient(var(--overlay-direction), var(--overlay-color), var(--overlay-color--end));
   }
 {% endstylesheet %}
-
-<div
-  class="overlay overlay--{{ settings.overlay_style | default: 'gradient' }}"
-  style="
-    --overlay-layer: {{ layer | default: 'var(--layer-flat)' }};
-    --overlay-color: {{ settings.overlay_color | default: 'rgba(0,0,0,0.25)' }};
-    --overlay-color--end: {{ settings.overlay_color | color_modify: 'alpha', 0 | default: 'rgba(0,0,0,0)' }};
-    --overlay-direction: {{ settings.gradient_direction | default: 'to top' }};
-    {%- if settings.border_radius %} --overlay-border-radius: {{ settings.border_radius | default: '0' }}px;{% endif -%}
-  "
-></div>

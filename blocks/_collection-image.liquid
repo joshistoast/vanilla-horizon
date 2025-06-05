@@ -1,16 +1,5 @@
 
 
-{% stylesheet %}
-  .collection-image {
-    width: var(--image-width);
-  }
-
-  .collection-image .collection-image__featured-image {
-    aspect-ratio: var(--ratio);
-    object-fit: cover;
-  }
-{% endstylesheet %}
-
 {% if block.settings.image_ratio == 'custom' %}
   {% assign image_width = block.settings.collection_image_width | at_most: 100 %}
   {% assign image_height = block.settings.collection_image_height %}
@@ -55,6 +44,17 @@
   </div>
 {% endif %}
 
+{% stylesheet %}
+  .collection-image {
+    width: var(--image-width);
+  }
+
+  .collection-image .collection-image__featured-image {
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.collection_image",
@@ -71,7 +71,7 @@
       "options": [
         {
           "value": "adapt",
-          "label": "t:options.adapt_to_image"
+          "label": "t:options.auto"
         },
         {
           "value": "portrait",
@@ -87,7 +87,7 @@
         }
       ],
       "default": "square",
-      "label": "t:settings.image_ratio"
+      "label": "t:settings.aspect_ratio"
     },
     {
       "type": "range",

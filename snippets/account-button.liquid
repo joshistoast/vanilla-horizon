@@ -4,6 +4,40 @@
   - attributes: @string - Additional attributes to add to the tag
 {% endcomment %}
 
+{%- assign tag = tag | default: 'button' -%}
+<{{ tag }}
+  class="account-button header-actions__action"
+  {{ attributes }}
+>
+  <span class="visually-hidden">
+    {{ 'accessibility.account' | t }}
+  </span>
+  {%- if customer.has_avatar? -%}
+    {{ customer | avatar }}
+  {%- elsif customer.first_name or customer.email -%}
+    {%- liquid
+      assign initial = customer.email | first
+
+      if customer.first_name != blank
+        assign initial = customer.first_name | first
+      endif
+    -%}
+    <span
+      class="account-button__avatar"
+      aria-hidden="true"
+    >
+      {{- initial -}}
+    </span>
+  {%- else -%}
+    <span
+      class="account-button__icon"
+      aria-hidden="true"
+    >
+      {{- 'icon-account.svg' | inline_asset_content -}}
+    </span>
+  {%- endif -%}
+</{{ tag }}>
+
 {% stylesheet %}
   .account-button {
     color: var(--color-foreground);
@@ -47,37 +81,3 @@
     pointer-events: none;
   }
 {% endstylesheet %}
-
-{%- assign tag = tag | default: 'button' -%}
-<{{ tag }}
-  class="account-button header-actions__action"
-  {{ attributes }}
->
-  <span class="visually-hidden">
-    {{ 'accessibility.account' | t }}
-  </span>
-  {%- if customer.has_avatar? -%}
-    {{ customer | avatar }}
-  {%- elsif customer.first_name or customer.email -%}
-    {%- liquid
-      assign initial = customer.email | first
-
-      if customer.first_name != blank
-        assign initial = customer.first_name | first
-      endif
-    -%}
-    <span
-      class="account-button__avatar"
-      aria-hidden="true"
-    >
-      {{- initial -}}
-    </span>
-  {%- else -%}
-    <span
-      class="account-button__icon"
-      aria-hidden="true"
-    >
-      {{- 'icon-account.svg' | inline_asset_content -}}
-    </span>
-  {%- endif -%}
-</{{ tag }}>

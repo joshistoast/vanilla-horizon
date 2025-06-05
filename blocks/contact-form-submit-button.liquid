@@ -1,11 +1,5 @@
 
 
-{% stylesheet %}
-  .submit-button {
-    min-width: max-content;
-  }
-{% endstylesheet %}
-
 <button
   type="submit"
   class="button submit-button size-style {{ block.settings.style_class }}"
@@ -14,6 +8,12 @@
 >
   {{ block.settings.label }}
 </button>
+
+{% stylesheet %}
+  .submit-button {
+    min-width: max-content;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

@@ -1,13 +1,125 @@
-{% comment %}
+{% doc %}
   Renders the sorting component.
 
-  Accepts:
-    - results: The results of the search
-    - sort_by: The current sort by
-    - filter_style: The filter style
-    - suffix: The suffix for the sorting component (required)
-    - should_use_select_on_mobile: Whether to use a select element for the sorting component on mobile
-{% endcomment %}
+  @param {object} results - The results of the search
+  @param {string} sort_by - The current sort by
+  @param {string} filter_style - The filter style
+  @param {string} suffix - The suffix for the sorting component
+  @param {boolean} should_use_select_on_mobile - Whether to use a select element for the sorting component on mobile
+  @param {string} section_id - The section ID
+{% enddoc %}
+
+<sorting-filter-component
+  class="sorting-filter{% if filter_style == 'horizontal' %} sorting-filter__horizontal{% endif %}"
+  on:change="/updateFilterAndSorting"
+  data-sort-position="{{ suffix }}"
+  data-should-use-select-on-mobile="{{ should_use_select_on_mobile }}"
+>
+  {% liquid
+    assign default_sort_by = results.default_sort_by
+    for option in results.sort_options
+      if option.value == sort_by
+        assign status = option.name
+      endif
+    endfor
+  %}
+
+  <div class="sorting-filter__container {% if should_use_select_on_mobile %} desktop:hidden {% else %} hidden {% endif %}">
+    <label
+      for="sort-select-{{ section_id }}"
+      class="facets__label"
+    >
+      {{- 'actions.sort' | t -}}
+    </label>
+    <div class="sorting-filter__select-wrapper">
+      <select
+        id="sort-select-{{ section_id }}"
+        name="sort_by"
+        class="sorting-filter__select"
+        {% if should_use_select_on_mobile == false %}
+          disabled
+        {% endif %}
+      >
+        {% for option in results.sort_options %}
+          <option
+            value="{{ option.value }}"
+            {% if option.value == sort_by %}
+              selected
+            {% endif %}
+          >
+            {{ option.name }}
+          </option>
+        {% endfor %}
+      </select>
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="icon icon-caret"
+        width="8"
+        height="13"
+        viewBox="0 0 8 13"
+      >
+        {%- render 'icon', icon: 'double-sided-caret' -%}
+      </svg>
+    </div>
+  </div>
+
+  <accordion-custom
+    {% if filter_style == 'horizontal' %}
+      data-disable-animation-on-desktop="true"
+      data-close-with-escape="true"
+    {% endif %}
+    open-by-default-on-mobile
+  >
+    <details
+      ref="details"
+      id="Sorting-{{ section_id }}"
+      data-default-sort-by="{{ default_sort_by }}"
+      class="facets__panel {% if should_use_select_on_mobile %} mobile:hidden {% endif %}"
+      style="z-index: var(--layer-overlay);"
+      data-auto-close-details="desktop,mobile"
+      open-by-default-on-mobile
+    >
+      <summary class="facets__summary">
+        <span class="facets__label">{{ 'actions.sort' | t }}</span>
+        <span
+          class="facets__status h6 desktop:hidden"
+        >
+          {{- status -}}
+        </span>
+        <span class="svg-wrapper icon-caret icon-animated">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+      </summary>
+      <floating-panel-component
+        class="sorting-filter__options color-{{ settings.popover_color_scheme }}"
+      >
+        {% for option in results.sort_options %}
+          <label
+            class="sorting-filter__option"
+            id="{{ option.value }}"
+          >
+            <input
+              type="radio"
+              name="sort_by"
+              form="FacetFiltersForm--{{ section_id }}-{{ suffix }}"
+              value="{{ option.value }}"
+              class="sorting-filter__input"
+              data-option-name="{{ option.name }}"
+              {% if option.value == sort_by %}
+                checked
+              {% endif %}
+            >
+            <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">
+              {{- 'icon-checkmark.svg' | inline_asset_content -}}
+            </span>
+            <label class="sorting-filter__label">{{ option.name }}</label>
+          </label>
+        {% endfor %}
+      </floating-panel-component>
+    </details>
+  </accordion-custom>
+</sorting-filter-component>
 
 {% stylesheet %}
   .sorting-filter__container {
@@ -215,114 +327,3 @@
     }
   }
 {% endstylesheet %}
-
-<sorting-filter-component
-  class="sorting-filter{% if filter_style == 'horizontal' %} sorting-filter__horizontal{% endif %}"
-  on:change="/updateFilterAndSorting"
-  data-sort-position="{{ suffix }}"
-  data-should-use-select-on-mobile="{{ should_use_select_on_mobile }}"
->
-  {% liquid
-    assign default_sort_by = results.default_sort_by
-    for option in results.sort_options
-      if option.value == sort_by
-        assign status = option.name
-      endif
-    endfor
-  %}
-
-  <div class="sorting-filter__container {% if should_use_select_on_mobile %} desktop:hidden {% else %} hidden {% endif %}">
-    <label
-      for="sort-select-{{ section.id }}"
-      class="facets__label"
-      >Sort</label
-    >
-    <div class="sorting-filter__select-wrapper">
-      <select
-        id="sort-select-{{ section.id }}"
-        name="sort_by"
-        class="sorting-filter__select"
-        {% if should_use_select_on_mobile == false %}
-          disabled
-        {% endif %}
-      >
-        {% for option in results.sort_options %}
-          <option
-            value="{{ option.value }}"
-            {% if option.value == sort_by %}
-              selected
-            {% endif %}
-          >
-            {{ option.name }}
-          </option>
-        {% endfor %}
-      </select>
-      <svg
-        aria-hidden="true"
-        focusable="false"
-        class="icon icon-caret"
-        width="8"
-        height="13"
-        viewBox="0 0 8 13"
-      >
-        {%- render 'icon', icon: 'double-sided-caret' -%}
-      </svg>
-    </div>
-  </div>
-
-  <accordion-custom
-    {% if filter_style == 'horizontal' %}
-      data-disable-animation-on-desktop="true"
-      data-close-with-escape="true"
-    {% endif %}
-    open-by-default-on-mobile
-  >
-    <details
-      ref="details"
-      id="Sorting-{{ section.id }}"
-      data-default-sort-by="{{ default_sort_by }}"
-      class="facets__panel {% if should_use_select_on_mobile %} mobile:hidden {% endif %}"
-      style="z-index: var(--layer-overlay);"
-      data-auto-close-details="desktop,mobile"
-      open-by-default-on-mobile
-    >
-      <summary class="facets__summary">
-        <span class="facets__label">Sort</span>
-        <span
-          class="facets__status h6 desktop:hidden"
-        >
-          {{- status -}}
-        </span>
-        <span class="svg-wrapper icon-caret icon-animated">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
-      </summary>
-      <floating-panel-component
-        class="sorting-filter__options color-{{ settings.popover_color_scheme }}"
-      >
-        {% for option in results.sort_options %}
-          <label
-            class="sorting-filter__option"
-            id="{{ option.value }}"
-          >
-            <input
-              type="radio"
-              name="sort_by"
-              form="FacetFiltersForm--{{ section.id }}-{{ suffix }}"
-              value="{{ option.value }}"
-              class="sorting-filter__input"
-              data-option-name="{{ option.name }}"
-              {% if option.value == sort_by %}
-                checked
-              {% endif %}
-            >
-            <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">
-              {{- 'icon-checkmark.svg' | inline_asset_content -}}
-            </span>
-            <label class="sorting-filter__label">{{ option.name }}</label>
-          </label>
-        {% endfor %}
-      </floating-panel-component>
-    </details>
-  </accordion-custom>
-</sorting-filter-component>

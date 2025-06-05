@@ -1,61 +1,4 @@
 
-{% stylesheet %}
-  .section-resource-list {
-    row-gap: var(--gap);
-  }
-
-  .resource-list--carousel-mobile {
-    display: block;
-
-    @media screen and (width >= 750px) {
-      display: none;
-    }
-  }
-
-  .resource-list {
-    --resource-list-mobile-gap-max: 12px;
-    --resource-list-column-gap: min(var(--resource-list-column-gap-desktop), var(--resource-list-mobile-gap-max));
-    --resource-list-row-gap: min(var(--resource-list-row-gap-desktop), var(--resource-list-mobile-gap-max));
-
-    width: 100%;
-
-    @media screen and (width >= 750px) {
-      --resource-list-column-gap: var(--resource-list-column-gap-desktop);
-      --resource-list-row-gap: var(--resource-list-row-gap-desktop);
-    }
-  }
-
-  .resource-list--grid {
-    display: grid;
-    column-gap: var(--resource-list-column-gap);
-    row-gap: var(--resource-list-row-gap);
-    grid-template-columns: var(--resource-list-columns-mobile);
-
-    @media screen and (width >= 750px) {
-      grid-template-columns: var(--resource-list-columns);
-    }
-  }
-
-  .resource-list__item {
-    height: 100%;
-    color: var(--color-foreground);
-    text-decoration: none;
-  }
-
-  .section-resource-list__content {
-    display: flex;
-    flex-direction: column;
-    align-items: var(--horizontal-alignment);
-    gap: var(--gap);
-    width: 100%;
-  }
-
-  .section-resource-list__header:empty,
-  .section-resource-list__header:has(.group-block-content:empty),
-  .section-resource-list__content:empty {
-    display: none;
-  }
-{% endstylesheet %}
 
 {% liquid
   assign max_items = section.settings.max_products
@@ -136,7 +79,7 @@
 
   <div
     class="
-      resource-list resource-list--{{ section.id }}
+      resource-list
       {% if section.settings.layout_type == 'carousel' %}
         force-full-width
       {% endif %}
@@ -158,8 +101,7 @@
           ref: 'resourceListCarousel',
           slides: list_items_array,
           slide_count: max_items,
-          settings: section.settings,
-          section_id: section.id
+          settings: section.settings
         %}
       {% when 'editorial' %}
         {% render 'editorial-product-grid', items: list_items_array %}
@@ -172,7 +114,7 @@
     %}
     <div
       class="
-        resource-list resource-list--{{ section.id }}
+        resource-list
         hidden--desktop
         force-full-width
       "
@@ -185,8 +127,7 @@
         ref: 'resourceListCarouselMobile',
         slides: list_items_array,
         slide_count: max_items,
-        settings: section.settings,
-        section_id: section.id
+        settings: section.settings
       %}
     </div>
   {% endif %}

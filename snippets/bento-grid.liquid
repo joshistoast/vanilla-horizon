@@ -46,7 +46,7 @@
   {% endif %}
 {% endfor %}
 
-{% style %}
+{% stylesheet %}
   .bento-box {
     display: grid;
     column-gap: var(--bento-gap);
@@ -70,12 +70,15 @@
     .bento-box__item:nth-child(3n + 1) {
       grid-column: span 1;
     }
+
     .bento-box__item:nth-child(3n + 2) {
       grid-column: span 1;
     }
+
     .bento-box__item:nth-child(3n + 3) {
       grid-column: span 2;
     }
+
     /* Ensure last items create a full row */
     .bento-box__item:last-child:nth-child(3n + 5) {
       grid-column: span 1;
@@ -196,4 +199,4 @@
         'J J J J K K K K K K K K';
     }
   }
-{% endstyle %}
+{% endstylesheet %}

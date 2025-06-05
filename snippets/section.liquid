@@ -5,37 +5,6 @@
   @param {string} children - The children of the section
 {% enddoc %}
 
-{% stylesheet %}
-  .section-wrapper {
-    --section-height-offset: 0px;
-  }
-
-  .section[data-shopify-visual-preview] {
-    min-height: var(--section-preview-height);
-    padding-top: 0;
-  }
-
-  .section[data-shopify-visual-preview] .custom-section-background {
-    display: none;
-  }
-
-  body:has(> #header-group > .header-section > #header-component[transparent]):not(
-      :has(> #header-group > .header-section + .shopify-section)
-    )
-    > main
-    > .section-wrapper:first-child {
-    --section-height-offset: var(--header-group-height, 0);
-  }
-
-  .custom-section-background {
-    grid-column: 1 / -1;
-  }
-
-  .custom-section-content {
-    z-index: var(--layer-flat);
-  }
-{% endstylesheet %}
-
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
@@ -94,3 +63,34 @@
     </div>
   </div>
 </div>
+
+{% stylesheet %}
+  .section-wrapper {
+    --section-height-offset: 0px;
+  }
+
+  .section[data-shopify-visual-preview] {
+    min-height: var(--section-preview-height);
+    padding-top: 0;
+  }
+
+  .section[data-shopify-visual-preview] .custom-section-background {
+    display: none;
+  }
+
+  body:has(> #header-group > .header-section > #header-component[transparent]):not(
+      :has(> #header-group > .header-section + .shopify-section)
+    )
+    > main
+    > .section-wrapper:first-child {
+    --section-height-offset: var(--header-group-height, 0);
+  }
+
+  .custom-section-background {
+    grid-column: 1 / -1;
+  }
+
+  .custom-section-content {
+    z-index: var(--layer-flat);
+  }
+{% endstylesheet %}

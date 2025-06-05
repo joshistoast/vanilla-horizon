@@ -29,8 +29,8 @@
     {% render 'localization-form',
       show_country: show_country,
       show_language: show_language,
-      country_style: country_style,
-      localization_style: 'dropdown'
+      localization_style: 'dropdown',
+      block_id: block.id
     %}
   </div>
 {% elsif show_country %}
@@ -45,7 +45,7 @@
       ref="button"
       on:click="/toggleSelector"
     >
-      <span class="visually-hidden">{{ 'content.localization_region_and_language' | t }}</span>
+      <span class="visually-hidden">{{ 'accessibility.localization_region_and_language' | t }}</span>
       {% if show_country %}
         {% if country_style == true %}
           <span
@@ -84,9 +84,9 @@
       {% render 'localization-form',
         show_country: show_country,
         show_language: show_language,
-        country_style: country_style,
         localization_style: 'dropdown',
-        form_style: form_style
+        form_style: form_style,
+        block_id: block.id
       %}
     </div>
   </dropdown-localization-component>

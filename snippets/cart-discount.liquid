@@ -1,3 +1,115 @@
+{% doc %}
+  Renders a cart discount form.
+
+  @param {string} section_id - The section ID
+{% enddoc %}
+
+{% liquid
+  assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
+  for item in cart.items
+    for allocation in item.line_level_discount_allocations
+      if allocation.discount_application.type == 'discount_code'
+        assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
+      endif
+    endfor
+  endfor
+
+  assign discount_codes = discount_codes | uniq
+%}
+
+<cart-discount-component
+  data-section-id="{{ section_id }}"
+>
+  <accordion-custom class="cart-discount">
+    <details
+      class="details discount-details"
+      {% if discount_codes.size > 0 %}
+        open
+      {% endif %}
+      declarative-open
+    >
+      <summary class="cart-discount__summary">
+        <span class="cart-discount__label h6">{{ 'content.discount' | t }}</span>
+
+        <span class="svg-wrapper icon-plus">
+          {{- 'icon-plus.svg' | inline_asset_content -}}
+        </span>
+      </summary>
+
+      <div class="details-content">
+        <div class="cart-discount__content">
+          <form
+            on:submit="/applyDiscount"
+            onsubmit="return false;"
+            class="cart-discount__form"
+          >
+            <label
+              for="cart-discount"
+              class="visually-hidden"
+            >
+              {{- 'accessibility.discount' | t -}}
+            </label>
+            <input
+              id="cart-discount"
+              class="cart-discount__input"
+              name="discount"
+              placeholder="{{ 'content.discount_code' | t }}"
+            >
+            <button
+              type="submit"
+              class="button button--primary cart-discount__button"
+            >
+              {{ 'actions.apply' | t }}
+            </button>
+          </form>
+        </div>
+        <div
+          class="cart-discount__error hidden"
+          role="alert"
+          ref="cartDiscountError"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-error.svg' | inline_asset_content -}}
+          </span>
+          <small
+            class="cart-discount__error-text cart-primary-typography hidden"
+            ref="cartDiscountErrorDiscountCode"
+          >
+            {{ 'content.discount_code_error' | t: code: 'test' }}
+          </small>
+          <small
+            class="cart-discount__error-text cart-primary-typography hidden"
+            ref="cartDiscountErrorShipping"
+          >
+            {{ 'content.shipping_discount_error' | t }}
+          </small>
+        </div>
+        <ul class="cart-discount__codes">
+          {% for discount_code in discount_codes %}
+            <li
+              class="cart-discount__pill"
+              data-discount-code="{{ discount_code }}"
+              aria-label="{{ 'accessibility.discount_applied' | t: code: discount_code }}"
+            >
+              <p class="cart-discount__pill-code">
+                {{ discount_code }}
+              </p>
+              <button
+                type="button"
+                on:click="/removeDiscount"
+                class="cart-discount__pill-remove svg-wrapper svg-wrapper--smaller button-unstyled"
+                aria-label="{{ 'actions.remove_discount' | t: code: discount_code }}"
+              >
+                {{- 'icon-filters-close.svg' | inline_asset_content -}}
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </details>
+  </accordion-custom>
+</cart-discount-component>
+
 {% stylesheet %}
   .cart-discount__input {
     background-color: var(--color-input-background);
@@ -9,6 +121,7 @@
     padding: var(--padding-sm) var(--padding-md);
     height: 100%;
     flex-grow: 1;
+    min-width: 0;
   }
 
   .cart-discount__input::placeholder {
@@ -116,109 +229,3 @@
     display: flex;
   }
 {% endstylesheet %}
-
-{% liquid
-  assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
-  for item in cart.items
-    for allocation in item.line_level_discount_allocations
-      if allocation.discount_application.type == 'discount_code'
-        assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
-      endif
-    endfor
-  endfor
-
-  assign discount_codes = discount_codes | uniq
-%}
-
-<cart-discount-component
-  data-section-id="{{ section.id }}"
->
-  <accordion-custom class="cart-discount">
-    <details
-      class="details discount-details"
-      {% if discount_codes.size > 0 %}
-        open
-      {% endif %}
-      declarative-open
-    >
-      <summary class="cart-discount__summary">
-        <span class="cart-discount__label h6">Discount</span>
-
-        <span class="svg-wrapper icon-plus">
-          {{- 'icon-plus.svg' | inline_asset_content -}}
-        </span>
-      </summary>
-
-      <div class="details-content">
-        <div class="cart-discount__content">
-          <form
-            on:submit="/applyDiscount"
-            onsubmit="return false;"
-            class="cart-discount__form"
-          >
-            <label
-              for="cart-discount"
-              class="visually-hidden"
-            >
-              {{- 'accessibility.discount' | t -}}
-            </label>
-            <input
-              id="cart-discount"
-              class="cart-discount__input"
-              name="discount"
-              placeholder="{{ 'content.discount_code' | t }}"
-            >
-            <button
-              type="submit"
-              class="button button--primary cart-discount__button"
-            >
-              {{ 'actions.apply' | t }}
-            </button>
-          </form>
-        </div>
-        <div
-          class="cart-discount__error hidden"
-          role="alert"
-          ref="cartDiscountError"
-        >
-          <span class="svg-wrapper">
-            {{- 'icon-error.svg' | inline_asset_content -}}
-          </span>
-          <small
-            class="cart-discount__error-text cart-primary-typography hidden"
-            ref="cartDiscountErrorDiscountCode"
-          >
-            {{ 'content.discount_code_error' | t: code: 'test' }}
-          </small>
-          <small
-            class="cart-discount__error-text cart-primary-typography hidden"
-            ref="cartDiscountErrorShipping"
-          >
-            {{ 'content.shipping_discount_error' | t }}
-          </small>
-        </div>
-        <ul class="cart-discount__codes">
-          {% for discount_code in discount_codes %}
-            <li
-              class="cart-discount__pill"
-              data-discount-code="{{ discount_code }}"
-              aria-label="{{ 'accessibility.discount_applied' | t: code: discount_code }}"
-            >
-              <p class="cart-discount__pill-code">
-                {{ discount_code }}
-              </p>
-              <button
-                type="button"
-                on:click="/removeDiscount"
-                class="cart-discount__pill-remove svg-wrapper svg-wrapper--smaller button-unstyled"
-                aria-label="{{ 'actions.remove_discount' | t: code: discount_code }}"
-              >
-                {{- 'icon-filters-close.svg' | inline_asset_content -}}
-              </button>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </details>
-  </accordion-custom>
-</cart-discount-component>

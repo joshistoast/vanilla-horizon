@@ -1,5 +1,11 @@
 
 
+{% doc %}
+  Renders an inline text block.
+
+  @param {string} suffix
+{% enddoc %}
+
 {% assign plain_text = block.settings.text | strip_newlines | strip_html | strip %}
 
 {% # We need to make sure the wrapper is rendered even if the text element is empty in the theme editor to allow live text editing %}

@@ -1,5 +1,51 @@
 
 
+{% liquid
+  assign media_class_modifier = 'media-with-content--' | append: section.settings.media_width
+
+  if section.settings.extend_media and section.settings.section_width == 'page-width'
+    assign media_class_modifier = media_class_modifier | append: ' media-with-content--media-extend'
+  endif
+
+  if section.settings.media_position == 'right'
+    assign media_class_modifier = media_class_modifier | append: ' media-with-content--media-right'
+  endif
+%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} disable-section-top-offset media-with-content color-{{ section.settings.color_scheme }} spacing-style {{ media_class_modifier }}"
+  data-testid="media-with-content"
+  style="
+    {%- render 'spacing-style', settings: section.settings %}
+    {% render 'border-override', settings: section.settings %}
+    --media-height: {{ section.settings.media_height }};
+    {%- case section.settings.media_height %}
+      {% when '50svh' %}
+        --media-height-mobile: 30svh;
+      {% when '60svh' %}
+        --media-height-mobile: 50svh;
+      {% when '80svh' %}
+        --media-height-mobile: 70svh;
+      {% when '100svh' %}
+        --media-height-mobile: 100svh;
+      {% else %}
+        --media-height-mobile: auto;
+    {% endcase -%}
+
+    {% if section.settings.media_height != 'auto' %}
+     --section-preview-height: 600px;
+     {% endif %}
+  "
+  {% if request.visual_preview_mode %}
+    data-shopify-visual-preview
+  {% endif %}
+>
+  {% content_for 'block', type: '_media-without-appearance', id: 'media' %}
+
+  {% content_for 'block', type: '_content-without-appearance', id: 'content' %}
+</div>
+
 {% stylesheet %}
   .section--page-width {
     &.media-with-content {
@@ -144,52 +190,6 @@
     min-height: 500px;
   }
 {% endstylesheet %}
-
-{% liquid
-  assign media_class_modifier = 'media-with-content--' | append: section.settings.media_width
-
-  if section.settings.extend_media and section.settings.section_width == 'page-width'
-    assign media_class_modifier = media_class_modifier | append: ' media-with-content--media-extend'
-  endif
-
-  if section.settings.media_position == 'right'
-    assign media_class_modifier = media_class_modifier | append: ' media-with-content--media-right'
-  endif
-%}
-
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
-<div
-  class="section section--{{ section.settings.section_width }} disable-section-top-offset media-with-content color-{{ section.settings.color_scheme }} spacing-style {{ media_class_modifier }}"
-  data-testid="media-with-content"
-  style="
-    {%- render 'spacing-style', settings: section.settings %}
-    {% render 'border-override', settings: section.settings %}
-    --media-height: {{ section.settings.media_height }};
-    {%- case section.settings.media_height %}
-      {% when '50svh' %}
-        --media-height-mobile: 30svh;
-      {% when '60svh' %}
-        --media-height-mobile: 50svh;
-      {% when '80svh' %}
-        --media-height-mobile: 70svh;
-      {% when '100svh' %}
-        --media-height-mobile: 100svh;
-      {% else %}
-        --media-height-mobile: auto;
-    {% endcase -%}
-
-    {% if section.settings.media_height != 'auto' %}
-     --section-preview-height: 600px;
-     {% endif %}
-  "
-  {% if request.visual_preview_mode %}
-    data-shopify-visual-preview
-  {% endif %}
->
-  {% content_for 'block', type: '_media-without-appearance', id: 'media' %}
-
-  {% content_for 'block', type: '_content-without-appearance', id: 'content' %}
-</div>
 
 {% schema %}
 {

@@ -68,11 +68,6 @@
     --letter-spacing-sm: 0.06em;
     --letter-spacing-md: 0.13em;
 
-
-    {%- comment -%}
-      TODO: Need to load all font weights
-    {%- endcomment -%}
-
     /* Font families */
     --font-body--family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
     --font-body--style: {{ settings.type_body_font.style }};
@@ -168,7 +163,7 @@
       endcomment
       assign font_size_values = ''
       for font_size in font_sizes
-        assign size_setting = 'type_size_' | append: font_size
+        assign size_setting = 'type_size_[font_size]' | replace: '[font_size]', font_size
         assign size_setting_value = settings[size_setting] | times: 1
 
         comment
@@ -176,10 +171,10 @@
           This is because we end up with an array of strings, which | sort filter can't order "correctly")
         endcomment
         if size_setting_value < 100
-          assign size_setting_value = '0' | append: size_setting_value
+          assign size_setting_value = '0[size_setting_value]' | replace: '[size_setting_value]', size_setting_value
         endif
 
-        assign font_size_values = font_size_values | append: size_setting_value | append: ','
+        assign font_size_values = font_size_values | append: '[size_setting_value],' | replace: '[size_setting_value]', size_setting_value
       endfor
 
       assign font_size_values = font_size_values | split: ',' | uniq | sort_natural
@@ -189,12 +184,10 @@
         The calculation depends on the size of S-1 (over or under the cutoff)
       endcomment
       for font_size in font_sizes
-        assign size_setting = 'type_size_' | append: font_size
+        assign size_setting = 'type_size_[font_size]' | replace: '[font_size]', font_size
         assign font_size_value = settings[size_setting] | times: 1
-        assign font_size_string = ''
-        assign font_size_string = font_size_string | append: font_size_value
+        assign font_size_string = '[font_size_value]' | replace: '[font_size_value]', font_size_value
         assign index = font_size_values | find_index: font_size_string
-
 
         if font_size_value >= fluid_size_cutoff
 
@@ -230,18 +223,18 @@
           assign fluid_size = font_size_value | times: 0.1
           assign fluid_size_max_rem = font_size_value | divided_by: 16.0
 
-          echo '--font-size--' | append: font_size | append: ': clamp(' | append: fluid_size_min_rem | append: 'rem, ' | append: fluid_size | append: 'vw, ' | append: fluid_size_max_rem | append: 'rem);'
+          echo '--font-size--[font_size]: clamp([fluid_size_min_rem]rem, [fluid_size]vw, [fluid_size_max_rem]rem);' | replace: '[font_size]', font_size | replace: '[fluid_size_min_rem]', fluid_size_min_rem | replace: '[fluid_size]', fluid_size | replace: '[fluid_size_max_rem]', fluid_size_max_rem
         else
           assign fluid_size_rem = font_size_value | divided_by: 16.0
-          echo '--font-size--' | append: font_size | append: ': ' | append: fluid_size_rem | append: 'rem;'
+          echo '--font-size--[font_size]: [fluid_size_rem]rem;' | replace: '[font_size]', font_size | replace: '[fluid_size_rem]', fluid_size_rem
         endif
       endfor
 
       assign type_presets = "paragraph, h1, h2, h3, h4, h5, h6" | split: ", "
 
       for preset_name in type_presets
-        assign preset_size = '--font-size--' | append: preset_name
-        assign preset_line_height = 'type_line_height_' | append: preset_name
+        assign preset_size = '--font-size--[preset_name]' | replace: '[preset_name]', preset_name
+        assign preset_line_height = 'type_line_height_[preset_name]' | replace: '[preset_name]', preset_name
 
         if preset_name == 'paragraph'
           assign preset_font = '--font-body--family'
@@ -250,31 +243,27 @@
           assign preset_case = '--font-body--case'
           assign preset_letter_spacing = 'body-normal'
 
-          echo '--font-' | append: preset_name | append: '--weight: ' | append: preset_weight | append: ';'
-          echo '--font-' | append: preset_name | append: '--letter-spacing: var(--letter-spacing--' | append: preset_letter_spacing | append: ');'
+          echo '--font-[preset_name]--weight: [preset_weight];' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
+          echo '--font-[preset_name]--letter-spacing: var(--letter-spacing--[preset_letter_spacing]);' | replace: '[preset_name]', preset_name | replace: '[preset_letter_spacing]', preset_letter_spacing
         else
-          assign preset_font_id = 'type_font_' | append: preset_name
-          assign preset_font = '--font-' | append: settings[preset_font_id] | append: '--family'
-          assign preset_style = '--font-' | append: settings[preset_font_id] | append: '--style'
-          assign preset_weight = '--font-' | append: settings[preset_font_id] | append: '--weight'
-          assign preset_case = 'type_case_' | append: preset_name
-          assign preset_letter_spacing = 'type_letter_spacing_' | append: preset_name
+          assign preset_font_id = 'type_font_[preset_name]' | replace: '[preset_name]', preset_name
+          assign preset_font = '--font-[preset_font]--family' | replace: '[preset_font]', settings[preset_font_id]
+          assign preset_style = '--font-[preset_font]--style' | replace: '[preset_font]', settings[preset_font_id]
+          assign preset_weight = '--font-[preset_font]--weight' | replace: '[preset_font]', settings[preset_font_id]
+          assign preset_case = 'type_case_[preset_name]' | replace: '[preset_name]', preset_name
+          assign preset_letter_spacing = 'type_letter_spacing_[preset_name]' | replace: '[preset_name]', preset_name
 
-          echo '--font-' | append: preset_name | append: '--weight: var(' | append: preset_weight | append: ');'
-          echo '--font-' | append: preset_name | append: '--letter-spacing: var(--letter-spacing--' | append: settings[preset_letter_spacing] | append: ');'
+          echo '--font-[preset_name]--weight: var([preset_weight]);' | replace: '[preset_name]', preset_name | replace: '[preset_weight]', preset_weight
+          echo '--font-[preset_name]--letter-spacing: var(--letter-spacing--[preset_letter_spacing]);' | replace: '[preset_name]', preset_name | replace: '[preset_letter_spacing]', settings[preset_letter_spacing]
         endif
 
-        echo '--font-' | append: preset_name | append: '--size: var(' | append: preset_size | append: ');'
-        echo '--font-' | append: preset_name | append: '--family: var(' | append: preset_font | append: ');'
-        echo '--font-' | append: preset_name | append: '--style: var(' | append: preset_style | append: ');'
-        echo '--font-' | append: preset_name | append: '--case: ' | append: settings[preset_case] | append: ';'
-        echo '--font-' | append: preset_name | append: '--line-height: var(--line-height--' | append: settings[preset_line_height] | append: ');'
+        echo '--font-[preset_name]--size: var([preset_size]);' | replace: '[preset_name]', preset_name | replace: '[preset_size]', preset_size
+        echo '--font-[preset_name]--family: var([preset_font]);' | replace: '[preset_name]', preset_name | replace: '[preset_font]', preset_font
+        echo '--font-[preset_name]--style: var([preset_style]);' | replace: '[preset_name]', preset_name | replace: '[preset_style]', preset_style
+        echo '--font-[preset_name]--case: [preset_case];' | replace: '[preset_name]', preset_name | replace: '[preset_case]', settings[preset_case]
+        echo '--font-[preset_name]--line-height: var(--line-height--[preset_line_height]);' | replace: '[preset_name]', preset_name | replace: '[preset_line_height]', settings[preset_line_height]
       endfor
     %}
-
-    {%- comment -%}
-      TODO: Delete everything that isn't part of the new schema, once we can figure out how we can rewire it
-    {%- endcomment -%}
 
     /* Hardcoded font sizes */
     --font-size--2xs: 0.625rem;
@@ -465,6 +454,7 @@
     --button-text-case: {{ settings.button_text_case }};
     --button-text-case-primary: {{ settings.button_text_case_primary }};
     --button-text-case-secondary: {{ settings.button_text_case_secondary }};
+
     /* Borders */
     --border-color: rgba(from var(--color-border) r g b / 0.55);
     --border-width-sm: 1px;
@@ -485,16 +475,16 @@
     /* Variant Picker Swatches */
     --variant-picker-swatch-width-unitless: {{ settings.variant_swatch_width }};
     --variant-picker-swatch-height-unitless: {{ settings.variant_swatch_height }};
-    --variant-picker-swatch-width: {{ settings.variant_swatch_width | append: "px" }};
-    --variant-picker-swatch-height: {{ settings.variant_swatch_height | append: "px" }};
-    --variant-picker-swatch-radius: {{ settings.variant_swatch_radius | append: "px" }};
-    --variant-picker-border-width: {{ settings.variant_swatch_border_width | append: "px" }};
+    --variant-picker-swatch-width: {{ settings.variant_swatch_width | append: 'px' }};
+    --variant-picker-swatch-height: {{ settings.variant_swatch_height | append: 'px' }};
+    --variant-picker-swatch-radius: {{ settings.variant_swatch_radius | append: 'px' }};
+    --variant-picker-border-width: {{ settings.variant_swatch_border_width | append: 'px' }};
     --variant-picker-border-style: {{ settings.variant_swatch_border_style }};
-    --variant-picker-border-opacity: {{ settings.variant_swatch_border_opacity | append: "%" }};
+    --variant-picker-border-opacity: {{ settings.variant_swatch_border_opacity | append: '%' }};
 
     /* Variant Picker Buttons */
-    --variant-picker-button-radius: {{ settings.variant_button_radius | append: "px" }};
-    --variant-picker-button-border-width: {{ settings.variant_button_border_width | append: "px" }};
+    --variant-picker-button-radius: {{ settings.variant_button_radius | append: 'px' }};
+    --variant-picker-button-border-width: {{ settings.variant_button_border_width | append: 'px' }};
 
     /* Slideshow */
     --slideshow-controls-size: 3.5rem;
@@ -537,7 +527,12 @@
     --card-border-hover: rgb(from var(--color-foreground) r g b / 0.3);
     --card-border-focus: rgb(from var(--color-border) r g b / 0.1);
 
-    /* Modal */
-    --modal-max-height: 65dvh;
+    /* Cart */
+    --cart-primary-font-family: var(--font-body--family);
+    --cart-primary-font-style: var(--font-body--style);
+    --cart-primary-font-weight: var(--font-body--weight);
+    --cart-secondary-font-family: var(--font-{{ settings.cart_price_font }}--family);
+    --cart-secondary-font-style: var(--font-{{ settings.cart_price_font }}--style);
+    --cart-secondary-font-weight: var(--font-{{ settings.cart_price_font }}--weight);
   }
 {% endstyle %}

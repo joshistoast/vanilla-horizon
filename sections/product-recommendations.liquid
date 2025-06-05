@@ -4,73 +4,6 @@
   type="module"
 ></script>
 
-{% stylesheet %}
-  .section-resource-list {
-    row-gap: var(--gap);
-  }
-
-  .section-resource-list.section--full-width product-card .group-block {
-    @media screen and (width < 750px) {
-      padding-inline-start: max(var(--padding-xs), var(--padding-inline-start));
-      padding-inline-end: max(var(--padding-xs), var(--padding-inline-end));
-    }
-  }
-
-  .resource-list--carousel-mobile {
-    display: block;
-
-    @media screen and (width >= 750px) {
-      display: none;
-    }
-  }
-
-  .resource-list {
-    --resource-list-mobile-gap-max: 12px;
-    --resource-list-column-gap: min(var(--resource-list-column-gap-desktop), var(--resource-list-mobile-gap-max));
-    --resource-list-row-gap: min(var(--resource-list-row-gap-desktop), var(--resource-list-mobile-gap-max));
-
-    width: 100%;
-
-    @media screen and (width >= 750px) {
-      --resource-list-column-gap: var(--resource-list-column-gap-desktop);
-      --resource-list-row-gap: var(--resource-list-row-gap-desktop);
-    }
-  }
-
-  .resource-list--grid {
-    display: grid;
-    column-gap: var(--resource-list-column-gap);
-    row-gap: var(--resource-list-row-gap);
-    grid-template-columns: var(--resource-list-columns-mobile);
-
-    @media screen and (width >= 750px) {
-      grid-template-columns: var(--resource-list-columns);
-    }
-  }
-
-  .resource-list__item {
-    color: var(--color-foreground);
-    text-decoration: none;
-  }
-
-  .product-recommendations__skeleton-item {
-    aspect-ratio: 3 / 4;
-    background-color: var(--color-foreground);
-    opacity: var(--skeleton-opacity);
-    border-radius: 4px;
-  }
-
-  @media screen and (width < 750px) {
-    .product-recommendations__skeleton-item:nth-child(2n + 1) {
-      display: none;
-    }
-  }
-
-  product-recommendations:has([data-has-recommendations='false']) {
-    display: none;
-  }
-{% endstylesheet %}
-
 {% liquid
   case section.settings.layout_type
     when 'grid'
@@ -125,14 +58,13 @@
     {%- if recommendations.performed or section.settings.product == blank -%}
       {% liquid
         if section.settings.product == blank
+          assign products = null
           if request.design_mode or request.visual_preview_mode
             # Onboarding mode: Show placeholder products
             for i in (1..section.settings.max_products)
               assign products = products | append: ', '
               assign products = products | split: ','
             endfor
-          else
-            assign products = null
           endif
         elsif recommendations.performed and recommendations.products_count == 0
           # No recommendations found, pull from catalog
@@ -162,11 +94,17 @@
         # Create an array from the list items to be used in the carousel
         assign slide_content = list_items | strip
         assign slides = slide_content | split: '<!--@list/split-->'
+
+        if products != blank and products.size > 0
+          assign has_recommendations = 'true'
+        else
+          assign has_recommendations = 'false'
+        endif
       %}
 
       <div
         class="
-          resource-list resource-list--{{ section.id }}
+          resource-list
           {% if section.settings.layout_type == 'carousel' %}
             force-full-width
           {% endif %}
@@ -178,7 +116,7 @@
         {% if section.settings.layout_type == 'grid' %}
           data-testid="resource-list-grid"
         {% endif %}
-        data-has-recommendations="{% if products.size > 0 %}true{% else %}false{% endif %}"
+        data-has-recommendations="{{ has_recommendations }}"
       >
         {% case section.settings.layout_type %}
           {% when 'grid' %}
@@ -200,7 +138,7 @@
         %}
         <div
           class="
-            resource-list resource-list--{{ section.id }}
+            resource-list
             hidden--desktop
             force-full-width
           "
@@ -231,6 +169,25 @@
     {%- endif -%}
   </div>
 </product-recommendations>
+
+{% stylesheet %}
+  .product-recommendations__skeleton-item {
+    aspect-ratio: 3 / 4;
+    background-color: var(--color-foreground);
+    opacity: var(--skeleton-opacity);
+    border-radius: 4px;
+  }
+
+  @media screen and (width < 750px) {
+    .product-recommendations__skeleton-item:nth-child(2n + 1) {
+      display: none;
+    }
+  }
+
+  product-recommendations:has([data-has-recommendations='false']) {
+    display: none;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

@@ -4,7 +4,10 @@
     {% unless cart == empty %} header-actions__cart-icon--has-cart{% endunless %}
   "
 >
-  <span class="svg-wrapper">
+  <span
+    class="svg-wrapper"
+    aria-hidden="true"
+  >
     {{ 'icon-cart.svg' | inline_asset_content }}
   </span>
 

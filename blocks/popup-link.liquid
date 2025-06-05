@@ -1,5 +1,42 @@
 
 
+<script
+  src="{{ 'dialog.js' | asset_url }}"
+  type="module"
+></script>
+
+<dialog-component
+  class="popup-link"
+  {{ block.shopify_attributes }}
+>
+  <button
+    on:click="/showDialog"
+    class="button button-unstyled popup-link__button text-left spacing-style {{ block.settings.type_preset }}"
+    style="{% render 'spacing-style', settings: block.settings %}"
+  >
+    {{- block.settings.heading }}
+    {{- 'icon-external.svg' | inline_asset_content -}}
+  </button>
+
+  <dialog
+    ref="dialog"
+    class="popup-link__content dialog-modal color-{{ settings.popover_color_scheme }}{% if block.settings.behavior == 'drawer' %} popup-link__content--drawer dialog-drawer{% endif %}"
+    scroll-lock
+  >
+    <div class="popup-link__inner">
+      {% content_for 'blocks' %}
+    </div>
+    <button
+      ref="closeButton"
+      on:click="/closeDialog"
+      class="button popup-link__close"
+      aria-label="{{ 'accessibility.close_dialog' | t }}"
+    >
+      {{- 'icon-close.svg' | inline_asset_content -}}
+    </button>
+  </dialog>
+</dialog-component>
+
 {% stylesheet %}
   .popup-link__button svg {
     display: inline-block;
@@ -67,43 +104,6 @@
     height: var(--icon-size-xs);
   }
 {% endstylesheet %}
-
-<script
-  src="{{ 'dialog.js' | asset_url }}"
-  type="module"
-></script>
-
-<dialog-component
-  class="popup-link"
-  {{ block.shopify_attributes }}
->
-  <button
-    on:click="/showDialog"
-    class="button button-unstyled popup-link__button text-left spacing-style {{ block.settings.type_preset }}"
-    style="{% render 'spacing-style', settings: block.settings %}"
-  >
-    {{- block.settings.heading }}
-    {{- 'icon-external.svg' | inline_asset_content -}}
-  </button>
-
-  <dialog
-    ref="dialog"
-    class="popup-link__content dialog-modal color-{{ settings.popover_color_scheme }}{% if block.settings.behavior == 'drawer' %} popup-link__content--drawer dialog-drawer{% endif %}"
-    scroll-lock
-  >
-    <div class="popup-link__inner">
-      {% content_for 'blocks' %}
-    </div>
-    <button
-      ref="closeButton"
-      on:click="/closeDialog"
-      class="button popup-link__close"
-      aria-label="{{ 'accessibility.close_dialog' | t }}"
-    >
-      {{- 'icon-close.svg' | inline_asset_content -}}
-    </button>
-  </dialog>
-</dialog-component>
 
 {% schema %}
 {

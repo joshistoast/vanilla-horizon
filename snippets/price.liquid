@@ -14,6 +14,11 @@
   assign price = selected_variant.price
   assign compare_at_price = selected_variant.compare_at_price
 
+  assign show_compare_price = false
+  if compare_at_price > price
+    assign show_compare_price = true
+  endif
+
   if product_resource == blank and request.design_mode
     assign price = 1999
   endif
@@ -37,13 +42,13 @@
 -%}
 
 <div ref="priceContainer">
-  {% if show_sale_price_first == false and compare_at_price > price %}
+  {% if show_sale_price_first == false and show_compare_price %}
     <s class="compare-at-price">{{ compare_at_price }}</s>
   {% endif %}
 
   <span class="price">{{ price | default: '&nbsp;' }}</span>
 
-  {% if show_sale_price_first == true and compare_at_price > price %}
+  {% if show_sale_price_first == true and show_compare_price %}
     <s class="compare-at-price">{{ compare_at_price }}</s>
   {% endif %}
 

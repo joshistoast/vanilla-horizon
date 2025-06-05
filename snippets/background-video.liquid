@@ -3,15 +3,9 @@
 
   @param {object} background_video - The video object
   @param {string} background_video_position - The position of the video background
+  @param {string} section_id - The section ID
+  @param {string} block_id - The block ID
 {% enddoc %}
-
-{% stylesheet %}
-  @media (prefers-reduced-motion: reduce) {
-    video-background-component video {
-      display: none;
-    }
-  }
-{% endstylesheet %}
 
 {% liquid
   assign video_classes = 'video-background video-background--' | append: background_video_position
@@ -47,8 +41,16 @@
 {%- else -%}
   <div class="{{ video_classes }}">
     <placeholder-image
-      data-block-id="{{ section.id }}-{{ block.id }}"
+      data-block-id="{{ section_id }}-{{ block_id }}"
       data-type="general"
     ></placeholder-image>
   </div>
 {%- endif -%}
+
+{% stylesheet %}
+  @media (prefers-reduced-motion: reduce) {
+    video-background-component video {
+      display: none;
+    }
+  }
+{% endstylesheet %}

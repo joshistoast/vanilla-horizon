@@ -1,3 +1,95 @@
+{% doc %}
+  Renders a quick add component.
+
+  @param {object} product - The product object
+  @param {string} section_id - The section ID
+  @param {object} [block] - The block object
+{% enddoc %}
+
+{% liquid
+  assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id
+  assign add_to_cart_text = 'actions.add' | t
+
+  if block.settings.product.selected_or_first_available_variant.available
+    assign can_add_to_cart = true
+  else
+    assign can_add_to_cart = false
+  endif
+%}
+
+<quick-add-component
+  class="quick-add color-{{ settings.quick_add_color_scheme }} "
+  ref="quickAdd"
+  data-product-title="{{ product.title }}"
+>
+  <product-form-component
+    data-section-id="{{ section_id }}"
+    data-product-id="{{ product.id }}"
+    on:submit="/handleSubmit"
+    class="
+      quick-add__product-form-component
+      {% if product.options.size == 1 %} quick-add__product-form-component--single-option {% else %} quick-add__product-form-component--multi-option {% endif %}
+      {% if product.variants.size == 1 %} quick-add__product-form-component--single-variant {% else %} quick-add__product-form-component--multi-variant {% endif %}
+    "
+  >
+    <div
+      class="visually-hidden"
+      aria-live="assertive"
+      role="status"
+      aria-atomic="true"
+      ref="liveRegion"
+    ></div>
+    {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      <input
+        type="hidden"
+        name="id"
+        ref="variantId"
+        value="{{ product.selected_or_first_available_variant.id }}"
+        {% if product.selected_or_first_available_variant.available == false %}
+          disabled
+        {% endif %}
+      >
+      <input
+        type="hidden"
+        name="quantity"
+        value="{% if product.selected_or_first_available_variant.quantity_rule.min %}{{ product.selected_or_first_available_variant.quantity_rule.min }}{% else %}1{% endif %}"
+      >
+      {% comment %} If there is one variant option but it's swatches or if it's a single variant product, then use add to cart button {% endcomment %}
+      {%- if product.variants.size == 1 or product.options.size == 1 -%}
+        {% render 'add-to-cart-button',
+          add_to_cart_text: add_to_cart_text,
+          class: 'button quick-add__button quick-add__button--add',
+          can_add_to_cart: can_add_to_cart,
+          icon_only_on_mobile: true,
+          product: product
+        %}
+      {%- endif -%}
+      {%- if product.variants.size > 1 -%}
+        <button
+          class="button quick-add__button quick-add__button--choose"
+          {% comment %} type="submit" is the default, so we explicitly set it to "button" to prevent the ProductFormComponent.handleSubmit from being triggered {% endcomment %}
+          type="button"
+          name="add"
+          on:click="quick-add-component/handleClick"
+        >
+          <span
+            class="add-to-cart-text"
+          >
+            <span
+              class="svg-wrapper add-to-cart-icon"
+            >
+              {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+            </span>
+            <span class="add-to-cart-text__content is-visually-hidden-mobile">
+              {{ add_to_cart_text }}
+            </span>
+          </span>
+        </button>
+      {%- endif -%}
+    {%- endform -%}
+  </product-form-component>
+</quick-add-component>
+
 {% stylesheet %}
   /* Quick Add */
   .quick-add {
@@ -189,87 +281,3 @@
     }
   }
 {% endstylesheet %}
-
-{% liquid
-  assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id
-  assign add_to_cart_text = 'actions.add' | t
-
-  if block.settings.product.selected_or_first_available_variant.available
-    assign can_add_to_cart = true
-  else
-    assign can_add_to_cart = false
-  endif
-%}
-
-<quick-add-component
-  class="quick-add color-{{ settings.quick_add_color_scheme }} "
-  ref="quickAdd"
-  data-product-title="{{ product.title }}"
->
-  <product-form-component
-    data-section-id="{{ section.id }}"
-    data-product-id="{{ product.id }}"
-    on:submit="/handleSubmit"
-    class="
-      quick-add__product-form-component
-      {% if product.options.size == 1 %} quick-add__product-form-component--single-option {% else %} quick-add__product-form-component--multi-option {% endif %}
-      {% if product.variants.size == 1 %} quick-add__product-form-component--single-variant {% else %} quick-add__product-form-component--multi-variant {% endif %}
-    "
-  >
-    <div
-      class="visually-hidden"
-      aria-live="assertive"
-      role="status"
-      aria-atomic="true"
-      ref="liveRegion"
-    ></div>
-    {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-      <input
-        type="hidden"
-        name="id"
-        ref="variantId"
-        value="{{ product.selected_or_first_available_variant.id }}"
-        {% if product.selected_or_first_available_variant.available == false %}
-          disabled
-        {% endif %}
-      >
-      <input
-        type="hidden"
-        name="quantity"
-        value="{% if product.selected_or_first_available_variant.quantity_rule.min %}{{ product.selected_or_first_available_variant.quantity_rule.min }}{% else %}1{% endif %}"
-      >
-      {% comment %} If there is one variant option but it's swatches or if it's a single variant product, then use add to cart button {% endcomment %}
-      {%- if product.variants.size == 1 or product.options.size == 1 -%}
-        {% render 'add-to-cart-button',
-          add_to_cart_text: add_to_cart_text,
-          class: 'button quick-add__button quick-add__button--add',
-          can_add_to_cart: can_add_to_cart,
-          icon_only_on_mobile: true,
-          product: product
-        %}
-      {%- endif -%}
-      {%- if product.variants.size > 1 -%}
-        <button
-          class="button quick-add__button quick-add__button--choose"
-          {% comment %} type="submit" is the default, so we explicitly set it to "button" to prevent the ProductFormComponent.handleSubmit from being triggered {% endcomment %}
-          type="button"
-          name="add"
-          on:click="quick-add-component/handleClick"
-        >
-          <span
-            class="add-to-cart-text"
-          >
-            <span
-              class="svg-wrapper add-to-cart-icon"
-            >
-              {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-            </span>
-            <span class="add-to-cart-text__content is-visually-hidden-mobile">
-              {{ add_to_cart_text }}
-            </span>
-          </span>
-        </button>
-      {%- endif -%}
-    {%- endform -%}
-  </product-form-component>
-</quick-add-component>

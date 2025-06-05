@@ -3,88 +3,6 @@
   @param [string] text - text to be rendered
 {% endcomment %}
 
-{% stylesheet %}
-  .jumbo-text__container {
-    width: 100%;
-  }
-
-  jumbo-text {
-    display: block;
-    font-family: var(--font-family, inherit);
-    font-style: var(--font-style, normal);
-    color: var(--color, inherit);
-    font-weight: var(--font-weight, inherit);
-    letter-spacing: var(--letter-spacing, -0.02em);
-    line-height: var(--line-height, 1);
-    opacity: 0;
-    text-align: var(--text-align);
-    text-box: var(--text-trim, trim-end cap text);
-    text-transform: var(--text-transform, none);
-    transition: opacity 0.3s ease;
-    white-space: pre;
-    width: 100%;
-    will-change: font-size;
-    margin-left: var(--margin-left-nudge, 0);
-    margin-right: var(--margin-right-nudge, 0);
-    overflow: visible;
-  }
-
-  jumbo-text.ready {
-    opacity: 1;
-  }
-
-  jumbo-text[data-cap-text='true'] {
-    text-box-edge: cap text;
-  }
-
-  .jumbo-text-space {
-    display: inline-flex;
-    width: 0.5ch;
-  }
-
-  :is(.jumbo-text-char, .jumbo-text-line) {
-    display: inline-flex;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    /* Blur effect */
-    [data-text-effect='blur'] {
-      filter: blur(20px);
-      opacity: 0.5;
-      scale: 1.05;
-      transition: filter 1.6s var(--animation-timing-fade-in), opacity 1.3s var(--animation-timing-fade-in),
-        scale 1.6s var(--animation-timing-fade-in);
-    }
-
-    .jumbo-text-visible[data-text-effect='blur'] {
-      filter: blur(0);
-      opacity: 1;
-      scale: 1;
-    }
-
-    /* Reveal effect */
-    .ready[data-text-effect='reveal'],
-    .ready[data-text-effect='reveal'] .jumbo-text-line {
-      overflow: hidden;
-    }
-
-    .ready[data-text-effect='reveal'] .jumbo-text-char {
-      transform: translateY(100%);
-    }
-
-    .jumbo-text-visible[data-text-effect='reveal'] .jumbo-text-char {
-      transition: transform 0.5s var(--animation-timing-fade-in) calc(var(--line-index) * 0.05s);
-      transform: translateY(0);
-    }
-
-    .jumbo-text-visible[data-text-effect='reveal'],
-    .jumbo-text-visible[data-text-effect='reveal'] .jumbo-text-line {
-      overflow: visible;
-      transition: overflow 0s linear 0.75s;
-    }
-  }
-{% endstylesheet %}
-
 {% liquid
   assign shown_text = text | default: block.settings.text
   assign descenders = 'alphabetic'
@@ -179,3 +97,85 @@
   src="{{ 'jumbo-text.js' | asset_url }}"
   type="module"
 ></script>
+
+{% stylesheet %}
+  .jumbo-text__container {
+    width: 100%;
+  }
+
+  jumbo-text {
+    display: block;
+    font-family: var(--font-family, inherit);
+    font-style: var(--font-style, normal);
+    color: var(--color, inherit);
+    font-weight: var(--font-weight, inherit);
+    letter-spacing: var(--letter-spacing, -0.02em);
+    line-height: var(--line-height, 1);
+    opacity: 0;
+    text-align: var(--text-align);
+    text-box: var(--text-trim, trim-end cap text);
+    text-transform: var(--text-transform, none);
+    transition: opacity 0.3s ease;
+    white-space: pre;
+    width: 100%;
+    will-change: font-size;
+    margin-left: var(--margin-left-nudge, 0);
+    margin-right: var(--margin-right-nudge, 0);
+    overflow: visible;
+  }
+
+  jumbo-text.ready {
+    opacity: 1;
+  }
+
+  jumbo-text[data-cap-text='true'] {
+    text-box-edge: cap text;
+  }
+
+  .jumbo-text-space {
+    display: inline-flex;
+    width: 0.5ch;
+  }
+
+  :is(.jumbo-text-char, .jumbo-text-line) {
+    display: inline-flex;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Blur effect */
+    [data-text-effect='blur'] {
+      filter: blur(20px);
+      opacity: 0.5;
+      scale: 1.05;
+      transition: filter 1.6s var(--animation-timing-fade-in), opacity 1.3s var(--animation-timing-fade-in),
+        scale 1.6s var(--animation-timing-fade-in);
+    }
+
+    .jumbo-text-visible[data-text-effect='blur'] {
+      filter: blur(0);
+      opacity: 1;
+      scale: 1;
+    }
+
+    /* Reveal effect */
+    .ready[data-text-effect='reveal'],
+    .ready[data-text-effect='reveal'] .jumbo-text-line {
+      overflow: hidden;
+    }
+
+    .ready[data-text-effect='reveal'] .jumbo-text-char {
+      transform: translateY(100%);
+    }
+
+    .jumbo-text-visible[data-text-effect='reveal'] .jumbo-text-char {
+      transition: transform 0.5s var(--animation-timing-fade-in) calc(var(--line-index) * 0.05s);
+      transform: translateY(0);
+    }
+
+    .jumbo-text-visible[data-text-effect='reveal'],
+    .jumbo-text-visible[data-text-effect='reveal'] .jumbo-text-line {
+      overflow: visible;
+      transition: overflow 0s linear 0.75s;
+    }
+  }
+{% endstylesheet %}
