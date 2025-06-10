@@ -122,7 +122,7 @@ class ProductFormComponent extends Component {
     super.connectedCallback();
 
     const { signal } = this.#abortController;
-    const target = this.closest('.shopify-section, dialog');
+    const target = this.closest('.shopify-section, dialog, product-card');
     target?.addEventListener(ThemeEvents.variantUpdate, this.#onVariantUpdate, { signal });
   }
 

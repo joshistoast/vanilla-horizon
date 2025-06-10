@@ -64,9 +64,13 @@
         {%- endfor -%}
         <li
           slot="more"
-          on:click="/showAllSwatches"
-          class="hidden-swatches__count"
-        ></li>
+        >
+          <button
+            class="hidden-swatches__count"
+            aria-label="{{ 'actions.show_all_options' | t }}"
+            on:click="/showAllSwatches"
+          ></button>
+        </li>
       {% endcapture %}
 
         {% render 'overflow-list', children: children, ref: 'overflowList', defer: true %}

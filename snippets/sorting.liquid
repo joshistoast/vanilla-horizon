@@ -4,7 +4,8 @@
   @param {object} results - The results of the search
   @param {string} sort_by - The current sort by
   @param {string} filter_style - The filter style
-  @param {string} suffix - The suffix for the sorting component
+  @param {string} [suffix] - { 'desktop' | 'mobile' | 'overflow' } Used on `form` attributes to connect inputs to a form[id]
+  @param {string} [sort_position] - { 'desktop' | 'mobile' } Used in a data-testID selector for automated testing
   @param {boolean} should_use_select_on_mobile - Whether to use a select element for the sorting component on mobile
   @param {string} section_id - The section ID
 {% enddoc %}
@@ -12,7 +13,9 @@
 <sorting-filter-component
   class="sorting-filter{% if filter_style == 'horizontal' %} sorting-filter__horizontal{% endif %}"
   on:change="/updateFilterAndSorting"
-  data-sort-position="{{ suffix }}"
+  {% if sort_position != blank %}
+    data-testid="sorting-filter-component-{{ sort_position }}"
+  {% endif %}
   data-should-use-select-on-mobile="{{ should_use_select_on_mobile }}"
 >
   {% liquid
@@ -69,7 +72,6 @@
       data-disable-animation-on-desktop="true"
       data-close-with-escape="true"
     {% endif %}
-    open-by-default-on-mobile
   >
     <details
       ref="details"
@@ -78,9 +80,11 @@
       class="facets__panel {% if should_use_select_on_mobile %} mobile:hidden {% endif %}"
       style="z-index: var(--layer-overlay);"
       data-auto-close-details="desktop,mobile"
-      open-by-default-on-mobile
     >
-      <summary class="facets__summary">
+      <summary
+        class="facets__summary"
+        role="button"
+      >
         <span class="facets__label">{{ 'actions.sort' | t }}</span>
         <span
           class="facets__status h6 desktop:hidden"
@@ -102,7 +106,9 @@
             <input
               type="radio"
               name="sort_by"
-              form="FacetFiltersForm--{{ section_id }}-{{ suffix }}"
+              {% if suffix != blank %}
+                form="FacetFiltersForm--{{ section_id }}-{{ suffix }}"
+              {% endif %}
               value="{{ option.value }}"
               class="sorting-filter__input"
               data-option-name="{{ option.name }}"
@@ -113,7 +119,7 @@
             <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">
               {{- 'icon-checkmark.svg' | inline_asset_content -}}
             </span>
-            <label class="sorting-filter__label">{{ option.name }}</label>
+            <span class="sorting-filter__label">{{ option.name }}</span>
           </label>
         {% endfor %}
       </floating-panel-component>

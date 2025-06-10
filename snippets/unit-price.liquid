@@ -13,9 +13,9 @@
   -%}
   {%- if measurement.measured_type == 'count' -%}
     {%- if count == 1 -%}
-      {{- 'blocks.unit_price.per_item.single' | t: price: price -}}
+      {{- 'blocks.unit_price.per_item_single_html' | t: price: price -}}
     {%- else -%}
-      {{- 'blocks.unit_price.per_item' | t: price: price, count: count -}}
+      {{- 'blocks.unit_price.per_item_html' | t: price: price, count: count -}}
     {%- endif -%}
   {%- else -%}
     {%- liquid
@@ -27,18 +27,21 @@
           # theme-check-enable TranslationKeyExists
       endcase
     -%}
+
     <span aria-hidden="true">
       {%- if count == 1 -%}
-        {{- 'blocks.unit_price.per_unit.single' | t: price: price, unit: unit -}}
+        {{- 'blocks.unit_price.per_unit_single_html' | t: price: price, unit: unit -}}
       {%- else -%}
-        {{- 'blocks.unit_price.per_unit' | t: price: price, count: count, unit: unit -}}
+        {{- 'blocks.unit_price.per_unit_html' | t: price: price, count: count, unit: unit -}}
       {%- endif -%}
     </span>
+
     <span class="visually-hidden">
+      {% assign price_without_html = price | strip_html %}
       {%- if count == 1 -%}
-        {{- 'blocks.unit_price.per_unit_accessibility.single' | t: price: price, unit: unit -}}
+        {{- 'blocks.unit_price.per_unit_accessibility.single' | t: price: price_without_html, unit: unit -}}
       {%- else -%}
-        {{- 'blocks.unit_price.per_unit_accessibility' | t: price: price, count: count, unit: unit -}}
+        {{- 'blocks.unit_price.per_unit_accessibility' | t: price: price_without_html, count: count, unit: unit -}}
       {%- endif -%}
     </span>
   {%- endif -%}

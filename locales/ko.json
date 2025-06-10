@@ -18,13 +18,11 @@
       "error_heading": "다음을 조정하세요."
     },
     "unit_price": {
-      "per_item": {
-        "single": "각각 {{price}}",
+      "per_item_html": {
         "one": "{{count}}개 품목당 {{price}}",
         "other": "{{count}}개 품목당 {{price}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "품목"
-      }
+      },
+      "per_item_single_html": "각각 {{price}}",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "open_image_in_full_screen": "전체 화면으로 이미지 열기",
     "sign_in_options": "기타 로그인 옵션",
     "sign_up": "가입하기",
-    "sort": "정렬"
+    "sort": "정렬",
+    "show_all_options": "모든 옵션 표시"
   },
   "content": {
     "reviews": "리뷰",
@@ -210,7 +211,7 @@
     "filters": "필터",
     "no_products_found": "제품을 찾을 수 없습니다.",
     "price_from": "{{ price }}부터",
-    "price_filter": "최고가는 {{ price }}입니다",
+    "price_filter_html": "최고가는 {{ price }}입니다",
     "use_fewer_filters_html": "필터 수를 줄여보거나 <a class=\"{{ class }}\" href=\"{{ link }}\">모든 필터를 지워보세요</a>.",
     "featured_products": "추천 제품",
     "blog_details_separator": "|",

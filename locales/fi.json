@@ -18,13 +18,11 @@
       "error_heading": "Muokkaa seuraavia:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} per tuote",
+      "per_item_html": {
         "one": "{{price}} per {{count}} tuote",
         "other": "{{price}} per {{count}} tuotetta"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "tuote"
-      }
+      },
+      "per_item_single_html": "{{price}} per tuote",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "Muut kirjautumisvaihtoehdot",
     "sign_up": "Rekisteröidy",
     "open_image_in_full_screen": "Avaa kuva koko näytön tilassa",
-    "sort": "Lajittele"
+    "sort": "Lajittele",
+    "show_all_options": "Näytä kaikki vaihtoehdot"
   },
   "content": {
     "reviews": "arvostelua",
@@ -211,7 +212,7 @@
     "price_from": "Alkaen {{ price }}",
     "filters": "Suodattimet",
     "no_products_found": "Tuotteita ei löytynyt.",
-    "price_filter": "Korkein hinta on {{ price }}",
+    "price_filter_html": "Korkein hinta on {{ price }}",
     "use_fewer_filters_html": "Käytä vähemmän suodattimia tai <a class=\"{{ class }}\" href=\"{{ link }}\">tyhjennä kaikki suodattimet</a>.",
     "read_more": "Lue lisää...",
     "blog_details_separator": "|",

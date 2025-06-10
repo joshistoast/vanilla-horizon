@@ -18,13 +18,11 @@
       "error_heading": "Коригирайте следното:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} за всеки артикул",
-        "one": "{{price}} на {{count}} артикула",
-        "other": "{{price}} на {{count}} артикул"
+      "per_item_html": {
+        "one": "{{price}} за {{count}} артикула",
+        "other": "{{price}} за {{count}} артикула"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "ярд",
         "ft2": "фут²",
         "item": "артикул"
-      }
+      },
+      "per_item_single_html": "{{price}} за всеки артикул",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -95,7 +95,7 @@
     "open_cart_drawer": "Отвори панела с количката",
     "inventory_status": "Статус на стоковите запаси",
     "pause_video": "Пауза на видеоклипа",
-    "find_country": "Намери страна",
+    "find_country": "Търсене на държава",
     "localization_region_and_language": "Отваряне на диалогов прозорец за избор на регион и език",
     "open_search_modal": "Отваряне на диалогов прозорец за търсене"
   },
@@ -135,7 +135,8 @@
     "sign_up": "Регистриране",
     "sign_in_options": "Други опции за влизане",
     "open_image_in_full_screen": "Отваряне на изображението на цял екран",
-    "sort": "Сортиране"
+    "sort": "Сортиране",
+    "show_all_options": "Показване на всички опции"
   },
   "content": {
     "reviews": "мнения",
@@ -211,7 +212,7 @@
     "filters": "Филтри",
     "no_products_found": "Не са открити продукти.",
     "price_from": "От {{ price }}",
-    "price_filter": "Най-високата цена е {{ price }}",
+    "price_filter_html": "Най-високата цена е {{ price }}",
     "use_fewer_filters_html": "Опитайте да използвате по-малко филтри или <a class=\"{{ class }}\" href=\"{{ link }}\">изчистете всички филтри</a>.",
     "blog_details_separator": "|",
     "read_more": "Прочетете повече...",

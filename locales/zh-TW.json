@@ -18,13 +18,11 @@
       "error_heading": "請調整以下內容："
     },
     "unit_price": {
-      "per_item": {
-        "single": "每個品項 {{price}}",
+      "per_item_html": {
         "one": "每 {{count}} 個品項 {{price}}",
         "other": "每 {{count}} 個品項 {{price}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "碼",
         "ft2": "平方英尺",
         "item": "品項"
-      }
+      },
+      "per_item_single_html": "每個品項 {{price}}",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -95,7 +95,7 @@
     "open_cart_drawer": "開啟購物車",
     "inventory_status": "庫存狀態",
     "pause_video": "暫停影片",
-    "find_country": "尋找國家",
+    "find_country": "尋找國家/地區",
     "localization_region_and_language": "開啟地區和語言選擇器",
     "open_search_modal": "開啟搜尋互動視窗"
   },
@@ -135,7 +135,8 @@
     "sign_in_options": "其他登入選項",
     "open_image_in_full_screen": "全螢幕開啟圖片",
     "sign_up": "註冊",
-    "sort": "排序"
+    "sort": "排序",
+    "show_all_options": "顯示所有選項"
   },
   "content": {
     "reviews": "評論",
@@ -211,7 +212,7 @@
     "price_from": "從 {{ price }} 起",
     "filters": "篩選條件",
     "no_products_found": "找不到任何商品。",
-    "price_filter": "最高價格為 {{ price }}",
+    "price_filter_html": "最高價格為 {{ price }}",
     "use_fewer_filters_html": "嘗試使用較少的篩選條件，或<a class=\"{{ class }}\" href=\"{{ link }}\">清除所有篩選條件</a>。",
     "blog_details_separator": "|",
     "account_title": "帳號",

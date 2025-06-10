@@ -18,13 +18,11 @@
       "error_heading": "Justera följande:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} vardera",
+      "per_item_html": {
         "one": "{{price}} per {{count}} artikel",
         "other": "{{price}} per {{count}} artiklar"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yard",
         "ft2": "fot²",
         "item": "artikel"
-      }
+      },
+      "per_item_single_html": "{{price}} vardera",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "open_image_in_full_screen": "Öppna bilden i helskärm",
     "sign_in_options": "Andra inloggningsalternativ",
     "sign_up": "Registrera dig",
-    "sort": "Sortera"
+    "sort": "Sortera",
+    "show_all_options": "Visa alla alternativ"
   },
   "content": {
     "reviews": "recensioner",
@@ -211,7 +212,7 @@
     "featured_products": "Utvalda produkter",
     "filters": "Filter",
     "no_products_found": "Inga produkter hittades",
-    "price_filter": "Det högsta priset är {{ price }}",
+    "price_filter_html": "Det högsta priset är {{ price }}",
     "use_fewer_filters_html": "Prova att använda färre filter eller <a class=\"{{ class }}\" href=\"{{ link }}\">rensa alla filter</a>.",
     "blog_details_separator": "|",
     "read_more": "Läs mer ...",

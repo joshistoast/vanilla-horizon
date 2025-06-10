@@ -79,12 +79,17 @@
     align-items: center;
     justify-content: center;
     color: rgb(from var(--color-foreground) r g b / 40%);
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
 
     &:before {
-      /* Max & Andy, Feb 2025: This doesn't work in Safari without the counter-reset. https://stackoverflow.com/a/40179718 */
+      /* This doesn't work in Safari without the counter-reset. https://stackoverflow.com/a/40179718 */
       counter-reset: overflow-count var(--overflow-count);
       content: '+' counter(overflow-count);
       line-height: 1;
+      cursor: pointer;
     }
   }
 

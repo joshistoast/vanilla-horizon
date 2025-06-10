@@ -29,25 +29,26 @@
     <summary class="facets__summary">
       <span class="facets__label">{{ filter.label }}</span>
       <facet-status-component class="facets__status">
+        <template ref="moneyFormat">{{ shop.money_format }}</template>
+
         <span
           class="hide-when-empty"
           ref="facetStatus"
           data-currency="{{ localization.country.currency.iso_code }}"
-          data-money-format="{{ shop.money_format }}"
           data-range-max="{{ filter.range_max }}"
         >
           {%- if filter.min_value.value != null or filter.max_value.value != null %}
             {%- if filter.min_value.value != null and filter.max_value.value != null %}
-              {{- filter.min_value.value | money -}}
+              {{- filter.min_value.value | money | strip_html -}}
               –
-              {{- filter.max_value.value | money -}}
+              {{- filter.max_value.value | money | strip_html -}}
             {%- elsif filter.min_value.value != null -%}
-              {{ filter.min_value.value | money }}–{{ filter.range_max | money }}
+              {{ filter.min_value.value | money | strip_html }}–{{ filter.range_max | money | strip_html }}
 
             {%- elsif filter.max_value.value != null -%}
-              {{- 0 | money -}}
+              {{- 0 | money | strip_html -}}
               –
-              {{- filter.max_value.value | money -}}
+              {{- filter.max_value.value | money | strip_html -}}
             {%- endif -%}
           {%- endif -%}
         </span>
@@ -130,7 +131,7 @@
 
         <div class="price-facet__highest-price">
           {%- assign formatted_highest_price = filter.range_max | money -%}
-          {{ 'content.price_filter' | t: price: formatted_highest_price }}
+          {{ 'content.price_filter_html' | t: price: formatted_highest_price }}
         </div>
 
         {% if filter.min_value.value != null or filter.max_value.value != null %}

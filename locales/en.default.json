@@ -67,6 +67,7 @@
     "open_image_in_full_screen": "Open image in full screen",
     "remove": "Remove",
     "remove_discount": "Remove discount {{ code }}",
+    "show_all_options": "Show all options",
     "see_items": {
       "one": "See {{ count }} item",
       "other": "See {{ count }} items"
@@ -105,13 +106,11 @@
     "load_video": "Load video: {{ description }}",
     "sold_out": "Sold out",
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} each",
+      "per_item_html": {
         "one": "{{price}} per {{count}} item",
         "other": "{{price}} per {{count}} items"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -143,7 +142,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "item"
-      }
+      },
+      "per_item_single_html": "{{price}} each",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     },
     "payment_methods": "Payment methods"
   },
@@ -229,7 +230,7 @@
     "price_from": "From {{ price }}",
     "price_regular": "Regular price",
     "price_sale": "Sale price",
-    "price_filter": "The highest price is {{ price }}",
+    "price_filter_html": "The highest price is {{ price }}",
     "product_image": "Product image",
     "product_information": "Product information",
     "product_total": "Product total",

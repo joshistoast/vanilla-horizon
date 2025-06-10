@@ -18,15 +18,13 @@
       "error_heading": "Upravte prosím následující informace:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} za každou položku",
+      "per_item_html": {
         "one": "{{price}} za {{count}} položku",
         "other": "{{price}} za tento počet položek: {{count}}",
         "few": "{{price}} za tento počet položek: {{count}}",
         "many": "{{price}} za tento počet položek: {{count}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}",
         "few": "{{price}}/{{count}} {{unit}}",
@@ -62,7 +60,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "položka"
-      }
+      },
+      "per_item_single_html": "{{price}} za každou položku",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -145,7 +145,8 @@
     "sign_in_options": "Další možnosti přihlášení",
     "sign_up": "Zaregistrovat se",
     "open_image_in_full_screen": "Otevřít obrázek na celou obrazovku",
-    "sort": "Třídit"
+    "sort": "Třídit",
+    "show_all_options": "Zobrazit všechny možnosti"
   },
   "content": {
     "reviews": "recen.",
@@ -226,7 +227,7 @@
     "price_from": "Od {{ price }}",
     "use_fewer_filters_html": "Zkuste použít méně filtrů, nebo <a class=\"{{ class }}\" href=\"{{ link }}\">vymazat všechny filtry</a>.",
     "filters": "Filtry",
-    "price_filter": "Nejvyšší cena je {{ price }}",
+    "price_filter_html": "Nejvyšší cena je {{ price }}",
     "blog_details_separator": "|",
     "account_title": "Účet",
     "account_title_personalized": "Přihlášený uživatel: {{ first_name }}",

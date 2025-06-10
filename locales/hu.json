@@ -18,13 +18,11 @@
       "error_heading": "Kérjük, helyesbítsd a következőket:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} termékenként",
+      "per_item_html": {
         "one": "{{price}}/{{count}} termék",
         "other": "{{price}}/{{count}} termék"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "termék"
-      }
+      },
+      "per_item_single_html": "{{price}} termékenként",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "További bejelentkezési lehetőségek",
     "sign_up": "Regisztráció",
     "open_image_in_full_screen": "Kép megnyitása teljes képernyőn",
-    "sort": "Rendezés"
+    "sort": "Rendezés",
+    "show_all_options": "Összes lehetőség megjelenítése"
   },
   "content": {
     "reviews": "összegzés",
@@ -212,7 +213,7 @@
     "search": "Keresés",
     "search_results_no_results_check_spelling": "Nincs találat erre: „{{ terms }}”. Ellenőrizd a helyesírást, vagy írj be egy másik szót vagy kifejezést.",
     "filters": "Szűrők",
-    "price_filter": "A legmagasabb ár {{ price }}",
+    "price_filter_html": "A legmagasabb ár {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Bővebben…",
     "wrong_password": "Hibás jelszó",

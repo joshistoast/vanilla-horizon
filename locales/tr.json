@@ -18,13 +18,11 @@
       "error_heading": "Lütfen aşağıdakileri düzenleyin:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "Her biri {{price}}",
+      "per_item_html": {
         "one": "{{count}} ürün {{price}}",
         "other": "{{count}} ürün {{price}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "ürün"
-      }
+      },
+      "per_item_single_html": "Her biri {{price}}",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "open_image_in_full_screen": "Görseli tam ekranda aç",
     "sign_in_options": "Diğer giriş yapma seçenekleri",
     "sign_up": "Kaydol",
-    "sort": "Sırala"
+    "sort": "Sırala",
+    "show_all_options": "Tüm seçenekleri göster"
   },
   "content": {
     "reviews": "değerlendirme",
@@ -211,7 +212,7 @@
     "search_results_no_results_check_spelling": "\"{{ terms }}\" için sonuç bulunamadı. Yazım hatası olmadığını doğrulayın veya farklı bir kelime ya da ifade kullanın.",
     "filters": "Filtreler",
     "no_products_found": "Ürün bulunamadı.",
-    "price_filter": "En yüksek fiyat: {{ price }}",
+    "price_filter_html": "En yüksek fiyat: {{ price }}",
     "use_fewer_filters_html": "Daha az filtre kullanmayı veya <a class=\"{{ class }}\" href=\"{{ link }}\">tüm filtreleri kaldırmayı</a> deneyin.",
     "blog_details_separator": "|",
     "read_more": "Devamını oku...",

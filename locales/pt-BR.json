@@ -18,14 +18,12 @@
       "error_heading": "Ajuste o seguinte:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} cada",
+      "per_item_html": {
         "one": "{{price}} por {{count}} item",
         "other": "{{price}} por {{count}} itens",
         "many": "{{price}} por {{count}} itens"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}",
         "many": "{{price}}/{{count}}{{unit}}"
@@ -59,7 +57,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "item"
-      }
+      },
+      "per_item_single_html": "{{price}} cada",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -99,7 +99,7 @@
     "open_cart_drawer": "Abrir carrinho de compras deslizante",
     "inventory_status": "Status do estoque",
     "pause_video": "Pausar o vídeo",
-    "find_country": "Encontrar país",
+    "find_country": "Localizar o país",
     "localization_region_and_language": "Abrir seletor de região e idioma",
     "open_search_modal": "Abrir janela modal de pesquisa"
   },
@@ -140,7 +140,8 @@
     "sign_in_options": "Outras opções de login",
     "sign_up": "Criar conta",
     "open_image_in_full_screen": "Abrir imagem em tela cheia",
-    "sort": "Classificar"
+    "sort": "Classificar",
+    "show_all_options": "Mostrar todas as opções"
   },
   "content": {
     "reviews": "avaliações",
@@ -219,7 +220,7 @@
     "price_from": "A partir de {{ price }}",
     "use_fewer_filters_html": "Tente usar menos filtros ou <a class=\"{{ class }}\" href=\"{{ link }}\">limpar tudo</a>.",
     "filters": "Filtros",
-    "price_filter": "O maior preço é {{ price }}",
+    "price_filter_html": "O maior preço é {{ price }}",
     "read_more": "Leia mais...",
     "blog_details_separator": "|",
     "account_title": "Conta",

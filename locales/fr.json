@@ -18,14 +18,12 @@
       "error_heading": "Veuillez ajuster les éléments suivants :"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} pièce",
+      "per_item_html": {
         "one": "{{price}} pour {{count}} article",
         "other": "{{price}} pour {{count}} articles",
         "many": "{{price}} pour {{count}} articles"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}",
         "many": "{{price}}/{{count}}{{unit}}"
@@ -59,7 +57,9 @@
         "yd": "yd",
         "ft2": "pi²",
         "item": "article"
-      }
+      },
+      "per_item_single_html": "{{price}} pièce",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -140,7 +140,8 @@
     "sign_up": "S’inscrire",
     "sign_in_options": "Autres options de connexion",
     "open_image_in_full_screen": "Ouvrir l’image en plein écran",
-    "sort": "Trier"
+    "sort": "Trier",
+    "show_all_options": "Afficher toutes les options"
   },
   "content": {
     "reviews": "avis",
@@ -218,7 +219,7 @@
     "use_fewer_filters_html": "Essayez d’utiliser moins de filtres, ou <a class=\"{{ class }}\" href=\"{{ link }}\">effacez tous les filtres</a>.",
     "featured_products": "Produits en vedette",
     "filters": "Filtres",
-    "price_filter": "Le prix le plus élevé est de {{ price }}",
+    "price_filter_html": "Le prix le plus élevé est de {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Lire plus...",
     "wrong_password": "Mot de passe incorrect",
@@ -256,7 +257,7 @@
     "store_owner_link_html": "Êtes-vous le propriétaire de la boutique ? <a href=\"{{ link }}\">Connectez-vous ici</a>",
     "shipping_discount_error": "Les réductions sur l’expédition sont affichées lors du paiement après avoir ajouté une adresse",
     "discount_code_error": "Le code de réduction ne peut pas être appliqué à votre panier",
-    "discount": "Remise"
+    "discount": "Réduction"
   },
   "gift_cards": {
     "issued": {

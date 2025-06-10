@@ -18,13 +18,11 @@
       "error_heading": "Mohon sesuaikan:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} setiap item",
+      "per_item_html": {
         "one": "{{price}} per {{count}} item",
         "other": "{{price}} per {{count}} item"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "kaki²",
         "item": "item"
-      }
+      },
+      "per_item_single_html": "{{price}} setiap item",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "Opsi masuk lainnya",
     "open_image_in_full_screen": "Buka gambar dalam layar penuh",
     "sign_up": "Daftar",
-    "sort": "Urutkan"
+    "sort": "Urutkan",
+    "show_all_options": "Tampilkan semua opsi"
   },
   "content": {
     "reviews": "ulasan",
@@ -212,7 +213,7 @@
     "no_products_found": "Tidak ada produk yang ditemukan.",
     "use_fewer_filters_html": "Coba kurangi filter, atau <a class=\"{{ class }}\" href=\"{{ link }}\">hapus semua filter</a>.",
     "filters": "Filter",
-    "price_filter": "Harga tertinggi adalah {{ price }}",
+    "price_filter_html": "Harga tertinggi adalah {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Baca selengkapnya...",
     "discount_code": "Kode diskon",

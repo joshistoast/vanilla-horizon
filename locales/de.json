@@ -18,13 +18,11 @@
       "error_heading": "Bitte passe Folgendes an:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} pro Stück",
+      "per_item_html": {
         "one": "{{price}} für {{count}} Artikel",
         "other": "{{price}} für {{count}} Artikel"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "Artikel"
-      }
+      },
+      "per_item_single_html": "{{price}} pro Stück",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "Andere Anmeldeoptionen",
     "sign_up": "Registrieren",
     "open_image_in_full_screen": "Bild im Vollbildmodus öffnen",
-    "sort": "Sortieren"
+    "sort": "Sortieren",
+    "show_all_options": "Alle Optionen anzeigen"
   },
   "content": {
     "reviews": "Reviews",
@@ -211,7 +212,7 @@
     "featured_products": "Vorgestellte Produkte",
     "filters": "Filter",
     "no_products_found": "Keine Produkte gefunden.",
-    "price_filter": "Der höchste Preis ist {{ price }}",
+    "price_filter_html": "Der höchste Preis ist {{ price }}",
     "use_fewer_filters_html": "Versuche, weniger Filter zu verwenden oder <a class=\"{{ class }}\" href=\"{{ link }}\">alle Filter zu löschen</a>.",
     "account_title": "Konto",
     "account_title_personalized": "Hallo {{ first_name }}",
