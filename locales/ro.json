@@ -18,14 +18,12 @@
     },
     "payment_methods": "Metode de plată",
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} fiecare articol",
+      "per_item_html": {
         "one": "{{price}} pentru {{count}} articol",
         "other": "{{price}} pentru {{count}} articole",
         "few": "{{price}} pentru {{count}} articole"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}",
         "few": "{{price}}/{{count}}{{unit}}"
@@ -59,7 +57,9 @@
         "yd": "yard",
         "ft2": "picior pătrat",
         "item": "articol"
-      }
+      },
+      "per_item_single_html": "{{price}} fiecare articol",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -140,7 +140,8 @@
     "open_image_in_full_screen": "Deschide imaginea în modul ecran complet",
     "sign_in_options": "Alte opțiuni de conectare",
     "sign_up": "Înscrie-te",
-    "sort": "Sortează"
+    "sort": "Sortează",
+    "show_all_options": "Afișează toate opțiunile"
   },
   "content": {
     "reviews": "recenzii",
@@ -220,7 +221,7 @@
     "use_fewer_filters_html": "Încearcă să folosești mai puține filtre sau <a class=\"{{ class }}\" href=\"{{ link }}\">șterge toate filtrele</a>.",
     "blog_details_separator": "|",
     "filters": "Filtre",
-    "price_filter": "Cel mai mare preț este {{ price }}",
+    "price_filter_html": "Cel mai mare preț este {{ price }}",
     "discount_code": "Cod de reducere",
     "pickup_available_at_html": "Ridicare disponibilă la <b>{{ location }}</b>",
     "pickup_available_in": "Ridicare disponibilă, {{ pickup_time }}",

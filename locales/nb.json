@@ -18,13 +18,11 @@
       "error_heading": "Juster følgende:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} hver",
+      "per_item_html": {
         "one": "{{price}} per {{count}} vare",
         "other": "{{price}} per {{count}} varer"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yard",
         "ft2": "fot²",
         "item": "vare"
-      }
+      },
+      "per_item_single_html": "{{price}} hver",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "open_image_in_full_screen": "Åpne bildet i fullskjerm",
     "sign_in_options": "Andre påloggingsalternativer",
     "sign_up": "Registrer deg",
-    "sort": "Sorter"
+    "sort": "Sorter",
+    "show_all_options": "Vis alle alternativer"
   },
   "content": {
     "reviews": "anmeldelser",
@@ -211,7 +212,7 @@
     "featured_products": "Utvalgte produkter",
     "filters": "Filtre",
     "no_products_found": "Fant ingen produkter.",
-    "price_filter": "Den høyeste prisen er {{ price }}",
+    "price_filter_html": "Den høyeste prisen er {{ price }}",
     "use_fewer_filters_html": "Prøv å bruke færre filtre eller <a class=\"{{ class }}\" href=\"{{ link }}\">tøm alle filtre</a>.",
     "blog_details_separator": "|",
     "read_more": "Les mer …",

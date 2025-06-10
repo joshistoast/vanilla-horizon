@@ -74,6 +74,28 @@ select {
   z-index: var(--layer-flat);
 }
 
+.product-card__link {
+  position: absolute;
+  inset: 0;
+}
+
+.product-card__content {
+  position: relative;
+  pointer-events: none;
+}
+
+.product-card__content :is(a, button, input, label, select, .card-gallery) {
+  pointer-events: auto;
+}
+
+.product-card__content .card-gallery {
+  cursor: pointer;
+}
+
+.product-card__content slideshow-component {
+  --cursor: pointer;
+}
+
 .predictive-search-results__card .product-card,
 .predictive-search-results__card .collection-card,
 .predictive-search-results__card .resource-card {
@@ -898,7 +920,7 @@ summary::-webkit-details-marker {
   height: fit-content;
 }
 
-.product-grid__link.product-grid__link {
+.product-grid__card.product-grid__card {
   display: flex;
   flex-flow: column nowrap;
   gap: var(--product-card-gap);
@@ -910,7 +932,7 @@ summary::-webkit-details-marker {
   overflow: hidden;
 }
 
-[product-grid-view='zoom-out'] .product-grid__link {
+[product-grid-view='zoom-out'] .product-grid__card {
   row-gap: var(--padding-xs);
 }
 
@@ -933,17 +955,17 @@ summary::-webkit-details-marker {
   }
 }
 
-.product-grid__link .group-block > * {
+.product-grid__card .group-block > * {
   @media screen and (width <= 749px) {
     flex-direction: column;
   }
 }
 
-ul[product-grid-view='zoom-out'] .product-grid__link > * {
+ul[product-grid-view='zoom-out'] .product-grid__card > * {
   display: none;
 }
 
-ul[product-grid-view='zoom-out'] .product-grid__link .card-gallery {
+ul[product-grid-view='zoom-out'] .product-grid__card .card-gallery {
   display: block;
 }
 
@@ -1946,7 +1968,8 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
 }
 
 @media screen and (width >= 750px) {
-  .sticky-content--desktop {
+  .sticky-content--desktop,
+  .sticky-content--desktop.full-height--desktop > .group-block {
     position: sticky;
     top: var(--sticky-header-offset, 0);
     z-index: var(--layer-flat);
@@ -4048,7 +4071,7 @@ text-component {
 }
 
 /* Product card title truncation - applied only to zoom-out view */
-[product-grid-view='zoom-out'] :is(.product-card, .product-grid__link) :is(h4, .h4) {
+[product-grid-view='zoom-out'] :is(.product-card, .product-grid__card) :is(h4, .h4) {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -4058,7 +4081,7 @@ text-component {
 
 /* Product card title truncation - applied on mobile regardless of view */
 @media screen and (width < 750px) {
-  :is(.product-card, .product-grid__link) :is(h4, .h4) {
+  :is(.product-card, .product-grid__card) :is(h4, .h4) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;

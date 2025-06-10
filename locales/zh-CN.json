@@ -18,13 +18,11 @@
       "error_heading": "请调整以下内容："
     },
     "unit_price": {
-      "per_item": {
-        "single": "单价为 {{price}}",
+      "per_item_html": {
         "one": "{{count}} 件商品为 {{price}}",
         "other": "{{count}} 件商品为 {{price}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "码",
         "ft2": "平均英尺",
         "item": "商品"
-      }
+      },
+      "per_item_single_html": "单价为 {{price}}",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "其他登录选项",
     "sign_up": "注册",
     "open_image_in_full_screen": "全屏打开图片",
-    "sort": "排序"
+    "sort": "排序",
+    "show_all_options": "显示所有选项"
   },
   "content": {
     "reviews": "评价",
@@ -212,7 +213,7 @@
     "price_from": "{{ price }} 起",
     "use_fewer_filters_html": "尝试减少使用的筛选条件数量，或<a class=\"{{ class }}\" href=\"{{ link }}\">清除所有筛选条件</a>。",
     "filters": "筛选条件",
-    "price_filter": "最高价格为 {{ price }}",
+    "price_filter_html": "最高价格为 {{ price }}",
     "blog_details_separator": "|",
     "read_more": "阅读详细内容…",
     "account_title": "账户",

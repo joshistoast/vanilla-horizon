@@ -648,7 +648,9 @@ class FacetStatusComponent extends Component {
    * @returns {string} The formatted money value
    */
   #formatMoney(moneyValue) {
-    const template = this.refs.facetStatus.dataset.moneyFormat || '{{amount}}';
+    if (!(this.refs.moneyFormat instanceof HTMLTemplateElement)) return '';
+
+    const template = this.refs.moneyFormat.content.textContent || '{{amount}}';
     const currency = this.refs.facetStatus.dataset.currency || '';
 
     return template.replace(/{{\s*(\w+)\s*}}/g, (_, placeholder) => {

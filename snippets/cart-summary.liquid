@@ -1,5 +1,3 @@
-
-
 <div class="cart__summary-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart__original-total-container cart-primary-typography">
@@ -60,7 +58,7 @@
       <span class="cart__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
       <text-component
         ref="cartTotal"
-        value="{{ total_price }}"
+        value="{{ total_price | strip_html }}"
         class="cart__total-value cart-secondary-typography"
         {% comment %} Used by payment_terms web component {% endcomment %}
         data-cart-subtotal

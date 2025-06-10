@@ -18,14 +18,12 @@
       "error_heading": "Correggi gli errori seguenti:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} per ciascun articolo",
+      "per_item_html": {
         "one": "{{price}} per {{count}} articolo",
         "other": "{{price}} per {{count}} articoli",
         "many": "{{price}} per {{count}} articoli"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}",
         "many": "{{price}}/{{count}}{{unit}}"
@@ -59,7 +57,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "articolo"
-      }
+      },
+      "per_item_single_html": "{{price}} per ciascun articolo",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -140,7 +140,8 @@
     "sign_in_options": "Altre opzioni di accesso",
     "sign_up": "Iscriviti",
     "open_image_in_full_screen": "Apri immagine a schermo intero",
-    "sort": "Ordina"
+    "sort": "Ordina",
+    "show_all_options": "Mostra tutte le opzioni"
   },
   "content": {
     "reviews": "recensioni",
@@ -219,7 +220,7 @@
     "price_from": "Da {{ price }}",
     "use_fewer_filters_html": "Prova a usare meno filtri oppure <a class=\"{{ class }}\" href=\"{{ link }}\">cancella tutti i filtri</a>.",
     "filters": "Filtri",
-    "price_filter": "Il prezzo più alto è {{ price }}",
+    "price_filter_html": "Il prezzo più alto è {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Maggiori informazioni...",
     "account_title": "Account",

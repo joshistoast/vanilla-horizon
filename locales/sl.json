@@ -18,15 +18,13 @@
       "error_heading": "Prilagodite naslednje:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "Cena za posamezen artikel {{price}}",
+      "per_item_html": {
         "one": "{{price}} za {{count}} artikel",
         "other": "{{price}} za toliko artiklov: {{count}}",
         "few": "{{price}} za toliko artiklov: {{count}}",
         "two": "{{price}} za toliko artiklov: {{count}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}",
         "few": "{{price}}/{{count}}{{unit}}",
@@ -62,7 +60,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "artikel"
-      }
+      },
+      "per_item_single_html": "Cena za posamezen artikel {{price}}",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -145,7 +145,8 @@
     "sign_in_options": "Druge možnosti za vpis",
     "sign_up": "Prijava",
     "open_image_in_full_screen": "Odpri sliko v celozaslonskem načinu",
-    "sort": "Razvrsti"
+    "sort": "Razvrsti",
+    "show_all_options": "Prikaži vse možnosti"
   },
   "content": {
     "reviews": "ocen.",
@@ -225,7 +226,7 @@
     "search_results_no_results_check_spelling": "Za »{{ terms }}« ni bilo mogoče najti nobenega rezultata. Preverite črkovanje ali uporabite drugo besedo ali frazo.",
     "filters": "Filtri",
     "no_products_found": "Nobenega izdelka ni bilo mogoče najti.",
-    "price_filter": "Najvišja cena je {{ price }}",
+    "price_filter_html": "Najvišja cena je {{ price }}",
     "use_fewer_filters_html": "Poskusite uporabiti manj filtrov ali <a class=\"{{ class }}\" href=\"{{ link }}\">počistite vse filtre</a>.",
     "blog_details_separator": "|",
     "read_more": "Več o tem",

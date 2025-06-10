@@ -18,13 +18,11 @@
       "error_heading": "Vui lòng điều chỉnh các mục sau:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} mỗi mặt hàng",
+      "per_item_html": {
         "one": "{{price}} mỗi {{count}} mặt hàng",
         "other": "{{price}} mỗi {{count}} mặt hàng"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "mặt hàng"
-      }
+      },
+      "per_item_single_html": "{{price}} mỗi mặt hàng",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "Các tùy chọn đăng nhập khác",
     "sign_up": "Đăng ký",
     "open_image_in_full_screen": "Mở hình ảnh ở chế độ toàn màn hình",
-    "sort": "Sắp xếp"
+    "sort": "Sắp xếp",
+    "show_all_options": "Hiển thị tất cả tùy chọn"
   },
   "content": {
     "reviews": "đánh giá",
@@ -211,7 +212,7 @@
     "search_results_no_results_check_spelling": "Không tìm thấy kết quả cho \"{{ terms }}\". Hãy kiểm tra chính tả hoặc sử dụng một từ hoặc cụm từ khác.",
     "filters": "Bộ lọc",
     "no_products_found": "Không tìm thấy sản phẩm nào.",
-    "price_filter": "Giá cao nhất là {{ price }}",
+    "price_filter_html": "Giá cao nhất là {{ price }}",
     "use_fewer_filters_html": "Hãy thử sử dụng ít bộ lọc hơn hoặc <a class=\"{{ class }}\" href=\"{{ link }}\">xóa tất cả bộ lọc</a>.",
     "blog_details_separator": "|",
     "account_title": "Tài khoản",

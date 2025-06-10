@@ -128,7 +128,7 @@
     }
   }
 
-  .collection-wrapper:has(.facets--vertical) .main-collection-grid {
+  .collection-wrapper:has(.facets--vertical) .facets-block-wrapper--vertical:not(.hidden) ~ .main-collection-grid {
     @media screen and (width >= 750px) {
       grid-column: var(--facets-vertical-col-width) / var(--full-width-column-number);
     }

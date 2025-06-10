@@ -1,5 +1,3 @@
-
-
 <script
   src="{{ 'component-cart-items.js' | asset_url }}"
   type="module"
@@ -293,7 +291,7 @@
                       assign unit_price = item.unit_price | money
                     endif
                   -%}
-                  <text-component value="{{ price }}">{{ price }}</text-component>
+                  <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
                   {%- if item.variant.available and item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', variant: item.variant, price: unit_price %}

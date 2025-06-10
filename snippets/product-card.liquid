@@ -33,9 +33,13 @@
   assign product_card_gap_value = product_card_gap | default: block.settings.product_card_gap
 
   if settings.transition_to_main_product
-    assign featured_media_url = product.selected_or_first_available_variant.featured_image | image_url: width: 500
-    if featured_media_url == blank
-      assign featured_media_url = product.featured_media.preview_image | image_url: width: 500
+    assign featured_image = product.selected_or_first_available_variant.featured_image
+    if featured_image == blank
+      assign featured_image = product.featured_media.preview_image
+    endif
+
+    if featured_image != blank
+      assign featured_media_url = featured_image | image_url: width: 500
     endif
   endif
 
@@ -54,6 +58,7 @@
 {%- endif -%}
 <product-card
   class="product-card"
+  data-product-id="{{ product.id }}"
   data-product-variants-size="{{ product.variants.size }}"
   id="product-card-{{ block.id }}"
   data-product-transition="{{ settings.transition_to_main_product }}"
@@ -65,11 +70,19 @@
       href="{{ product.selected_or_first_available_variant.url }}"
       on:click="/navigateToProduct"
     {% endunless %}
+    class="product-card__link"
+    ref="productCardLink"
+  >
+    <span class="visually-hidden">
+      {{ product.title }}
+    </span>
+  </a>
+  <div
     class="
+      product-card__content
       layout-panel-flex
       layout-panel-flex--column
-      product-card__link
-      product-grid__link
+      product-grid__card
       spacing-style
       border-style
       gap-style
@@ -87,10 +100,9 @@
       {% if block.settings.padding-block-start > 0 %}--zoom-out-padding-block-start: min(var(--padding-xs), {{ block.settings.padding-block-start | times: 0.7}}px);{% endif %}
       {% if block.settings.padding-block-end > 0 %}--zoom-out-padding-block-end: min(var(--padding-xs), {{ block.settings.padding-block-end | times: 0.7}}px);{% endif %}
     "
-    ref="productCardLink"
   >
     {{ children }}
-  </a>
+  </div>
 </product-card>
 {%- if settings.transition_to_main_product -%}
   </product-card-link>

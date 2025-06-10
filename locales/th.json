@@ -18,15 +18,13 @@
       "error_heading": "โปรดแก้ไขข้อมูลดังต่อไปนี้"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} ต่อรายการ",
+      "per_item_html": {
         "one": "{{price}} ต่อ {{count}} รายการ",
         "other": "{{price}} ต่อ {{count}} รายการ"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
-        "one": "{{price}}/{{count}}{{unit}}",
-        "other": "{{price}}/{{count}}{{unit}}"
+      "per_unit_html": {
+        "one": "{{price}}/{{count}} {{unit}}",
+        "other": "{{price}}/{{count}} {{unit}}"
       },
       "per_unit_accessibility": {
         "single": "{{price}} ต่อ {{unit}}",
@@ -56,7 +54,9 @@
         "yd": "หลา",
         "ft2": "ตร.ฟุต",
         "item": "รายการ"
-      }
+      },
+      "per_item_single_html": "{{price}} ต่อรายการ",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "ตัวเลือกอื่นๆ ในการลงชื่อเข้าใช้",
     "sign_up": "ลงทะเบียน",
     "open_image_in_full_screen": "เปิดรูปภาพแบบเต็มหน้าจอ",
-    "sort": "จัดเรียง"
+    "sort": "จัดเรียง",
+    "show_all_options": "แสดงตัวเลือกทั้งหมด"
   },
   "content": {
     "reviews": "รีวิว",
@@ -212,7 +213,7 @@
     "search": "การค้นหา",
     "search_results_no_results_check_spelling": "ไม่พบผลลัพธ์สำหรับ “{{ terms }}” ตรวจสอบการสะกดคำหรือลองค้นหาคำหรือประโยคอื่น",
     "filters": "ตัวกรอง",
-    "price_filter": "ราคาสูงสุดคือ {{ price }}",
+    "price_filter_html": "ราคาสูงสุดคือ {{ price }}",
     "blog_details_separator": "|",
     "discount_code": "รหัสส่วนลด",
     "pickup_available_at_html": "รับสินค้าได้ที่ <b>{{ location }}</b>",

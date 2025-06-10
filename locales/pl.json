@@ -18,15 +18,13 @@
       "error_heading": "Dostosuj następujące dane:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} za szt.",
+      "per_item_html": {
         "one": "{{price}} za {{count}} szt.",
         "other": "{{price}} za {{count}} szt.",
         "few": "{{price}} za {{count}} szt.",
         "many": "{{price}} za {{count}} szt."
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}} {{unit}}",
         "other": "{{price}}/{{count}} {{unit}}",
         "few": "{{price}}/{{count}} {{unit}}",
@@ -62,7 +60,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "szt."
-      }
+      },
+      "per_item_single_html": "{{price}} za szt.",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -145,7 +145,8 @@
     "open_image_in_full_screen": "Otwórz obraz w trybie pełnoekranowym",
     "sign_in_options": "Inne opcje logowania",
     "sign_up": "Zarejestruj się",
-    "sort": "Sortuj"
+    "sort": "Sortuj",
+    "show_all_options": "Pokaż wszystkie opcje"
   },
   "content": {
     "reviews": "recenzje",
@@ -162,7 +163,7 @@
     "seller_note": "Specjalne instrukcje",
     "cart_subtotal": "Suma częściowa",
     "discounts": "Rabaty",
-    "discount": "Zniżka",
+    "discount": "Rabat",
     "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "Z wliczonymi cłami i podatkami. Obliczenie rabatów i <a href=\"{{ link }}\">wysyłki</a> przy realizacji zakupu.",
     "duties_and_taxes_included_shipping_at_checkout_without_policy": "Z wliczonymi cłami i podatkami. Obliczenie rabatów i wysyłki przy realizacji zakupu.",
     "taxes_included_shipping_at_checkout_with_policy_html": "Z wliczonymi podatkami. Obliczenie rabatów i <a href=\"{{ link }}\">wysyłki</a> przy realizacji zakupu.",
@@ -225,7 +226,7 @@
     "price_from": "Od {{ price }}",
     "filters": "Filtry",
     "no_products_found": "Nie znaleziono produktów.",
-    "price_filter": "Najwyższa cena to {{ price }}",
+    "price_filter_html": "Najwyższa cena to {{ price }}",
     "use_fewer_filters_html": "Spróbuj użyć mniej filtrów lub <a class=\"{{ class }}\" href=\"{{ link }}\">wyczyść wszystkie filtry</a>.",
     "blog_details_separator": "|",
     "account_title": "Konto",

@@ -120,6 +120,7 @@ class CartItemsComponent extends Component {
       line: line,
       quantity: quantity,
       sections: Array.from(sectionsToUpdate).join(','),
+      sections_url: window.location.pathname,
     });
 
     cartTotal?.shimmer();

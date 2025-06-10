@@ -18,13 +18,11 @@
       "error_heading": "Juster følgende:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} pr. stk.",
+      "per_item_html": {
         "one": "{{price}} pr. {{count}} vare",
         "other": "{{price}} pr. {{count}} varer"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "fod²",
         "item": "vare"
-      }
+      },
+      "per_item_single_html": "{{price}} pr. stk.",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_up": "Tilmeld dig",
     "open_image_in_full_screen": "Åbn billede i fuld skærm",
     "sign_in_options": "Andre muligheder for at logge ind",
-    "sort": "Sortér"
+    "sort": "Sortér",
+    "show_all_options": "Vis alle muligheder"
   },
   "content": {
     "reviews": "anmeldelser",
@@ -209,7 +210,7 @@
     "search_results_no_results_check_spelling": "Der blev ikke fundet nogen resultater for “{{ terms }}”. Kontrollér stavemåden, eller brug et andet ord eller udtryk.",
     "filters": "Filtre",
     "price_from": "Fra {{ price }}",
-    "price_filter": "Den højeste pris er {{ price }}",
+    "price_filter_html": "Den højeste pris er {{ price }}",
     "featured_products": "Udvalgte produkter",
     "no_products_found": "Der blev ikke fundet nogen produkter.",
     "use_fewer_filters_html": "Prøv at bruge færre filtre, eller <a class=\"{{ class }}\" href=\"{{ link }}\">ryd alle filtre</a>.",

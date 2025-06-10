@@ -18,14 +18,12 @@
       "error_heading": "Prilagodite sljedeće:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} svaki",
+      "per_item_html": {
         "one": "{{price}} za sljedeći broj artikala: {{count}}",
         "other": "{{price}} za sljedeći broj artikala: {{count}}",
         "few": "{{price}} za sljedeći broj artikala: {{count}}"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}{{count}}{{unit}}",
         "other": "{{price}}{{count}}{{unit}}",
         "few": "{{price}}{{count}}{{unit}}"
@@ -59,7 +57,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "artikl"
-      }
+      },
+      "per_item_single_html": "{{price}} svaki",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -140,7 +140,8 @@
     "sign_in_options": "Druge mogućnosti prijave",
     "sign_up": "Registrirajte se",
     "open_image_in_full_screen": "Otvori sliku preko cijelog zaslona",
-    "sort": "Razvrstaj"
+    "sort": "Razvrstaj",
+    "show_all_options": "Prikaži sve opcije"
   },
   "content": {
     "reviews": "recenzije",
@@ -219,7 +220,7 @@
     "price_from": "Od {{ price }}",
     "use_fewer_filters_html": "Pokušaje upotrijebiti manje filtara ili <a class=\"{{ class }}\" href=\"{{ link }}\">očistite sve filtere</a>.",
     "filters": "Filtri",
-    "price_filter": "Najveća cijena iznosi {{ price }}",
+    "price_filter_html": "Najveća cijena iznosi {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Pročitajte više...",
     "account_title": "Račun",

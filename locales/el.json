@@ -18,13 +18,11 @@
       "error_heading": "Προσαρμόστε τα παρακάτω:"
     },
     "unit_price": {
-      "per_item": {
-        "single": "{{price}} το καθένα",
+      "per_item_html": {
         "one": "{{price}} ανά {{count}} προϊόν",
         "other": "{{price}} από {{count}} στοιχεία"
       },
-      "per_unit": {
-        "single": "{{price}}/{{unit}}",
+      "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
         "other": "{{price}}/{{count}}{{unit}}"
       },
@@ -56,7 +54,9 @@
         "yd": "yd",
         "ft2": "ft²",
         "item": "στοιχείο"
-      }
+      },
+      "per_item_single_html": "{{price}} το καθένα",
+      "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
   "accessibility": {
@@ -135,7 +135,8 @@
     "sign_in_options": "Άλλες επιλογές σύνδεσης",
     "sign_up": "Εγγραφή",
     "open_image_in_full_screen": "Άνοιγμα εικόνας σε πλήρη οθόνη",
-    "sort": "Ταξινόμηση"
+    "sort": "Ταξινόμηση",
+    "show_all_options": "Εμφάνιση όλων των επιλογών"
   },
   "content": {
     "reviews": "κριτικές",
@@ -212,7 +213,7 @@
     "no_products_found": "Δεν βρέθηκαν προϊόντα.",
     "use_fewer_filters_html": "Δοκιμάστε να χρησιμοποιήσετε λιγότερα φίλτρα ή <a class=\"{{ class }}\" href=\"{{ link }}\">καταργήστε όλα τα φίλτρα</a>.",
     "filters": "Φίλτρα",
-    "price_filter": "Η υψηλότερη τιμή είναι {{ price }}",
+    "price_filter_html": "Η υψηλότερη τιμή είναι {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Διαβάστε περισσότερα...",
     "wrong_password": "Λανθασμένος κωδικός πρόσβασης",

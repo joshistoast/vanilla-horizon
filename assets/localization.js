@@ -115,6 +115,8 @@ class LocalizationFormComponent extends Component {
   resizeLanguageInput() {
     const { languageInput } = this.refs;
 
+    if (!languageInput) return;
+
     // Hide all options except the selected option
     for (const option of languageInput.options) {
       if (!option.selected) {
@@ -371,6 +373,8 @@ class LocalizationFormComponent extends Component {
    */
   resetForm() {
     const { search } = this.refs;
+
+    if (!search) return;
 
     if (search.value != '') {
       search.value = '';
