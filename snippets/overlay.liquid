@@ -1,8 +1,12 @@
-{% comment %}
-  Renders a full bleed overay
-  @param {object} settings - Block or Section settings, expects `overlay_color`, `overlay_style`, `gradient_direction`
-  @param {string} layer - The z-index layer to place the overlay on, defaults to var(--layer-flat)
-{% endcomment %}
+{%- doc -%}
+  Renders a full-bleed overlay.
+
+  @param {object} settings - Block or section settings, expecting `overlay_color`, `overlay_style`, and `gradient_direction`.
+  @param {string} [layer] - The z-index layer for the overlay, defaults to `var(--layer-flat)`.
+
+  @example
+  {% render 'overlay', settings: section.settings, layer: 'var(--layer-raised)' %}
+{%- enddoc -%}
 
 <div
   class="overlay overlay--{{ settings.overlay_style | default: 'gradient' }}"

@@ -1,17 +1,16 @@
-{% comment %}
-  Accepts:
-  - tag: @string - The tag to use
-  - attributes: @string - Additional attributes to add to the tag
-{% endcomment %}
+{%- doc -%}
+  Renders an account button.
+
+  @param {string} [tag] - The tag to use
+  @param {string} [attributes] - Additional attributes to add to the tag
+{%- enddoc -%}
 
 {%- assign tag = tag | default: 'button' -%}
 <{{ tag }}
   class="account-button header-actions__action"
+  aria-label="{{ 'accessibility.account' | t }}"
   {{ attributes }}
 >
-  <span class="visually-hidden">
-    {{ 'accessibility.account' | t }}
-  </span>
   {%- if customer.has_avatar? -%}
     {{ customer | avatar }}
   {%- elsif customer.first_name or customer.email -%}

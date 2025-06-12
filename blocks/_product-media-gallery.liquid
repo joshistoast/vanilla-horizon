@@ -173,7 +173,6 @@
           thumbnails: sorted_media,
           controls_on_media: controls_on_media,
           pagination_position: pagination_position,
-          default_slide_index: 1,
           aspect_ratio: block.settings.aspect_ratio
         -%}
       {% endif %}
@@ -185,7 +184,6 @@
           item_count: sorted_media.size,
           controls_on_media: true,
           pagination_position: 'center',
-          default_slide_index: 1
         -%}
       {% endif %}
     {% endcapture %}

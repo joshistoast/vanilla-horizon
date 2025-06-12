@@ -97,7 +97,9 @@
     "pause_video": "หยุดวิดีโอชั่วคราว",
     "find_country": "ค้นหาประเทศ",
     "localization_region_and_language": "เปิดตัวเลือกภูมิภาคและภาษา",
-    "open_search_modal": "เปิดโมดอลค้นหา"
+    "open_search_modal": "เปิดโมดอลค้นหา",
+    "decrease_quantity": "ลดจำนวน",
+    "increase_quantity": "เพิ่มจำนวน"
   },
   "actions": {
     "add_to_cart": "เพิ่มลงในตะกร้าสินค้า",

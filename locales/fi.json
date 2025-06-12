@@ -19,12 +19,12 @@
     },
     "unit_price": {
       "per_item_html": {
-        "one": "{{price}} per {{count}} tuote",
-        "other": "{{price}} per {{count}} tuotetta"
+        "one": "{{price}} / {{count}} tuote",
+        "other": "{{price}} / {{count}} tuotetta"
       },
       "per_unit_html": {
-        "one": "{{price}}/{{count}} {{unit}}",
-        "other": "{{price}}/{{count}} {{unit}}"
+        "one": "{{price}} / {{count}} {{unit}}",
+        "other": "{{price}} / {{count}} {{unit}}"
       },
       "per_unit_accessibility": {
         "single": "{{price}} per {{unit}}",
@@ -55,7 +55,7 @@
         "ft2": "ft²",
         "item": "tuote"
       },
-      "per_item_single_html": "{{price}} per tuote",
+      "per_item_single_html": "{{price}} / tuote",
       "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
@@ -82,7 +82,7 @@
       "one": "{{ count }} suodatin käytössä",
       "other": "{{ count }} suodatinta käytössä"
     },
-    "account": "Avaa tilin pudotusvalikko",
+    "account": "Avaa tilimenu",
     "cart": "Ostoskori",
     "cart_count": "Tuotteita ostoskorissa yhteensä",
     "menu": "Valikko",
@@ -92,12 +92,14 @@
     "loading_product_recommendations": "Tuotesuositusten lataaminen",
     "discount": "Käytä alennuskoodia",
     "discount_applied": "Käytetty alennuskoodi: {{ code }}",
-    "open_cart_drawer": "Avaa veto-ostoskori",
+    "open_cart_drawer": "Avaa ostoskori",
     "inventory_status": "Varaston tila",
     "pause_video": "Keskeytä video",
     "find_country": "Etsi maa",
     "localization_region_and_language": "Avaa alueen ja kielen valitsin",
-    "open_search_modal": "Avaa modaalinen hakuikkuna"
+    "open_search_modal": "Avaa modaalinen hakuikkuna",
+    "decrease_quantity": "Vähennä määrää",
+    "increase_quantity": "Lisää määrää"
   },
   "actions": {
     "add_to_cart": "Lisää ostoskoriin",

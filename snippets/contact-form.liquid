@@ -1,11 +1,12 @@
-{% comment %}
+{%- doc -%}
   Renders a contact form with name, email, phone, and comment fields.
 
-  Accepts:
+  @param {object} settings - Block settings, required for the 'spacing-style' and 'size-style' snippets.
+  @param {string} submit_button - HTML for the submit button, rendered via a `content_for` block.
 
-  @param {object} settings - Settings for 'spacing-style' and 'size-style' snippets in the contact form.
-  @param {string} submit_button - HTML for the submit button (rendered via content_for block)
-{% endcomment %}
+  @example
+  {% render 'contact-form', settings: block.settings, submit_button: content_for_submit_button %}
+{%- enddoc -%}
 
 <div
   class="

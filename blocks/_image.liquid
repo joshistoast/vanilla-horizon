@@ -1,10 +1,10 @@
 
 
-{% doc %}
+{%- doc -%}
   Renders an image block.
 
   @param {string} [loading] - The html loading attribute
-{% enddoc %}
+{%- enddoc -%}
 
 {% assign image = block.settings.image
   | default: closest.collection.featured_image

@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders a card for displaying various resource types (products, collections, articles, pages).
 
   @param {object} resource - The product or collection resource to render
@@ -8,7 +8,7 @@
   @param {number} [image_width] - The width of the image
   @param {string} [image_aspect_ratio] - The aspect ratio to display the image. Defaults to image's natural ratio
   @param {boolean} [image_hover] - Whether to show a secondary image on hover and focus
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   if image_aspect_ratio == blank or image_aspect_ratio == 'adapt'

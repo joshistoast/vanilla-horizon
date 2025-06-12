@@ -1,10 +1,12 @@
-{% comment %}
-  This snippet is used to render the unit price along with the measurement of a variant
+{%- doc -%}
+  Renders the unit price for a variant, including its measurement.
 
-  Accepts:
-  - variant: {Object} Variant Liquid object
-  - price: {String} Unit's price to display
-{% endcomment %}
+  @param {object} variant - The variant object.
+  @param {string} price - The unit price to display.
+
+  @example
+  {% render 'unit-price', variant: variant, price: price %}
+{%- enddoc -%}
 <small class="unit-price">
   <span class="visually-hidden">{{ 'accessibility.unit_price' | t }}</span>
   {%- liquid

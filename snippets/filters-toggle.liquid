@@ -1,15 +1,14 @@
-{% doc %}
+{%- doc -%}
   Renders the sorting component.
 
   @param {boolean} enable_filtering - Whether to enable filtering
   @param {number} padding-block-start - The padding-block-start value
   @param {number} padding-block-end - The padding-block-end value
   @param {number} total_active_values - The total number of active values
-  @param {object} block - The block object
   @param {string} section_id - The section ID
   @param {object} results - The results of the search
   @param {string} sort_by - The current sort by
-{% enddoc %}
+{%- enddoc -%}
 
 <div
   class="facets-toggle{% if block.settings.enable_filtering == false %} facets-toggle--no-filters{% endif %}"

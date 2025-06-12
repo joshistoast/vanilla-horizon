@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   This snippet is used to render a product card.
   It is used in the product block, featured product block, and the product card block.
   The product object is null or when placeholders are rendered.
@@ -7,7 +7,7 @@
   @param {object} children - The children of the product card
   @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
-{% enddoc %}
+{%- enddoc -%}
 
 {% style %}
   {% if request.visual_preview_mode %}

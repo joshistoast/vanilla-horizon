@@ -1,10 +1,10 @@
-{% doc %}
+{%- doc -%}
   Renders a quick add component.
 
   @param {object} product - The product object
   @param {string} section_id - The section ID
   @param {object} [block] - The block object
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id

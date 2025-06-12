@@ -1,16 +1,19 @@
-{% comment %}
-  Renders a product media
+{%- doc -%}
+  Renders a product media component.
 
-  Accepts:
-  - media: {Object} Product Media object
-  - preview_image_only: {Boolean} Whether the media is being rendered as an image preview without any control tools
-  - widths: {String} The widths to use for the Liquid image tag filter, e.g. image_tag: widths: widths
-  - sizes: {String} The sizes to use for the Liquid image tag filter, e.g. image_tag: sizes: sizes
-  - loading: {String} The loading to use for the Liquid image tag filter, e.g. image_tag: loading: loading
+  @param {object} media - The product media object.
+  @param {boolean} [preview_image_only] - Renders only the preview image without controls.
+  @param {string} [widths] - Image widths for responsive images.
+  @param {string} [sizes] - Image sizes for responsive images.
+  @param {string} [loading] - The loading attribute for the image.
+  @param {object} [block] - The block object.
+  @param {object} [section] - The section object.
+  @param {object} [selected_product] - The currently selected product.
+  @param {boolean} [first_3d_model] - Indicates if this is the first 3D model.
 
-  Usage:
-  {%- render 'product-media', media: media -%}
-{% endcomment %}
+  @example
+  {% render 'product-media', media: media, preview_image_only: false, loading: 'lazy' %}
+{%- enddoc -%}
 
 {% liquid
   assign widths = widths | default: '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'

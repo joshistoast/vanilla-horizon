@@ -101,7 +101,9 @@
     "pause_video": "Metti video in pausa",
     "find_country": "Trova paese",
     "localization_region_and_language": "Apri selettore dell'area geografica e della lingua",
-    "open_search_modal": "Apri modale di ricerca"
+    "open_search_modal": "Apri modale di ricerca",
+    "decrease_quantity": "Diminuisci quantità",
+    "increase_quantity": "Aumenta quantità"
   },
   "actions": {
     "add_to_cart": "Aggiungi al carrello",

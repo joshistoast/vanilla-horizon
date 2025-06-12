@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders the <img> element using provided image object
 
   @param {object} image - image object
@@ -10,7 +10,7 @@
 
   @example
   {% render 'image', image: product.featured_image, height: 300, class: 'product-image' %}
-{% enddoc %}
+{%- enddoc -%}
 {% if image != blank %}
   {% assign image_height = height | default: image.height %}
   {% assign image_height_2x = height | default: image_height | times: 2 %}

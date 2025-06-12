@@ -1,12 +1,14 @@
-{% comment %}
-  Usage:
-  {%- render 'slideshow-arrow', action: 'previous' -%}
+{%- doc -%}
+  Renders a slideshow arrow control
 
-  Accepts:
-  - icon_style: {String} 'arrow' | 'chevron' (optional) -- the style of the icon, defaults to 'arrow'
-  - icon_size: {String} 'small' | 'medium' | 'large' (optional) -- the size of the icon, defaults to 'medium'
-  - icon_shape: {String} 'circle' | 'square' (optional) -- the shape of the control, defaults to 'none'
-{% endcomment %}
+  @param {string} action - { 'previous' | 'next' } The action to perform when the arrow is clicked.
+  @param {string} [icon_style] - { 'arrow' | 'chevron' } The style of the icon, defaults to 'arrow'.
+  @param {string} [icon_size] - { 'small' | 'medium' | 'large' } The size of the icon, defaults to 'medium'.
+  @param {string} [icon_shape] - { 'circle' | 'square' } The shape of the control, defaults to 'none'.
+
+  @example
+  {%- render 'slideshow-arrow', action: 'previous' -%}
+{%- enddoc -%}
 
 {%- liquid
   assign icon_name = 'arrow'

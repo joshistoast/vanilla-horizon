@@ -1,4 +1,12 @@
+{%- doc -%}
+  Renders product badges for the product card.
 
+  @param {object} product - The product object.
+  @param {object} settings - The theme settings object.
+
+  @example
+  {% render 'product-card-badges', product: product, settings: settings %}
+{%- enddoc -%}
 
 <div
   class="product-badges product-badges--{{ settings.badge_position }}"

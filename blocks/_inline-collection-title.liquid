@@ -1,7 +1,7 @@
 
-{% doc %}
+{%- doc -%}
   @param {string} [suffix] - The suffix to add to the collection title
-{% enddoc %}
+{%- enddoc -%}
 
 {% if block.settings.collection == blank and request.design_mode %}
   {% assign collection_title = 'placeholders.collection_title' | t %}

@@ -1,12 +1,15 @@
-{% comment %}
-  Renders the predictive search input and results
+{%- doc -%}
+  Renders the predictive search input and results.
 
-  Accepts:
-  - class: @string - additional classes to add to the component
-  - search_style: @string - Handles "popover" or "inline"
-  - search_position: @string - lateral position of the predictive search component in the header. Handles "left" and "right"
-  - search_test_id: @string - a playwright test id, used to differentiate search components in the header vs drawer
-{% endcomment %}
+  @param {string} [class] - Additional classes to add to the component.
+  @param {string} [search_position] - Lateral position of the search component in the header ('left' or 'right').
+  @param {string} [search_test_id] - A Playwright test ID for differentiating search components.
+  @param {string} [input_id] - The ID for the search input element.
+  @param {string} [products_test_id] - A Playwright test ID for differentiating products.
+
+  @example
+  {% render 'predictive-search', search_position: 'left', search_test_id: 'header-search' %}
+{%- enddoc -%}
 
 <script
   src="{{ 'predictive-search.js' | asset_url }}"

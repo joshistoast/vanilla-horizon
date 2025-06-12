@@ -1,15 +1,18 @@
-{% comment %}
+{%- doc -%}
   Renders mega menu list markup and optional featured content.
 
-  Accepts:
-  - parent_link {linklist}: The linklist to render
-  - id {string}: Unique ID to assign ul in markup
-  - grid_columns_count {number}: Number of grid columns to display in the mega menu
-  - grid_columns_count_collection_images {number}: Number of grid columns to display in the mega menu when menu_content_type is 'collection_images'
-  - menu_content_type {string}: The type of content to render, options: ['featured_products', 'featured_collections', 'collection_images', 'text'] (default: 'text')
-  - content_aspect_ratio {number}: The aspect ratio to display the content images if applicable (optional)
-  - image_border_radius {number}: The border radius used for the content images (optional)
-{% endcomment %}
+  @param {object} parent_link - The linklist to render.
+  @param {string} id - Unique ID to assign to the `<ul>` element.
+  @param {number} [grid_columns_count] - Number of grid columns for the mega menu.
+  @param {number} [grid_columns_count_tablet] - Number of grid columns for the mega menu on tablets.
+  @param {number} [grid_columns_count_collection_images] - Number of grid columns when `menu_content_type` is 'collection_images'.
+  @param {string} [menu_content_type] - Type of content: 'featured_products', 'featured_collections', 'collection_images', or 'text'.
+  @param {number} [content_aspect_ratio] - Aspect ratio for content images.
+  @param {number} [image_border_radius] - Border radius for content images.
+
+  @example
+  {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
+{%- enddoc -%}
 
 {% liquid
   comment

@@ -1,12 +1,15 @@
-{% comment %}
-  Renders block content for all blocks that extends the group block.
+{%- doc -%}
+  Renders block content for all blocks that extend the group block.
 
-  @param {object} children - The DOM content of the group block
-  @param {object} settings - The settings of the group block
-  @param {string} shopify_attributes - String with shopify attributes for the editor
-  @param {string} [class] - Custom classes of the group block
-  @param {string} [style] - Custom inline styles of the group block
-{% endcomment %}
+  @param {string} children - The DOM content of the group block.
+  @param {object} settings - The settings of the group block.
+  @param {string} shopify_attributes - String with Shopify attributes for the editor.
+  @param {string} [class] - Custom classes for the group block.
+  @param {string} [style] - Custom inline styles for the group block.
+
+  @example
+  {% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
+{%- enddoc -%}
 
 <div
   class="

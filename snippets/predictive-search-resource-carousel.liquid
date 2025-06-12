@@ -1,13 +1,10 @@
-{% comment %}
-  Renders a carousel of predictive search results cards
+{%- doc -%}
+  Renders a carousel of predictive search results cards.
 
-    Accepts:
-    - title: {String} The title of the carousel
-    - resources: {Array} The resources to display in the carousel
-    - resource_type: {String} The type of resource to display in the carousel
-    Usage:
-    {% render 'predictive-search-resource-carousel', title: 'Collections', resources: predictive_search.resources.collections %}
-{% endcomment %}
+  @param {string} title - The title of the carousel.
+  @param {object} resources - The resources to display.
+  @param {string} resource_type - The type of resource to display.
+{%- enddoc -%}
 
 {% liquid
   capture slides

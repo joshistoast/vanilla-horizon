@@ -19,8 +19,8 @@
     },
     "unit_price": {
       "per_item_html": {
-        "one": "{{price}} pr. {{count}} vare",
-        "other": "{{price}} pr. {{count}} varer"
+        "one": "{{price}} pr. {{count}} vare",
+        "other": "{{price}} pr. {{count}} varer"
       },
       "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
@@ -55,7 +55,7 @@
         "ft2": "fod²",
         "item": "vare"
       },
-      "per_item_single_html": "{{price}} pr. stk.",
+      "per_item_single_html": "{{price}} pr. stk.",
       "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
@@ -82,7 +82,7 @@
       "one": "{{ count }} filter anvendt",
       "other": "{{ count }} filtre anvendt"
     },
-    "account": "Åbn kontorullemenu",
+    "account": "Åbn kontomenu",
     "cart": "Indkøbskurv",
     "cart_count": "Varer i alt i indkøbskurven",
     "menu": "Menu",
@@ -92,12 +92,14 @@
     "loading_product_recommendations": "Indlæser produktanbefalinger",
     "discount": "Anvend en rabatkode",
     "discount_applied": "Anvendt rabatkode: {{ code }}",
-    "open_cart_drawer": "Åbn indkøbskurvskuffe",
+    "open_cart_drawer": "Åbn indkøbskurv",
     "pause_video": "Sæt video på pause",
     "inventory_status": "Lagerstatus",
     "find_country": "Find land",
     "localization_region_and_language": "Åbn område- og sprogvælger",
-    "open_search_modal": "Åbn søgemodus"
+    "open_search_modal": "Åbn søgemodus",
+    "decrease_quantity": "Formindsk antal",
+    "increase_quantity": "Forøg antal"
   },
   "actions": {
     "add_to_cart": "Læg i indkøbskurven",

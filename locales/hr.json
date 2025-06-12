@@ -24,9 +24,9 @@
         "few": "{{price}} za sljedeći broj artikala: {{count}}"
       },
       "per_unit_html": {
-        "one": "{{price}}{{count}}{{unit}}",
-        "other": "{{price}}{{count}}{{unit}}",
-        "few": "{{price}}{{count}}{{unit}}"
+        "one": "{{price}} / {{count}}{{unit}}",
+        "other": "{{price}} / {{count}}{{unit}}",
+        "few": "{{price}} / {{count}}{{unit}}"
       },
       "per_unit_accessibility": {
         "single": "{{price}} za {{unit}}",
@@ -101,7 +101,9 @@
     "pause_video": "Pauziraj videozapis",
     "localization_region_and_language": "Otvori izbornik regije i jezika",
     "open_search_modal": "Otvori dijaloški okvir pretraživanja",
-    "find_country": "Pronađi državu"
+    "find_country": "Pronađi državu",
+    "decrease_quantity": "Smanji količinu",
+    "increase_quantity": "Povećaj količinu"
   },
   "actions": {
     "add_to_cart": "Dodaj u košaricu",

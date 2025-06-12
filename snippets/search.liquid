@@ -1,26 +1,25 @@
-{% comment %}
-  Renders the search action
+{%- doc -%}
+  Renders the search action button.
 
-  Accepts:
-  - style: @string - style of the search action
-  - class: @string - class of the search action
-{% endcomment %}
+  @param {string} [style] - The style of the search action.
+  @param {string} [class] - Additional classes for the search action.
+
+  @example
+  {% render 'search', style: 'default', class: 'custom-class' %}
+{%- enddoc -%}
 
 {% unless style == 'none' %}
   <search-button class="search-action{% if class != blank %} {{ class | strip }}{% endif %}">
     <button
       on:click="#search-modal/showDialog"
       class="button button-unstyled search-modal__button header-actions__action"
-      name="Search"
+      aria-label="{{ 'accessibility.open_search_modal' | t }}"
     >
       <span
         aria-hidden="true"
         class="svg-wrapper"
       >
         {{ 'icon-search.svg' | inline_asset_content }}
-      </span>
-      <span class="visually-hidden">
-        {{ 'accessibility.open_search_modal' | t }}
       </span>
     </button>
   </search-button>

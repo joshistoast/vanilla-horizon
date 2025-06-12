@@ -55,7 +55,7 @@
         "ft2": "ft²",
         "item": "품목"
       },
-      "per_item_single_html": "각각 {{price}}",
+      "per_item_single_html": "개당 {{price}}",
       "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
@@ -97,7 +97,9 @@
     "inventory_status": "재고 상태",
     "find_country": "국가 찾기",
     "localization_region_and_language": "지역 및 언어 선택기 열기",
-    "open_search_modal": "검색 모달 열기"
+    "open_search_modal": "검색 모달 열기",
+    "decrease_quantity": "수량 줄이기",
+    "increase_quantity": "수량 늘리기"
   },
   "actions": {
     "add_to_cart": "카트에 추가",
@@ -136,7 +138,7 @@
     "sign_in_options": "기타 로그인 옵션",
     "sign_up": "가입하기",
     "sort": "정렬",
-    "show_all_options": "모든 옵션 표시"
+    "show_all_options": "모든 옵션 보기"
   },
   "content": {
     "reviews": "리뷰",

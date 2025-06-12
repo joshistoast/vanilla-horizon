@@ -25,10 +25,10 @@
         "many": "{{price}} за {{count}} ед. товара"
       },
       "per_unit_html": {
-        "one": "{{price}}/{{count}}{{unit}}",
-        "other": "{{price}}/{{count}}{{unit}}",
-        "few": "{{price}}/{{count}}{{unit}}",
-        "many": "{{price}}/{{count}}{{unit}}"
+        "one": "{{price}}/{{count}} {{unit}}",
+        "other": "{{price}}/{{count}} {{unit}}",
+        "few": "{{price}}/{{count}} {{unit}}",
+        "many": "{{price}}/{{count}} {{unit}}"
       },
       "per_unit_accessibility": {
         "single": "{{price}} за {{unit}}",
@@ -105,7 +105,9 @@
     "pause_video": "Приостановить видео",
     "find_country": "Найти страну",
     "localization_region_and_language": "Открыть выбор региона и языка",
-    "open_search_modal": "Открыть модальное окно поиска"
+    "open_search_modal": "Открыть модальное окно поиска",
+    "decrease_quantity": "Уменьшить количество",
+    "increase_quantity": "Увеличить количество"
   },
   "actions": {
     "add_to_cart": "Добавить в корзину",

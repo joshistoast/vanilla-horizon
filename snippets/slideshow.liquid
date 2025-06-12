@@ -1,24 +1,30 @@
-{% comment %}
-  Renders a slideshow component
+{%- doc -%}
+  Renders a slideshow component.
+  Condiional <slideshow-arrows> component and slideshow controls.
 
-  Accepts:
-  - slides: <slideshow-slide>[] -- the slides of the slideshow
-  - ref: {String} (optional) -- the ref of the slideshow component
-  - class: {String} (optional) -- HTML class attribute of the slideshow component
-  - header: {HTML} (optional) -- the header of the slideshow component
-  - controls: {HTML} (optional) -- the controls of the slideshow component
-  - style: {String} (optional) -- HTML style attribute of the slideshow component
-  - autoplay: {Boolean} (optional) -- whether the slideshow will autoplay
-  - autoplay_speed: {Integer} (optional) -- the speed of the slideshow autoplay
-  - auto_hide_controls: {Boolean} (optional) -- whether to hide slideshow-controls when the scroller is smaller than the viewport
-  - infinite: {Boolean} (optional) -- whether the slideshow will loop
-  - initial_slide: {Integer} (optional) -- the index of the initial slide
-  - slideshow_gutters: {"start" | "end" | "start end"} (optional) -- the gutter positions to render. Set width with CSS variables --gutter-slide-width
-  - slide_count: {Integer} -- the total number of slides
-  - slide_size: {String} (optional) -- the height of the slides
-  - show_arrows: {Boolean} (optional) -- whether the slideshow will render a slideshow-arrows component
-  - slideshow_arrows: {HTML} (optional) -- a custom slideshow-arrows component to render instead of the default
-{% endcomment %}
+  @param {object[]} slides - the slides of the slideshow
+  @param {string} [ref] - the ref of the slideshow component
+  @param {string} [class] - HTML class attribute of the slideshow component
+  @param {string} [header] - the header of the slideshow component
+  @param {string} [controls] - the controls of the slideshow component
+  @param {string} [style] - HTML style attribute of the slideshow component
+  @param {boolean} [autoplay] - whether the slideshow will autoplay
+  @param {number} [autoplay_speed] - the speed of the slideshow autoplay
+  @param {boolean} [auto_hide_controls] - whether to hide slideshow-controls when the scroller is smaller than the viewport
+  @param {boolean} [infinite] - whether the slideshow will loop
+  @param {number} [initial_slide] - the index of the initial slide
+  @param {string} [slideshow_gutters] - the gutter positions to render. Set width with CSS variables --gutter-slide-width
+  @param {number} [slide_count] - the total number of slides
+  @param {string} [slide_size] - the height of the slides
+  @param {boolean} [show_arrows] - whether the slideshow will render a slideshow-arrows component
+  @param {string} [slideshow_arrows] - a custom slideshow-arrows component to render instead of the default
+  @param {string} [icon_style] - The style of the icon, defaults to 'arrow'
+  @param {string} [arrows_position] - The position of the arrows, defaults to 'bottom'
+  @param {string} [attributes] - Additional attributes to add to the slideshow component
+
+  @example
+  {% render 'slideshow', slides: slides, slide_count: collection.products.size, ref: 'mobileSlideshow' %}
+{%- enddoc -%}
 
 {% assign class = class | strip %}
 {% assign style = style | strip %}

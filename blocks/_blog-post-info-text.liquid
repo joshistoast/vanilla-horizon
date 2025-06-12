@@ -1,10 +1,10 @@
 
-{% doc %}
+{%- doc -%}
   Renders the blog post info text block.
 
   @param {object} [article] - The article object
   @param {string} [alignment] - The alignment of the text. Defaults to the block's alignment setting.
-{% enddoc %}
+{%- enddoc -%}
 
 {% assign alignment = alignment | default: block.settings.alignment %}
 

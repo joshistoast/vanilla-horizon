@@ -1,6 +1,14 @@
-{% comment %}
+{%- doc -%}
+  Renders a localization component for the drawer.
   The <drawer-localization> component must be used inside a <header-drawer> component. It relies on event bindings from the parent <header-drawer>  component.
-{% endcomment %}
+
+  @param {boolean} [show_country] - Whether to show the country selector
+  @param {boolean} [show_language] - Whether to show the language selector
+  @param {boolean} [country_style] - Whether to show the country flag
+
+  @example
+  {% render 'drawer-localization', country_style: true %}
+{%- enddoc -%}
 
 {% liquid
   assign background_brightness = block.settings.color_scheme.settings.background | color_brightness

@@ -90,7 +90,7 @@
       "few": "Je použito více filtrů ({{ count }})",
       "many": "Je použito více filtrů ({{ count }})"
     },
-    "account": "Otevřít rozbalovací nabídku účtu",
+    "account": "Otevřít menu účtu",
     "cart": "Košík",
     "cart_count": "Celkem položek v košíku",
     "menu": "Nabídka",
@@ -100,12 +100,14 @@
     "loading_product_recommendations": "Načítají se doporučené produkty",
     "discount": "Použít slevový kód",
     "discount_applied": "Uplatněný slevový kód: {{ code }}",
-    "open_cart_drawer": "Otevřít výsuvný košík",
+    "open_cart_drawer": "Otevřít košík",
     "inventory_status": "Stav skladových zásob",
     "pause_video": "Pozastavit video",
     "find_country": "Najít zemi",
     "localization_region_and_language": "Otevřít výběr regionu a jazyka",
-    "open_search_modal": "Otevřít modální vyhledávání"
+    "open_search_modal": "Otevřít modální vyhledávání",
+    "decrease_quantity": "Snížit množství",
+    "increase_quantity": "Zvýšit množství"
   },
   "actions": {
     "add_to_cart": "Přidat do košíku",

@@ -1,13 +1,13 @@
-{% comment %}
+{%- doc -%}
   This snippet is used to render the quantity selector for a product.
   It is used in the product page and the cart page.
 
-  - product: the product to render the quantity selector for
-  - in_cart_quantity: the quantity in the cart to set the input value
-  - line_index: the index of the forloop representing the line on which the quantity selector is rendered
-  - min: the minimum quantity the input supports
-  - class: custom class for the quantity selector, optional
-{% endcomment %}
+  @param {object} product - the product to render the quantity selector for
+  @param {number} [in_cart_quantity] - the quantity in the cart to set the input value
+  @param {number} [line_index] - the index of the forloop representing the line on which the quantity selector is rendered
+  @param {number} [min] - the minimum quantity the input supports
+  @param {string} [class] - custom class for the quantity selector, optional
+{%- enddoc -%}
 
 {% liquid
   assign variant = product.selected_or_first_available_variant
@@ -27,7 +27,7 @@
     on:click="/decreaseQuantity"
     ref="quantityButtons[]"
   >
-    <span class="visually-hidden">Decrease quantity</span
+    <span class="visually-hidden">{{ 'accessibility.decrease_quantity' | t }}</span
     ><span class="svg-wrapper icon-plus">
       {{- 'icon-minus.svg' | inline_asset_content -}}
     </span>
@@ -47,7 +47,7 @@
       max="{{ variant.quantity_rule.max }}"
     {% endif %}
     step="{{ variant.quantity_rule.increment | default: 1 }}"
-    {% if variant.selected_or_first_available_variant.available == false %}
+    {% if variant.available == false %}
       disabled
     {% endif %}
   >
@@ -58,7 +58,7 @@
     on:click="/increaseQuantity"
     ref="quantityButtons[]"
   >
-    <span class="visually-hidden">Increase quantity</span
+    <span class="visually-hidden">{{ 'accessibility.increase_quantity' | t }}</span
     ><span class="svg-wrapper icon-plus">
       {{- 'icon-plus.svg' | inline_asset_content -}}
     </span>

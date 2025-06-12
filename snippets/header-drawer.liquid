@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders a header drawer menu triggered by the top details element.
 
   @param {object} linklist - The linklist to render
@@ -9,7 +9,7 @@
 
   @example
   {% render 'header-drawer', linklist: section.settings.menu, class: 'header-drawer--mobile' %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign max_featured_items = 4
@@ -980,7 +980,7 @@
   }
 
   .menu-drawer__menu-item-text {
-    overflow-x: hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
 

@@ -1,6 +1,12 @@
-{% comment %}
-  This is the cart drawer component.
-{% endcomment %}
+{%- doc -%}
+  Renders the cart drawer, a slide-out panel that displays the contents of the cart. It includes the cart icon that acts as a trigger.
+
+  @param {object} [settings] - An object containing theme settings.
+
+  @param {boolean} [settings.auto_open_cart_drawer] - If `true`, the cart drawer opens automatically after an item is
+  added.
+  @param {string} [settings.drawer_color_scheme] - The color scheme for the drawer.
+{%- enddoc -%}
 
 <script
   src="{{ 'cart-drawer.js' | asset_url }}"
@@ -10,7 +16,6 @@
 <cart-drawer-component
   class="cart-drawer"
   {{ block.shopify_attributes }}
-  {{ cart_drawer_sizes }}
   {% if settings.auto_open_cart_drawer %}
     auto-open
   {% endif %}
@@ -84,7 +89,7 @@
           <div
             class="cart-drawer__content motion-reduce"
             aria-label="{{ 'accessibility.cart' | t }}"
-            style="--header-height: {{ section.settings.header_height | default: 60 }}px;"
+            style="--header-height: 60px;"
           >
             <scroll-hint
               class="cart-drawer__items"

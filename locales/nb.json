@@ -19,12 +19,12 @@
     },
     "unit_price": {
       "per_item_html": {
-        "one": "{{price}} per {{count}} vare",
-        "other": "{{price}} per {{count}} varer"
+        "one": "{{price}} for {{count}} vare",
+        "other": "{{price}} for {{count}} varer"
       },
       "per_unit_html": {
-        "one": "{{price}}/{{count}}{{unit}}",
-        "other": "{{price}}/{{count}}{{unit}}"
+        "one": "{{price}}/{{count}} {{unit}}",
+        "other": "{{price}}/{{count}} {{unit}}"
       },
       "per_unit_accessibility": {
         "single": "{{price}} per {{unit}}",
@@ -97,7 +97,9 @@
     "inventory_status": "Lagerstatus",
     "find_country": "Finn land",
     "localization_region_and_language": "Åpne område- og språkvelgeren",
-    "open_search_modal": "Åpne søkemodalen"
+    "open_search_modal": "Åpne søkemodalen",
+    "decrease_quantity": "Reduser antall",
+    "increase_quantity": "Øk antall"
   },
   "actions": {
     "add_to_cart": "Legg i handlekurv",

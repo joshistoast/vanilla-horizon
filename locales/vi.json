@@ -97,7 +97,9 @@
     "pause_video": "Tạm dừng video",
     "find_country": "Tìm quốc gia",
     "localization_region_and_language": "Mở bộ chọn khu vực và ngôn ngữ",
-    "open_search_modal": "Mở hộp tương tác tìm kiếm"
+    "open_search_modal": "Mở hộp tương tác tìm kiếm",
+    "decrease_quantity": "Giảm số lượng",
+    "increase_quantity": "Tăng số lượng"
   },
   "actions": {
     "add_to_cart": "Thêm vào giỏ hàng",

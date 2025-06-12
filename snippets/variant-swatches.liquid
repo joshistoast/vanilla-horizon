@@ -1,6 +1,11 @@
-{% comment %}
-  This is a swatches variant picker. It is used to display the variant picker in the product-swatches block.
-{% endcomment %}
+{%- doc -%}
+  Renders a swatches variant picker, used within the product-swatches block.
+
+  @param {object} product_resource - The product object, which contains variants and options.
+
+  @example
+  {% render 'variant-swatches', product_resource: product %}
+{%- enddoc -%}
 
 <swatches-variant-picker-component
   data-product-id="{{ product_resource.id }}"

@@ -1,8 +1,8 @@
-{% doc %}
+{%- doc -%}
   Renders a cart discount form.
 
   @param {string} section_id - The section ID
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'

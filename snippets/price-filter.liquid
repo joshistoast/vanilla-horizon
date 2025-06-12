@@ -1,11 +1,14 @@
-{% comment %}
+{%- doc -%}
   Renders a price filter.
 
-  Accepts:
-  - filter {filter}: The filter to render
-  - filter_style {string}: The filter style (horizontal or vertical)
-  - autofocus {boolean}: Whether to autofocus the filter
-{% endcomment %}
+  @param {object} filter - The filter object to render.
+  @param {string} filter_style - The filter style, can be 'horizontal' or 'vertical'.
+  @param {boolean} [autofocus] - Whether to autofocus the filter.
+  @param {boolean} [should_render_clear] - Whether to render the clear button.
+
+  @example
+  {% render 'price-filter', filter: filter, filter_style: 'vertical' %}
+{%- enddoc -%}
 
 <accordion-custom
   class="facets__item"

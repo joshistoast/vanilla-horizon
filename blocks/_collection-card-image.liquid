@@ -1,6 +1,6 @@
 
 
-{% doc %}
+{%- doc -%}
   Display an image of a collection inside a collection card.
   Intended for collection-card.liquid block.
 
@@ -8,7 +8,7 @@
 
   @example
   {% content_for 'block', type: '_collection-card-image', id: 'collection-card-image', parent_block_id: block.id %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign collection = block.settings.collection

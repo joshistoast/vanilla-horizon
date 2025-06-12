@@ -86,7 +86,7 @@
       "other": "{{ count }} filtres appliqués",
       "many": "{{ count }} filtres appliqués"
     },
-    "account": "Ouvrir le menu déroulant Compte",
+    "account": "Ouvrir le menu du compte",
     "cart": "Panier",
     "cart_count": "Nombre total d’articles dans le panier",
     "menu": "Menu",
@@ -96,12 +96,14 @@
     "loading_product_recommendations": "Chargement des recommandations de produits",
     "discount": "Appliquer un code de réduction",
     "discount_applied": "Code de réduction appliqué : {{ code }}",
-    "open_cart_drawer": "Ouvrir le panier coulissant",
+    "open_cart_drawer": "Ouvrir le panier",
     "inventory_status": "Statut du stock",
     "pause_video": "Mettre la vidéo en pause",
     "find_country": "Trouver un pays",
     "localization_region_and_language": "Ouvrir le sélecteur de région et de langue",
-    "open_search_modal": "Ouvrir la fenêtre modale de recherche"
+    "open_search_modal": "Ouvrir la fenêtre modale de recherche",
+    "decrease_quantity": "Diminuer la quantité",
+    "increase_quantity": "Augmenter la quantité"
   },
   "actions": {
     "add_to_cart": "Ajouter au panier",

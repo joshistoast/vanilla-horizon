@@ -1,8 +1,11 @@
-{% comment %}
+{%- doc -%}
   Renders the grid density controls.
 
-  @param {string} viewport - The viewport to render the grid density controls for.
-{% endcomment %}
+  @param {string} viewport - The viewport to render the controls for, either 'mobile' or 'desktop'.
+
+  @example
+  {% render 'grid-density-controls', viewport: 'desktop' %}
+{%- enddoc -%}
 
 <div class="column-options-wrapper">
   <fieldset class="column-options">
