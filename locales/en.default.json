@@ -9,12 +9,13 @@
 */
 {
   "accessibility": {
-    "account": "Open account dropdown",
+    "account": "Open account menu",
     "cart": "Cart",
     "cart_count": "Total items in cart",
     "close_dialog": "Close dialog",
     "country_region": "Country/Region",
     "country_results_count": "{{ count }} results",
+    "decrease_quantity": "Decrease quantity",
     "discount": "Apply a discount code",
     "discount_applied": "Applied discount code: {{ code }}",
     "filters": "Filters",
@@ -22,12 +23,13 @@
       "one": "{{ count }} filter applied",
       "other": "{{ count }} filters applied"
     },
+    "increase_quantity": "Increase quantity",
     "inventory_status": "Inventory status",
     "localization_region_and_language": "Open region and language selector",
     "menu": "Menu",
     "new_window": "Opens in a new window.",
-    "open_cart_drawer": "Open cart drawer",
-    "open_search_modal": "Open search modal",
+    "open_cart_drawer": "Open cart",
+    "open_search_modal": "Open search",
     "pause_video": "Pause video",
     "play_model": "Play 3D model",
     "play_video": "Play video",

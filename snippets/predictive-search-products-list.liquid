@@ -1,13 +1,12 @@
-{% comment %}
+{%- doc -%}
   Renders the predictive search products list for empty state and recently viewed products
 
-  Accepts:
-  - title: @string - title of the result list
-  - products: @array - array of products
-  - order_ids: @array - array of product ids
-  - limit: @number - limit of products to display
-  - products_test_id: @string - a playwright test id, used to differentiate empty state from 'real' search results
-{% endcomment %}
+  @param {string} title - title of the result list
+  @param {object[]} products - array of products
+  @param {string[]} [order_ids] - array of product ids
+  @param {number} [limit] - limit of products to display
+  @param {string} [products_test_id] - a playwright test id, used to differentiate empty state from 'real' search results
+{%- enddoc -%}
 {%- liquid
   assign recently_viewed_title_text = 'content.recently_viewed_products' | t
 -%}

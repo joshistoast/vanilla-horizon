@@ -1,9 +1,9 @@
-{% doc %}
-  Takes a list of items (as HTML string) and postions them in a bento box grid layout.
-  Bento boxes have at most 12 items; when more than 12 items are present, a new box is created.
+{%- doc -%}
+  Takes an array of HTML strings and positions them in a bento box grid layout.
+  Bento boxes can hold up to 12 items; when more items are provided, a new box is created to maintain the layout structure.
 
-  @param {object} items - An array of HTML strings for the collection list items
-{% enddoc %}
+  @param {string[]} items - An array of HTML strings, where each string is a collection list item.
+{%- enddoc -%}
 
 {% liquid
   assign odd_item_check = items.size | modulo: 12

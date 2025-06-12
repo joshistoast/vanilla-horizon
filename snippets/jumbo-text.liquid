@@ -1,7 +1,11 @@
-{% comment %}
-  A snippet for text that stretches to fit the full width of it's container.
-  @param [string] text - text to be rendered
-{% endcomment %}
+{%- doc -%}
+  Renders text that stretches to fit the full width of its container.
+
+  @param {string} [text] - The text to be rendered.
+
+  @example
+  {% render 'jumbo-text', text: block.settings.text %}
+{%- enddoc -%}
 
 {% liquid
   assign shown_text = text | default: block.settings.text

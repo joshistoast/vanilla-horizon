@@ -97,7 +97,9 @@
     "inventory_status": "Envanter durumu",
     "find_country": "Ülke bul",
     "localization_region_and_language": "Bölge ve dil seçiciyi aç",
-    "open_search_modal": "Arama modunu aç"
+    "open_search_modal": "Arama modunu aç",
+    "decrease_quantity": "Miktarı azalt",
+    "increase_quantity": "Miktarı artır"
   },
   "actions": {
     "add_to_cart": "Sepete ekle",

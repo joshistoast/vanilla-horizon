@@ -97,7 +97,9 @@
     "pause_video": "暫停影片",
     "find_country": "尋找國家/地區",
     "localization_region_and_language": "開啟地區和語言選擇器",
-    "open_search_modal": "開啟搜尋互動視窗"
+    "open_search_modal": "開啟搜尋互動視窗",
+    "decrease_quantity": "減少數量",
+    "increase_quantity": "增加數量"
   },
   "actions": {
     "add_to_cart": "加入購物車",

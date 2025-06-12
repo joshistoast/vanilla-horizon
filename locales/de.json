@@ -78,7 +78,7 @@
     "search_results_count": "{{ count }} Suchergebnisse für „{{ query }}“ gefunden",
     "search_results_no_results": "Keine Ergebnisse für „{{ query }}“ gefunden",
     "filters": "Filter",
-    "account": "Konto-Drop-down-Menü öffnen",
+    "account": "Kontomenü öffnen",
     "cart": "Warenkorb",
     "cart_count": "Artikel im Warenkorb insgesamt",
     "filter_count": {
@@ -92,12 +92,14 @@
     "discount": "Rabattcode anwenden",
     "loading_product_recommendations": "Produktempfehlungen werden geladen",
     "discount_applied": "Angewendeter Rabattcode: {{ code }}",
-    "open_cart_drawer": "Warenkorbeinschub öffnen",
+    "open_cart_drawer": "Warenkorb öffnen",
     "inventory_status": "Inventarstatus",
     "pause_video": "Video pausieren",
     "find_country": "Land finden",
     "localization_region_and_language": "Region- und Sprachauswahl öffnen",
-    "open_search_modal": "Modal suchen öffnen"
+    "open_search_modal": "Modal suchen öffnen",
+    "decrease_quantity": "Menge verringern",
+    "increase_quantity": "Menge erhöhen"
   },
   "actions": {
     "add_to_cart": "In den Warenkorb legen",

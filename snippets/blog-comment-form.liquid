@@ -1,10 +1,10 @@
-{% doc %}
+{%- doc -%}
   Renders a comment form for a blog post.
 
   @param {object} [form] - The form object
-  @param {object} article - The article object
-  @param {string} section_id - The section ID
-{% enddoc %}
+  @param {object} [article] - The article object
+  @param {string} [section_id] - The section ID
+{%- enddoc -%}
 
 {% form 'new_comment', article %}
   <div class="blog-post-comments__form-container">

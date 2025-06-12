@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders either a country selector, language selector, or both.
 
   @param {boolean} show_country - Whether to show the country selector
@@ -9,7 +9,7 @@
 
   @example
   {% render 'localization-form', show_country: true, show_language: true, block_id: block.id %}
-{% enddoc %}
+{%- enddoc -%}
 
 {%- liquid
   comment
@@ -560,6 +560,11 @@
 
   #header-component[transparent] localization-form-component .localization-form .localization-form__select {
     background-color: transparent;
+  }
+
+  .localization-form__select option {
+    background-color: var(--color-input-background);
+    color: var(--color-input-text);
   }
 
   dropdown-localization-component .localization-form__select:hover {

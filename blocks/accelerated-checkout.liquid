@@ -1,6 +1,6 @@
 
 
-{% doc %}
+{%- doc -%}
   This block is used to display the accelerated checkout button.
   Intended for product-form.liquid block.
 
@@ -8,7 +8,7 @@
 
   @example
   {% content_for 'block', type: 'accelerated-checkout', id: 'accelerated-checkout', can_add_to_cart: can_add_to_cart %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign product = block.settings.product

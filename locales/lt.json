@@ -105,7 +105,9 @@
     "pause_video": "Pristabdyti vaizdo įrašą",
     "find_country": "Rasti šalį",
     "localization_region_and_language": "Atidaryti regiono ir kalbos parinkiklį",
-    "open_search_modal": "Atidaryti modalinį paieškos langą"
+    "open_search_modal": "Atidaryti modalinį paieškos langą",
+    "decrease_quantity": "Sumažinti kiekį",
+    "increase_quantity": "Padidinti kiekį"
   },
   "actions": {
     "add_to_cart": "Įdėti į krepšelį",

@@ -105,7 +105,9 @@
     "pause_video": "Pozastaviť video",
     "find_country": "Nájsť krajinu",
     "localization_region_and_language": "Otvoriť výber oblasti a jazyka",
-    "open_search_modal": "Otvoriť modálne okno vyhľadávania"
+    "open_search_modal": "Otvoriť modálne okno vyhľadávania",
+    "decrease_quantity": "Znížiť množstvo",
+    "increase_quantity": "Zvýšiť množstvo"
   },
   "actions": {
     "add_to_cart": "Pridať do košíka",

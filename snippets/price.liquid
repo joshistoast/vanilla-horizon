@@ -1,11 +1,11 @@
-{% doc %}
+{%- doc -%}
   This snippet is used to render a product card.
   It is used in the product block,featured product block, and the product card block.
 
   @param {product} product_resource - The product to render
   @param {boolean} [show_unit_price] - Whether to show the unit price
   @param {boolean} [show_sale_price_first] - Whether to show the sale price first
-{% enddoc %}
+{%- enddoc -%}
 
 {%- liquid
   assign show_unit_price = show_unit_price | default: false

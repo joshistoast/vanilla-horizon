@@ -101,7 +101,9 @@
     "inventory_status": "Estado do inventário",
     "localization_region_and_language": "Abrir seletor de região e idioma",
     "open_search_modal": "Abrir modal de pesquisa",
-    "find_country": "Localizar país"
+    "find_country": "Localizar país",
+    "decrease_quantity": "Diminuir quantidade",
+    "increase_quantity": "Aumentar quantidade"
   },
   "actions": {
     "add_to_cart": "Adicionar ao carrinho",

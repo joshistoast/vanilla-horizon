@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders the CSS variables for the `gap` styles needed for responsive scaling.
   Intended for use with the `gap-style` class.
 
@@ -9,7 +9,7 @@
 
   @example
   <div class="gap-style" style="{% render 'gap-style', value: block.settings.gap %}">
-{% enddoc %}
+{%- enddoc -%}
 
 {%- liquid
   assign min = scale_min | default: 24

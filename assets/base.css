@@ -187,6 +187,9 @@ select {
 dialog {
   background-color: var(--color-background);
   color: var(--color-foreground);
+
+  /* the ::backdrop inherits from the originating element, custom properties must be set on the dialog element */
+  --backdrop-color: var(--color-shadow);
 }
 
 p,
@@ -2003,7 +2006,8 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
 }
 
 @media screen and (width >= 750px) {
-  .card-gallery:is(:focus-within, :hover) .quick-add__button {
+  product-card:focus-within .quick-add__button,
+  .card-gallery:hover .quick-add__button {
     display: grid;
     will-change: margin, opacity;
     animation: elementSlideInTop var(--animation-speed) var(--animation-easing);
@@ -3541,6 +3545,31 @@ slideshow-controls:has(.slideshow-controls__dots) {
       border: var(--style-border-width) solid rgba(from var(--color-border) r g b / var(--media-border-opacity));
     }
   }
+}
+
+.slideshow-controls__thumbnail {
+  position: relative;
+}
+
+.slideshow-controls__thumbnail-badge {
+  position: absolute;
+  top: var(--padding-2xs);
+  right: var(--padding-2xs);
+  width: clamp(16px, 10%, 20px);
+  height: clamp(16px, 10%, 20px);
+  background-color: var(--color-background);
+  border-radius: var(--style-border-radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1px rgba(from var(--color-foreground) r g b / 5%);
+}
+
+.slideshow-controls__thumbnail-badge svg {
+  width: 60%;
+  height: 60%;
+  fill: var(--color-foreground);
+  opacity: 0.6;
 }
 
 /* Slideshow Play/Pause */

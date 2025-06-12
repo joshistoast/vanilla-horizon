@@ -20,7 +20,7 @@
     "unit_price": {
       "per_item_html": {
         "one": "{{price}} ανά {{count}} προϊόν",
-        "other": "{{price}} από {{count}} στοιχεία"
+        "other": "{{price}} ανά {{count}} προϊόντα"
       },
       "per_unit_html": {
         "one": "{{price}}/{{count}}{{unit}}",
@@ -78,7 +78,7 @@
     "slideshow_next": "Επόμενη διαφάνεια",
     "slideshow_previous": "Προηγούμενη διαφάνεια",
     "filters": "Φίλτρα",
-    "account": "Ανοίξτε το αναδυόμενο μενού του λογαριασμού",
+    "account": "Άνοιγμα μενού λογαριασμού",
     "cart": "Καλάθι",
     "cart_count": "Σύνολο προϊόντων στο καλάθι",
     "filter_count": {
@@ -92,12 +92,14 @@
     "loading_product_recommendations": "Φόρτωση συστάσεων προϊόντων",
     "discount": "Εφαρμογή κωδικού έκπτωσης",
     "discount_applied": "Εφαρμόστηκε ο κωδικός έκπτωση: {{ code }}",
-    "open_cart_drawer": "Άνοιγμα cart drawer",
+    "open_cart_drawer": "Άνοιγμα καλαθιού",
     "inventory_status": "Κατάσταση αποθέματος",
     "pause_video": "Παύση του βίντεο",
     "localization_region_and_language": "Επιλέξτε περιοχή και γλώσσα",
     "open_search_modal": "Ανοίξτε το πεδίο αναζήτησης",
-    "find_country": "Εύρεση χώρας"
+    "find_country": "Εύρεση χώρας",
+    "decrease_quantity": "Μείωση ποσότητας",
+    "increase_quantity": "Αύξηση ποσότητας"
   },
   "actions": {
     "add_to_cart": "Προσθήκη στο καλάθι",

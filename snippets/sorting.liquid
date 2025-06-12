@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders the sorting component.
 
   @param {object} results - The results of the search
@@ -8,7 +8,7 @@
   @param {string} [sort_position] - { 'desktop' | 'mobile' } Used in a data-testID selector for automated testing
   @param {boolean} should_use_select_on_mobile - Whether to use a select element for the sorting component on mobile
   @param {string} section_id - The section ID
-{% enddoc %}
+{%- enddoc -%}
 
 <sorting-filter-component
   class="sorting-filter{% if filter_style == 'horizontal' %} sorting-filter__horizontal{% endif %}"
@@ -78,7 +78,6 @@
       id="Sorting-{{ section_id }}"
       data-default-sort-by="{{ default_sort_by }}"
       class="facets__panel {% if should_use_select_on_mobile %} mobile:hidden {% endif %}"
-      style="z-index: var(--layer-overlay);"
       data-auto-close-details="desktop,mobile"
     >
       <summary

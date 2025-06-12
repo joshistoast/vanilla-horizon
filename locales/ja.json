@@ -97,7 +97,9 @@
     "inventory_status": "在庫ステータス",
     "find_country": "国を探す",
     "localization_region_and_language": "地域と言語のセレクターを開く",
-    "open_search_modal": "検索モーダルを開く"
+    "open_search_modal": "検索モーダルを開く",
+    "decrease_quantity": "数量を減らす",
+    "increase_quantity": "数量を増やす"
   },
   "actions": {
     "add_to_cart": "カートに追加",
@@ -136,7 +138,7 @@
     "sign_in_options": "その他のログインオプション",
     "sign_up": "サインアップする",
     "sort": "並び替え",
-    "show_all_options": "すべてのオプションを表示"
+    "show_all_options": "すべてのオプションを表示する"
   },
   "content": {
     "reviews": "レビュー",

@@ -101,7 +101,9 @@
     "pause_video": "Pausar o vídeo",
     "find_country": "Localizar o país",
     "localization_region_and_language": "Abrir seletor de região e idioma",
-    "open_search_modal": "Abrir janela modal de pesquisa"
+    "open_search_modal": "Abrir janela modal de pesquisa",
+    "decrease_quantity": "Diminuir quantidade",
+    "increase_quantity": "Aumentar quantidade"
   },
   "actions": {
     "add_to_cart": "Adicionar ao carrinho",

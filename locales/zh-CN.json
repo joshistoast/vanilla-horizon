@@ -97,7 +97,9 @@
     "pause_video": "暂停视频",
     "localization_region_and_language": "打开区域和语言选择器",
     "open_search_modal": "打开搜索模态窗口",
-    "find_country": "查找国家/地区"
+    "find_country": "查找国家/地区",
+    "decrease_quantity": "减少数量",
+    "increase_quantity": "增加数量"
   },
   "actions": {
     "add_to_cart": "添加到购物车",

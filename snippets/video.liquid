@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders a video element, from a video object (<video> element) or a video URL (<iframe> element)
 
   Shared parameters:
@@ -25,7 +25,7 @@
 
   @example
   {% render 'video', video: section.settings.video, video_autoplay: true, video_loop: true, section_id: section.id %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% assign video_alt = video_alt | default: video.alt %}
 {% assign alt = 'blocks.load_video' | t: description: video_alt | escape %}

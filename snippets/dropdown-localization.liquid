@@ -1,13 +1,11 @@
-{% comment %}
-  Determines whether to wrap the localization-form in a dropdown-component.
-  Passes variables to the localization-form snippet.
+{%- doc -%}
+  Determines whether to wrap the localization-form in a dropdown-component and passes variables to it.
 
-  Accepts:
-  - show_country: @boolean - Whether to show the country selector
-  - show_language: @boolean - Whether to show the language selector
-  - country_style: @string - The style of the country selector
-  - localization_picker_position: @string - The position of the localization component
-{% endcomment %}
+  @param {boolean} [show_country] - Whether to show the country selector.
+  @param {boolean} [show_language] - Whether to show the language selector.
+  @param {string} [country_style] - The style of the country selector.
+  @param {string} localization_position - { 'right' | 'left' } The position of the localization picker.
+{%- enddoc -%}
 
 {% liquid
   assign background_brightness = section.settings.color_scheme.settings.background | color_brightness

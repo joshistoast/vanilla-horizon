@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   This snippet is used to render the product grid on collection and search pages.
 
   @param {object} section - The section object
@@ -6,7 +6,7 @@
   @param {object} products - Array of product objects
   @param {string} [title] - Header of the collection or search results
   @param {string} children - List or grid of product cards
-{% enddoc %}
+{%- enddoc -%}
 
 {% capture product_card_size %}
   {% render 'util-product-grid-card-size' section: section %}

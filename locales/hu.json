@@ -97,7 +97,9 @@
     "pause_video": "Videó szüneteltetése",
     "find_country": "Ország keresése",
     "localization_region_and_language": "Régió- és nyelvválasztó megnyitása",
-    "open_search_modal": "Modális keresőablak megnyitása"
+    "open_search_modal": "Modális keresőablak megnyitása",
+    "decrease_quantity": "Mennyiség csökkentése",
+    "increase_quantity": "Mennyiség növelése"
   },
   "actions": {
     "add_to_cart": "Hozzáadás a kosárhoz",

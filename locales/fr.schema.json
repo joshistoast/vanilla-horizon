@@ -842,7 +842,8 @@
     "product_page": "Page de produit",
     "text": "Texte",
     "thumbnails": "Miniatures",
-    "visibility": "Visibilité"
+    "visibility": "Visibilité",
+    "app_required_for_ratings": "Une application est requise pour les évaluations de produits. [En savoir plus](https://help.shopify.com/manual/apps)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Partagez des informations sur votre marque. Décrivez un produit, partagez des annonces ou souhaitez la bienvenue à vos clients dans votre boutique.</p>"

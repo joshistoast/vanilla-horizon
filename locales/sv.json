@@ -55,7 +55,7 @@
         "ft2": "fot²",
         "item": "artikel"
       },
-      "per_item_single_html": "{{price}} vardera",
+      "per_item_single_html": "{{price}} styck",
       "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
@@ -97,7 +97,9 @@
     "inventory_status": "Lagerstatus",
     "find_country": "Hitta land",
     "localization_region_and_language": "Öppna region- och språkväljare",
-    "open_search_modal": "Öppna sökfönster"
+    "open_search_modal": "Öppna sökfönster",
+    "decrease_quantity": "Minska antal",
+    "increase_quantity": "Öka antal"
   },
   "actions": {
     "add_to_cart": "Lägg till i varukorgen",

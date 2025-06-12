@@ -1,12 +1,12 @@
 
 
-{% doc %}
+{%- doc -%}
   This block is used to display the add to cart button.
   Intended for product-form.liquid block.
 
   @param {string} can_add_to_cart - Whether the product can be added to the cart
   @param {string} add_to_cart_text - The text of the add to cart button
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign class = 'add-to-cart-button ' | append: block.settings.style_class

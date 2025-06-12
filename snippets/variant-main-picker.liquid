@@ -1,8 +1,8 @@
-{% comment %}
-  This is a default variant picker. It is used to display the variant picker in the variants block.
+{%- doc -%}
+  Renders a default variant picker, used to display the variant picker in the variants block.
 
-  @param {product} product_resource - The product resource object.
-{% endcomment %}
+  @param {object} product_resource - The product object.
+{%- enddoc -%}
 
 {% unless product_resource.has_only_default_variant %}
   {% liquid

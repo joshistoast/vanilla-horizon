@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Output the minimum product card size for cards in a product grid (main collection and search results).
 
   @param {object} section - Section object that contains the product card block.
@@ -7,7 +7,7 @@
   {% capture product_card_size %}
     {% render 'util-product-grid-card-size' section: section %}
   {% endcapture %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   if section.settings.layout_type == 'organic'

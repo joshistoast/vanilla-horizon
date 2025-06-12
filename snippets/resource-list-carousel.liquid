@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Renders a carousel of predictive search results cards
 
   @param {string} ref - The ref of the slideshow
@@ -9,7 +9,7 @@
 
   @example
   {% render 'resource-list-carousel', slides: slides, slide_count: slide_count, settings: block.settings %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign slideshow_ref = ref | default: 'resourceListCarousel'

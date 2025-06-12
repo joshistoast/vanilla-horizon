@@ -78,7 +78,7 @@
     "slideshow_next": "Slide berikutnya",
     "slideshow_previous": "Slide sebelumnya",
     "filters": "Filter",
-    "account": "Buka dropdown akun",
+    "account": "Buka menu akun",
     "cart": "Keranjang",
     "cart_count": "Total item di keranjang",
     "filter_count": {
@@ -92,12 +92,14 @@
     "loading_product_recommendations": "Memuat rekomendasi produk",
     "discount": "Pakai kode diskon",
     "discount_applied": "Kode diskon yang dipakai: {{ code }}",
-    "open_cart_drawer": "Buka isi keranjang",
+    "open_cart_drawer": "Buka troli",
     "inventory_status": "Status Inventaris",
     "pause_video": "Jeda video",
     "find_country": "Temukan negara",
     "localization_region_and_language": "Buka selektor wilayah dan bahasa",
-    "open_search_modal": "Buka modal pencarian"
+    "open_search_modal": "Buka pencarian",
+    "decrease_quantity": "Kurangi jumlah",
+    "increase_quantity": "Tambah jumlah"
   },
   "actions": {
     "add_to_cart": "Tambahkan ke keranjang",
@@ -213,7 +215,7 @@
     "no_products_found": "Tidak ada produk yang ditemukan.",
     "use_fewer_filters_html": "Coba kurangi filter, atau <a class=\"{{ class }}\" href=\"{{ link }}\">hapus semua filter</a>.",
     "filters": "Filter",
-    "price_filter_html": "Harga tertinggi adalah {{ price }}",
+    "price_filter_html": "Harga tertingginya adalah {{ price }}",
     "blog_details_separator": "|",
     "read_more": "Baca selengkapnya...",
     "discount_code": "Kode diskon",

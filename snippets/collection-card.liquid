@@ -1,15 +1,13 @@
-{% doc %}
+{%- doc -%}
   This snippet is used to render a collection card.
   To be used inside a block to inherit the block object settings.
 
   @param {string} card_image - The image to display in the collection card
   @param {string} children - The content to render inside the collection card
-  @param {object} block - The block object
-  @param {object} [section] - The section object
 
   @example
   {% render 'collection-card', children: collection_content %}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   assign collection = block.settings.collection

@@ -97,7 +97,9 @@
     "pause_video": "Video pauzeren",
     "find_country": "Land zoeken",
     "localization_region_and_language": "Regio- en taalkiezer openen",
-    "open_search_modal": "Zoekvenster openen"
+    "open_search_modal": "Zoekvenster openen",
+    "decrease_quantity": "Hoeveelheid verminderen",
+    "increase_quantity": "Hoeveelheid verhogen"
   },
   "actions": {
     "add_to_cart": "Aan winkelwagen toevoegen",
@@ -136,7 +138,7 @@
     "sign_up": "Aanmelden",
     "open_image_in_full_screen": "Afbeelding openen in volledig scherm",
     "sort": "Sorteren",
-    "show_all_options": "Alle opties weergeven"
+    "show_all_options": "Alle opties tonen"
   },
   "content": {
     "reviews": "recensies",

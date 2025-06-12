@@ -1,11 +1,11 @@
-{% doc %}
-  Renders a video background for a section or block.
+{%- doc -%}
+  Renders a video as a background for a section or block, with a fallback to a placeholder image if no video is provided.
 
-  @param {object} background_video - The video object
-  @param {string} background_video_position - The position of the video background
-  @param {string} section_id - The section ID
-  @param {string} block_id - The block ID
-{% enddoc %}
+  @param {object} background_video - The video object to be used as the background.
+  @param {string} background_video_position - The position of the video, e.g., 'center-center'.
+  @param {string} section_id - The ID of the parent section.
+  @param {string} block_id - The ID of the parent block, if applicable.
+{%- enddoc -%}
 
 {% liquid
   assign video_classes = 'video-background video-background--' | append: background_video_position

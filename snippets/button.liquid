@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Intended for use in a block similar to the button block.
 
   @param {string} link - link to render
@@ -6,7 +6,7 @@
 
   @example
   {% render 'button', link: '/collections/all' %}
-{% enddoc %}
+{%- enddoc -%}
 
 <a
   {% if link == blank %}

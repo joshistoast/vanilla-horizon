@@ -1,4 +1,4 @@
-{% doc %}
+{%- doc -%}
   Echo a sizes attribute for an <img> tag based on a minimum image size.
 
   @param {number} card_size - The minimum pixel-width of the product card.
@@ -12,7 +12,7 @@
   {% endcapture %}
   {% assign size_attribute = size_attribute | strip %}
   {{ image_url | image_tag: sizes: size_attribute }}
-{% enddoc %}
+{%- enddoc -%}
 
 {% liquid
   # Defense: ensure card_size and card_gap are numbers

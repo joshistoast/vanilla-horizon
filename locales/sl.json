@@ -61,7 +61,7 @@
         "ft2": "ft²",
         "item": "artikel"
       },
-      "per_item_single_html": "Cena za posamezen artikel {{price}}",
+      "per_item_single_html": "Cena za posamezen artikel: {{price}}",
       "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
@@ -105,7 +105,9 @@
     "pause_video": "Zaustavi videoposnetek",
     "find_country": "Poišči državo",
     "localization_region_and_language": "Odpri izbirnik za regijo in jezik",
-    "open_search_modal": "Odpri modalno okno za iskanje"
+    "open_search_modal": "Odpri modalno okno za iskanje",
+    "decrease_quantity": "Zmanjšaj količino",
+    "increase_quantity": "Povečaj količino"
   },
   "actions": {
     "add_to_cart": "Dodaj v košarico",

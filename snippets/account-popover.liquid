@@ -1,6 +1,10 @@
-{% comment %}
-  This snippet renders the account popover, which is used for desktop users.
-{% endcomment %}
+{%- doc -%}
+  Renders the account popover for desktop users, which appears when clicking the account icon. It contains links for account actions like login, logout, and viewing account details.
+
+  @param {object} [settings] - The theme-level settings.
+
+  @param {string} [settings.popover_color_scheme] - The color scheme for the popover panel.
+{%- enddoc -%}
 
 <details
   class="account-popover mobile:hidden"

@@ -105,7 +105,9 @@
     "inventory_status": "Stan zapasów",
     "find_country": "Znajdź kraj",
     "localization_region_and_language": "Otwórz region i selektor języka",
-    "open_search_modal": "Otwórz okno modalne wyszukiwania"
+    "open_search_modal": "Otwórz okno modalne wyszukiwania",
+    "decrease_quantity": "Zmniejsz ilość",
+    "increase_quantity": "Zwiększ ilość"
   },
   "actions": {
     "add_to_cart": "Dodaj do koszyka",

@@ -58,7 +58,7 @@
         "ft2": "picior pătrat",
         "item": "articol"
       },
-      "per_item_single_html": "{{price}} fiecare articol",
+      "per_item_single_html": "{{price}} bucata",
       "per_unit_single_html": "{{price}}/{{unit}}"
     }
   },
@@ -101,7 +101,9 @@
     "inventory_status": "Stare inventar",
     "find_country": "Găsește țara",
     "localization_region_and_language": "Deschide instrumentul de selectare a regiunii și limbii",
-    "open_search_modal": "Deschide fereastra modală de căutare"
+    "open_search_modal": "Deschide fereastra modală de căutare",
+    "decrease_quantity": "Micșorează cantitatea",
+    "increase_quantity": "Mărește cantitatea"
   },
   "actions": {
     "add_to_cart": "Adaugă în coș",

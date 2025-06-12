@@ -120,7 +120,7 @@ class LocalizationFormComponent extends Component {
     // Hide all options except the selected option
     for (const option of languageInput.options) {
       if (!option.selected) {
-        option.dataset.optionLabel = option.innerText;
+        option.dataset.optionLabel = option.textContent || '';
         option.innerText = '';
       }
     }
@@ -146,7 +146,7 @@ class LocalizationFormComponent extends Component {
     // Add back all option labels
     for (const option of languageInput.options) {
       if (option.dataset.optionLabel) {
-        option.innerText = option.dataset.optionLabel;
+        option.textContent = option.dataset.optionLabel;
         delete option.dataset.optionLabel;
       }
     }

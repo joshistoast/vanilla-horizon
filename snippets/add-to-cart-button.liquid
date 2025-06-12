@@ -1,14 +1,13 @@
-{% doc %}
-  This snippet is used to display the add to cart button.
-  Intended for add-to-cart.liquid block.
+{%- doc -%}
+  Renders an "Add to cart" button with dynamic text and state. It shows different text based on whether the product can be added to the cart and provides visual feedback when an item is added.
 
-  @param {string} can_add_to_cart - Whether the product can be added to the cart
-  @param {string} add_to_cart_text - The text of the add to cart button
-  @param {string} product - The product to add to the cart
-  @param {boolean} [icon_only_on_mobile] - Whether the icon is only visible on mobile
-  @param {string} class - The class of the button
-  @param {string} [id] - The id of the button
-{% enddoc %}
+  @param {boolean} can_add_to_cart - Whether the product can be added to the cart.
+  @param {string} add_to_cart_text - The text to display on the button.
+  @param {object} product - The product object to be added to the cart.
+  @param {boolean} [icon_only_on_mobile] - If `true`, only the icon is shown on mobile devices.
+  @param {string} [class] - Additional CSS classes to apply to the button.
+  @param {string} [id] - The ID attribute for the button.
+{%- enddoc -%}
 
 {%- liquid
   assign default_add_to_cart_text = 'actions.add_to_cart' | t
