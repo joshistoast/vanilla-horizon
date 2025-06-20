@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Heritage",
-    "theme_version": "1.0.4",
+    "theme_version": "1.0.5",
     "theme_author": "Shopify",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
@@ -2042,12 +2042,6 @@
     "name": "t:names.product_cards",
     "settings": [
       {
-        "type": "color_scheme",
-        "id": "quick_add_color_scheme",
-        "label": "t:settings.quick_add_colors",
-        "default": "scheme-1"
-      },
-      {
         "type": "checkbox",
         "id": "quick_add",
         "label": "t:settings.quick_add",
@@ -2059,6 +2053,29 @@
         "label": "t:settings.mobile_quick_add",
         "default": false,
         "visible_if": "{{ settings.quick_add == true }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "quick_add_color_scheme",
+        "label": "t:settings.quick_add_colors",
+        "default": "scheme-1",
+        "visible_if": "{{ settings.quick_add == true }}"
+      },
+      {
+        "type": "header",
+        "content": "t:settings.media"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_second_image_on_hover",
+        "label": "t:settings.show_second_image_on_hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_card_carousel",
+        "label": "t:settings.product_card_carousel",
+        "default": true
       }
     ]
   },

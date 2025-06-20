@@ -1,50 +1,16 @@
 {%- doc -%}
-  Renders the unit price for a variant, including its measurement.
+  Renders the unit price, including its measurement.
 
-  @param {object} variant - The variant object.
-  @param {string} price - The unit price to display.
+  @param {object} price - The unit price (money or string).
+  @param {object} measurement - The unit_price_measurement object.
 
   @example
-  {% render 'unit-price', variant: variant, price: price %}
+  {% render 'unit-price', price: variant.unit_price, measurement: variant.unit_price_measurement %}
+
+  @example
+  {% render 'unit-price', price: line_item.unit_price | money_with_currency, measurement: line_item.unit_price_measurement }
 {%- enddoc -%}
 <small class="unit-price">
   <span class="visually-hidden">{{ 'accessibility.unit_price' | t }}</span>
-  {%- liquid
-    assign measurement = variant.unit_price_measurement
-    assign count = measurement.reference_value
-  -%}
-  {%- if measurement.measured_type == 'count' -%}
-    {%- if count == 1 -%}
-      {{- 'blocks.unit_price.per_item_single_html' | t: price: price -}}
-    {%- else -%}
-      {{- 'blocks.unit_price.per_item_html' | t: price: price, count: count -}}
-    {%- endif -%}
-  {%- else -%}
-    {%- liquid
-      assign unit = measurement.reference_unit
-      case measurement.reference_unit
-        when 'ml', 'cl', 'l', 'm3', 'pt', 'qt', 'gal', 'floz', 'mg', 'g', 'kg', 'oz', 'lb', 'mm', 'cm', 'm', 'ft', 'yd', 'in', 'm2', 'ft2', 'item'
-          # theme-check-disable TranslationKeyExists
-          assign unit = 'blocks.unit_price.unit.' | append: measurement.reference_unit | t
-          # theme-check-enable TranslationKeyExists
-      endcase
-    -%}
-
-    <span aria-hidden="true">
-      {%- if count == 1 -%}
-        {{- 'blocks.unit_price.per_unit_single_html' | t: price: price, unit: unit -}}
-      {%- else -%}
-        {{- 'blocks.unit_price.per_unit_html' | t: price: price, count: count, unit: unit -}}
-      {%- endif -%}
-    </span>
-
-    <span class="visually-hidden">
-      {% assign price_without_html = price | strip_html %}
-      {%- if count == 1 -%}
-        {{- 'blocks.unit_price.per_unit_accessibility.single' | t: price: price_without_html, unit: unit -}}
-      {%- else -%}
-        {{- 'blocks.unit_price.per_unit_accessibility' | t: price: price_without_html, count: count, unit: unit -}}
-      {%- endif -%}
-    </span>
-  {%- endif -%}
+  {{ price | unit_price_with_measurement: measurement }}
 </small>

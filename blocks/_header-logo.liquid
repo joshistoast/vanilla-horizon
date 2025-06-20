@@ -28,7 +28,7 @@
   {% if template.name == 'index' and block.settings.hide_logo_on_home_page %}
     data-hidden-on-home-page
   {% endif %}
-  href="/"
+  href="{{ routes.root_url }}"
   class="size-style spacing-style header-logo"
   style="
     {% render 'size-style', settings: block.settings %}

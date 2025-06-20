@@ -201,8 +201,7 @@
       added: `{{ 'actions.added' | t }}`,
     },
     routes: {
-      root: '/',
-      cart_add_url: '{{ routes.cart_add_url }}',
+      cart_add_url: '{{ routes.cart_add_url | append: '.js' }}',
       cart_change_url: '{{ routes.cart_change_url }}',
       cart_update_url: '{{ routes.cart_update_url }}',
       cart_url: '{{ routes.cart_url }}',

@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Ränder",
     "collapsible_row": "Einklappbare Reihe",
     "custom_section": "Benutzerdefinierter Abschnitt",
@@ -125,7 +126,6 @@
     "search_input": "Sucheingabe",
     "search_results": "Suchergebnisse",
     "read_only": "Schreibgeschützt",
-    "404": "404",
     "collection_title": "Kollektionstitel",
     "view_all_button": "Alle anzeigen",
     "custom_liquid": "Benutzerdefiniertes Liquid",
@@ -485,7 +485,9 @@
     "right_padding": "Rechtes Padding",
     "show_inventory_quantity": "Menge bei niedrigem Lagerbestand anzeigen",
     "text_label_case": "Groß-/Kleinschreibung der Beschriftung",
-    "transition_to_main_product": "Übergang von Produktkarte zu Produktseite"
+    "transition_to_main_product": "Übergang von Produktkarte zu Produktseite",
+    "show_second_image_on_hover": "Hover-Effekt mit zweitem Bild",
+    "media": "Medien"
   },
   "options": {
     "adapt_to_image": "An Bild anpassen",

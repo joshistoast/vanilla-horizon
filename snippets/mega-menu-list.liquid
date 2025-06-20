@@ -53,7 +53,6 @@
 <ul
   data-menu-list-id="{{ id }}"
   class="mega-menu__list list-unstyled"
-  role="menu"
   style="--menu-image-border-radius: {{ image_border_radius }}px;"
 >
   {% for link in parent_link.links %}
@@ -79,14 +78,13 @@
             assign span_class = span_class | append: ' mega-menu__column--collection-image'
           endif
         endif
-        echo '<span class="' | append: span_class | append: '">'
+        echo '<li class="' | append: span_class | append: '">'
       endif
     %}
-    <li>
+    <div>
       <a
         href="{{ link.url }}"
         class="mega-menu__link {% if link.links != blank %}mega-menu__link--parent{% endif %}"
-        role="menuitem"
       >
         {% if menu_content_type == 'collection_images' %}
           {{
@@ -107,7 +105,6 @@
           {% if should_break_columns %}
             style="column-count: {{ column_span }};"
           {% endif %}
-          role="menu"
         >
           {% for childLink in link.links %}
             {% assign break_after_modulo = forloop.index | modulo: links_before_wrap %}
@@ -119,7 +116,6 @@
               <a
                 href="{{ childLink.url }}"
                 class="mega-menu__link"
-                role="menuitem"
               >
                 <span class="mega-menu__link-title">{{- childLink.title -}}</span>
               </a>
@@ -127,7 +123,7 @@
           {% endfor %}
         </ul>
       {% endif %}
-    </li>
+    </div>
 
     {% liquid
       # Check conditions for closing the span at the end of each iteration, then close the span if needed
@@ -144,7 +140,7 @@
       endif
 
       if open_column_span == false
-        echo '</span>'
+        echo '</li>'
       endif
     %}
   {% endfor %}
@@ -234,12 +230,12 @@
 
 {% case menu_content_type %}
   {% when 'featured_products' %}
-    <ul
-      class="mega-menu__content-list list-unstyled"
+    <span
+      class="mega-menu__content"
       style="--menu-content-columns-desktop: {{ max_product_columns }}; --menu-content-columns-tablet: {{ max_product_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
     >
-      <span
-        class="mega-menu__content-column mega-menu__content-column--products"
+      <ul
+        class="mega-menu__content-list mega-menu__content-list--products list-unstyled"
       >
         {% paginate collection_object.products by max_featured_products %}
           {% for item in collection_object.products %}
@@ -248,22 +244,21 @@
                 resource: item,
                 resource_type: 'product',
                 image_hover: true,
-                image_width: 300,
                 image_aspect_ratio: content_aspect_ratio
               %}
             </li>
           {% endfor %}
         {% endpaginate %}
-      </span>
-    </ul>
+      </ul>
+    </span>
   {% when 'featured_collections' %}
     {% assign collection_handles = collection_handles | split: ',' | uniq %}
-    <ul
-      class="mega-menu__content-list list-unstyled"
+    <span
+      class="mega-menu__content"
       style="--menu-content-columns-desktop: {{ max_collection_columns }}; --menu-content-columns-tablet: {{ max_collection_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
     >
-      <span
-        class="mega-menu__content-column mega-menu__content-column--collections"
+      <ul
+        class="mega-menu__content-list mega-menu__content-list--collections list-unstyled"
         style="--menu-content-columns-desktop: {{ max_featured_collections }}; --menu-content-columns-tablet: {{ max_featured_collections_tablet }};"
       >
         {% for handle in collection_handles limit: max_featured_collections %}
@@ -272,11 +267,10 @@
               resource: collections[handle],
               resource_type: 'collection',
               style: 'overlay',
-              image_width: 600,
               image_aspect_ratio: content_aspect_ratio
             %}
           </li>
         {% endfor %}
-      </span>
-    </ul>
+      </ul>
+    </span>
 {% endcase %}

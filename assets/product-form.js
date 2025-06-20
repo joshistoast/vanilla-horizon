@@ -180,7 +180,7 @@ class ProductFormComponent extends Component {
 
     const fetchCfg = fetchConfig('javascript', { body: formData });
 
-    fetch(Theme.routes.root + 'cart/add.js', {
+    fetch(Theme.routes.cart_add_url, {
       ...fetchCfg,
       headers: {
         ...fetchCfg.headers,
@@ -221,7 +221,7 @@ class ProductFormComponent extends Component {
             new CartAddEvent({}, this.id, {
               didError: true,
               source: 'product-form-component',
-              itemCount: Number(formData.get('quantity')),
+              itemCount: Number(formData.get('quantity')) || Number(this.dataset.quantityDefault),
               productId: this.dataset.productId,
             })
           );
@@ -253,7 +253,7 @@ class ProductFormComponent extends Component {
           this.dispatchEvent(
             new CartAddEvent({}, id.toString(), {
               source: 'product-form-component',
-              itemCount: Number(formData.get('quantity')),
+              itemCount: Number(formData.get('quantity')) || Number(this.dataset.quantityDefault),
               productId: this.dataset.productId,
               sections: response.sections,
             })

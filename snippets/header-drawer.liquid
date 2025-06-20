@@ -263,6 +263,7 @@
                             class="button menu-drawer__back-button focus-inset"
                             aria-expanded="true"
                             on:click="header-drawer/back"
+                            aria-label="{{ 'actions.back' | t }}"
                           >
                             <span class="svg-wrapper icon-caret icon-caret--backward">
                               {{- 'icon-caret.svg' | inline_asset_content -}}
@@ -484,7 +485,6 @@
                                     {% render 'resource-card',
                                       resource: collection.object,
                                       resource_type: 'collection',
-                                      image_width: 500,
                                       style: 'overlay',
                                       image_aspect_ratio: ratio
                                     %}
@@ -496,7 +496,6 @@
                                     {% render 'resource-card',
                                       resource: product,
                                       resource_type: 'product',
-                                      image_width: 300,
                                       image_aspect_ratio: ratio
                                     %}
                                   </li>
@@ -574,7 +573,6 @@
                   {% render 'resource-card',
                     resource: collection.object,
                     resource_type: 'collection',
-                    image_width: 500,
                     style: 'overlay',
                     image_aspect_ratio: ratio
                   %}
@@ -583,12 +581,7 @@
             {% elsif top_level_featured_products.size > 0 %}
               {%- for product in top_level_featured_products limit: max_featured_items -%}
                 <li class="menu-drawer__featured-content-list-item menu-drawer__featured-content-list-item--product">
-                  {% render 'resource-card',
-                    resource: product,
-                    resource_type: 'product',
-                    image_width: 300,
-                    image_aspect_ratio: ratio
-                  %}
+                  {% render 'resource-card', resource: product, resource_type: 'product', image_aspect_ratio: ratio %}
                 </li>
               {%- endfor -%}
             {% endif %}

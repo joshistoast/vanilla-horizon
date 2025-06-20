@@ -1,6 +1,7 @@
 import { Component } from '@theme/component';
 import { sectionRenderer } from '@theme/section-renderer';
 import { requestIdleCallback, viewTransition } from '@theme/utilities';
+import { ThemeEvents } from '@theme/events';
 
 /**
  * A custom element that renders a paginated list of items.
@@ -39,6 +40,9 @@ export default class PaginatedList extends Component {
     this.#fetchPage('next');
     this.#fetchPage('previous');
     this.#observeViewMore();
+
+    // Listen for filter updates to clear cached pages
+    document.addEventListener(ThemeEvents.FilterUpdate, this.#handleFilterUpdate);
   }
 
   /**
@@ -56,6 +60,8 @@ export default class PaginatedList extends Component {
     if (this.infinityScrollObserver) {
       this.infinityScrollObserver.disconnect();
     }
+    // Remove the filter update listener
+    document.removeEventListener(ThemeEvents.FilterUpdate, this.#handleFilterUpdate);
   }
 
   #observeViewMore() {
@@ -94,17 +100,9 @@ export default class PaginatedList extends Component {
    */
   #shouldUsePage(pageInfo) {
     if (!pageInfo) return false;
-    if (pageInfo.page > this.#getLastPage() || pageInfo.page < 1) return false;
+    if (pageInfo.page < 1) return false;
 
     return true;
-  }
-
-  #getLastPage() {
-    const { grid } = this.refs;
-
-    if (!grid) return 0;
-
-    return Number(grid.getAttribute('last-page'));
   }
 
   /**
@@ -115,7 +113,8 @@ export default class PaginatedList extends Component {
 
     if (!page || !this.#shouldUsePage(page)) return;
 
-    this.pages.set(page.page, await sectionRenderer.getSectionHTML(this.sectionId, true, page.url));
+    await this.#fetchSpecificPage(page.page, page.url);
+
     if (type === 'next') {
       this.#resolveNextPagePromise?.();
       this.#resolveNextPagePromise = null;
@@ -125,6 +124,25 @@ export default class PaginatedList extends Component {
     }
   }
 
+  /**
+   * @param {number} pageNumber - The page number to fetch
+   * @param {URL} [url] - Optional URL, will be constructed if not provided
+   */
+  async #fetchSpecificPage(pageNumber, url = undefined) {
+    const pageInfo = { page: pageNumber, url };
+
+    if (!url) {
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set('page', pageNumber.toString());
+      newUrl.hash = '';
+      pageInfo.url = newUrl;
+    }
+
+    if (!this.#shouldUsePage(pageInfo)) return;
+    const pageContent = await sectionRenderer.getSectionHTML(this.sectionId, true, pageInfo.url);
+    this.pages.set(pageNumber, pageContent);
+  }
+
   async #renderNextPage() {
     const { grid } = this.refs;
 
@@ -132,7 +150,6 @@ export default class PaginatedList extends Component {
 
     const nextPage = this.#getPage('next');
     if (!nextPage || !this.#shouldUsePage(nextPage)) return;
-
     let nextPageItemElements = this.#getGridForPage(nextPage.page);
 
     if (!nextPageItemElements) {
@@ -393,4 +410,22 @@ export default class PaginatedList extends Component {
 
     return id;
   }
+
+  /**
+   * Handle filter updates by clearing cached pages
+   */
+  #handleFilterUpdate = () => {
+    this.pages.clear();
+
+    // Resolve any pending promises to unblock waiting renders
+    this.#resolveNextPagePromise?.();
+    this.#resolvePreviousPagePromise?.();
+
+    this.#resolveNextPagePromise = null;
+    this.#resolvePreviousPagePromise = null;
+
+    // After a filter update, pagination typically resets to page 1
+    // Fetch page 2 as the "next" page since page 1 is already visible
+    this.#fetchSpecificPage(2);
+  };
 }

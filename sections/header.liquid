@@ -289,8 +289,8 @@
     &[transparent='not-sticky'][data-sticky-state='active'],
     &:has(
         .header__row:hover,
-        [role='menu']:is(:hover),
-        [role='menuitem']:is([aria-expanded='true']),
+        .mega-menu__list:is(:hover),
+        .header-menu:is([aria-expanded='true']),
         nav[header-menu]:is(:focus-within),
         .menu-list__link[data-animating],
         .account-popover[open],
@@ -334,8 +334,8 @@
   }
 
   .header--inherit-color-scheme-on-menu-open:has(
-      [role='menu']:is(:hover),
-      [role='menuitem']:is([aria-expanded='true']),
+      .mega-menu__list:is(:hover),
+      .header-menu:is([aria-expanded='true']),
       nav[header-menu]:is(:focus-within),
       .menu-list__link[data-animating]
     )

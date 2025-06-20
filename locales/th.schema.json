@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "ขอบ",
     "collapsible_row": "แถวที่ย่อได้",
     "colors": "สี",
@@ -125,7 +126,6 @@
     "search_input": "ค้นหาอินพุต",
     "search_results": "ผลลัพธ์การค้นหา",
     "read_only": "อ่านอย่างเดียว",
-    "404": "404",
     "collection_title": "ชื่อคอลเลกชัน",
     "view_all_button": "ดูทั้งหมด",
     "page_layout": "เลย์เอาต์ของหน้า",
@@ -485,7 +485,9 @@
     "product_title_case": "เคสชื่อสินค้า",
     "reflection_opacity": "ความทึบแสงของภาพสะท้อน",
     "text_label_case": "เคสป้ายกำกับข้อความ",
-    "transition_to_main_product": "การเปลี่ยนจากบัตรสินค้าไปยังหน้าสินค้า"
+    "transition_to_main_product": "การเปลี่ยนจากบัตรสินค้าไปยังหน้าสินค้า",
+    "show_second_image_on_hover": "แสดงรูปภาพที่สองเมื่อนำเมาส์ไปวาง",
+    "media": "สื่อ"
   },
   "options": {
     "adapt_to_image": "ปรับตามรูปภาพ",

@@ -47,6 +47,7 @@
       data-product-id="{{ product.id }}"
       data-product-url="{{ product.url }}"
       on:submit="/handleSubmit"
+      data-quantity-default="{% if product.selected_or_first_available_variant.quantity_rule.min %}{{ product.selected_or_first_available_variant.quantity_rule.min }}{% else %}1{% endif %}"
     >
       <div
         class="visually-hidden"
@@ -67,6 +68,7 @@
           style="{% render 'spacing-style', settings: block.settings %}"
         >
           {% content_for 'block', type: 'quantity', id: 'quantity' %}
+
           {% content_for 'block',
             type: 'add-to-cart',
             id: 'add-to-cart',

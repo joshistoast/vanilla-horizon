@@ -27,8 +27,10 @@
       : {{ cart.item_count }}
     </span>
     <span
-      class="cart-bubble__text-count"
+      class="cart-bubble__text-count{% if cart == empty %} hidden{% endif %}"
+      ref="cartBubbleCount"
       aria-hidden="true"
+      data-testid="cart-bubble"
     >
       {%- if limit == blank or cart.item_count < limit %}
         {{- cart.item_count -}}

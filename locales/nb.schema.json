@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Rammer",
     "collapsible_row": "Sammenleggbar rad",
     "colors": "Farger",
@@ -118,7 +119,6 @@
     "search_input": "Søkinndata",
     "search_results": "Søkeresultater",
     "read_only": "Skrivebeskyttet",
-    "404": "404",
     "collection_title": "Samlingstittel",
     "collections_bento": "Samlingsliste: Bento",
     "faq_section": "Vanlige spørsmål",
@@ -485,7 +485,9 @@
     "inventory_threshold": "Terskel for lav lagerbeholdning",
     "reflection_opacity": "Refleksjonsopasitet",
     "show_inventory_quantity": "Vis lav lagerbeholdning",
-    "transition_to_main_product": "Overgang fra produktkort til produktside"
+    "transition_to_main_product": "Overgang fra produktkort til produktside",
+    "show_second_image_on_hover": "Vis sekundærbilde når musepekeren beveges over",
+    "media": "Medier"
   },
   "options": {
     "adapt_to_image": "Tilpass til bilde",

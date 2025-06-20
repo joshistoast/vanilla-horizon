@@ -47,9 +47,18 @@ export default class VariantPicker extends Component {
 
     const url = new URL(window.location.href);
 
+    let variantId;
+
+    if (event.target instanceof HTMLInputElement && event.target.type === 'radio') {
+      variantId = event.target.dataset.variantId || null;
+    } else if (event.target instanceof HTMLSelectElement) {
+      const selectedOption = event.target.options[event.target.selectedIndex];
+      variantId = selectedOption?.dataset.variantId || null;
+    }
+
     if (isOnProductPage) {
-      if (event.target.dataset.variantId) {
-        url.searchParams.set('variant', event.target.dataset.variantId);
+      if (variantId) {
+        url.searchParams.set('variant', variantId);
       } else {
         url.searchParams.delete('variant');
       }
