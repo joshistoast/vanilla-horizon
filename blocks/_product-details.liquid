@@ -13,15 +13,15 @@
     data-view-transition-type="product-details"
   {% endif %}
 >
-  <div class="view-product-title">
-    <a
-      href="{{ product.selected_or_first_available_variant.url }}"
-      class="link"
-    >
-      {{- product.title }}
-    </a>
-  </div>
   {% capture children %}
+    <div class="view-product-title">
+      <a
+        href="{{ product.selected_or_first_available_variant.url }}"
+        class="link"
+      >
+        {{- product.title }}
+      </a>
+    </div>
     {% content_for 'blocks' %}
   {% endcapture %}
 

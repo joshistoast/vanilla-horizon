@@ -33,18 +33,21 @@
       on:pointerleave="/deactivate"
     >
       <a
-        role="menuitem"
-        {%- if link.links != blank -%}
-          aria-haspopup="true"
-        {%- endif -%}
         href="{{ link.url }}"
         class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+        {%- if link.links != blank -%}
+          aria-controls="submenu-{{ forloop.index }}"
+          aria-haspopup="true"
+          aria-expanded="false"
+        {%- endif -%}
+        ref="menuitem"
       >
         <span class="menu-list__link-title">{{- link.title -}}</span>
       </a>
       {%- if link.links != blank -%}
         <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
           <div
+            id="submenu-{{ forloop.index }}"
             class="menu-list__submenu-inner"
             style="{% render 'submenu-font-styles', settings: block.settings %}"
           >

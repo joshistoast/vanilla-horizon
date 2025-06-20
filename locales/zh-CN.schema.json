@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "边框",
     "collapsible_row": "可折叠行",
     "colors": "颜色",
@@ -115,7 +116,6 @@
     "search_input": "搜索输入",
     "search_results": "搜索结果",
     "read_only": "只读",
-    "404": "404",
     "collection_title": "产品系列标题",
     "collections_bento": "产品系列列表：Bento",
     "faq_section": "常见问题解答",
@@ -485,7 +485,9 @@
     "product_corner_radius": "产品圆角半径",
     "card_corner_radius": "卡片圆角半径",
     "blurred_reflection": "模糊的倒影",
-    "reflection_opacity": "倒影不透明度"
+    "reflection_opacity": "倒影不透明度",
+    "show_second_image_on_hover": "在悬停时显示第二张图片",
+    "media": "媒体"
   },
   "options": {
     "adapt_to_image": "适应图片",

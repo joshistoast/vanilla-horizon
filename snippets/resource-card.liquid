@@ -5,7 +5,7 @@
   @param {string} resource_type - The type of resource to render.
   @param {string} [collection_thumbnails] - The style of the collection card. Can be 'single' or 'multiple'. Defaults to 'single'
   @param {string} [style] - The style of the card. Can be 'default' or 'overlay'
-  @param {number} [image_width] - The width of the image
+  @param {number} [image_width] - The maximum width of the image, value influences the srcset attribute. Defaults to 1200px.
   @param {string} [image_aspect_ratio] - The aspect ratio to display the image. Defaults to image's natural ratio
   @param {boolean} [image_hover] - Whether to show a secondary image on hover and focus
 {%- enddoc -%}
@@ -16,7 +16,8 @@
   else
     assign ratio = image_aspect_ratio
   endif
-
+  assign image_width = image_width | default: 1200
+  assign widths = '300, 450, 600, 750, 900, 1050, 1200'
   assign single_thumbnail_collection = false
   if resource_type == 'collection' and collection_thumbnails != 'multiple'
     assign single_thumbnail_collection = true
@@ -37,11 +38,19 @@
     data-product-transition="{{ settings.transition_to_main_product }}"
   >
 {%- endif -%}
-<a
+<div
   class="resource-card{% if style == 'overlay' %} resource-card--overlay{% endif %}"
   href="{{ resource.url }}"
   data-resource-type="{{ resource_type }}"
 >
+  <a
+    class="resource-card__link"
+    href="{{ resource.url }}"
+  >
+    <span class="visually-hidden">
+      {{ resource.title }}
+    </span>
+  </a>
   <div
     class="resource-card__media"
     style="--resource-card-aspect-ratio: {{ ratio }};"
@@ -59,6 +68,7 @@
           | image_tag:
             loading: 'lazy',
             class: 'resource-card__image',
+            widths: widths,
             sizes: 'auto',
             transitionToProduct: settings.transition_to_main_product,
             data-media-id: featured_image.id
@@ -70,6 +80,7 @@
             | image_tag:
               loading: 'lazy',
               class: 'resource-card__image resource-card__image--secondary',
+              widths: widths,
               sizes: 'auto',
               transitionToProduct: settings.transition_to_main_product,
               data-media-id: resource.media[1].id
@@ -91,7 +102,7 @@
             {{
               product.featured_image
               | image_url: width: image_width
-              | image_tag: loading: 'lazy', class: 'resource-card__collection-image', sizes: 'auto'
+              | image_tag: loading: 'lazy', class: 'resource-card__collection-image', sizes: 'auto', widths: widths
             }}
           {% endfor %}
         </div>
@@ -100,9 +111,9 @@
   </div>
 
   <div class="resource-card__content">
-    <h4 class="resource-card__title{% if style == 'overlay' %} h5{%else %} paragraph{% endif %}">
+    <p class="resource-card__title{% if style == 'overlay' %} h5{%else %} paragraph{% endif %}">
       {{- resource.title -}}
-    </h4>
+    </p>
 
     {% if resource_type == 'product' %}
       {% render 'price', product_resource: resource, show_unit_price: true %}
@@ -116,7 +127,7 @@
       </p>
     {% endif %}
   </div>
-</a>
+</div>
 {%- if resource_type == 'product' and settings.transition_to_main_product -%}
   </product-card-link>
 {%- endif -%}
@@ -134,6 +145,12 @@
     height: 100%;
     opacity: 0;
     animation: fadeIn var(--animation-speed-medium) var(--animation-timing-fade-in) forwards;
+  }
+
+  .resource-card__link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
   }
 
   .resource-card__content {

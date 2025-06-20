@@ -18,13 +18,17 @@
 %}
 
 {% capture class %}
-  image-block image-block--{{ block.id }} image-block--height-{{ block.settings.height }} spacing-style size-style border-style
+  image-block image-block--{{ block.id }} image-block--height-{{ block.settings.height }} spacing-style size-style
 {% endcapture %}
 
 {% capture style %}
   --ratio: {{ ratio }};
   {% render 'size-style', settings: block.settings %}
   {% render 'spacing-style', settings: block.settings %}
+{% endcapture %}
+
+{% capture image_border_style %}
+  --ratio: {{ ratio }};
   {% render 'border-override', settings: block.settings %}
 {% endcapture %}
 
@@ -44,11 +48,12 @@
         width: block.settings.image.width,
         widths: widths,
         height: block.settings.image.height,
-        class: 'image-block__image',
+        class: 'image-block__image border-style',
+        style: image_border_style,
         sizes: sizes
     }}
   {%- else -%}
-    <div class="placeholder-image border-style size-style">
+    <div class="placeholder-image border-style size-style" style="{{ image_border_style }}">
       <placeholder-image
         data-block-id="{{ block.id }}"
         data-type="general"

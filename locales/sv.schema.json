@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Gränser",
     "collapsible_row": "Rad som kan döljas",
     "colors": "Färger",
@@ -116,7 +117,6 @@
     "search_input": "Sökinmatning",
     "search_results": "Sökresultat",
     "read_only": "Skrivskyddad",
-    "404": "404",
     "collection_title": "Produktseriens namn",
     "collections_bento": "Produktserielista: Bento",
     "collection_links": "Produktserielänkar",
@@ -485,7 +485,9 @@
     "inventory_threshold": "Tröskel för låg lagernivå",
     "reflection_opacity": "Reflektionens opacitet",
     "show_inventory_quantity": "Visa antal i lager vid låg lagernivå",
-    "transition_to_main_product": "Övergång från produktkort till produktsida"
+    "transition_to_main_product": "Övergång från produktkort till produktsida",
+    "show_second_image_on_hover": "Visa den andra bilden vid hovring",
+    "media": "Media"
   },
   "options": {
     "adapt_to_image": "Anpassa till bild",

@@ -177,7 +177,7 @@
                         {%- assign property_first_char = property.first | slice: 0 -%}
                         {%- if property.last != blank and property_first_char != '_' -%}
                           <div class="cart-items__properties">
-                            <dt class="visually-hidden">{{ property.first }}:</dt>
+                            <dt>{{ property.first }}:</dt>
                             <dd>
                               {%- if property.last contains '/uploads/' -%}
                                 <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
@@ -292,9 +292,9 @@
                     endif
                   -%}
                   <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
-                  {%- if item.variant.available and item.unit_price_measurement -%}
+                  {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
-                      {% render 'unit-price', variant: item.variant, price: unit_price %}
+                      {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
                     </div>
                   {%- endif -%}
                 </td>
@@ -709,5 +709,15 @@
     100% {
       transform: translate(0, 0);
     }
+  }
+
+  .cart-items__properties {
+    display: block;
+    margin-block-start: var(--margin-2xs);
+  }
+
+  .cart-items__properties dt,
+  .cart-items__properties dd {
+    display: inline;
   }
 {% endstylesheet %}

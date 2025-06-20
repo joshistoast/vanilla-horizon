@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Grenzen",
     "collapsible_row": "Inklapbare rij",
     "custom_section": "Aangepaste sectie",
@@ -118,7 +119,6 @@
     "search_input": "Input zoeken",
     "search_results": "Zoekresultaten",
     "read_only": "Alleen lezen",
-    "404": "404",
     "collection_title": "Titel collectie",
     "collections_bento": "Collectielijst: Bento",
     "faq_section": "Veelgestelde vragen",
@@ -485,7 +485,9 @@
     "inventory_threshold": "Drempelwaarde lage voorraad",
     "reflection_opacity": "Opaciteit reflectie",
     "show_inventory_quantity": "Laag voorraadaantal weergeven",
-    "transition_to_main_product": "Overgang van productkaart naar productpagina"
+    "transition_to_main_product": "Overgang van productkaart naar productpagina",
+    "show_second_image_on_hover": "Tweede afbeelding weergeven als je de aanwijzer erboven beweegt",
+    "media": "Media"
   },
   "options": {
     "adapt_to_image": "Aanpassen aan afbeelding",

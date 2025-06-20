@@ -108,8 +108,10 @@
     --gallery-aspect-ratio: {{ ratio }};
   "
   data-product-id="{{ product.id }}"
-  on:pointerenter="/previewImage"
-  on:pointerleave="/resetImage"
+  {% if settings.show_second_image_on_hover %}
+    on:pointerenter="/previewImage"
+    on:pointerleave="/resetImage"
+  {% endif %}
   {% if settings.transition_to_main_product %}
     data-view-transition-to-main-product
   {% endif %}
@@ -146,13 +148,25 @@
     {% endfor %}
   {% endfor %}
 
+  {% liquid
+    # Sort media so selected variant image comes first
+    assign selected_media = all_media | where: 'src', selected_variant_image
+    assign other_media = all_media | reject: 'src', selected_variant_image
+    assign all_media_sorted = selected_media | concat: other_media
+    # Check if there are generic media that are not variant images
+    assign has_generic_media = false
+    if all_media_sorted.size > variant_images.size
+      assign has_generic_media = true
+    endif
+  %}
+
   {%- if all_media.size > 0 -%}
     {% if all_media.size > 2 and hover_behavior == 'carousel' %}
       {% assign show_arrows = true %}
     {% endif %}
 
     {% capture slides %}
-      {% for media in all_media %}
+      {% for media in all_media_sorted %}
         {% assign loading = 'lazy' %}
         {% assign sizes = lazy_image_sizes %}
 
@@ -171,7 +185,7 @@
         {% assign hidden = false %}
         {% if variant_images contains media.src %}
           {% assign attributes = 'variant-image' %}
-          {% unless forloop.first %}
+          {% unless forloop.first and media.src == selected_variant_image or has_generic_media == false %}
             {% assign hidden = true %}
           {% endunless %}
         {% endif %}
@@ -180,7 +194,7 @@
     {% endcapture %}
 
     {% assign slideshow_attributes = '' %}
-    {% if hover_behavior == 'none' %}
+    {% if hover_behavior == 'none' or settings.product_card_carousel == false %}
       {% assign slideshow_attributes = 'disabled="true"' %}
     {% endif %}
     {% render 'slideshow',

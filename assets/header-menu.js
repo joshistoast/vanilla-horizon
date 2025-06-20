@@ -203,7 +203,7 @@ function findMenuItem(element) {
     return findMenuItem(element.parentElement?.querySelector('[slot="overflow"]'));
   }
 
-  return element?.querySelector('[role="menuitem"]');
+  return element?.querySelector('[ref="menuitem"]');
 }
 
 /**

@@ -1492,6 +1492,12 @@ media-gallery:where(.media-gallery--grid) .media-gallery__grid {
   position: absolute;
 }
 
+@media screen and (width < 750px) {
+  .product-media-container.constrain-height {
+    max-height: none;
+  }
+}
+
 @media screen and (width >= 750px) {
   .product-media-container.constrain-height {
     --viewport-offset: var(--header-height, 100px);
@@ -1993,6 +1999,7 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
 
 .compare-at-price {
   opacity: 0.4;
+  text-decoration-line: line-through;
   text-decoration-thickness: 1.5px;
 }
 

@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Limites",
     "collapsible_row": "Linha recolhível",
     "colors": "Cores",
@@ -115,7 +116,6 @@
     "search_input": "Entrada de pesquisa",
     "search_results": "Resultados da pesquisa",
     "read_only": "Só de leitura",
-    "404": "404",
     "collection_title": "Título da coleção",
     "collections_bento": "Lista de coleções: Bento",
     "faq_section": "FAQ",
@@ -485,7 +485,9 @@
     "reflection_opacity": "Opacidade do reflexo",
     "show_inventory_quantity": "Mostrar quantidade de stock baixo",
     "text_label_case": "Formato de maiúsculas iniciais das etiquetas de texto",
-    "transition_to_main_product": "Transição entre cartão de produto e página de produto"
+    "transition_to_main_product": "Transição entre cartão de produto e página de produto",
+    "show_second_image_on_hover": "Mostrar segunda imagem ao passar o rato",
+    "media": "Multimédia"
   },
   "options": {
     "adapt_to_image": "Adaptar à imagem",

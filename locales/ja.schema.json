@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "罫線",
     "collapsible_row": "折りたたみ可能な行",
     "colors": "色",
@@ -114,7 +115,6 @@
     "text": "テキスト",
     "title": "タイトル",
     "utilities": "ユーティリティ",
-    "404": "404",
     "collection_title": "コレクションのタイトル",
     "collections_bento": "コレクションリスト：Bento",
     "faq_section": "よくある質問",
@@ -485,7 +485,9 @@
     "right_padding": "右の余白",
     "show_inventory_quantity": "低在庫数量を表示する",
     "text_label_case": "テキストラベルの大文字・小文字設定",
-    "transition_to_main_product": "商品カードから商品ページへの遷移"
+    "transition_to_main_product": "商品カードから商品ページへの遷移",
+    "show_second_image_on_hover": "マウスオーバー時に2番目の画像を表示する",
+    "media": "メディア"
   },
   "options": {
     "adapt_to_image": "画像に合わせる",

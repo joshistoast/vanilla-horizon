@@ -22,7 +22,6 @@ declare global {
       product: string[];
     };
     routes: {
-      root: string;
       cart_add_url: string;
       cart_change_url: string;
       cart_update_url: string;

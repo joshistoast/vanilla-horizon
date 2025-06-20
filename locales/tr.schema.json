@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Kenarlıklar",
     "collapsible_row": "Daraltılabilir satır",
     "custom_section": "Özel bölüm",
@@ -122,7 +123,6 @@
     "utilities": "Yardımcı araçlar",
     "video_section": "Video",
     "jumbo_text": "Jumbo metin",
-    "404": "404",
     "collection_title": "Koleksiyon başlığı",
     "view_all_button": "Tümünü görüntüle",
     "search_input": "Girdi arayın",
@@ -485,7 +485,10 @@
     "right_padding": "Sağ iç boşluk",
     "show_inventory_quantity": "Düşük stok miktarını göster",
     "text_label_case": "Metin etiketi büyük/küçük harf durumu",
-    "transition_to_main_product": "Ürün kartı - ürün sayfası geçişi"
+    "transition_to_main_product": "Ürün kartı - ürün sayfası geçişi",
+    "media": "Medya",
+    "product_card_carousel": "Görsel döngüsü",
+    "show_second_image_on_hover": "Üzerine gelindiğinde ikinci görseli göster"
   },
   "options": {
     "adapt_to_image": "Görsele uyarla",

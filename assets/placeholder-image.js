@@ -1,4 +1,4 @@
-import { preloadImage } from '@theme/utilities';
+import { preloadImage, onDocumentReady } from '@theme/utilities';
 
 /** @type {Record<string, number>} */
 const cache = {};
@@ -12,12 +12,16 @@ const counters = {
   general: shopPlaceholderSeed % Theme.placeholders.general.length,
 };
 
-if (window.Shopify.visualPreviewMode || window.Shopify.designMode) {
-  const placeholderUrls = Object.values(Theme.placeholders).flat();
+const isEditorRequest = window.Shopify.visualPreviewMode || window.Shopify.designMode;
 
-  for (const url of placeholderUrls) {
-    preloadImage(url);
-  }
+if (isEditorRequest) {
+  onDocumentReady(() => {
+    const placeholderUrls = Object.values(Theme.placeholders).flat();
+
+    for (const url of placeholderUrls) {
+      preloadImage(url);
+    }
+  });
 }
 
 class PlaceholderImage extends HTMLElement {
@@ -44,9 +48,19 @@ class PlaceholderImage extends HTMLElement {
     const image = Theme.placeholders[type][counter];
     if (!image) return;
 
+    const sectionElement = this.closest('section');
+    const sectionIndex = sectionElement
+      ? Array.from(sectionElement.parentElement?.children ?? []).indexOf(sectionElement)
+      : -1;
+
     const imageElement = document.createElement('img');
     imageElement.src = image;
     imageElement.alt = Theme.translations.placeholder_image || 'Placeholder Image';
+
+    if (sectionIndex === -1 || sectionIndex > 3 || isEditorRequest) {
+      imageElement.loading = 'lazy';
+    }
+
     this.appendChild(imageElement);
     cache[blockId] = counter;
   }

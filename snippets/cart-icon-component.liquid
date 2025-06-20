@@ -6,6 +6,7 @@
     header-actions__cart-icon
     {% unless cart == empty %} header-actions__cart-icon--has-cart{% endunless %}
   "
+  data-testid="cart-icon"
 >
   <span
     class="svg-wrapper"
@@ -14,7 +15,7 @@
     {{ 'icon-cart.svg' | inline_asset_content }}
   </span>
 
-  {% render 'cart-bubble', limit: 100, live_region: true %}
+  {% render 'cart-bubble', limit: 100, live_region: true, test_id: test_id %}
 </cart-icon>
 
 {% stylesheet %}

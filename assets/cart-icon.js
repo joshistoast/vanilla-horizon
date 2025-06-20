@@ -8,19 +8,20 @@ import { ThemeEvents, CartUpdateEvent } from '@theme/events';
  * @typedef {object} Refs
  * @property {HTMLElement} cartBubble - The cart bubble element.
  * @property {HTMLElement} cartBubbleText - The cart bubble text element.
+ * @property {HTMLElement} cartBubbleCount - The cart bubble count element.
  *
  * @extends {Component<Refs>}
  */
 class CartIcon extends Component {
-  requiredRefs = ['cartBubble', 'cartBubbleText'];
+  requiredRefs = ['cartBubble', 'cartBubbleText', 'cartBubbleCount'];
 
   /** @type {number} */
   get currentCartCount() {
-    return parseInt(this.refs.cartBubbleText.textContent ?? '0', 10);
+    return parseInt(this.refs.cartBubbleCount.textContent ?? '0', 10);
   }
 
   set currentCartCount(value) {
-    this.refs.cartBubbleText.textContent = value < 100 ? String(value) : '';
+    this.refs.cartBubbleCount.textContent = value < 100 ? String(value) : '';
   }
 
   connectedCallback() {
@@ -54,8 +55,11 @@ class CartIcon extends Component {
    */
   renderCartBubble = async (itemCount, comingFromProductForm, animate = true) => {
     // If the cart update is coming from the product form, we add to the current cart count, otherwise we set the new cart count
+
+    this.refs.cartBubbleCount.classList.toggle('hidden', itemCount === 0);
     this.refs.cartBubble.classList.toggle('visually-hidden', itemCount === 0);
     this.refs.cartBubble.classList.toggle('cart-bubble--animating', itemCount > 0 && animate);
+
     this.currentCartCount = comingFromProductForm ? this.currentCartCount + itemCount : itemCount;
 
     this.classList.toggle('header-actions__cart-icon--has-cart', itemCount > 0);
@@ -79,7 +83,8 @@ class CartIcon extends Component {
    */
   ensureCartBubbleIsCorrect = () => {
     const sessionStorageCount = sessionStorage.getItem('cart-count');
-    const visibleCount = this.refs.cartBubbleText.textContent;
+    const visibleCount = this.refs.cartBubbleCount.textContent;
+
     if (sessionStorageCount === visibleCount || sessionStorageCount === null) return;
 
     try {

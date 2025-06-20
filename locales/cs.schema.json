@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Ohraničení",
     "collapsible_row": "Sbalitelný řádek",
     "colors": "Barvy",
@@ -115,7 +116,6 @@
     "search_input": "Vstup hledání",
     "search_results": "Výsledky hledání",
     "read_only": "Pouze pro čtení",
-    "404": "404",
     "collection_title": "Název kolekce",
     "collections_bento": "Seznam kolekcí: Bento",
     "faq_section": "Nejčastější dotazy",
@@ -485,7 +485,9 @@
     "right_padding": "Pravý vnitřní okraj",
     "show_inventory_quantity": "Zobrazit množství nízkých skladových zásob",
     "text_label_case": "Interní balení textového štítku",
-    "transition_to_main_product": "Přechod z karty produktu na stránku produktu"
+    "transition_to_main_product": "Přechod z karty produktu na stránku produktu",
+    "show_second_image_on_hover": "Zobrazit druhý obrázek po najetí myší/prstem",
+    "media": "Média"
   },
   "options": {
     "adapt_to_image": "Přizpůsobení obrázku",

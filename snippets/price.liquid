@@ -43,15 +43,27 @@
 
 <div ref="priceContainer">
   {% if show_sale_price_first == false and show_compare_price %}
-    <s class="compare-at-price">{{ compare_at_price }}</s>
+    <span role="group">
+      <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+      <span class="compare-at-price">{{- compare_at_price -}}</span>
+    </span>
   {% endif %}
 
-  <span class="price">{{ price | default: '&nbsp;' }}</span>
+  {% if show_compare_price %}
+    <span role="group">
+      <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+      <span class="price">{{ price | default: '&nbsp;' }}</span>
+    </span>
+  {% else %}
+    <span class="price">{{ price | default: '&nbsp;' }}</span>
+  {% endif %}
 
   {% if show_sale_price_first == true and show_compare_price %}
-    <s class="compare-at-price">{{ compare_at_price }}</s>
+    <span role="group">
+      <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+      <span class="compare-at-price">{{- compare_at_price -}}</span>
+    </span>
   {% endif %}
-
   {%- if selected_variant.unit_price and show_unit_price %}
     {%- liquid
       if product.handle == closest.product.handle and settings.currency_code_enabled_product_pages
@@ -62,6 +74,6 @@
         assign unit_price = selected_variant.unit_price | money
       endif
     -%}
-    {% render 'unit-price', variant: selected_variant, price: unit_price %}
+    {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
   {%- endif -%}
 </div>

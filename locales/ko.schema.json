@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "테두리",
     "collapsible_row": "축소 가능한 행",
     "custom_section": "사용자 지정 섹션",
@@ -113,7 +114,6 @@
     "search_input": "입력 검색",
     "search_results": "검색 결과",
     "read_only": "읽기 전용",
-    "404": "404",
     "collection_title": "컬렉션 제목",
     "collections_bento": "컬렉션 목록: Bento",
     "faq_section": "FAQ",
@@ -485,7 +485,9 @@
     "right_padding": "오른쪽 패딩",
     "show_inventory_quantity": "재고 수량 부족 표시",
     "text_label_case": "텍스트 레이블 케이스",
-    "transition_to_main_product": "제품 카드에서 제품 페이지로의 전환"
+    "transition_to_main_product": "제품 카드에서 제품 페이지로의 전환",
+    "show_second_image_on_hover": "마우스를 올리면 보조 이미지 표시",
+    "media": "미디어"
   },
   "options": {
     "adapt_to_image": "이미지에 맞춤",

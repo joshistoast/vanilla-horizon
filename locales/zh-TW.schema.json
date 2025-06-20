@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "邊框",
     "collapsible_row": "可折疊的橫列",
     "colors": "顏色",
@@ -115,7 +116,6 @@
     "search_input": "搜尋輸入",
     "search_results": "搜尋結果",
     "read_only": "唯讀",
-    "404": "404",
     "collection_title": "商品系列標題",
     "collections_bento": "商品系列清單：便當式",
     "faq_section": "常見問題",
@@ -485,7 +485,9 @@
     "reflection_opacity": "反射不透明度",
     "show_inventory_quantity": "顯示上架庫存偏低的商品",
     "text_label_case": "文字標籤案例",
-    "transition_to_main_product": "產品卡片到產品頁面的過渡"
+    "transition_to_main_product": "產品卡片到產品頁面的過渡",
+    "show_second_image_on_hover": "游標暫留時顯示次要圖片",
+    "media": "媒體"
   },
   "options": {
     "adapt_to_image": "配合圖片",

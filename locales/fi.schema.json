@@ -1,5 +1,6 @@
 {
   "names": {
+    "404": "404",
     "borders": "Reunukset",
     "collapsible_row": "Pienenettävä rivi",
     "colors": "Värit",
@@ -115,7 +116,6 @@
     "search_input": "Hakusyöte",
     "search_results": "Hakutulokset",
     "read_only": "Vain luku",
-    "404": "404",
     "collection_title": "Kokoelman nimi",
     "collections_bento": "Kokoelmaluettelo: bento",
     "faq_section": "Usein kysyttyä",
@@ -485,7 +485,10 @@
     "card_hover_effect": "Kortin osoitusefekti",
     "effects": "Efektit",
     "reflection_opacity": "Heijastuksen peittävyys",
-    "transition_to_main_product": "Siirtymä tuotekortista tuotesivuun"
+    "transition_to_main_product": "Siirtymä tuotekortista tuotesivuun",
+    "media": "Media",
+    "product_card_carousel": "Kuvakaruselli",
+    "show_second_image_on_hover": "Näytä toinen kuva osoitettaessa"
   },
   "options": {
     "adapt_to_image": "Sovita kuvaan",

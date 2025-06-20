@@ -451,10 +451,9 @@ if (!customElements.get('facet-remove-component')) {
 class SortingFilterComponent extends Component {
   /**
    * Updates filter and sorting
-   * @param {Object} data - The data object
    * @param {Event} event - The change event
    */
-  updateFilterAndSorting(data, event) {
+  updateFilterAndSorting(event) {
     const facetsForm =
       this.closest('facets-form-component') || this.closest('.shopify-section')?.querySelector('facets-form-component');
 
