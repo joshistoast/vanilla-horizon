@@ -161,7 +161,8 @@
     "variant_pickers": "Variantkiezers",
     "pills": "Keuzeopties",
     "large_logo": "Groot logo",
-    "product_inventory": "Productvoorraad"
+    "product_inventory": "Productvoorraad",
+    "description": "Beschrijving"
   },
   "settings": {
     "autoplay": "Automatisch afspelen",
@@ -487,7 +488,8 @@
     "show_inventory_quantity": "Laag voorraadaantal weergeven",
     "transition_to_main_product": "Overgang van productkaart naar productpagina",
     "show_second_image_on_hover": "Tweede afbeelding weergeven als je de aanwijzer erboven beweegt",
-    "media": "Media"
+    "media": "Media",
+    "product_card_carousel": "Carrousel weergeven"
   },
   "options": {
     "adapt_to_image": "Aanpassen aan afbeelding",
@@ -845,7 +847,22 @@
     "product_page": "Productpagina",
     "text": "Tekst",
     "thumbnails": "Miniatuurafbeeldingen",
-    "app_required_for_ratings": "Er is een app vereist voor productbeoordelingen. [Meer informatie](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Er is een app vereist voor productbeoordelingen. [Meer informatie](https://help.shopify.com/manual/apps)",
+    "icon": "Pictogram",
+    "manage_store_name": "[Winkelnaam beheren](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Toont collectie uit bovenliggende sectie",
+    "resource_reference_collection_card_image": "Toont afbeelding uit bovenliggende collectie",
+    "resource_reference_collection_title": "Toont titel uit bovenliggende collectie",
+    "resource_reference_product": "Verbindt automatisch met bovenliggend product",
+    "resource_reference_product_card": "Toont product uit bovenliggende sectie",
+    "resource_reference_product_inventory": "Toont voorraad uit bovenliggend product",
+    "resource_reference_product_price": "Toont prijs uit bovenliggend product",
+    "resource_reference_product_recommendations": "Toont aanbevelingen gebaseerd op bovenliggend product",
+    "resource_reference_product_review": "Toont beoordelingen uit bovenliggend product",
+    "resource_reference_product_swatches": "Toont stalen uit bovenliggend product",
+    "resource_reference_product_title": "Toont titel uit bovenliggend product",
+    "resource_reference_product_variant_picker": "Toont varianten uit bovenliggend product",
+    "resource_reference_product_media": "Toont media uit bovenliggend product"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Deel informatie over je merk met klanten. Beschrijf een product, doe aankondigingen of verwelkom klanten in je winkel.</p>"

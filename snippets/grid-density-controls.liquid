@@ -104,7 +104,7 @@
   .facets .column-options-wrapper {
     display: none;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: flex;
     }
   }
@@ -117,7 +117,7 @@
     padding: 0;
     border: none;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       gap: var(--gap-2xs);
     }
   }
@@ -129,14 +129,14 @@
 
   .column-options__option:has(.column-picker-mobile--single),
   .column-options__option:has(.column-picker-mobile--double) {
-    @media screen and (width <= 749px) {
+    @media screen and (max-width: 749px) {
       display: flex;
     }
   }
 
   .column-options__option:has(.column-picker--default),
   .column-options__option:has(.column-picker--zoom-out) {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: flex;
     }
   }

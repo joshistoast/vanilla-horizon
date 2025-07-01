@@ -180,11 +180,10 @@
           ]
         },
         "static-product-card": {
-          "type": "product-card",
+          "type": "_product-card",
           "name": "t:names.product_card",
           "static": true,
           "settings": {
-            "product": "{{ closest.product }}",
             "product_card_gap": 8,
             "inherit_color_scheme": true,
             "color_scheme": "scheme-3",
@@ -202,7 +201,6 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_image",
               "settings": {
-                "product": "{{ closest.product }}",
                 "image_ratio": "portrait",
                 "border": "none",
                 "border_width": 1,
@@ -216,7 +214,7 @@
               "blocks": {}
             },
             "group_XtkwyU": {
-              "type": "group",
+              "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
                 "open_in_new_tab": false,
@@ -257,7 +255,6 @@
                   "type": "product-title",
                   "name": "t:names.product_title",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -283,7 +280,6 @@
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
@@ -301,7 +297,6 @@
                   "type": "swatches",
                   "name": "t:names.swatches",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "product_swatches_alignment": "flex-start",
                     "product_swatches_alignment_mobile": "flex-start",
                     "hide_padding": false,

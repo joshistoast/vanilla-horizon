@@ -9,7 +9,7 @@
  */{
   "sections": {
     "collection_list_kTdkcn": {
-      "type": "collection-list",
+      "type": "main-collection-list",
       "blocks": {
         "group_we9NFt": {
           "type": "group",
@@ -81,11 +81,10 @@
           ]
         },
         "static-collection-card": {
-          "type": "collection-card",
+          "type": "_collection-card",
           "name": "t:names.collection_card",
           "static": true,
           "settings": {
-            "collection": "{{ closest.collection }}",
             "placement": "below_image",
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
@@ -102,7 +101,6 @@
               "type": "collection-title",
               "name": "t:names.collection_title",
               "settings": {
-                "collection": "{{ closest.collection }}",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -129,7 +127,6 @@
               "name": "t:names.collection_card_image",
               "static": true,
               "settings": {
-                "collection": "{{ closest.collection }}",
                 "image_ratio": "portrait",
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",

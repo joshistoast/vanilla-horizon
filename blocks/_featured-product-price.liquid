@@ -1,7 +1,7 @@
 
 
 {% liquid
-  assign product = block.settings.product
+  assign product = closest.product
 
   if settings.currency_code_enabled_product_cards
     assign price_min = product.price_min | money_with_currency
@@ -25,7 +25,7 @@
 %}
 
 <product-price
-  class="text-right {{ block.settings.type_preset | default: 'h6' }} spacing-style{% if block.settings.product == blank and request.design_mode == false %} hidden{% endif %}"
+  class="text-right {{ block.settings.type_preset | default: 'h6' }} spacing-style{% if closest.product == blank and request.design_mode == false %} hidden{% endif %}"
   data-block-id="{{ block.id }}"
   data-product-id="{{ product.id }}"
   style="
@@ -52,12 +52,11 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "t:content.edit_price_in_theme_settings"
+      "content": "t:content.resource_reference_product_price"
     },
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.edit_price_in_theme_settings"
     },
     {
       "type": "checkbox",

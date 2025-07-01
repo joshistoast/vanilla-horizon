@@ -601,7 +601,7 @@
     position: initial;
   }
 
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .header--desktop header-menu + .header__drawer header-drawer {
       display: none;
     }
@@ -626,7 +626,7 @@
     min-height: 60px;
     align-items: center;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       min-height: 0;
     }
   }
@@ -638,7 +638,7 @@
   .menu-drawer__navigation {
     padding: 0;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-top: var(--drawer-header-desktop-top);
     }
   }
@@ -648,7 +648,7 @@
   }
 
   details[open] .header__icon--menu .header-drawer-icon--close {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -656,7 +656,7 @@
   details[open] .header__icon--menu .header-drawer-icon--open {
     display: none;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: flex;
     }
   }
@@ -679,7 +679,7 @@
     box-shadow: var(--shadow-drawer);
     flex-direction: column;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       width: 25rem;
     }
 
@@ -689,7 +689,7 @@
   }
 
   .menu-drawer:has(details[open]) {
-    overflow: hidden;
+    overflow: initial;
   }
 
   .menu-drawer__backdrop {
@@ -743,7 +743,7 @@
     height: 100%;
     overflow-y: auto;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-top: var(--drawer-header-desktop-top);
     }
   }
@@ -779,7 +779,7 @@
   .menu-drawer__menu--childlist:not(:has(.menu-drawer__animated-element)) {
     margin-block-end: var(--margin-xs);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-block-end: 2.5rem;
     }
   }
@@ -820,7 +820,7 @@
   .menu-drawer__menu--childlist .menu-drawer__list-item--flat {
     margin-block-end: var(--margin-sm);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-block-end: var(--margin-lg);
     }
   }
@@ -1012,7 +1012,7 @@
     left: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
-    transform: translateX(5%);
+    transform: translateX(-5%);
     visibility: hidden;
     overflow-y: auto;
     opacity: 0;
@@ -1088,5 +1088,9 @@
       opacity: 0;
       transform: translateX(-1rem);
     }
+  }
+
+  .menu-drawer__menu-item > .svg-wrapper {
+    flex-shrink: 0;
   }
 {% endstylesheet %}

@@ -1,17 +1,10 @@
 
 
-{% render 'quantity-selector', product: block.settings.product %}
+{% render 'quantity-selector', product: closest.product %}
 
 {% schema %}
 {
   "name": "t:names.quantity",
-  "tag": null,
-  "settings": [
-    {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
-    }
-  ]
+  "tag": null
 }
 {% endschema %}

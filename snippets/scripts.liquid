@@ -29,6 +29,8 @@
   {% # theme-check-enable %}
 {% endif %}
 
+{{ 'critical.js' | asset_url | preload_tag: as: 'script' }}
+
 <link
   rel="modulepreload"
   href="{{ 'utilities.js' | asset_url }}"

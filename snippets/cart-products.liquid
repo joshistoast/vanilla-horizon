@@ -513,7 +513,7 @@
     margin-block-start: var(--margin-3xs);
   }
 
-  @container cart-items (width >= 720px) {
+  @container cart-items (min-width: 720px) {
     .cart-items__table-row {
       --cart-item-price-width: 6rem;
 
@@ -572,7 +572,7 @@
       border-block-start: none;
     }
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding-block-start: 0;
     }
   }

@@ -82,7 +82,7 @@
       {% capture list_items %}
         {% for product in products limit: section.settings.max_products %}
           <div class="resource-list__item">
-            {% content_for 'block', type: 'product-card', id: 'static-product-card', closest.product: product %}
+            {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
           </div>
           {% unless forloop.last %}
             <!--@list/split-->
@@ -177,7 +177,7 @@
     border-radius: 4px;
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .product-recommendations__skeleton-item:nth-child(2n + 1) {
       display: none;
     }
@@ -483,22 +483,17 @@
           }
         },
         "static-product-card": {
-          "type": "product-card",
+          "type": "_product-card",
           "name": "t:names.product_card",
           "static": true,
-          "settings": {
-            "product": "{{ closest.product }}"
-          },
+          "settings": {},
           "blocks": {
             "card-gallery": {
               "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "product": "{{ closest.product }}"
-              }
+              "name": "t:names.product_card_media"
             },
             "group": {
-              "type": "group",
+              "type": "_product-card-group",
               "settings": {
                 "content_direction": "column",
                 "gap": 4
@@ -507,22 +502,17 @@
                 "text": {
                   "type": "product-title",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "type_preset": "h5"
                   }
                 },
                 "price": {
                   "type": "price",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "show_tax_info": false
                   }
                 },
                 "swatches": {
-                  "type": "swatches",
-                  "settings": {
-                    "product": "{{ closest.product }}"
-                  }
+                  "type": "swatches"
                 }
               },
               "block_order": ["text", "price", "swatches"]

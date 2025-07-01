@@ -13,21 +13,24 @@
 {% liquid
   assign background_brightness = block.settings.color_scheme.settings.background | color_brightness
   if background_brightness < 64
-    assign shadow_opacity = 0.25
-    assign flag_shadow_opacity = 0.6
     assign flag_shadow_size = 4
   else
-    assign shadow_opacity = 0.1
-    assign flag_shadow_opacity = 0.3
     assign flag_shadow_size = 2
   endif
 
-  assign form_style = '--color-shadow: rgb(from var(--color-foreground) r g b / ' | append: shadow_opacity | append: ');'
+  assign localization_font = '--menu-localization-font: var(--font-[localization_font]--family); ' | replace: '[localization_font]', section.settings.localization_font
+  assign color_shadow = '--color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));'
+  assign form_style = localization_font | append: color_shadow
 %}
 
 {% if show_language and show_country == false %}
   <div class="menu-drawer__localization color-{{ settings.popover_color_scheme }}">
-    {% render 'localization-form', show_country: show_country, show_language: show_language, block_id: block.id %}
+    {% render 'localization-form',
+      show_country: show_country,
+      show_language: show_language,
+      block_id: block.id,
+      form_style: form_style
+    %}
   </div>
 {% else %}
   <drawer-localization-component class="menu-drawer__localization">
@@ -41,6 +44,7 @@
         class="drawer-localization__button h3 link link--text focus-inset"
         aria-expanded="false"
         on:click="header-drawer/open"
+        style="{{ form_style }}"
       >
         <div class="drawer-localization__button--label h6">
           {%- if show_country -%}
@@ -51,7 +55,7 @@
                   style="
                     background-image: url({{- localization.country | image_url: width: 32 }});
                     --size-shadow: {{ flag_shadow_size }}px;
-                    --color-shadow: rgb(from var(--color-foreground) r g b / {{ flag_shadow_opacity }});
+                    --color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-30-60));
                   "
                 ></span>
               {%- endif -%}

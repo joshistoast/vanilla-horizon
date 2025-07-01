@@ -161,7 +161,8 @@
     "large_logo": "Großes Logo",
     "product_list_button": "Schaltfläche „Alle anzeigen“",
     "product_inventory": "Produktinventar",
-    "pills": "Kapseln"
+    "pills": "Kapseln",
+    "description": "Beschreibung"
   },
   "settings": {
     "autoplay": "Automatische Wiedergabe",
@@ -487,7 +488,8 @@
     "text_label_case": "Groß-/Kleinschreibung der Beschriftung",
     "transition_to_main_product": "Übergang von Produktkarte zu Produktseite",
     "show_second_image_on_hover": "Hover-Effekt mit zweitem Bild",
-    "media": "Medien"
+    "media": "Medien",
+    "product_card_carousel": "Karussell anzeigen"
   },
   "options": {
     "adapt_to_image": "An Bild anpassen",
@@ -845,7 +847,22 @@
     "visibility": "Sichtbarkeit",
     "visible_if_collection_has_more_products": "Sichtbar, wenn die Kollektion mehr als die angezeigten Produkte enthält",
     "grid_layout": "Raster-Layout",
-    "app_required_for_ratings": "Für Produktbewertungen wird eine App benötigt. [Mehr Informationen](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Für Produktbewertungen wird eine App benötigt. [Mehr Informationen](https://help.shopify.com/manual/apps)",
+    "icon": "Symbol",
+    "manage_store_name": "[Shop-Namen verwalten ](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Zeigt Kollektion aus übergeordnetem Abschnitt an",
+    "resource_reference_collection_card_image": "Zeigt Bild aus übergeordneter Kollektion an",
+    "resource_reference_collection_title": "Zeigt Titel aus übergeordneter Kollektion an",
+    "resource_reference_product": "Verbindet sich automatisch mit übergeordnetem Produkt",
+    "resource_reference_product_card": "Zeigt Produkt aus übergeordnetem Abschnitt an",
+    "resource_reference_product_inventory": "Zeigt Inventar aus übergeordnetem Produkt an",
+    "resource_reference_product_media": "Zeigt Medien aus dem übergeordneten Produkt an",
+    "resource_reference_product_price": "Zeigt Preis aus übergeordnetem Produkt an",
+    "resource_reference_product_recommendations": "Zeigt Empfehlungen auf Basis des übergeordneten Produkts an",
+    "resource_reference_product_review": "Zeigt Bewertungen aus übergeordnetem Produkt an",
+    "resource_reference_product_swatches": "Zeigt Farbfelder aus übergeordnetem Produkt an",
+    "resource_reference_product_title": "Zeigt Titel aus übergeordnetem Produkt an",
+    "resource_reference_product_variant_picker": "Zeigt Varianten aus übergeordnetem Produkt an"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Teile Infos über deine Marke mit deinen Kunden. Beschreibe ein Produkt, kündige etwas an oder heiße Kunden willkommen.</p>"

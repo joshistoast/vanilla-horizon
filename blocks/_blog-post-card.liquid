@@ -13,6 +13,10 @@
   %}
 {% endcapture %}
 
+{% capture description %}
+  {% content_for 'block', id: 'content', type: '_blog-post-description', article: article %}
+{% endcapture %}
+
 <div
   class="blog-post-card"
   style="--text-align: {{ block.settings.alignment }}"
@@ -30,22 +34,7 @@
 
     {{ details }}
 
-    <div class="blog-post-card__content-text">
-      {% assign content = article.excerpt | default: article.content %}
-
-      {% if content %}
-        {% assign truncatewords = 30 %}
-        {% unless article.image %}
-          {% assign truncatewords = 90 %}
-        {% endunless %}
-
-        <rte-formatter>
-          {{ content | strip_html | truncatewords: truncatewords }}
-        </rte-formatter>
-      {% endif %}
-
-      <a href="{{ article.url }}">{{ 'content.read_more' | t }}</a>
-    </div>
+    {{ description }}
   </div>
 </div>
 
@@ -64,7 +53,7 @@
   .blog-post-item:first-child .blog-post-card {
     flex-direction: row;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       flex-direction: column;
     }
   }
@@ -72,7 +61,7 @@
   .blog-post-item:first-child .blog-post-card__image-container {
     width: 70%;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       width: 100%;
     }
   }
@@ -81,7 +70,7 @@
     padding-inline-start: var(--columns-gap);
     width: 30%;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       padding-inline-start: 0;
       width: 100%;
     }
@@ -93,8 +82,7 @@
     flex-direction: column;
   }
 
-  .blog-post-card__content a,
-  .blog-post-card__content .blog-post-card__content-text {
+  .blog-post-card__content a {
     display: block;
     text-wrap: pretty;
     text-decoration: none;

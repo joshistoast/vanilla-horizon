@@ -161,7 +161,8 @@
     "large_logo": "Logo grande",
     "product_list_button": "Botón Ver todo",
     "product_inventory": "Inventario de productos",
-    "pills": "Cápsulas"
+    "pills": "Cápsulas",
+    "description": "Descripción"
   },
   "settings": {
     "alignment": "Alineación",
@@ -487,7 +488,8 @@
     "text_label_case": "Caja de la etiqueta de texto",
     "transition_to_main_product": "Transición de la tarjeta de producto a la página de producto",
     "show_second_image_on_hover": "Mostrar segunda imagen al pasar el cursor",
-    "media": "Medios"
+    "media": "Elementos multimedia",
+    "product_card_carousel": "Mostrar carrusel"
   },
   "options": {
     "adapt_to_image": "Adaptar a la imagen",
@@ -845,7 +847,22 @@
     "visibility": "Visibilidad",
     "visible_if_collection_has_more_products": "Visible si la colección tiene más productos que los que se muestran",
     "grid_layout": "Diseño de cuadrícula",
-    "app_required_for_ratings": "Se requiere una aplicación para las calificaciones de productos. [Obtén más información en](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Se requiere una aplicación para las calificaciones de productos. [Obtén más información en](https://help.shopify.com/manual/apps)",
+    "icon": "Ícono",
+    "manage_store_name": "[Gestionar nombre de la tienda](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Muestra la colección de la sección principal",
+    "resource_reference_collection_card_image": "Muestra la imagen de la colección principal",
+    "resource_reference_collection_title": "Muestra el título de la colección principal",
+    "resource_reference_product": "Se conecta automáticamente al producto principal",
+    "resource_reference_product_card": "Muestra el producto de la sección principal",
+    "resource_reference_product_inventory": "Muestra el inventario del producto principal",
+    "resource_reference_product_price": "Muestra el precio del producto principal",
+    "resource_reference_product_recommendations": "Muestra recomendaciones basadas en el producto principal",
+    "resource_reference_product_review": "Muestra las reseñas del producto principal",
+    "resource_reference_product_swatches": "Muestra las muestras del producto principal",
+    "resource_reference_product_title": "Muestra el título del producto principal",
+    "resource_reference_product_variant_picker": "Muestra las variantes del producto principal",
+    "resource_reference_product_media": "Muestra los medios del producto principal"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Comparte información sobre tu marca con los clientes. Describe un producto, comparte anuncios o da la bienvenida a los clientes a tu tienda.</p>"

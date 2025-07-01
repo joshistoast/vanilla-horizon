@@ -1,14 +1,5 @@
 
 
-{% liquid
-  assign background_brightness = section.settings.color_scheme.settings.background | color_brightness
-  if background_brightness < 64
-    assign shadow_opacity = 0.25
-  else
-    assign shadow_opacity = 0.1
-  endif
--%}
-
 {%- if predictive_search.performed or search.performed -%}
   <div
     id="predictive-search-results"
@@ -17,7 +8,7 @@
     aria-label="{{ 'content.search_results_label' | t }}"
     aria-expanded="true"
     data-transition-container
-    style="--color-shadow: rgb(from var(--color-foreground) r g b / {{ shadow_opacity }});"
+    style="--color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));"
   >
     <div
       class="predictive-search-results__inner"
@@ -193,7 +184,7 @@
   }
 
   :not(:is(dialog)) > predictive-search-component {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       max-width: min(40dvw, 650px);
     }
   }
@@ -251,11 +242,11 @@
 
     overflow: hidden;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-radius: 0;
     }
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       max-height: var(--modal-max-height);
       height: var(--predictive-search-results-height, auto);
     }
@@ -420,7 +411,7 @@
     height: var(--icon-size-lg);
     color: rgb(from var(--color-foreground) r g b / 60%);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       left: var(--margin-md);
     }
   }
@@ -453,7 +444,7 @@
       transition: transform 100ms var(--animation-timing-active);
     }
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       margin-right: var(--margin-md);
     }
   }
@@ -550,7 +541,7 @@
     background-color: var(--color-input-background);
     border-radius: var(--style-border-radius-inputs);
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       padding: var(--padding-2xs) var(--padding-sm);
     }
   }
@@ -565,7 +556,7 @@
     justify-content: space-between;
     width: 100%;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-radius: var(--style-border-radius-inputs);
       border: none;
     }
@@ -575,7 +566,7 @@
     outline: 0;
     outline-offset: var(--focus-outline-offset);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       outline: var(--focus-outline-width) solid var(--color-primary);
     }
   }
@@ -585,7 +576,7 @@
     border-right-color: transparent;
     border-left-color: transparent;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-bottom-color: transparent;
     }
   }
@@ -597,7 +588,7 @@
     border-left-color: transparent;
     border-radius: var(--search-border-radius);
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-radius: var(--style-border-radius-inputs);
     }
   }
@@ -607,7 +598,7 @@
     transition: box-shadow var(--animation-speed) var(--animation-easing);
     background-color: var(--color-background);
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-radius: var(--style-border-radius-inputs) var(--style-border-radius-inputs) 0 0;
     }
   }
@@ -641,7 +632,7 @@
       height: var(--icon-size-xs);
     }
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -652,7 +643,7 @@
     left: 0;
     right: 0;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --to-top-gradient-background: linear-gradient(
         to top,
         rgb(from var(--color-background) r g b / 90%),
@@ -672,18 +663,18 @@
     background-color: var(--color-background);
     border-bottom: var(--style-border-width) solid var(--color-border);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding: var(--padding-2xs) var(--padding-2xs) 0;
       border-bottom: var(--search-border-width) solid var(--color-border);
     }
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       transition: box-shadow 0.2s ease;
       box-shadow: none;
     }
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .dialog-modal .predictive-search__close-modal-button {
       padding-inline-start: var(--margin-xs);
       margin-inline-start: 0;
@@ -691,7 +682,7 @@
   }
 
   .dialog-modal[open] {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-radius: 0;
 
       .dialog-modal_content {
@@ -701,18 +692,18 @@
   }
 
   .dialog-modal .predictive-search-form__header:has(.predictive-search-form__header-inner:focus-within) {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       border-bottom-color: transparent;
     }
   }
 
   .dialog-modal .predictive-search-form__header-inner {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       border: 0;
     }
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .dialog-modal {
       .predictive-search__reset-button-icon {
         display: none;
@@ -780,7 +771,7 @@
       margin-block-start: 0;
     }
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       margin-block: var(--margin-lg) var(--margin-sm);
     }
   }
@@ -821,7 +812,7 @@
     gap: var(--gap-md);
     transition: height var(--animation-speed-medium) var(--animation-easing);
 
-    @container (width >= 550px) {
+    @container (min-width: 550px) {
       grid-template-columns: repeat(4, 1fr);
     }
   }
@@ -829,7 +820,7 @@
   .predictive-search-results__wrapper-products:last-child {
     padding-block-end: var(--padding-lg);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding-block-end: var(--padding-sm);
     }
   }
@@ -890,7 +881,7 @@
     width: 60cqi;
     content-visibility: visible;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       width: 27.5cqi;
     }
 
@@ -981,13 +972,13 @@
   }
 
   .predictive-search-results__resource-header slideshow-controls {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
 
   .predictive-search-results__list slideshow-arrows {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
@@ -1169,7 +1160,7 @@
     border-right-color: transparent;
     border-left-color: transparent;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-bottom-color: transparent;
     }
   }

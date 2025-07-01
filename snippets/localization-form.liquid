@@ -280,7 +280,7 @@
     display: flex;
     width: var(--width, auto);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       position: relative;
     }
   }
@@ -351,6 +351,8 @@
     position: relative;
     align-items: center;
     gap: 4px;
+    font-family: var(--menu-localization-font);
+    font-size: var(--menu-localization-font-size);
     font-weight: var(--menu-top-level-font-weight);
     padding-inline: var(--padding-2xs);
     margin-inline: calc(-1 * var(--padding-2xs));
@@ -367,8 +369,8 @@
 
   .drawer-localization__button .icon-flag,
   .dropdown-localization__button .icon-flag {
-    width: var(--icon-size-sm);
-    height: var(--icon-size-sm);
+    width: var(--menu-localization-font-size, var(--icon-size-sm));
+    height: var(--menu-localization-font-size, var(--icon-size-sm));
     clip-path: circle(50%);
     background-position: center;
     background-size: cover;
@@ -549,6 +551,8 @@
     padding-inline: var(--padding-xs) calc(var(--icon-size-xs) + var(--padding-xs));
     text-align: right;
     cursor: pointer;
+    max-width: 40vw;
+    text-overflow: ellipsis;
 
     &:focus-visible {
       outline: var(--focus-outline-width) solid currentColor;
@@ -575,7 +579,7 @@
     width: var(--icon-size-xs);
     height: var(--icon-size-xs);
     position: absolute;
-    right: 20px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -613,11 +617,11 @@
     font-size: var(--font-size-lg);
     padding: var(--padding-md) var(--padding-lg) var(--padding-md) calc(var(--margin-md) + var(--padding-xl));
     border: 1px solid var(--color-foreground);
-    color: var(--color-foreground);
+    color: var(--color-input-text);
     background-color: var(--color-input-background);
     outline-offset: -1px;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       height: 36px;
     }
   }
@@ -655,7 +659,7 @@
     transform: translateY(-50%);
     align-items: center;
     background-color: transparent;
-    color: var(--color-foreground);
+    color: var(--color-input-text);
     border: 0;
   }
 
@@ -672,7 +676,6 @@
     padding: 0;
     position: relative;
     text-decoration: none;
-    font-size: 1.8rem;
     height: 44px;
 
     &:hover {
@@ -722,13 +725,13 @@
 
   /* Additional specificity due to dropdown-localization-component getting a low score */
   dropdown-localization-component .language-selector.language-selector {
-    padding: 10px 16px;
+    padding: 10px 8px 10px 16px;
   }
 
   dropdown-localization-component .localization-form__currency {
     width: max-content;
     opacity: 0;
-    display: none;
+    visibility: hidden;
     transition: none;
   }
 
@@ -742,11 +745,17 @@
     opacity: 1;
     color: var(--color-foreground-muted);
     transition: opacity var(--animation-speed-slow) var(--animation-easing);
-    display: block;
+    visibility: visible;
   }
 
   .dropdown-localization .language-selector:where(:not(.top-shadow)) {
     font-weight: var(--menu-top-level-font-weight);
+  }
+
+  .dropdown-localization:not(dropdown-localization-component) .language-selector,
+  .menu-drawer__localization:not(drawer-localization-component) .language-selector {
+    font-family: var(--menu-localization-font);
+    font-size: var(--menu-localization-font-size);
   }
 
   .menu-drawer__localization .language-selector.h5 {
@@ -773,6 +782,10 @@
     gap: var(--gap-xs);
     margin-block: 0;
     align-items: center;
+  }
+
+  .drawer-localization__button--label.h6 {
+    font-family: var(--menu-localization-font);
   }
 
   .drawer-localization img {

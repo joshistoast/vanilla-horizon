@@ -36,7 +36,7 @@
             data-product-id="{{ product.id }}"
             ref="cards[]"
           >
-            {% content_for 'block', type: 'product-card', id: 'product-card', closest.product: product %}
+            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
           </li>
         {% endfor %}
       {% endcapture %}

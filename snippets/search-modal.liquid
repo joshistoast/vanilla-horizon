@@ -43,7 +43,7 @@
 
     padding: 0;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       width: var(--modal-width);
       margin-block-start: var(--modal-top-margin);
       overflow: hidden;
@@ -51,7 +51,7 @@
   }
 
   /* Hide the default dialog backdrop on small screens */
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .search-modal__content::backdrop {
       display: none;
     }
@@ -63,7 +63,7 @@
     border-radius: var(--search-border-radius);
     box-shadow: var(--shadow-popover);
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       border-radius: 0;
     }
   }
@@ -81,7 +81,7 @@
   }
 
   /* Predictive search header tweaks for small screens */
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .dialog-modal
       .predictive-search-form__header:has(
         .predictive-search__reset-button:not(.predictive-search__reset-button[hidden])

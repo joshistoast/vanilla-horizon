@@ -93,7 +93,7 @@
 
 {% stylesheet %}
   .email-signup-block {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       width: 100%;
     }
   }
@@ -115,7 +115,7 @@
   }
 
   .email-signup__input-group:not(:has(.email-signup__button--arrow)) {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       grid-template-columns: 1fr;
     }
   }
@@ -132,7 +132,7 @@
     white-space: nowrap;
     padding: 0;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       width: 100%;
     }
   }
@@ -172,7 +172,7 @@
 
   .email-signup__input:has(+ .email-signup__button--arrow),
   .email-signup__input:has(+ .email-signup__button--integrated) {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       text-align: left;
     }
   }
@@ -193,7 +193,7 @@
     right: calc(var(--button-offset) + var(--border-width));
     top: calc(var(--button-offset) + var(--border-width));
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       width: fit-content;
     }
 
@@ -253,7 +253,7 @@
     fill: currentcolor;
     padding: 5px;
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       padding: 0;
       align-self: center;
       justify-self: center;

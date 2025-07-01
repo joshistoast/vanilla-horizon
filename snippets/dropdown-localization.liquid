@@ -10,16 +10,15 @@
 {% liquid
   assign background_brightness = section.settings.color_scheme.settings.background | color_brightness
   if background_brightness < 64
-    assign shadow_opacity = 0.25
-    assign flag_shadow_opacity = 0.6
     assign shadow_size = 4
   else
-    assign shadow_opacity = 0.1
-    assign flag_shadow_opacity = 0.3
     assign shadow_size = 2
   endif
 
-  assign form_style = '--color-shadow: rgb(from var(--color-foreground) r g b / ' | append: shadow_opacity | append: ');'
+  assign localization_font = '--menu-localization-font: var(--font-[localization_font]--family); ' | replace: '[localization_font]', section.settings.localization_font
+  assign localization_font_size = '--menu-localization-font-size: [localization_font_size]; ' | replace: '[localization_font_size]', section.settings.localization_font_size
+  assign color_shadow = '--color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));'
+  assign form_style = localization_font | append: localization_font_size | append: color_shadow
 %}
 
 {% if show_language and show_country == false %}
@@ -28,6 +27,7 @@
       show_country: show_country,
       show_language: show_language,
       localization_style: 'dropdown',
+      form_style: form_style,
       block_id: block.id
     %}
   </div>
@@ -42,6 +42,7 @@
       aria-controls="dropdown-localization-results"
       ref="button"
       on:click="/toggleSelector"
+      style="{{ localization_font }} {{ localization_font_size }}"
     >
       <span class="visually-hidden">{{ 'accessibility.localization_region_and_language' | t }}</span>
       {% if show_country %}
@@ -51,7 +52,7 @@
             style="
               background-image: url({{- localization.country | image_url: width: 32 }});
               --size-shadow: {{ shadow_size }}px;
-              --color-shadow: rgb(from var(--color-foreground) r g b / {{ flag_shadow_opacity }});
+              --color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-30-60));
             "
           ></span>
         {% endif %}

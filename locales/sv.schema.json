@@ -161,7 +161,8 @@
     "variant_pickers": "Variantväljare",
     "pills": "Knappar",
     "large_logo": "Stor logotyp",
-    "product_inventory": "Produktlager"
+    "product_inventory": "Produktlager",
+    "description": "Beskrivning"
   },
   "settings": {
     "alignment": "Justering",
@@ -487,7 +488,8 @@
     "show_inventory_quantity": "Visa antal i lager vid låg lagernivå",
     "transition_to_main_product": "Övergång från produktkort till produktsida",
     "show_second_image_on_hover": "Visa den andra bilden vid hovring",
-    "media": "Media"
+    "media": "Media",
+    "product_card_carousel": "Visa karusell"
   },
   "options": {
     "adapt_to_image": "Anpassa till bild",
@@ -845,7 +847,22 @@
     "text": "Text",
     "thumbnails": "Miniatyrbilder",
     "visibility": "Synlighet",
-    "app_required_for_ratings": "En app krävs för produktbetyg. [Mer information](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "En app krävs för produktbetyg. [Mer information](https://help.shopify.com/manual/apps)",
+    "icon": "Ikon",
+    "manage_store_name": "[Hantera butiksnamn](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Visar kollektion från överordnad sektion",
+    "resource_reference_collection_card_image": "Visar bild från överordnad kollektion",
+    "resource_reference_collection_title": "Visar titel från överordnad kollektion",
+    "resource_reference_product": "Ansluter automatiskt till överordnad produkt",
+    "resource_reference_product_card": "Visar produkt från överordnat avsnitt",
+    "resource_reference_product_inventory": "Visar lager från överordnad produkt",
+    "resource_reference_product_price": "Visar pris från överordnad produkt",
+    "resource_reference_product_recommendations": "Visar rekommendationer baserad på överordnad produkt",
+    "resource_reference_product_review": "Visar recensioner från överordnad produkt",
+    "resource_reference_product_swatches": "Visar prover från överordnad produkt",
+    "resource_reference_product_title": "Visar titel från överordnad produkt",
+    "resource_reference_product_variant_picker": "Visar varianter från överordnad produkt",
+    "resource_reference_product_media": "Visar media från överordnad produkt"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Dela information om ditt varumärke med dina kunder. Beskriv en produkt, gör tillkännagivanden eller välkomna kunder till din butik.</p>"

@@ -21,7 +21,7 @@
     id: id,
     class: class,
     can_add_to_cart: can_add_to_cart,
-    product: block.settings.product,
+    product: closest.product,
     add_to_cart_text: add_to_cart_text
   %}
 </span>
@@ -31,11 +31,6 @@
   "name": "t:names.add_to_cart",
   "tag": null,
   "settings": [
-    {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
-    },
     {
       "type": "select",
       "id": "style_class",

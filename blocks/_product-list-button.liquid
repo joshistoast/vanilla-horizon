@@ -1,6 +1,6 @@
 
 
-{% assign button_collection = block.settings.collection %}
+{% assign button_collection = closest.collection %}
 {% assign button_url = button_collection.url %}
 
 {% if button_collection.products.size > section.settings.max_products %}
@@ -21,11 +21,6 @@
       "id": "label",
       "label": "t:settings.label",
       "default": "t:text_defaults.button_label"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "t:settings.collection"
     },
     {
       "type": "checkbox",
@@ -118,7 +113,6 @@
       "category": "t:categories.collection",
       "settings": {
         "label": "View all",
-        "collection": "{{ closest.collection }}",
         "style_class": "button-secondary"
       }
     }

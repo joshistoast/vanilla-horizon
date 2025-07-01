@@ -178,7 +178,7 @@
     flex-grow: 0;
   }
 
-  @container (width < 200px) {
+  @container (max-width: 199px) {
     .facets__inputs-wrapper.price-facet__inputs-wrapper {
       flex-wrap: wrap;
       width: 100%;
@@ -199,7 +199,7 @@
   }
 
   .facets--horizontal .facets__inputs-wrapper.price-facet__inputs-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding: calc(var(--padding-md) + var(--style-border-width-inputs));
     }
   }

@@ -431,7 +431,7 @@
   }
 
   .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
-    border-color: rgb(from var(--color-foreground) r g b / 40%);
+    border-color: rgb(from var(--color-foreground) r g b / var(--opacity-40-60));
     background-color: rgb(from var(--color-foreground) r g b / 5%);
   }
 
@@ -463,7 +463,7 @@
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 0 var(--pill-label-border-width)
-      rgb(from var(--pill-label-color) r g b / var(--pill-label-border-opacity));
+      rgb(from var(--pill-label-color) r g b / var(--opacity-10-25));
     border-radius: var(--pill-label-border-radius);
     height: var(--pill-label-height);
     width: 100%;
@@ -504,7 +504,7 @@
   }
 
   .facets--drawer .facets__status-wrapper {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       gap: var(--gap-3xs);
     }
   }
@@ -558,7 +558,7 @@
     --variant-picker-swatch-width: 32px;
     --variant-picker-swatch-height: 32px;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --variant-picker-swatch-width: 26px;
       --variant-picker-swatch-height: 26px;
     }
@@ -622,13 +622,13 @@
   }
 
   .facets--horizontal .facets__status--swatches {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: flex;
     }
   }
 
   .facets--horizontal .sorting-filter .facets__status {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -707,7 +707,7 @@
   .facets--drawer .facets__inputs-wrapper .facets__inputs-list--images {
     grid-template-columns: repeat(3, 1fr);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       grid-template-columns: repeat(4, 1fr);
     }
   }

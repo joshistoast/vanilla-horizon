@@ -1,5 +1,5 @@
 import { Component } from '@theme/component';
-import { debounce, onAnimationEnd, prefersReducedMotion } from '@theme/utilities';
+import { debounce, onAnimationEnd, prefersReducedMotion, onDocumentReady } from '@theme/utilities';
 import { sectionRenderer } from '@theme/section-renderer';
 import { morph } from '@theme/morph';
 import { ThemeEvents } from '@theme/events';
@@ -62,7 +62,7 @@ class PredictiveSearchComponent extends Component {
       document.addEventListener(ThemeEvents.megaMenuHover, this.#blurSearch, { signal });
     }
 
-    this.#getRecentlyViewed();
+    onDocumentReady(this.#getRecentlyViewed);
 
     const results = this.refs.predictiveSearchResults.firstElementChild;
 
@@ -367,7 +367,7 @@ class PredictiveSearchComponent extends Component {
   /**
    * Fetch recently viewed products using the section renderer and update the results container.
    */
-  async #getRecentlyViewed() {
+  #getRecentlyViewed = async () => {
     const { predictiveSearchResults } = this.refs;
     // Get the initial height before the results are rendered
     const abortController = this.#createAbortController();
@@ -399,7 +399,7 @@ class PredictiveSearchComponent extends Component {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   #hideResetButton() {
     const { resetButton } = this.refs;

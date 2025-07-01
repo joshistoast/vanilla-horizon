@@ -6,18 +6,15 @@
   @param {string} [loading] - The html loading attribute
 {%- enddoc -%}
 
-{% assign image = block.settings.image
-  | default: closest.collection.featured_image
-  | default: closest.product.featured_image
-%}
-{% assign alt = block.settings.alt | default: closest.collection.title | default: closest.product.title %}
+{% assign image = closest.collection.featured_image | default: closest.product.featured_image %}
+{% assign alt = closest.collection.title | default: closest.product.title %}
 
 {% liquid
   assign width = '100%'
   assign media_width_desktop = '100vw'
   assign media_width_mobile = '100vw'
   assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
-  assign widths = '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'
+  assign widths = '450, 750, 1200, 1800, 2000'
 %}
 
 {% if image %}
@@ -29,7 +26,7 @@
   >
     {{
       image
-      | image_url: width: 3840
+      | image_url: width: 2000
       | image_tag: width: width, widths: widths, sizes: sizes, loading: loading, alt: alt
     }}
   </image-block>
@@ -63,13 +60,13 @@
     --image-height-medium: calc(var(--image-height-basis) * 3);
     --image-height-large: calc(var(--image-height-basis) * 4);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --image-height-small: calc(var(--image-height-basis) * 2.5);
       --image-height-medium: calc(var(--image-height-basis) * 3.5);
       --image-height-large: calc(var(--image-height-basis) * 4.5);
     }
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       height: auto;
     }
 
@@ -92,7 +89,7 @@
     &[ratio='square'] {
       --ratio: 1 / 1;
 
-      @media screen and (width >= 750px) {
+      @media screen and (min-width: 750px) {
         max-width: var(--image-height);
       }
     }
@@ -117,9 +114,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "t:settings.image"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_collection_card_image"
     },
     {
       "type": "select",

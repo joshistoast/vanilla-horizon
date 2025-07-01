@@ -1,7 +1,7 @@
 
 
 {% liquid
-  assign product = block.settings.product
+  assign product = closest.product
   assign rating = product.metafields.reviews.rating.value.rating
   assign scale_max = product.metafields.reviews.rating.value.scale_max
   assign rating_count = product.metafields.reviews.rating_count
@@ -41,6 +41,7 @@
       style="width: 0; height: 0;"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 32 32"
+      role="presentation"
     >
       <defs>
         <linearGradient id="half" x1="0" x2="100%" y1="0" y2="0">
@@ -56,13 +57,14 @@
     <div
       class="rating"
       style="--star-size: calc(var(--font-{{ block.settings.type_preset }}--size) * 1.1);"
-      aria-label="Rating of this product is {{ rating }} out of 5"
+      aria-label="{{ 'accessibility.rating' | t: rating: rating }}"
     >
       {% if block.settings.stars_style == 'single' %}
         <svg
           class="stars {% if svg_filled_stars > 0 %}filled-star{% endif %}"
           viewBox="0 0 32 32"
           style="--empty-star-fill-color:rgb(from var(--star-fill-color) r g b/ 0.2)"
+          role="presentation"
         >
           <use xlink:href="#star"></use>
         </svg>
@@ -72,6 +74,7 @@
             class="stars {% if star <= svg_filled_stars %}filled-star{% endif %}"
             viewBox="0 0 32 32"
             style="--empty-star-fill-color:{% if block.settings.stars_style == 'outline' %}transparent{% else %}rgb(from var(--star-fill-color) r g b/ 0.2){% endif %}"
+            role="presentation"
           >
             <use xlink:href="#star"{% if decimal_rating == 0.5 and star == svg_filled_stars %} fill="url(#half)"{% endif %}></use>
             {% if block.settings.stars_style == "outline" %}
@@ -85,7 +88,7 @@
     {%- if block.settings.show_number or block.settings.stars_style == 'single' -%}
       <p class="rating-count {{ block.settings.type_preset }}">
         {%- if block.settings.stars_style == 'single' -%}
-          {{- rating | round: 1 }}
+          <span aria-hidden="true">{{- rating | round: 1 }}</span>
         {%- endif -%}
         {%- if block.settings.stars_style == 'single' and block.settings.show_number -%}
           <span class="rating-count-separator">|</span>
@@ -159,12 +162,11 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "t:content.app_required_for_ratings"
+      "content": "t:content.resource_reference_product_review"
     },
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.app_required_for_ratings"
     },
     {
       "type": "select",
@@ -258,10 +260,7 @@
   "presets": [
     {
       "name": "t:names.product_review_stars",
-      "category": "t:categories.product",
-      "settings": {
-        "product": "{{ closest.product }}"
-      }
+      "category": "t:categories.product"
     }
   ]
 }

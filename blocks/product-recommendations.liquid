@@ -30,7 +30,7 @@
   class="product-recommendations"
   data-url="{{ routes.product_recommendations_url }}?limit={{ block.settings.max_products }}"
   data-section-id="{{ section.id }}"
-  data-product-id="{{ block.settings.product.id }}"
+  data-product-id="{{ closest.product.id }}"
   data-intent="{{ block.settings.recommendation_type }}"
   data-recommendations-performed="{{ recommendations.performed }}"
   {% if request.visual_preview_mode %}
@@ -58,11 +58,11 @@
       {% content_for 'blocks' %}
     </div>
 
-    {%- if recommendations.performed or block.settings.product == blank -%}
+    {%- if recommendations.performed or closest.product == blank -%}
       {% liquid
         assign products = recommendations.products
 
-        if block.settings.product == blank
+        if closest.product == blank
           if request.design_mode or request.visual_preview_mode
             # Onboarding mode: Show placeholder products
             for i in (1..block.settings.max_products)
@@ -73,7 +73,7 @@
         elsif recommendations.performed and recommendations.products_count == 0
           # No recommendations found, pull from catalog
           if block.settings.recommendation_type == 'related'
-            assign products = collections.all.products | reject: 'id', block.settings.product.id
+            assign products = collections.all.products | reject: 'id', closest.product.id
           elsif block.settings.recommendation_type == 'complementary'
             # Do not recommend the All collection as complementary products
             assign products = null
@@ -86,7 +86,7 @@
         {% for product in products limit: block.settings.max_products %}
           <div class="resource-list__item">
             {% content_for 'block',
-              type: 'product-card',
+              type: '_product-card',
               id: 'static-product-card',
               closest.product: product
             %}
@@ -205,9 +205,8 @@
   ],
   "settings": [
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_recommendations"
     },
     {
       "type": "select",
@@ -392,7 +391,6 @@
       "name": "t:names.product_recommendations",
       "category": "t:categories.product",
       "settings": {
-        "product": "{{ closest.product }}",
         "recommendation_type": "related"
       },
       "blocks": {
@@ -403,47 +401,38 @@
           }
         },
         "static-product-card": {
-          "type": "product-card",
+          "type": "_product-card",
           "static": true,
-          "settings": {
-            "product": "{{ closest.product }}"
-          },
+          "settings": {},
           "blocks": {
             "product-card-gallery": {
-              "type": "_product-card-gallery",
-              "settings": {
-                "product": "{{ closest.product }}"
-              }
+              "type": "_product-card-gallery"
             },
             "group": {
-              "type": "group",
+              "type": "_product-card-group",
               "settings": {
                 "content_direction": "column",
                 "gap": 4
               },
               "blocks": {
-                "text": {
+                "product_title": {
                   "type": "product-title",
+                  "name": "t:names.title",
                   "settings": {
-                    "product": "{{ closest.product }}",
-                    "type_preset": "paragraph"
+                    "type_preset": "h5"
                   }
                 },
                 "price": {
                   "type": "price",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "show_tax_info": false
                   }
                 },
                 "swatches": {
-                  "type": "swatches",
-                  "settings": {
-                    "product": "{{ closest.product }}"
-                  }
+                  "type": "swatches"
                 }
               },
-              "block_order": ["text", "price", "swatches"]
+              "block_order": ["product_title", "price", "swatches"]
             }
           },
           "block_order": ["product-card-gallery", "group"]

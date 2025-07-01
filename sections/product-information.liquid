@@ -8,7 +8,7 @@
   endif
 
   assign product_has_media = true
-  if section.settings.product.media.size == 0
+  if closest.product.media.size == 0
     assign product_has_media = false
   endif
 
@@ -39,7 +39,7 @@
 %}
 
 <script type="application/ld+json">
-  {{ section.settings.product | structured_data }}
+  {{ closest.product | structured_data }}
 </script>
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -64,7 +64,7 @@
         {%- content_for 'block',
           type: '_product-media-gallery',
           id: 'media-gallery',
-          closest.product: section.settings.product
+          closest.product: closest.product
         -%}
       </div>
     {% endcapture %}
@@ -73,7 +73,7 @@
       {% content_for 'block',
         type: '_product-details',
         id: 'product-details',
-        closest.product: section.settings.product
+        closest.product: closest.product
       %}
     {% endcapture %}
 
@@ -113,7 +113,7 @@
   }
 
   /* Mobile styles */
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .product-information__media {
       grid-column: 1 / -1;
     }
@@ -123,7 +123,7 @@
   }
 
   /* Desktop styles */
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .product-information__grid {
       grid-column: 2;
     }
@@ -267,11 +267,6 @@
     "groups": ["header", "footer"]
   },
   "settings": [
-    {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
-    },
     {
       "type": "header",
       "content": "t:content.layout"

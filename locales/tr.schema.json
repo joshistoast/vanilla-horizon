@@ -161,7 +161,8 @@
     "large_logo": "Büyük logo",
     "product_list_button": "Tümünü görüntüle düğmesi",
     "product_inventory": "Ürün envanteri",
-    "pills": "Seçenekler"
+    "pills": "Seçenekler",
+    "description": "Açıklama"
   },
   "settings": {
     "autoplay": "Otomatik oynatma",
@@ -487,7 +488,7 @@
     "text_label_case": "Metin etiketi büyük/küçük harf durumu",
     "transition_to_main_product": "Ürün kartı - ürün sayfası geçişi",
     "media": "Medya",
-    "product_card_carousel": "Görsel döngüsü",
+    "product_card_carousel": "Döngüyü göster",
     "show_second_image_on_hover": "Üzerine gelindiğinde ikinci görseli göster"
   },
   "options": {
@@ -846,7 +847,22 @@
     "visibility": "Görünürlük",
     "visible_if_collection_has_more_products": "Koleksiyonda gösterilenden daha fazla ürün varsa görünür",
     "grid_layout": "Izgara düzeni",
-    "app_required_for_ratings": "Ürün derecelendirmeleri için bir uygulama gereklidir. [Daha fazla bilgi edinin](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Ürün derecelendirmeleri için bir uygulama gereklidir. [Daha fazla bilgi edinin](https://help.shopify.com/manual/apps)",
+    "icon": "Simge",
+    "manage_store_name": "[Mağaza adını yönet](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Üst bölümden koleksiyonu görüntüler",
+    "resource_reference_collection_card_image": "Üst koleksiyondan görseli görüntüler",
+    "resource_reference_collection_title": "Üst koleksiyondan başlığı görüntüler",
+    "resource_reference_product": "Üst ürüne otomatik bağlanır",
+    "resource_reference_product_card": "Üst bölümden ürünü görüntüler",
+    "resource_reference_product_inventory": "Üst üründen stok görüntüler",
+    "resource_reference_product_price": "Üst üründen fiyat görüntüler",
+    "resource_reference_product_recommendations": "Üst ürüne dayalı önerileri görüntüler",
+    "resource_reference_product_review": "Üst üründen incelemeleri görüntüler",
+    "resource_reference_product_swatches": "Üst üründen renk örneklerini görüntüler",
+    "resource_reference_product_title": "Üst üründen başlığı görüntüler",
+    "resource_reference_product_variant_picker": "Üst üründen varyantları görüntüler",
+    "resource_reference_product_media": "Üst üründen medyayı görüntüler"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Müşterilerinizle markanız hakkında bilgi paylaşın. Ürün açıklaması girin, duyuru paylaşın veya mağazanıza gelen müşterileri karşılayın.</p>"

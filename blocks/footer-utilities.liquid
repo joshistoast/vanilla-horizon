@@ -26,7 +26,7 @@
     border-top: var(--border-width) solid var(--color-border);
     color: var(--color-foreground-muted);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       flex-direction: row;
       justify-content: space-between;
       gap: var(--gap-md);
@@ -49,7 +49,7 @@
     flex-wrap: wrap;
     gap: var(--gap-md);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       flex-direction: row;
       align-items: baseline;
       gap: var(--gap-2xs) var(--gap-xl);
@@ -58,13 +58,13 @@
   }
 
   .footer-utilities__group--right {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       justify-content: flex-end;
     }
   }
 
   .footer-utilities__group:empty {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
