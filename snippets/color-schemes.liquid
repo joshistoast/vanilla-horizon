@@ -4,8 +4,27 @@
     {% if forloop.index == 1 %}
       :root,
     {% endif %}
+    {% assign background_brightness = scheme.settings.background | color_brightness %}
+    {% if background_brightness < 64 %}
+      {% assign opacity_5_15 = 0.15 %}
+      {% assign opacity_10_25 = 0.25 %}
+      {% assign opacity_35_55 = 0.55 %}
+      {% assign opacity_40_60 = 0.60 %}
+      {% assign opacity_30_60 = 0.60 %}
+    {% else %}
+      {% assign opacity_5_15 = 0.05 %}
+      {% assign opacity_10_25 = 0.1 %}
+      {% assign opacity_35_55 = 0.35 %}
+      {% assign opacity_40_60 = 0.40 %}
+      {% assign opacity_30_60 = 0.30 %}
+    {% endif %}
     .color-{{ scheme.id }} {
         --color-background: rgba({{ scheme.settings.background.rgba }});
+        --opacity-5-15: {{ opacity_5_15 }};
+        --opacity-10-25: {{ opacity_10_25 }};
+        --opacity-35-55: {{ opacity_35_55 }};
+        --opacity-40-60: {{ opacity_40_60 }};
+        --opacity-30-60: {{ opacity_30_60 }};
         --color-foreground: rgba({{ scheme.settings.foreground.rgba }});
         --color-foreground-heading: rgba({{ scheme.settings.foreground_heading.rgba }});
         --color-primary: rgba({{ scheme.settings.primary.rgba }});
@@ -41,7 +60,7 @@
         --color-selected-variant-hover-text: rgba({{ scheme.settings.selected_variant_hover_text_color.rgba }});
         --color-selected-variant-hover-border: rgba({{ scheme.settings.selected_variant_hover_border_color.rgba }});
         --input-disabled-background-color: rgb(from var(--color-foreground) r g b / 10%);
-        --input-disabled-border-color: rgb(from var(--color-foreground) r g b / 5%);
+        --input-disabled-border-color: rgb(from var(--color-foreground) r g b / var(--opacity-5-15));
         --input-disabled-text-color: rgb(from var(--color-foreground) r g b / 50%);
         --color-foreground-muted: rgb(from var(--color-foreground) r g b / 60%);
         --font-h1--color: var(--color-foreground-heading);

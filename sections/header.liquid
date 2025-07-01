@@ -387,7 +387,7 @@
     border-bottom: var(--border-bottom-width) solid var(--color-border);
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .header__row--top:not(.divider--page-width),
     .header__row--top.divider--page-width .header__columns {
       border-bottom-width: var(--border-bottom-width-mobile);
@@ -395,7 +395,7 @@
   }
 
   .header__row.divider--page-width:not(.section--page-width) .header__columns {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding-inline-start: 0;
       padding-inline-end: 0;
       margin-inline-start: var(--page-margin);
@@ -407,7 +407,7 @@
     display: flex;
     align-items: center;
     /* on mobile, header__column nodes are ignored to create a new grid-template-area based on all visible content */
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: contents;
     }
   }
@@ -461,7 +461,7 @@
 
     /* If there is no center column, make the column the menu is in grow eagerly */
     &:where(:not(:has(.header__column--center))) {
-      @media screen and (width >= 750px) {
+      @media screen and (min-width: 750px) {
         grid-template-areas: 'left right';
         --header-template-columns: var(--header-left) var(--header-right);
       }
@@ -478,7 +478,7 @@
       }
     }
 
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
         var(--header-mobile-bookend) var(--header-mobile-bookend);
       grid-template-areas: 'leftA leftB center rightA rightB';
@@ -718,6 +718,59 @@
       "label": "t:settings.language_selector",
       "info": "t:info.manage_languages",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "localization_font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "heading",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "subheading",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "body",
+          "label": "t:options.body"
+        },
+        {
+          "value": "accent",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": "heading",
+      "visible_if": "{{ section.settings.show_country or section.settings.show_language }}"
+    },
+    {
+      "type": "select",
+      "id": "localization_font_size",
+      "label": "t:settings.size",
+      "options": [
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        }
+      ],
+      "default": "1rem"
     },
     {
       "type": "select",

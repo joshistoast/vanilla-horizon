@@ -11,7 +11,7 @@
 {%- enddoc -%}
 
 {% liquid
-  assign product = block.settings.product
+  assign product = closest.product
   if request.visual_preview_mode and product == blank
     assign product = collections.all.products.first
   endif
@@ -60,22 +60,6 @@
 {% schema %}
 {
   "name": "t:names.accelerated_checkout",
-  "tag": null,
-  "settings": [
-    {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
-    }
-  ],
-  "presets": [
-    {
-      "name": "t:names.accelerated_checkout",
-      "settings": {
-        "product": "{{ closest.product }}"
-      },
-      "category": "t:categories.product"
-    }
-  ]
+  "tag": null
 }
 {% endschema %}

@@ -229,7 +229,9 @@ function registerEventListeners() {
         const value = element.getAttribute(attribute) ?? '';
         let [selector, method] = value.split('/');
         // Extract the last segment of the attribute value delimited by `?` or `/`
-        const data = value.match(/(?<=[\/\?][^\/\?]+)[\/\?][^\/\?]+$/)?.[0];
+        // Do not use lookback for Safari 16.0 compatibility
+        const matches = value.match(/([\/\?][^\/\?]+)([\/\?][^\/\?]+)$/);
+        const data = matches ? matches[2] : null;
         const instance = selector
           ? selector.startsWith('#')
             ? document.querySelector(selector)

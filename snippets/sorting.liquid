@@ -182,7 +182,7 @@
   }
 
   .sorting-filter {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       z-index: var(--facets-upper-z-index);
     }
   }
@@ -239,7 +239,7 @@
   }
 
   .facets-toggle--no-filters .sorting-filter__select-wrapper {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       padding-inline-start: 0;
     }
   }
@@ -283,25 +283,25 @@
   }
 
   .facets-toggle .sorting-filter__container {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       padding: 0;
     }
   }
 
   .facets-toggle .sorting-filter__container .facets__label {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
 
   .facets-toggle .sorting-filter::before {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
 
   .facets--drawer .sorting-filter {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }

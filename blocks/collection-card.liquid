@@ -22,7 +22,13 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
-{% render 'collection-card', card_image: card_image, children: children, block: block %}
+{% render 'collection-card',
+  card_image: card_image,
+  children: children,
+  block: block,
+  collection: collection,
+  section: section
+%}
 
 {% schema %}
 {
@@ -198,15 +204,11 @@
       "blocks": {
         "collection-card-image": {
           "type": "_collection-card-image",
-          "static": true,
-          "settings": {
-            "collection": "{{ closest.collection }}"
-          }
+          "static": true
         },
         "collection-title": {
           "type": "collection-title",
           "settings": {
-            "collection": "{{ closest.collection }}",
             "type_preset": "h4"
           }
         }

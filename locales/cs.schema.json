@@ -161,7 +161,8 @@
     "large_logo": "Velké logo",
     "product_list_button": "Zobrazit tlačítko vše",
     "product_inventory": "Skladové zásoby produktu",
-    "pills": "Kulaté přepínače"
+    "pills": "Kulaté přepínače",
+    "description": "Popis"
   },
   "settings": {
     "alignment": "Zarovnání",
@@ -487,7 +488,8 @@
     "text_label_case": "Interní balení textového štítku",
     "transition_to_main_product": "Přechod z karty produktu na stránku produktu",
     "show_second_image_on_hover": "Zobrazit druhý obrázek po najetí myší/prstem",
-    "media": "Média"
+    "media": "Média",
+    "product_card_carousel": "Zobrazit karusel"
   },
   "options": {
     "adapt_to_image": "Přizpůsobení obrázku",
@@ -845,7 +847,21 @@
     "visibility": "Viditelnost",
     "visible_if_collection_has_more_products": "Viditelné, pokud kolekce obsahuje více produktů, než je jich zobrazeno",
     "grid_layout": "Rozvržení mřížky",
-    "app_required_for_ratings": "Pro hodnocení produktů je nutná aplikace. [Zjistit více](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Pro hodnocení produktů je nutná aplikace. [Zjistit více](https://help.shopify.com/manual/apps)",
+    "icon": "Ikona",
+    "resource_reference_collection_card": "Zobrazí kolekci z nadřazené sekce",
+    "resource_reference_collection_card_image": "Zobrazí obrázek z nadřazené kolekce",
+    "resource_reference_collection_title": "Zobrazí název z nadřazené kolekce",
+    "resource_reference_product": "Automaticky se připojí k nadřazenému produktu",
+    "resource_reference_product_card": "Zobrazí produkt z nadřazené sekce",
+    "resource_reference_product_inventory": "Zobrazí zásoby z nadřazeného produktu",
+    "resource_reference_product_price": "Zobrazí cenu z nadřazeného produktu",
+    "resource_reference_product_recommendations": "Zobrazí doporučení na základě nadřazeného produktu",
+    "resource_reference_product_review": "Zobrazí recenze z nadřazeného produktu",
+    "resource_reference_product_swatches": "Zobrazí vzorky z nadřazeného produktu",
+    "resource_reference_product_title": "Zobrazí název z nadřazeného produktu",
+    "resource_reference_product_variant_picker": "Zobrazí varianty z nadřazeného produktu",
+    "resource_reference_product_media": "Zobrazí média z nadřazeného produktu"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Informujte zákazníky o své značce. Zároveň můžete popsat některý z produktů, oznámit důležité informace nebo přivítat zákazníky ve svém obchodě.</p>"

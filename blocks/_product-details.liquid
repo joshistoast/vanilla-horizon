@@ -30,7 +30,7 @@
 
 {% stylesheet %}
   /* Clear padding on mobile, if not full-width */
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .product-information.section--page-width .product-details > .group-block {
       padding-inline: 0;
     }
@@ -47,7 +47,7 @@
     justify-content: center;
   }
 
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .product-details > .group-block {
       height: min-content;
     }
@@ -476,7 +476,6 @@
         "price_a7krng": {
           "type": "price",
           "settings": {
-            "product": "{{ closest.product }}",
             "show_tax_info": true,
             "type_preset": "h4",
             "alignment": "left"
@@ -485,7 +484,6 @@
         "variant_picker_R3rGDr": {
           "type": "variant-picker",
           "settings": {
-            "product": "{{ closest.product }}",
             "variant_style": "pills",
             "padding-block-start": 0,
             "padding-block-end": 8,
@@ -496,7 +494,6 @@
         "buy_buttons_eYQEYi": {
           "type": "buy-buttons",
           "settings": {
-            "product": "{{ closest.product }}",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -507,16 +504,12 @@
               "type": "add-to-cart",
               "static": true,
               "settings": {
-                "product": "{{ closest.product }}",
                 "style_class": "button-secondary"
               }
             },
             "accelerated-checkout": {
               "type": "accelerated-checkout",
-              "static": true,
-              "settings": {
-                "product": "{{ closest.product }}"
-              }
+              "static": true
             }
           },
           "block_order": []
@@ -684,7 +677,6 @@
         "complementary_products": {
           "type": "product-recommendations",
           "settings": {
-            "product": "{{ closest.product }}",
             "recommendation_type": "complementary"
           },
           "blocks": {

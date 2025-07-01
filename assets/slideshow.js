@@ -8,6 +8,7 @@ import {
   prefersReducedMotion,
   preventDefault,
   viewTransition,
+  scheduler,
 } from '@theme/utilities';
 import { Scroller, scrollIntoView } from '@theme/scrolling';
 import { SlideshowSelectEvent } from '@theme/events';
@@ -65,32 +66,35 @@ export class Slideshow extends Component {
 
     this.current = this.dataset.initialSlide ? parseInt(this.dataset.initialSlide, 10) : 0;
 
-    let visibleSlidesAmount = 0;
+    // Batch reads and writes to the DOM
+    scheduler.schedule(() => {
+      let visibleSlidesAmount = 0;
 
-    if (this.current !== 0) {
-      this.select(this.current, undefined, { animate: false });
-      visibleSlidesAmount = 1;
-    } else {
-      visibleSlidesAmount = this.#updateVisibleSlides();
-      if (visibleSlidesAmount === 0) {
-        this.select(0, undefined, { animate: false });
+      if (this.current !== 0) {
+        this.select(this.current, undefined, { animate: false });
         visibleSlidesAmount = 1;
-      }
-    }
-
-    this.#resizeObserver = new ResizeObserver(async () => {
-      if (viewTransition.current) await viewTransition.current;
-
-      if (visibleSlidesAmount > 1) {
-        this.#updateVisibleSlides();
+      } else {
+        visibleSlidesAmount = this.#updateVisibleSlides();
+        if (visibleSlidesAmount === 0) {
+          this.select(0, undefined, { animate: false });
+          visibleSlidesAmount = 1;
+        }
       }
 
-      if (this.hasAttribute('auto-hide-controls')) {
-        this.#updateControlsVisibility();
-      }
+      this.#resizeObserver = new ResizeObserver(async () => {
+        if (viewTransition.current) await viewTransition.current;
+
+        if (visibleSlidesAmount > 1) {
+          this.#updateVisibleSlides();
+        }
+
+        if (this.hasAttribute('auto-hide-controls')) {
+          this.#updateControlsVisibility();
+        }
+      });
+
+      this.#resizeObserver.observe(this.refs.slideshowContainer);
     });
-
-    this.#resizeObserver.observe(this.refs.slideshowContainer);
   }
 
   disconnectedCallback() {
@@ -697,10 +701,13 @@ export class Slideshow extends Component {
 
     const visibleSlides = this.visibleSlides;
 
-    // Update aria-hidden based on visibility
-    slides.forEach((slide) => {
-      const isVisible = visibleSlides.includes(slide);
-      slide.setAttribute('aria-hidden', `${!isVisible}`);
+    // Batch writes to the DOM
+    scheduler.schedule(() => {
+      // Update aria-hidden based on visibility
+      slides.forEach((slide) => {
+        const isVisible = visibleSlides.includes(slide);
+        slide.setAttribute('aria-hidden', `${!isVisible}`);
+      });
     });
 
     return visibleSlides.length;

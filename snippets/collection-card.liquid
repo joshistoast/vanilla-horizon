@@ -4,15 +4,23 @@
 
   @param {string} card_image - The image to display in the collection card
   @param {string} children - The content to render inside the collection card
+  @param {object} collection - The collection to render the card for
+  @param {object} block - The block object
+  @param {object} section - The section object
 
   @example
-  {% render 'collection-card', children: collection_content %}
+  {% render 'collection-card',
+    card_image: card_image,
+    children: children,
+    block: block,
+    collection: collection,
+    section: section
+  %}
 {%- enddoc -%}
 
 {% liquid
-  assign collection = block.settings.collection
-
   assign onboarding = false
+
   if collection == blank
     assign onboarding = true
   endif

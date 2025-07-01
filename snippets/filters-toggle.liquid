@@ -78,7 +78,7 @@
     padding-block: var(--facets-inner-padding-block);
     padding-inline: var(--facets-inner-padding-inline);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -90,7 +90,7 @@
   .facets-toggle__button {
     box-shadow: none;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -127,7 +127,7 @@
   .filter-count-bubble__background {
     position: absolute;
     inset: 0;
-    background-color: rgb(from var(--color-foreground) r g b / 10%);
+    background-color: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));
     border-radius: var(--style-border-radius-50);
   }
 
@@ -138,7 +138,7 @@
   }
 
   .facets-toggle--no-filters {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       justify-content: unset !important;
 
       & > .facets-mobile-wrapper {

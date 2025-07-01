@@ -161,7 +161,8 @@
     "product_title": "Produkttittel",
     "large_logo": "Stor logo",
     "product_list_button": "«Vis alle»-knappen",
-    "product_inventory": "Produktlager"
+    "product_inventory": "Produktlager",
+    "description": "Beskrivelse"
   },
   "settings": {
     "alignment": "Justering",
@@ -487,7 +488,8 @@
     "show_inventory_quantity": "Vis lav lagerbeholdning",
     "transition_to_main_product": "Overgang fra produktkort til produktside",
     "show_second_image_on_hover": "Vis sekundærbilde når musepekeren beveges over",
-    "media": "Medier"
+    "media": "Medier",
+    "product_card_carousel": "Vis karusell"
   },
   "options": {
     "adapt_to_image": "Tilpass til bilde",
@@ -845,7 +847,22 @@
     "thumbnails": "Miniatyrbilder",
     "visibility": "Synlighet",
     "visible_if_collection_has_more_products": "Synlig hvis samlingen har flere produkter enn det som vises",
-    "app_required_for_ratings": "En app kreves for produktanmeldelser. [Finn ut mer](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "En app kreves for produktanmeldelser. [Finn ut mer](https://help.shopify.com/manual/apps)",
+    "icon": "Ikon",
+    "manage_store_name": "[Administrer butikknavnet](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Viser samling fra overordnet seksjon",
+    "resource_reference_collection_card_image": "Viser bilde fra overordnet samling",
+    "resource_reference_collection_title": "Viser tittel fra overordnet samling",
+    "resource_reference_product": "Kobles automatisk til overordnet produkt",
+    "resource_reference_product_card": "Viser produkt fra overordnet seksjon",
+    "resource_reference_product_inventory": "Viser lager fra overordnet produkt",
+    "resource_reference_product_price": "Viser pris fra overordnet produkt",
+    "resource_reference_product_recommendations": "Viser anbefalinger basert på overordnet produkt",
+    "resource_reference_product_review": "Viser anmeldelser fra overordnet produkt",
+    "resource_reference_product_swatches": "Viser fargeprøver fra overordnet produkt",
+    "resource_reference_product_title": "Viser tittel fra overordnet produkt",
+    "resource_reference_product_variant_picker": "Viser varianter fra overordnet produkt",
+    "resource_reference_product_media": "Viser medier fra overordnet produkt"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Del informasjon om merkevaren din med kundene. Beskriv et produkt, gjør kunngjøringer eller ønsk kundene velkommen til butikken.</p>"

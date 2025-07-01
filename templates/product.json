@@ -15,7 +15,6 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "product": "{{ closest.product }}",
             "media_presentation": "grid",
             "media_columns": "two",
             "image_gap": 4,
@@ -168,7 +167,6 @@
                     "price_iBYhxh": {
                       "type": "price",
                       "settings": {
-                        "product": "{{ closest.product }}",
                         "show_sale_price_first": true,
                         "show_installments": true,
                         "show_tax_info": false,
@@ -191,7 +189,6 @@
                 "variant_picker_VT89rh": {
                   "type": "variant-picker",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "variant_style": "buttons",
                     "show_swatches": true,
                     "alignment": "left",
@@ -205,7 +202,6 @@
                 "buy_buttons_64taHw": {
                   "type": "buy-buttons",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "stacking": false,
                     "show_pickup_availability": false,
                     "padding-block-start": 0,
@@ -217,16 +213,13 @@
                     "quantity": {
                       "type": "quantity",
                       "static": true,
-                      "settings": {
-                        "product": "{{ closest.product }}"
-                      },
+                      "settings": {},
                       "blocks": {}
                     },
                     "add-to-cart": {
                       "type": "add-to-cart",
                       "static": true,
                       "settings": {
-                        "product": "{{ closest.product }}",
                         "style_class": "button-secondary"
                       },
                       "blocks": {}
@@ -234,9 +227,7 @@
                     "accelerated-checkout": {
                       "type": "accelerated-checkout",
                       "static": true,
-                      "settings": {
-                        "product": "{{ closest.product }}"
-                      },
+                      "settings": {},
                       "blocks": {}
                     }
                   },
@@ -668,7 +659,6 @@
                 "product_recommendations_Rpc8dN": {
                   "type": "product-recommendations",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "recommendation_type": "complementary",
                     "layout_type": "grid",
                     "carousel_on_mobile": true,
@@ -709,7 +699,7 @@
                       "blocks": {}
                     },
                     "static-product-card": {
-                      "type": "product-card",
+                      "type": "_product-card",
                       "static": true,
                       "settings": {
                         "product_card_gap": 16,
@@ -729,7 +719,6 @@
                           "type": "product-title",
                           "name": "t:names.product_title",
                           "settings": {
-                            "product": "{{ closest.product }}",
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
@@ -755,7 +744,6 @@
                           "type": "price",
                           "name": "t:names.product_price",
                           "settings": {
-                            "product": "{{ closest.product }}",
                             "show_sale_price_first": true,
                             "show_installments": false,
                             "show_tax_info": false,
@@ -773,7 +761,6 @@
                           "type": "swatches",
                           "name": "t:names.swatches",
                           "settings": {
-                            "product": "{{ closest.product }}",
                             "product_swatches_alignment": "flex-start",
                             "product_swatches_alignment_mobile": "flex-start",
                             "hide_padding": false,
@@ -813,7 +800,6 @@
         }
       },
       "settings": {
-        "product": "{{ closest.product }}",
         "content_width": "content-center-aligned",
         "desktop_media_position": "right",
         "equal_columns": true,
@@ -1483,11 +1469,10 @@
           "blocks": {}
         },
         "static-product-card": {
-          "type": "product-card",
+          "type": "_product-card",
           "name": "t:names.product_card",
           "static": true,
           "settings": {
-            "product": "{{ closest.product }}",
             "product_card_gap": 16,
             "inherit_color_scheme": true,
             "color_scheme": "",
@@ -1505,7 +1490,6 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "product": "{{ closest.product }}",
                 "image_ratio": "portrait",
                 "border": "none",
                 "border_width": 1,
@@ -1519,7 +1503,7 @@
               "blocks": {}
             },
             "group_GRhihq": {
-              "type": "group",
+              "type": "_product-card-group",
               "settings": {
                 "open_in_new_tab": false,
                 "content_direction": "column",
@@ -1559,7 +1543,6 @@
                   "type": "product-title",
                   "name": "t:names.product_title",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1584,7 +1567,6 @@
                 "price_7MFRKD": {
                   "type": "price",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
@@ -1601,7 +1583,6 @@
                 "swatches_xep9yx": {
                   "type": "swatches",
                   "settings": {
-                    "product": "{{ closest.product }}",
                     "product_swatches_alignment": "flex-start",
                     "product_swatches_alignment_mobile": "flex-start",
                     "hide_padding": false,

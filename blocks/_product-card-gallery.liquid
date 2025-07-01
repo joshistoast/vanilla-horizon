@@ -1,10 +1,10 @@
 
 
 {% capture children %}
-  {% unless block.settings.product == blank %}
-    {% render 'product-card-badges', product: block.settings.product %}
+  {% unless closest.product == blank %}
+    {% render 'product-card-badges', product: closest.product %}
     {%  if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: block.settings.product, section_id: section.id %}
+      {% render 'quick-add', product: closest.product, section_id: section.id %}
     {% endif %}
   {% endunless %}
 {% endcapture %}
@@ -13,13 +13,13 @@
 
 {% # Title and price for the zoomed out grid view %}
 <div class="product-grid-view-zoom-out--details">
-  {% if block.settings.product == blank %}
+  {% if closest.product == blank %}
     <h3 class="h4">{{ 'content.product_card_placeholder' | t }}</h3>
   {% else %}
-    <h3 class="h4">{{ block.settings.product.title }}</h3>
+    <h3 class="h4">{{ closest.product.title }}</h3>
     <div class="h6">
-      <product-price data-product-id="{{ block.settings.product.id }}">
-        {% render 'price', product_resource: block.settings.product, show_unit_price: false %}
+      <product-price data-product-id="{{ closest.product.id }}">
+        {% render 'price', product_resource: closest.product, show_unit_price: false %}
       </product-price>
     </div>
   {% endif %}
@@ -31,9 +31,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_media"
     },
     {
       "type": "select",
@@ -160,10 +159,7 @@
   "presets": [
     {
       "name": "t:names.product_card_media",
-      "category": "t:categories.product",
-      "settings": {
-        "product": "{{ closest.product }}"
-      }
+      "category": "t:categories.product"
     }
   ]
 }

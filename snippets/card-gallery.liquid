@@ -100,7 +100,7 @@
   ref="cardGallery"
   class="
     card-gallery card-gallery-{{ block.id }} spacing-style border-style
-    {% if block.settings.product == blank and request.design_mode == false %}hidden{% endif %}
+    {% if closest.product == blank and request.design_mode == false %}hidden{% endif %}
   "
   style="
     {% render 'border-override', settings: block.settings %}
@@ -246,7 +246,7 @@
     text-overflow: ellipsis;
   }
 
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .product-grid[data-product-card-size='extra-large'] .product-card-gallery__title-placeholder {
       padding: var(--padding-3xl);
       font-size: var(--font-size--3xl);
@@ -340,7 +340,7 @@
     }
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .product-card-gallery__title-placeholder {
       font-size: var(--font-size--xl);
       padding: var(--padding-md);

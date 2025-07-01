@@ -8,7 +8,7 @@
 {%- endif -%}
 
 {%- liquid
-  assign selected_product = block.settings.product
+  assign selected_product = closest.product
   assign selected_variant_media = selected_product.selected_or_first_available_variant.featured_media
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
 
@@ -389,7 +389,7 @@
     flex: inherit;
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .dialog-zoomed-gallery {
       /* Prevent scroll wheel or swipe scrolling */
       overscroll-behavior: none;
@@ -505,11 +505,6 @@
   "name": "t:names.product_media",
   "tag": null,
   "settings": [
-    {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
-    },
     {
       "type": "select",
       "id": "media_presentation",
@@ -788,10 +783,7 @@
   ],
   "presets": [
     {
-      "name": "t:names.product_media",
-      "settings": {
-        "product": "{{ closest.product }}"
-      }
+      "name": "t:names.product_media"
     }
   ]
 }

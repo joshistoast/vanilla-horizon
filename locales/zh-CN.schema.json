@@ -161,7 +161,8 @@
     "split_showcase": "拆分展示",
     "variant_pickers": "多属性选择器",
     "pills": "椭圆形框",
-    "large_logo": "大 logo"
+    "large_logo": "大 logo",
+    "description": "描述"
   },
   "settings": {
     "alignment": "对齐方式",
@@ -487,7 +488,8 @@
     "blurred_reflection": "模糊的倒影",
     "reflection_opacity": "倒影不透明度",
     "show_second_image_on_hover": "在悬停时显示第二张图片",
-    "media": "媒体"
+    "media": "媒体文件",
+    "product_card_carousel": "显示轮播"
   },
   "options": {
     "adapt_to_image": "适应图片",
@@ -845,7 +847,22 @@
     "text": "文本",
     "thumbnails": "缩略图",
     "visibility": "可见性",
-    "app_required_for_ratings": "需要通过应用来进行产品评分。[了解详情](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "需要通过应用来进行产品评分。[了解详情](https://help.shopify.com/manual/apps)",
+    "icon": "图标",
+    "manage_store_name": "[管理商店名称](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "显示父级版块的商品系列",
+    "resource_reference_collection_card_image": "显示父级商品系列的图片",
+    "resource_reference_collection_title": "显示父级商品系列的标题",
+    "resource_reference_product": "自动连接到父级产品",
+    "resource_reference_product_card": "显示父级版块的产品",
+    "resource_reference_product_inventory": "显示父级产品的库存",
+    "resource_reference_product_price": "显示父级产品的价格",
+    "resource_reference_product_recommendations": "显示基于父级产品的推荐",
+    "resource_reference_product_review": "显示父级产品的评论",
+    "resource_reference_product_swatches": "显示父级产品的色板",
+    "resource_reference_product_title": "显示父级产品的标题",
+    "resource_reference_product_variant_picker": "显示父级产品的多属性",
+    "resource_reference_product_media": "显示父级产品的媒体"
   },
   "html_defaults": {
     "share_information_about_your": "<p>与客户分享有关您品牌的信息。描述产品、发布公告或欢迎客户访问您的商店。</p>"

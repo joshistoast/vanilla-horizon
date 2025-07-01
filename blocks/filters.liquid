@@ -52,13 +52,6 @@
     assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
   endif
 
-  assign background_brightness = block.settings.color_scheme.settings.background | color_brightness
-  if background_brightness < 64
-    assign shadow_opacity = 0.25
-  else
-    assign shadow_opacity = 0.1
-  endif
-
   assign is_active = false
   assign should_show_pane = true
   if block.settings.filter_style == 'vertical'
@@ -351,7 +344,7 @@
         >
           <div
             class="facets__title-wrapper"
-            style="--color-shadow: rgb(from var(--color-foreground) r g b / {{ shadow_opacity }});"
+            style="--color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));"
           >
             <h2 class="facets-drawer__title h3">
               {{ 'blocks.filter' | t }}
@@ -452,30 +445,30 @@
 
 {% stylesheet %}
   .collection-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --facets-vertical-col-width: 6;
     }
 
-    @media screen and (width >= 990px) {
+    @media screen and (min-width: 990px) {
       --facets-vertical-col-width: 5;
     }
   }
 
   .facets-block-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin: var(--facets-margin);
       grid-column: var(--grid-column--desktop);
     }
   }
 
   .facets-block-wrapper--vertical {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       grid-column: var(--grid-column--desktop);
     }
   }
 
   .facets-block-wrapper--vertical + .facets-toggle {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       margin: 0;
     }
   }
@@ -492,7 +485,7 @@
   }
 
   dialog-component.facets-block-wrapper:not(:has(.facets--drawer[open])) {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -535,7 +528,7 @@
     padding-block: 0;
 
     &:not(.facets--drawer) {
-      @media screen and (width >= 750px) {
+      @media screen and (min-width: 750px) {
         padding-inline: var(--padding-inline-start) var(--padding-inline-end);
         width: 100%;
         max-width: 100%;
@@ -546,7 +539,7 @@
   .facets--horizontal {
     display: none;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding-block: var(--padding-block-start) var(--padding-block-end);
       display: flex;
       align-items: center;
@@ -565,7 +558,7 @@
   .facets--vertical {
     display: none;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding-block: 0 var(--padding-block-end);
       display: block;
       position: static;
@@ -579,7 +572,7 @@
   }
 
   .collection-wrapper:has(.collection-wrapper--full-width) .facets--vertical:not(.facets--drawer) {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding-inline-start: max(var(--padding-sm), var(--padding-inline-start));
     }
   }
@@ -598,7 +591,7 @@
   }
 
   .facets.facets-controls-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       grid-column: column-1 / column-12;
       color: rgb(from var(--color-foreground) r g b / 70%);
       gap: 0 var(--facets-form-horizontal-gap);
@@ -607,7 +600,7 @@
   }
 
   .collection-wrapper:has(.product-grid-mobile--large) .facets-mobile-wrapper.facets-controls-wrapper {
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
@@ -632,7 +625,7 @@
   }
 
   .facets--horizontal .facets__form-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       flex-direction: row;
       height: auto;
     }
@@ -646,20 +639,20 @@
   }
 
   .facets--horizontal .facets__form {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       flex-flow: row nowrap;
       height: auto;
     }
   }
 
   .facets:not(.facets--drawer) .facets__filters-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-inline-end: var(--margin-md);
     }
   }
 
   .facets--horizontal .facets__filters-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       max-width: 60%;
       display: flex;
       flex-wrap: wrap;
@@ -674,7 +667,7 @@
     --variant-picker-swatch-height: 32px;
     --icon-opacity: 0.5;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --variant-picker-swatch-width: 26px;
       --variant-picker-swatch-height: 26px;
     }
@@ -699,7 +692,7 @@
   }
 
   .facets--horizontal .facets__summary {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       font-size: var(--font-paragraph--size);
       justify-content: flex-start;
       height: var(--minimum-touch-target);
@@ -739,19 +732,19 @@
   }
 
   .facets:not(.facets--drawer) .facets__inputs-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       gap: var(--gap-sm);
     }
   }
 
   .facets--horizontal .facets__inputs .show-more {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: contents;
     }
   }
 
   .facets--horizontal .facets__inputs-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       max-height: var(--facets-horizontal-max-input-wrapper-height);
       scrollbar-width: none;
       -ms-overflow-style: none;
@@ -768,7 +761,7 @@
     margin-inline: calc(var(--padding-sm) * -1);
   }
 
-  @media screen and (width < 750px) {
+  @media screen and (max-width: 749px) {
     .facets__inputs:has(.show-more) .facets__inputs-wrapper {
       padding-block: var(--padding-sm);
       padding-inline: var(--padding-sm);
@@ -783,12 +776,12 @@
     gap: var(--facets-mobile-gap);
     flex-direction: column;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       gap: var(--gap-sm);
     }
   }
 
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .facets--vertical .facets__inputs-wrapper .facets__inputs-list--swatches {
       gap: var(--gap-sm);
     }
@@ -811,13 +804,13 @@
     grid-template-columns: repeat(auto-fit, minmax(var(--min-column-width), 1fr));
     gap: var(--gap-sm);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --min-column-width: 50px;
     }
   }
 
   .facets-block-wrapper:not(.facets-block-wrapper--vertical) .facets__inputs-list--grid {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       width: var(--facets-grid-panel-width);
     }
   }
@@ -834,7 +827,7 @@
 
     gap: var(--show-more-gap);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --show-more-icon-size: 16px;
       --show-more-gap: 6px;
     }
@@ -857,13 +850,13 @@
 
   .facets:not(.facets--drawer) .facets__panel,
   .facets-controls-wrapper .facets__panel {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       padding: 0;
     }
   }
 
   .facets--horizontal .facets__panel {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       position: relative;
     }
   }
@@ -880,7 +873,7 @@
 
   .facets--horizontal .facets__panel-content,
   .sorting-filter__options {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       border-radius: var(--style-border-radius-popover);
       position: absolute;
       top: 100%;
@@ -906,7 +899,7 @@
     margin: 0 auto;
   }
 
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .facets:not(.facets--drawer) :is(.facets__item, .sorting-filter)::before {
       width: 100%;
     }
@@ -917,7 +910,7 @@
     }
   }
 
-  @media screen and (width >= 750px) {
+  @media screen and (min-width: 750px) {
     .facets--vertical .facets__item:not(:first-of-type)::before,
     .facets--vertical .sorting-filter::before {
       content: '';
@@ -949,7 +942,7 @@
   .facets__label {
     color: var(--color-foreground);
     cursor: pointer;
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-inline-end: var(--margin-2xs);
     }
   }
@@ -960,7 +953,7 @@
   }
 
   .facets--horizontal .products-count-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: flex;
       margin-left: auto;
       flex-shrink: 0;
@@ -985,7 +978,7 @@
   }
 
   :is(.facets--horizontal, .facets--vertical) .facets__title-wrapper {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: none;
     }
   }
@@ -999,7 +992,7 @@
     --variant-picker-swatch-width: 32px;
     --variant-picker-swatch-height: 32px;
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       --variant-picker-swatch-width: 26px;
       --variant-picker-swatch-height: 26px;
     }
@@ -1035,13 +1028,13 @@
     margin-block-end: 0;
     color: var(--color-foreground);
     height: fit-content;
-    @media screen and (width < 750px) {
+    @media screen and (max-width: 749px) {
       display: none;
     }
   }
 
   .facets--horizontal .facets__panel .facets__status:has(:not(:empty)) {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       display: flex;
       margin-inline-start: var(--margin-xs);
       margin-inline-end: var(--margin-xs);
@@ -1050,13 +1043,13 @@
 
   /* Horizontal filter style */
   .facets--horizontal .facets__form {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       gap: 0 var(--facets-form-horizontal-gap);
     }
   }
 
   .collection-wrapper:has(> .facets--horizontal) .facets__panel[open] {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       z-index: var(--facets-open-z-index);
     }
   }

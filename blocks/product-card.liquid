@@ -15,16 +15,13 @@
   "name": "t:names.product_card",
   "blocks": [
     {
-      "type": "group"
+      "type": "_product-card-group"
     },
     {
       "type": "text"
     },
     {
       "type": "image"
-    },
-    {
-      "type": "buy-buttons"
     },
     {
       "type": "price"
@@ -40,6 +37,9 @@
     },
     {
       "type": "product-title"
+    },
+    {
+      "type": "@app"
     }
   ],
   "tag": null,
@@ -172,18 +172,12 @@
     {
       "name": "t:names.product_card",
       "category": "t:categories.product",
-      "settings": {
-        "product": "{{ closest.product }}"
-      },
       "blocks": {
         "product-card-gallery": {
-          "type": "_product-card-gallery",
-          "settings": {
-            "product": "{{ closest.product }}"
-          }
+          "type": "_product-card-gallery"
         },
         "group": {
-          "type": "group",
+          "type": "_product-card-group",
           "settings": {
             "content_direction": "column"
           },
@@ -191,16 +185,12 @@
             "product_title": {
               "type": "product-title",
               "settings": {
-                "product": "{{ closest.product }}",
                 "width": "100%",
                 "type_preset": "h5"
               }
             },
             "price": {
-              "type": "price",
-              "settings": {
-                "product": "{{ closest.product }}"
-              }
+              "type": "price"
             }
           },
           "block_order": ["product_title", "price"]

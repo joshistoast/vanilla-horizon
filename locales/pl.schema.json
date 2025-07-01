@@ -161,7 +161,8 @@
     "large_logo": "Duże logo",
     "product_list_button": "Przycisk Wyświetl wszystkie",
     "product_inventory": "Zapas produktu",
-    "pills": "Przyciski"
+    "pills": "Przyciski",
+    "description": "Opis"
   },
   "settings": {
     "autoplay": "Autoodtwarzanie",
@@ -487,7 +488,8 @@
     "text_label_case": "Wielkość liter etykiety tekstowej",
     "transition_to_main_product": "Przejście z karty produktu do strony produktu",
     "show_second_image_on_hover": "Pokaż drugi obraz po najechaniu kursorem",
-    "media": "Media"
+    "media": "Multimedia",
+    "product_card_carousel": "Wyświetl karuzelę"
   },
   "options": {
     "adapt_to_image": "Dostosuj do obrazu",
@@ -845,7 +847,22 @@
     "visibility": "Widoczność",
     "visible_if_collection_has_more_products": "Widoczne, jeśli kolekcja ma więcej produktów niż pokazano",
     "grid_layout": "Układ siatki",
-    "app_required_for_ratings": "Do oceniania produktów wymagana jest aplikacja. [Dowiedz się więcej](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Do oceniania produktów wymagana jest aplikacja. [Dowiedz się więcej](https://help.shopify.com/manual/apps)",
+    "icon": "Ikona",
+    "manage_store_name": "[Zarządzaj nazwą sklepu](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Wyświetla kolekcję z sekcji nadrzędnej",
+    "resource_reference_collection_card_image": "Wyświetla obraz z kolekcji nadrzędnej",
+    "resource_reference_collection_title": "Wyświetla tytuł z kolekcji nadrzędnej",
+    "resource_reference_product": "Automatycznie łączy z produktem nadrzędnym",
+    "resource_reference_product_card": "Wyświetla produkt z sekcji nadrzędnej",
+    "resource_reference_product_inventory": "Wyświetla zapas z produktu nadrzędnego",
+    "resource_reference_product_price": "Wyświetla cenę z produktu nadrzędnego",
+    "resource_reference_product_recommendations": "Wyświetla polecenia na podstawie produktu nadrzędnego",
+    "resource_reference_product_review": "Wyświetla recenzje z produktu nadrzędnego",
+    "resource_reference_product_swatches": "Wyświetla próbki z produktu nadrzędnego",
+    "resource_reference_product_title": "Wyświetla tytuł z produktu nadrzędnego",
+    "resource_reference_product_variant_picker": "Wyświetla warianty z produktu nadrzędnego",
+    "resource_reference_product_media": "Wyświetla multimedia z produktu nadrzędnego"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Udostępnij klientom informacje o swojej marce. Opisz produkt, udostępnij ogłoszenia lub przywitaj klientów w swoim sklepie.</p>"

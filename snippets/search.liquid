@@ -39,13 +39,13 @@
   }
 
   :is(.header__column--left, .header__column--center) .search-action {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-inline: calc(var(--padding-lg) * -1);
     }
   }
 
   .header__column--right .search-action {
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       margin-inline: calc(var(--gap-md) * -1) calc(var(--gap-xs) * -1);
     }
   }

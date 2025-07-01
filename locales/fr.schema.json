@@ -161,7 +161,8 @@
     "pills": "Boutons pilule",
     "product_title": "Titre de produit",
     "large_logo": "Grand logo",
-    "product_inventory": "Stock de produits"
+    "product_inventory": "Stock de produits",
+    "description": "Description"
   },
   "settings": {
     "autoplay": "Jeu automatique",
@@ -486,8 +487,8 @@
     "show_inventory_quantity": "Afficher la quantité de stock faible",
     "text_label_case": "Casse de l’étiquette de texte",
     "transition_to_main_product": "Transition de carte de produit à page de produit",
-    "media": "Médias",
-    "product_card_carousel": "Carrousel d’images",
+    "media": "Support multimédia",
+    "product_card_carousel": "Afficher le carrousel",
     "show_second_image_on_hover": "Afficher la deuxième image au passage de la souris"
   },
   "options": {
@@ -846,7 +847,22 @@
     "text": "Texte",
     "thumbnails": "Miniatures",
     "visibility": "Visibilité",
-    "app_required_for_ratings": "Une application est requise pour les évaluations de produits. [En savoir plus](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Une application est requise pour les évaluations de produits. [En savoir plus](https://help.shopify.com/manual/apps)",
+    "icon": "Icône",
+    "manage_store_name": "[Gérer le nom de la boutique :](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Affiche la collection de la section parente",
+    "resource_reference_collection_card_image": "Affiche l'image de la collection parente",
+    "resource_reference_collection_title": "Affiche le titre de la collection parente",
+    "resource_reference_product": "Se connecte automatiquement au produit parent",
+    "resource_reference_product_card": "Affiche le produit de la section parente",
+    "resource_reference_product_inventory": "Affiche l'inventaire du produit parent",
+    "resource_reference_product_price": "Affiche le prix du produit parent",
+    "resource_reference_product_recommendations": "Affiche les recommandations basées sur le produit parent",
+    "resource_reference_product_review": "Affiche les avis du produit parent",
+    "resource_reference_product_swatches": "Affiche les échantillons du produit parent",
+    "resource_reference_product_title": "Affiche le titre du produit parent",
+    "resource_reference_product_variant_picker": "Affiche les variantes du produit parent",
+    "resource_reference_product_media": "Affiche les supports multimédias du produit parent"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Partagez des informations sur votre marque. Décrivez un produit, partagez des annonces ou souhaitez la bienvenue à vos clients dans votre boutique.</p>"

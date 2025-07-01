@@ -254,9 +254,11 @@ export class ProductCard extends Component {
    * @param {PointerEvent} event - The pointer event.
    */
   previewImage(event) {
+    if (event.pointerType !== 'mouse') return;
+
     const { slideshow } = this.refs;
 
-    if (!slideshow || event.pointerType !== 'mouse') return;
+    if (!slideshow) return;
 
     this.resetVariant.cancel();
 
@@ -270,9 +272,13 @@ export class ProductCard extends Component {
 
   /**
    * Resets the image to the variant image.
+   * @param {PointerEvent} event - The pointer event.
    */
-  resetImage() {
+  resetImage(event) {
+    if (event.pointerType !== 'mouse') return;
+
     const { slideshow } = this.refs;
+
     if (!this.variantPicker) {
       if (!slideshow) return;
       slideshow.previous(undefined, { animate: false });

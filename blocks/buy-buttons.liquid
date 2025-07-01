@@ -1,11 +1,11 @@
 
 {% liquid
-  assign product = block.settings.product
+  assign product = closest.product
   if request.visual_preview_mode and product == blank
     assign product = collections.all.products.first
   endif
 
-  assign variant = block.settings.product.selected_or_first_available_variant
+  assign variant = closest.product.selected_or_first_available_variant
   assign inventory_quantity = variant.inventory_quantity
   assign inventory_policy = variant.inventory_policy
 
@@ -26,7 +26,7 @@
       assign add_to_cart_text = 'products.product.add_to_cart' | t
     endif
   else
-    if block.settings.product.selected_or_first_available_variant != null
+    if closest.product.selected_or_first_available_variant != null
       assign can_add_to_cart = true
       assign add_to_cart_text = 'products.product.add_to_cart' | t
     else
@@ -111,7 +111,7 @@
     type="module"
   ></script>
 
-  {%- assign pick_up_availabilities = block.settings.product.selected_or_first_available_variant.store_availabilities
+  {%- assign pick_up_availabilities = closest.product.selected_or_first_available_variant.store_availabilities
     | where: 'pick_up_enabled', true
   -%}
 
@@ -121,8 +121,8 @@
       hidden
     {% endif %}
     data-section-id="{{ section.id }}"
-    data-product-url="{{ block.settings.product.url }}"
-    data-variant-id="{{ block.settings.product.selected_or_first_available_variant.id }}"
+    data-product-url="{{ closest.product.url }}"
+    data-variant-id="{{ closest.product.selected_or_first_available_variant.id }}"
     style="{% render 'spacing-style', settings: block.settings %}"
     ref="localPickupButton"
   >
@@ -166,9 +166,9 @@
         >
           <div class="pickup-availability__dialog-row pickup-availability__header-container">
             <div class="pickup-availability__column">
-              <h4 class="pickup-location__h4">{{ block.settings.product.title }}</h4>
+              <h4 class="pickup-location__h4">{{ closest.product.title }}</h4>
               <p class="pickup-location__text-sm">
-                {{ block.settings.product.selected_or_first_available_variant.title }}
+                {{ closest.product.selected_or_first_available_variant.title }}
               </p>
             </div>
             <button
@@ -219,7 +219,7 @@
     flex-wrap: wrap;
     gap: calc(var(--gap-sm) / 2);
 
-    @media screen and (width >= 750px) {
+    @media screen and (min-width: 750px) {
       gap: var(--gap-sm);
     }
   }
@@ -388,9 +388,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product"
     },
     {
       "type": "checkbox",
@@ -453,31 +452,21 @@
     {
       "name": "t:names.product_buy_buttons",
       "category": "t:categories.product",
-      "settings": {
-        "product": "{{ closest.product }}"
-      },
       "blocks": {
         "quantity": {
           "type": "quantity",
-          "static": true,
-          "settings": {
-            "product": "{{ closest.product }}"
-          }
+          "static": true
         },
         "add-to-cart": {
           "type": "add-to-cart",
           "static": true,
           "settings": {
-            "product": "{{ closest.product }}",
             "style_class": "button-secondary"
           }
         },
         "accelerated-checkout": {
           "type": "accelerated-checkout",
-          "static": true,
-          "settings": {
-            "product": "{{ closest.product }}"
-          }
+          "static": true
         }
       }
     }

@@ -4,25 +4,21 @@
   Renders a collection link block.
 
   @param {number} index
-  @param {boolean} [selected]
+  @param {boolean} [current]
   @param {boolean} [image_only]
 {%- enddoc -%}
 
-{% unless selected %}
+{% unless current %}
   {% assign loading = 'lazy' %}
 {% endunless %}
 
-{% if closest.collection.url == block.settings.collection.url %}
-  {% assign is_current = true %}
-{% endif %}
-
 {% if block.settings.show_count %}
-  {% assign count = block.settings.collection.all_products_count %}
+  {% assign count = closest.collection.all_products_count %}
   {%- capture count -%}
     &nbsp;<sup class="collection-links__count">{{ count }}</sup>
   {%- endcapture -%}
 
-  {% if block.settings.collection == empty %}
+  {% if closest.collection == empty %}
     {%- capture count -%}
       &nbsp;<sup class="collection-links__count">5</sup>
     {%- endcapture -%}
@@ -52,8 +48,7 @@
     ref="links[]"
     on:pointerenter="/select/{{ index }}"
     on:focus="/select/{{ index }}"
-    aria-selected="{{ selected }}"
-    aria-current="{{ is_current }}"
+    aria-current="{{ current }}"
     {{ block.shopify_attributes }}
   >
     {{ title_block }}
@@ -89,7 +84,7 @@
       opacity: var(--disabled-opacity);
     }
 
-    &[aria-selected='true'] {
+    &[aria-current='true'] {
       opacity: 1;
     }
 
@@ -97,7 +92,7 @@
       display: inline-block;
     }
 
-    @media (width < 750px) {
+    @media (max-width: 749px) {
       --min-font-size: var(--font-size--3xl);
       --max-font-size: var(--font-size--5xl);
 
@@ -152,9 +147,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "t:settings.collection"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_collection_card"
     },
     {
       "type": "checkbox",

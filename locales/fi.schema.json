@@ -161,7 +161,8 @@
     "variant_pickers": "Versionvalitsimet",
     "pills": "Pillerikuvakkeet",
     "product_title": "Tuotteen nimi",
-    "large_logo": "Suuri logo"
+    "large_logo": "Suuri logo",
+    "description": "Kuvaus"
   },
   "settings": {
     "alignment": "Tasaus",
@@ -487,7 +488,7 @@
     "reflection_opacity": "Heijastuksen peittävyys",
     "transition_to_main_product": "Siirtymä tuotekortista tuotesivuun",
     "media": "Media",
-    "product_card_carousel": "Kuvakaruselli",
+    "product_card_carousel": "Näytä karuselli",
     "show_second_image_on_hover": "Näytä toinen kuva osoitettaessa"
   },
   "options": {
@@ -846,7 +847,22 @@
     "product_page": "Tuotesivu",
     "text": "Teksti",
     "thumbnails": "Pikkukuvat",
-    "app_required_for_ratings": "Tuotearviot edellyttävät sovellusta. [Lue lisää](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "Tuotearviot edellyttävät sovellusta. [Lue lisää](https://help.shopify.com/manual/apps)",
+    "icon": "Kuvake",
+    "manage_store_name": "[Hallitse kaupan nimeä](/admin/settings/general?edit=storeName)",
+    "resource_reference_collection_card": "Näyttää kokoelman ylemmästä osiosta",
+    "resource_reference_collection_card_image": "Näyttää kuvan ylemmästä kokoelmasta",
+    "resource_reference_collection_title": "Näyttää otsikon ylemmästä kokoelmasta",
+    "resource_reference_product": "Yhdistää automaattisesti ylempään tuotteeseen",
+    "resource_reference_product_card": "Näyttää tuotteen ylemmästä osiosta",
+    "resource_reference_product_inventory": "Näyttää varaston ylemmästä tuotteesta",
+    "resource_reference_product_price": "Näyttää hinnan ylemmästä tuotteesta",
+    "resource_reference_product_recommendations": "Näyttää suositukset ylemmän tuotteen perusteella",
+    "resource_reference_product_review": "Näyttää arvostelut ylemmästä tuotteesta",
+    "resource_reference_product_swatches": "Näyttää väripalat ylemmästä tuotteesta",
+    "resource_reference_product_title": "Näyttää otsikon ylemmästä tuotteesta",
+    "resource_reference_product_variant_picker": "Näyttää versiot ylemmästä tuotteesta",
+    "resource_reference_product_media": "Näyttää median ylemmästä tuotteesta"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Kerro brändiäsi koskevia tietoja asiakkaillesi. Kuvaile tuotetta, jaa ilmoituksia tai toivota asiakkaat tervetulleiksi kauppaasi.</p>"

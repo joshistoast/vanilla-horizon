@@ -1,7 +1,7 @@
 
 
 {%- liquid
-  assign variant = block.settings.product.selected_or_first_available_variant
+  assign variant = closest.product.selected_or_first_available_variant
   if variant.inventory_management == 'shopify'
     assign inventory_managed = true
   endif
@@ -31,7 +31,7 @@
       endif
     endif
   else
-    if block.settings.product.selected_or_first_available_variant != null
+    if closest.product.selected_or_first_available_variant != null
       assign status = 'in_stock'
       assign translation_key = 'content.inventory_in_stock'
     else
@@ -111,9 +111,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_inventory"
     },
     {
       "type": "range",
@@ -178,10 +177,7 @@
   "presets": [
     {
       "name": "t:names.product_inventory",
-      "category": "t:categories.product",
-      "settings": {
-        "product": "{{ closest.product }}"
-      }
+      "category": "t:categories.product"
     }
   ]
 }

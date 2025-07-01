@@ -41,7 +41,7 @@ class CollectionLinks extends Component {
   }
 
   get currentIndex() {
-    return this.links.findIndex((link) => link.getAttribute('aria-selected') === 'true');
+    return this.links.findIndex((link) => link.getAttribute('aria-current') === 'true');
   }
 
   /**
@@ -66,7 +66,7 @@ class CollectionLinks extends Component {
     const selectedIndex = clamp(index, 0, links.length - 1);
 
     for (const [index, link] of links.entries()) {
-      link.setAttribute('aria-selected', Boolean(index === selectedIndex).toString());
+      link.setAttribute('aria-current', Boolean(index === selectedIndex).toString());
     }
   }
 

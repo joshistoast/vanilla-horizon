@@ -1,11 +1,11 @@
 
 
-{% if block.settings.collection == blank and request.design_mode %}
+{% if closest.collection == blank and request.design_mode %}
   {% assign text = 'placeholders.collection_title' | t %}
   {% assign collection_title = '<p>' | append: text | append: '</p>' %}
   {% render 'text', fallback_text: collection_title, block: block %}
-{% elsif block.settings.collection != blank %}
-  {% assign collection_title = '<p>' | append: block.settings.collection.title | append: '</p>' %}
+{% elsif closest.collection != blank %}
+  {% assign collection_title = '<p>' | append: closest.collection.title | append: '</p>' %}
   {% render 'text', fallback_text: collection_title, block: block %}
 {% endif %}
 
@@ -15,9 +15,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "t:settings.collection"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_collection_title"
     },
     {
       "type": "header",
@@ -393,10 +392,7 @@
   "presets": [
     {
       "name": "t:names.collection_title",
-      "category": "t:categories.collection",
-      "settings": {
-        "collection": "{{ closest.collection }}"
-      }
+      "category": "t:categories.collection"
     }
   ]
 }

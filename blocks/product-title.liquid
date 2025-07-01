@@ -1,11 +1,11 @@
 
 
-{% if block.settings.product == blank and request.design_mode %}
+{% if closest.product == blank and request.design_mode %}
   {% assign text = 'placeholders.product_title' | t %}
   {% assign product_title = '<p>' | append: text | append: '</p>' %}
   {% render 'text', fallback_text: product_title, block: block %}
-{% elsif block.settings.product != blank %}
-  {% assign product_title = '<p>' | append: block.settings.product.title | append: '</p>' %}
+{% elsif closest.product != blank %}
+  {% assign product_title = '<p>' | append: closest.product.title | append: '</p>' %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% endif %}
 
@@ -15,9 +15,8 @@
   "tag": null,
   "settings": [
     {
-      "type": "product",
-      "id": "product",
-      "label": "t:settings.product"
+      "type": "paragraph",
+      "content": "t:content.resource_reference_product_title"
     },
     {
       "type": "header",
@@ -392,11 +391,8 @@
   ],
   "presets": [
     {
-      "name": "t:names.product_title",
-      "category": "t:categories.product",
-      "settings": {
-        "product": "{{ closest.product }}"
-      }
+      "name": "t:names.title",
+      "category": "t:categories.product"
     }
   ]
 }
