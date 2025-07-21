@@ -33,7 +33,7 @@ export default class VariantPicker extends Component {
     this.dispatchEvent(new VariantSelectedEvent({ id: event.target.dataset.optionValueId ?? '' }));
 
     const isOnProductPage =
-      Theme.template.name === 'product' &&
+      this.dataset.templateProductMatch === 'true' &&
       !event.target.closest('product-card') &&
       !event.target.closest('quick-add-dialog');
 

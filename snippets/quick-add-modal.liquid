@@ -26,7 +26,7 @@
     height: fit-content;
     overflow: hidden;
     min-height: 500px;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 30px rgb(0 0 0 / var(--opacity-15));
 
     @media screen and (max-width: 750px) {
       position: fixed;
@@ -269,8 +269,7 @@
   }
 
   .quick-add-modal__content
-    .group-block:not(
-      :has(
+    .group-block:not(:has(
           .buy-buttons-block,
           .buy-buttons-block *,
           .view-product-title,
@@ -283,8 +282,7 @@
           product-inventory *,
           .view-more-details__wrapper,
           .view-more-details__wrapper *
-        )
-    ):not(.buy-buttons-block) {
+        ), .buy-buttons-block) {
     display: none;
   }
 
@@ -420,6 +418,7 @@
       opacity: 0;
       transform: translateY(10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);

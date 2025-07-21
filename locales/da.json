@@ -60,7 +60,8 @@
     "decrease_quantity": "Reducer antal",
     "increase_quantity": "Øg antal",
     "quantity": "Antal",
-    "rating": "Bedømmelsen af dette produkt er {{ rating }} ud af 5"
+    "rating": "Bedømmelsen af dette produkt er {{ rating }} ud af 5",
+    "nested_product": "{{ product_title }} for {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Læg i indkøbskurven",

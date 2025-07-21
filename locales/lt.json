@@ -62,7 +62,8 @@
     "decrease_quantity": "Sumažinti kiekį",
     "increase_quantity": "Padidinti kiekį",
     "rating": "Šio produkto vertinimas: {{ rating }} iš 5",
-    "quantity": "Kiekis"
+    "quantity": "Kiekis",
+    "nested_product": "{{ product_title }} ({{ parent_title }})"
   },
   "actions": {
     "add_to_cart": "Įdėti į krepšelį",

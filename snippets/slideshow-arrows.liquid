@@ -5,7 +5,6 @@
 
   @param {string} [class] - The class name to apply to the slideshow-arrows component
   @param {string} [icon_style] - The style of the icon, defaults to 'arrow'
-  @param {string} [icon_shape] - The shape of the icons background, defaults to 'none'
   @param {string} [arrows_position] - { 'left' | 'center' | 'right' } The position of the arrows, defaults to 'center'
 
   @example
@@ -20,11 +19,10 @@
 
 <slideshow-arrows
   position="{{ arrows_position }}"
-  shape="{{ icon_shape | default: 'none' }}"
   {% if class %}
     class="{{ class }}"
   {% endif %}
 >
-  {%- render 'slideshow-arrow', action: 'previous', icon_style: icon_style, icon_shape: icon_shape -%}
-  {%- render 'slideshow-arrow', action: 'next', icon_style: icon_style, icon_shape: icon_shape -%}
+  {%- render 'slideshow-arrow', action: 'previous', icon_style: icon_style -%}
+  {%- render 'slideshow-arrow', action: 'next', icon_style: icon_style -%}
 </slideshow-arrows>

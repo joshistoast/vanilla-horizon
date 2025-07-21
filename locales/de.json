@@ -60,7 +60,8 @@
     "decrease_quantity": "Menge verringern",
     "increase_quantity": "Menge erhöhen",
     "quantity": "Anzahl",
-    "rating": "Die Bewertung für dieses Produkts lautet {{ rating }} von 5 Sternen"
+    "rating": "Die Bewertung für dieses Produkts lautet {{ rating }} von 5 Sternen",
+    "nested_product": "{{ product_title }} für {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "In den Warenkorb legen",

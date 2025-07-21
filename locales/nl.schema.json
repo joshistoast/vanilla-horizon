@@ -489,7 +489,8 @@
     "transition_to_main_product": "Overgang van productkaart naar productpagina",
     "show_second_image_on_hover": "Tweede afbeelding weergeven als je de aanwijzer erboven beweegt",
     "media": "Media",
-    "product_card_carousel": "Carrousel weergeven"
+    "product_card_carousel": "Carrousel weergeven",
+    "media_fit": "Media-aanpassing"
   },
   "options": {
     "adapt_to_image": "Aanpassen aan afbeelding",
@@ -850,19 +851,21 @@
     "app_required_for_ratings": "Er is een app vereist voor productbeoordelingen. [Meer informatie](https://help.shopify.com/manual/apps)",
     "icon": "Pictogram",
     "manage_store_name": "[Winkelnaam beheren](/admin/settings/general?edit=storeName)",
-    "resource_reference_collection_card": "Toont collectie uit bovenliggende sectie",
-    "resource_reference_collection_card_image": "Toont afbeelding uit bovenliggende collectie",
-    "resource_reference_collection_title": "Toont titel uit bovenliggende collectie",
-    "resource_reference_product": "Verbindt automatisch met bovenliggend product",
-    "resource_reference_product_card": "Toont product uit bovenliggende sectie",
-    "resource_reference_product_inventory": "Toont voorraad uit bovenliggend product",
-    "resource_reference_product_price": "Toont prijs uit bovenliggend product",
-    "resource_reference_product_recommendations": "Toont aanbevelingen gebaseerd op bovenliggend product",
-    "resource_reference_product_review": "Toont beoordelingen uit bovenliggend product",
-    "resource_reference_product_swatches": "Toont stalen uit bovenliggend product",
-    "resource_reference_product_title": "Toont titel uit bovenliggend product",
-    "resource_reference_product_variant_picker": "Toont varianten uit bovenliggend product",
-    "resource_reference_product_media": "Toont media uit bovenliggend product"
+    "resource_reference_collection_card": "Geeft collectie uit bovenliggende sectie weer",
+    "resource_reference_collection_card_image": "Geeft afbeelding uit bovenliggende collectie weer",
+    "resource_reference_collection_title": "Geeft titel uit bovenliggende collectie weer",
+    "resource_reference_product": "Koppelt automatisch met bovenliggend product",
+    "resource_reference_product_card": "Geeft product uit bovenliggende sectie weer",
+    "resource_reference_product_inventory": "Geeft voorraad uit bovenliggend product weer",
+    "resource_reference_product_price": "Geeft prijs uit bovenliggend product weer",
+    "resource_reference_product_recommendations": "Geeft aanbevelingen weer op basis van bovenliggend product",
+    "resource_reference_product_review": "Geeft recensies uit bovenliggend product weer",
+    "resource_reference_product_swatches": "Geeft stalen uit bovenliggend product weer",
+    "resource_reference_product_title": "Geeft titel uit bovenliggend product weer",
+    "resource_reference_product_variant_picker": "Geeft varianten uit bovenliggend product weer",
+    "resource_reference_product_media": "Geeft media van bovenliggend product weer",
+    "product_media": "Productmedia",
+    "section_link": "Sectielink"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Deel informatie over je merk met klanten. Beschrijf een product, doe aankondigingen of verwelkom klanten in je winkel.</p>"

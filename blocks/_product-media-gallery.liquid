@@ -98,6 +98,33 @@
     assign sorted_media = selected_product.media
   endif
   assign has_image_drop = sorted_media | has: 'media_type', 'image'
+
+  # Determine if we're in single column mode (carousel or grid with one column)
+  assign is_single_column = false
+  if block.settings.media_presentation == 'carousel' or sorted_media.size == 1 or block.settings.media_presentation == 'grid' and block.settings.media_columns == 'one'
+    assign is_single_column = true
+  endif
+
+  # Check if we need both sizes (for large first image in two-column grid)
+  assign needs_both_sizes = false
+  if block.settings.media_presentation == 'grid' and block.settings.media_columns == 'two' and block.settings.large_first_image
+    assign needs_both_sizes = true
+  endif
+
+  # Calculate sizes using utility snippet
+  if needs_both_sizes
+    # Calculate sizes for single column (first image)
+    capture sizes_single
+      render 'util-product-media-sizes-attr', block: block, section: section, settings: settings, is_first_image: true, is_single_column: true, needs_both_sizes: true
+    endcapture
+    assign sizes_single = sizes_single | strip
+  endif
+
+  # Calculate sizes value for regular grid/carousel items
+  capture sizes
+    render 'util-product-media-sizes-attr', block: block, section: section, settings: settings, is_first_image: false, is_single_column: is_single_column, needs_both_sizes: needs_both_sizes
+  endcapture
+  assign sizes = sizes | strip
 -%}
 {%- if has_image_drop -%}
   <script
@@ -112,6 +139,51 @@
       --media-preview-ratio: {{ block.settings.aspect_ratio }};
     }
   {% endunless %}
+
+  {% if block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport %}
+    .media-fit-{{ block.settings.media_fit }} {
+      --product-media-fit: {{ block.settings.media_fit }};
+    }
+
+    /* Media fit for all media elements */
+    .media-fit-{{ block.settings.media_fit }} :is(img, video, iframe, .deferred-media__poster-image) {
+      object-fit: {{ block.settings.media_fit }};
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 3D Models (no object-fit support, just sizing) */
+    .media-fit-{{ block.settings.media_fit }} model-viewer {
+      width: 100%;
+      height: 100%;
+    }
+  {% endif %}
+
+  {% unless block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport %}
+    .media-fit-cover {
+      --product-media-fit: cover;
+    }
+
+    /* Media fit for all media elements - default to cover */
+    .media-fit-cover :is(img, video, iframe, .deferred-media__poster-image) {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 3D Models (no object-fit support, just sizing) */
+    .media-fit-cover model-viewer {
+      width: 100%;
+      height: 100%;
+    }
+  {% endunless %}
+
+  {% if block.settings.media_fit == 'contain' %}
+    /* Add background color so carousel arrows' mix-blend-mode works correctly even on transparent areas. */
+    .media-fit-contain :is(img, .deferred-media__poster-image) {
+      background-color: var(--color-background);
+    }
+  {% endif %}
 {% endstyle %}
 
 <media-gallery
@@ -130,17 +202,24 @@
       media-gallery--extend
     {% endif %}
   "
-  style="{% render 'spacing-style', settings: block.settings %} --thumbnail-width: {{ block.settings.thumbnail_width }}px; --media-radius: {{ block.settings.media_radius }}px;{% if block.settings.icons_style contains 'large' %} --slideshow-icon-padding: 0;{% endif %}--image-gap: {{ block.settings.image_gap }}px;"
+  style="{% render 'spacing-style', settings: block.settings %} --thumbnail-width: {{ block.settings.thumbnail_width }}px; --media-radius: {{ block.settings.media_radius }}px;{% if block.settings.icons_style contains 'large' %} --slideshow-icon-padding: 0px;{% endif %}--image-gap: {{ block.settings.image_gap }}px;"
   data-presentation="{{ block.settings.media_presentation }}"
   {{ block.shopify_attributes }}
 >
   {% capture slides %}
     {% for media in sorted_media %}
       {% capture children %}
-        {%- render 'product-media', media: media -%}
+        {%- liquid
+            if needs_both_sizes and forloop.first
+              assign media_sizes = sizes_single
+            else
+              assign media_sizes = sizes
+            endif
+        -%}
+        {%- render 'product-media', media: media, sizes: media_sizes, is_main_product_media: forloop.first -%}
       {% endcapture %}
       {% capture class %}
-        product-media-container product-media-container--{{ media.media_type }}{% if block.settings.constrain_to_viewport %} constrain-height{% endif %}{% if block.settings.aspect_ratio != 'adapt' %} media-fit{% endif %}{% if block.settings.zoom %} product-media-container--zoomable{% endif %}
+        product-media-container product-media-container--{{ media.media_type }}{% if block.settings.constrain_to_viewport %} constrain-height{% endif %}{% if block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport %} media-fit-{{ block.settings.media_fit }}{% else %} media-fit-cover{% endif %}{% if block.settings.zoom %} product-media-container--zoomable{% endif %}
       {% endcapture %}
       {% if block.settings.aspect_ratio == 'adapt' %}
         {% capture style %}
@@ -154,11 +233,12 @@
       {% endif %}
 
       {% render 'slideshow-slide',
-        index: forloop.index,
+        index: forloop.index0,
         children: children,
         class: class,
         style: style,
         attributes: attributes,
+        media_fit: block.settings.media_fit,
       %}
     {% endfor %}
   {% endcapture %}
@@ -217,7 +297,7 @@
             product-media-container
             product-media-container--{{ media.media_type }}
             {%- if block.settings.constrain_to_viewport %} constrain-height{% endif %}
-            {%- if block.settings.aspect_ratio != 'adapt' %} media-fit{% endif %}
+            {%- if block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport %} media-fit-{{ block.settings.media_fit }}{% else %} media-fit-cover{% endif %}
           "
           style="{% if block.settings.aspect_ratio == 'adapt' %} --media-preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};{% endif %}"
           {% if settings.transition_to_main_product and forloop.first %}
@@ -234,7 +314,14 @@
               <span class="visually-hidden">{{ 'actions.open_image_in_full_screen' | t }}</span>
             </button>
           {%- endif -%}
-          {%- render 'product-media', media: media -%}
+          {%- liquid
+            if needs_both_sizes and forloop.first
+              assign media_sizes = sizes_single
+            else
+              assign media_sizes = sizes
+            endif
+          -%}
+          {%- render 'product-media', media: media, sizes: media_sizes, is_main_product_media: forloop.first -%}
         </li>
       {% endfor %}
     </ul>
@@ -308,7 +395,7 @@
                 product-media-container
                 product-media-container--{{ media.media_type }}
                 {% if block.settings.constrain_to_viewport %} constrain-height{% endif %}
-                {% if block.settings.aspect_ratio != 'adapt' %} media-fit{% endif %}
+                {% if block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport %} media-fit-{{ block.settings.media_fit }}{% else %} media-fit-cover{% endif %}
                 {% if media.media_type == 'image' %} product-media-container--zoomable{% endif %}
               "
               style="{% if block.settings.aspect_ratio == 'adapt' %} --media-preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};{% endif %}"
@@ -319,10 +406,20 @@
             >
               {% if media.media_type == 'image' %}
                 <drag-zoom-wrapper class="product-media__drag-zoom-wrapper">
-                  {%- render 'product-media', media: media -%}
+                  {%- render 'product-media',
+                    media: media,
+                    sizes: '100vw',
+                    loading: 'lazy',
+                    is_main_product_media: forloop.first
+                  -%}
                 </drag-zoom-wrapper>
               {% else %}
-                {%- render 'product-media', media: media -%}
+                {%- render 'product-media',
+                  media: media,
+                  sizes: '100vw',
+                  loading: 'lazy',
+                  is_main_product_media: forloop.first
+                -%}
               {% endif %}
             </li>
           {%- endfor -%}
@@ -451,6 +548,8 @@
 
     .product-media__drag-zoom-wrapper .product-media__image {
       --product-media-fit: contain;
+
+      object-fit: var(--product-media-fit);
       overflow: hidden;
       transform: scale(var(--drag-zoom-scale))
         translate(var(--drag-zoom-translate-x, 0), var(--drag-zoom-translate-y, 0));
@@ -696,6 +795,29 @@
       "default": "adapt"
     },
     {
+      "type": "checkbox",
+      "id": "constrain_to_viewport",
+      "label": "t:settings.limit_media_to_screen_height",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "media_fit",
+      "label": "t:settings.media_fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:options.cover"
+        },
+        {
+          "value": "contain",
+          "label": "t:options.contain"
+        }
+      ],
+      "default": "cover",
+      "visible_if": "{{ block.settings.aspect_ratio == 'adapt' and block.settings.constrain_to_viewport == true }}"
+    },
+    {
       "type": "range",
       "id": "media_radius",
       "label": "t:settings.border_radius",
@@ -711,12 +833,6 @@
       "label": "t:settings.extend_media_to_screen_edge",
       "default": true,
       "visible_if": "{{ section.settings.content_width == 'content-center-aligned' }}"
-    },
-    {
-      "type": "checkbox",
-      "id": "constrain_to_viewport",
-      "label": "t:settings.limit_media_to_screen_height",
-      "default": false
     },
     {
       "type": "checkbox",

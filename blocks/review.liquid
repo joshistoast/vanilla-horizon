@@ -46,7 +46,7 @@
       <defs>
         <linearGradient id="half" x1="0" x2="100%" y1="0" y2="0">
           <stop offset="50%" stop-color="var(--star-fill-color)"></stop>
-          <stop offset="50%" stop-color="{% if block.settings.stars_style == "outline" %}transparent{% else %}rgb(from var(--star-fill-color) r g b/ 0.2){% endif %}"></stop>
+          <stop offset="50%" stop-color="{% if block.settings.stars_style == "outline" %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"></stop>
         </linearGradient>
 
         <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
@@ -63,7 +63,7 @@
         <svg
           class="stars {% if svg_filled_stars > 0 %}filled-star{% endif %}"
           viewBox="0 0 32 32"
-          style="--empty-star-fill-color:rgb(from var(--star-fill-color) r g b/ 0.2)"
+          style="--empty-star-fill-color: rgb(var(--star-fill-color-rgb) / var(--opacity-20)"
           role="presentation"
         >
           <use xlink:href="#star"></use>
@@ -73,7 +73,7 @@
           <svg
             class="stars {% if star <= svg_filled_stars %}filled-star{% endif %}"
             viewBox="0 0 32 32"
-            style="--empty-star-fill-color:{% if block.settings.stars_style == 'outline' %}transparent{% else %}rgb(from var(--star-fill-color) r g b/ 0.2){% endif %}"
+            style="--empty-star-fill-color:{% if block.settings.stars_style == 'outline' %}transparent{% else %}rgb(var(--star-fill-color-rgb) / var(--opacity-20){% endif %}"
             role="presentation"
           >
             <use xlink:href="#star"{% if decimal_rating == 0.5 and star == svg_filled_stars %} fill="url(#half)"{% endif %}></use>
@@ -111,10 +111,12 @@
 
   .rating-color--primary {
     --star-fill-color: var(--color-primary);
+    --star-fill-color-rgb: var(--color-primary-rgb);
   }
 
   .rating-color--foreground {
     --star-fill-color: var(--color-foreground);
+    --star-fill-color-rgb: var(--color-foreground-rgb);
   }
 
   .rating-wrapper,
@@ -140,7 +142,7 @@
   }
 
   .rating-count-separator {
-    opacity: 0.2;
+    opacity: var(--opacity-20);
     padding-left: calc(var(--padding-xs) / 2);
     padding-right: var(--padding-xs);
   }

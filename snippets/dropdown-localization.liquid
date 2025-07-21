@@ -17,7 +17,7 @@
 
   assign localization_font = '--menu-localization-font: var(--font-[localization_font]--family); ' | replace: '[localization_font]', section.settings.localization_font
   assign localization_font_size = '--menu-localization-font-size: [localization_font_size]; ' | replace: '[localization_font_size]', section.settings.localization_font_size
-  assign color_shadow = '--color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));'
+  assign color_shadow = '--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));'
   assign form_style = localization_font | append: localization_font_size | append: color_shadow
 %}
 
@@ -52,7 +52,7 @@
             style="
               background-image: url({{- localization.country | image_url: width: 32 }});
               --size-shadow: {{ shadow_size }}px;
-              --color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-30-60));
+              --color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-30-60));
             "
           ></span>
         {% endif %}

@@ -60,7 +60,8 @@
     "decrease_quantity": "減少數量",
     "increase_quantity": "增加數量",
     "quantity": "數量",
-    "rating": "本商品的評分為 {{ rating }}/5"
+    "rating": "本商品的評分為 {{ rating }}/5",
+    "nested_product": "適用於 {{ parent_title }} 的 {{ product_title }}"
   },
   "actions": {
     "add_to_cart": "加入購物車",

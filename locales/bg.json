@@ -60,7 +60,8 @@
     "decrease_quantity": "Намаляване на количеството",
     "increase_quantity": "Увеличаване на количеството",
     "quantity": "Количество",
-    "rating": "Оценката за този продукт е {{ rating }} от 5"
+    "rating": "Оценката за този продукт е {{ rating }} от 5",
+    "nested_product": "{{ product_title }} за {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Добавяне към количката",

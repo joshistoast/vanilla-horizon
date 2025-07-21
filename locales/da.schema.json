@@ -489,7 +489,8 @@
     "transition_to_main_product": "Overgang fra produktkort til produktside",
     "show_second_image_on_hover": "Vis sekundært billede, når der peges",
     "media": "Medie",
-    "product_card_carousel": "Vis karrusel"
+    "product_card_carousel": "Vis karrusel",
+    "media_fit": "Medietilpasning"
   },
   "options": {
     "adapt_to_image": "Tilpas til billede",
@@ -850,19 +851,21 @@
     "app_required_for_ratings": "Der kræves en app til produktbedømmelser. [Få mere at vide](https://help.shopify.com/manual/apps)",
     "icon": "Ikon",
     "manage_store_name": "[Administrer butiksnavn](/admin/settings/general?edit=storeName)",
-    "resource_reference_collection_card": "Viser kollektion fra overordnet sektion",
+    "resource_reference_collection_card": "Viser kollektion fra overordnet afsnit",
     "resource_reference_collection_card_image": "Viser billede fra overordnet kollektion",
     "resource_reference_collection_title": "Viser titel fra overordnet kollektion",
-    "resource_reference_product": "Forbinder automatisk til overordnet produkt",
-    "resource_reference_product_card": "Viser produkt fra overordnet sektion",
-    "resource_reference_product_inventory": "Viser lager fra overordnet produkt",
+    "resource_reference_product": "Forbindes automatisk til overordnet produkt",
+    "resource_reference_product_card": "Viser produkt fra overordnet afsnit",
+    "resource_reference_product_inventory": "Viser lagerbeholdning fra overordnet produkt",
     "resource_reference_product_price": "Viser pris fra overordnet produkt",
     "resource_reference_product_recommendations": "Viser anbefalinger baseret på overordnet produkt",
     "resource_reference_product_review": "Viser anmeldelser fra overordnet produkt",
-    "resource_reference_product_swatches": "Viser farveprøver fra overordnet produkt",
+    "resource_reference_product_swatches": "Viser prøver fra overordnet produkt",
     "resource_reference_product_title": "Viser titel fra overordnet produkt",
     "resource_reference_product_variant_picker": "Viser varianter fra overordnet produkt",
-    "resource_reference_product_media": "Viser medier fra overordnet produkt"
+    "resource_reference_product_media": "Viser medie fra overordnet produkt",
+    "product_media": "Produktmedier",
+    "section_link": "Afsnitslink"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Del oplysninger om dit brand med dine kunder. Beskriv et produkt, del meddelelser, eller byd velkommen til din butik.</p>"

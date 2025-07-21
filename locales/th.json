@@ -60,7 +60,8 @@
     "decrease_quantity": "ลดจำนวน",
     "increase_quantity": "เพิ่มจำนวน",
     "quantity": "จำนวน",
-    "rating": "คะแนนสำหรับสินค้านี้คือ {{ rating }} จาก 5"
+    "rating": "คะแนนสำหรับสินค้านี้คือ {{ rating }} จาก 5",
+    "nested_product": "{{ product_title }} สำหรับ {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "เพิ่มลงในตะกร้าสินค้า",

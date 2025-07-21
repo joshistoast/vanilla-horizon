@@ -60,7 +60,8 @@
     "decrease_quantity": "수량 감소",
     "increase_quantity": "수량 증가",
     "quantity": "수량",
-    "rating": "이 제품의 평점은 5점 만점에 {{ rating }}점입니다"
+    "rating": "이 제품의 평점은 5점 만점에 {{ rating }}점입니다",
+    "nested_product": "{{ parent_title }}용 {{ product_title }}"
   },
   "actions": {
     "add_to_cart": "카트에 추가",

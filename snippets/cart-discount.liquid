@@ -125,7 +125,7 @@
   }
 
   .cart-discount__input::placeholder {
-    color: rgba(from var(--color-input-text) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-input-text-rgb) / var(--opacity-subdued-text));
   }
 
   .cart-discount__label {
@@ -154,7 +154,7 @@
   }
 
   .cart-discount__summary:hover {
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .cart-discount__codes {
@@ -198,13 +198,13 @@
   }
 
   :is(.cart-discount__pill-remove, .cart-discount__pill-remove:hover) {
+    --close-icon-opacity: 0.4;
+
     color: var(--color-foreground);
     background-color: transparent;
     pointer-events: all;
     cursor: pointer;
     height: 100%;
-
-    --close-icon-opacity: 0.4;
   }
 
   .cart-discount__error {

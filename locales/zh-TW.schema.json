@@ -162,7 +162,7 @@
     "large_logo": "大型標誌",
     "product_list_button": "「檢視全部」按鈕",
     "product_inventory": "產品庫存",
-    "description": "描述"
+    "description": "說明"
   },
   "settings": {
     "alignment": "對齊方式",
@@ -489,7 +489,8 @@
     "transition_to_main_product": "產品卡片到產品頁面的過渡",
     "show_second_image_on_hover": "游標暫留時顯示次要圖片",
     "media": "多媒體檔案",
-    "product_card_carousel": "顯示輪播"
+    "product_card_carousel": "顯示輪播",
+    "media_fit": "媒體適配"
   },
   "options": {
     "adapt_to_image": "配合圖片",
@@ -850,19 +851,21 @@
     "app_required_for_ratings": "需要應用程式，方可顯示商品評價。[瞭解詳情](https://help.shopify.com/manual/apps)",
     "icon": "圖示",
     "manage_store_name": "[管理商店名稱](/admin/settings/general?edit=storeName)",
-    "resource_reference_collection_card": "顯示父層級區段的商品系列",
-    "resource_reference_collection_card_image": "顯示父層級商品系列的圖片",
-    "resource_reference_collection_title": "顯示父層級商品系列的標題",
-    "resource_reference_product": "自動連接到父層級產品",
-    "resource_reference_product_card": "顯示父層級區段的產品",
-    "resource_reference_product_inventory": "顯示父層級產品的庫存",
-    "resource_reference_product_price": "顯示父層級產品的價格",
-    "resource_reference_product_recommendations": "顯示基於父層級產品的推薦",
-    "resource_reference_product_review": "顯示父層級產品的評論",
-    "resource_reference_product_swatches": "顯示父層級產品的色樣",
-    "resource_reference_product_title": "顯示父層級產品的標題",
-    "resource_reference_product_variant_picker": "顯示父層級產品的子類",
-    "resource_reference_product_media": "顯示父層級產品的媒體"
+    "resource_reference_collection_card": "顯示上層區段的商品系列",
+    "resource_reference_collection_card_image": "顯示上層商品系列的圖片",
+    "resource_reference_collection_title": "顯示上層商品系列的名稱",
+    "resource_reference_product": "自動連結至上層商品",
+    "resource_reference_product_card": "顯示上層區段的商品",
+    "resource_reference_product_inventory": "顯示上層商品的庫存",
+    "resource_reference_product_price": "顯示上層商品的價格",
+    "resource_reference_product_recommendations": "根據上層商品顯示推薦",
+    "resource_reference_product_review": "顯示上層商品的評論",
+    "resource_reference_product_swatches": "顯示上層商品的色樣",
+    "resource_reference_product_title": "顯示上層商品的名稱",
+    "resource_reference_product_variant_picker": "顯示上層商品的子類",
+    "resource_reference_product_media": "顯示上層商品的多媒體檔案",
+    "product_media": "商品多媒體檔案",
+    "section_link": "區段連結"
   },
   "html_defaults": {
     "share_information_about_your": "<p>和顧客分享品牌資訊、描述商品、進行公告，或歡迎顧客光臨您的商店。</p>"

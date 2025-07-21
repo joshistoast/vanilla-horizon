@@ -76,11 +76,8 @@
 
   .group-block__link ~ :is(.group-block-content, .group-block__media-wrapper) {
     pointer-events: none;
-    a,
-    button,
-    input,
-    textarea,
-    select {
+
+    :is(a, button, input, textarea, select) {
       pointer-events: auto;
     }
   }

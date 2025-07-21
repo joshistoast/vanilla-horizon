@@ -78,7 +78,7 @@
   padding: var(--padding-md);
   text-align: center;
   background-color: rgb(var(--color-background));
-  border-color: rgba(var(--color-foreground), 0.04);
+  border-color: rgb(var(--color-foreground), var(--opacity-5));
   color: rgb(var(--color-foreground));
   margin-block: 0;
 }

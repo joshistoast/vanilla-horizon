@@ -62,7 +62,8 @@
     "decrease_quantity": "Убрать позиции",
     "increase_quantity": "Добавить позиции",
     "quantity": "Количество",
-    "rating": "Рейтинг этого продукта {{ rating }} из 5"
+    "rating": "Рейтинг этого продукта {{ rating }} из 5",
+    "nested_product": "{{ product_title }} для товара \"{{ parent_title }}\""
   },
   "actions": {
     "add_to_cart": "Добавить в корзину",

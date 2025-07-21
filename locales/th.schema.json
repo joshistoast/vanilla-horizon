@@ -88,7 +88,7 @@
     "menu": "เมนู",
     "mobile_layout": "เลย์เอาต์สำหรับมือถือ",
     "payment_icons": "ไอคอนการชำระเงิน",
-    "popup_link": "ลิงค์ป๊อปอัป",
+    "popup_link": "ลิงค์ป๊อปอัพ",
     "predictive_search": "ค้นหาป๊อปโอเวอร์",
     "predictive_search_empty": "การค้นหาที่คาดการณ์ว่างเปล่า",
     "price": "ราคา",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "แสดงรูปภาพที่สองเมื่อนำเมาส์ไปวาง",
     "media": "สื่อ",
     "product_card_carousel": "แสดงภาพสไลด์",
-    "hide_resource_setting": "ซ่อนการตั้งค่าแหล่งข้อมูล"
+    "hide_resource_setting": "ซ่อนการตั้งค่าแหล่งข้อมูล",
+    "media_fit": "การปรับสื่อ"
   },
   "options": {
     "adapt_to_image": "ปรับตามรูปภาพ",
@@ -816,7 +817,7 @@
     "padding_desktop": "ระยะห่างของเดสก์ท็อป",
     "paragraph": "ย่อหน้า",
     "policies": "นโยบาย",
-    "popup": "ป๊อปอัป",
+    "popup": "ป๊อปอัพ",
     "search": "การค้นหา",
     "size": "ขนาด",
     "social_media": "โซเชียลมีเดีย",
@@ -862,7 +863,10 @@
     "resource_reference_product_review": "แสดงรีวิวจากสินค้าหลัก",
     "resource_reference_product_swatches": "แสดงตัวอย่างจากสินค้าหลัก",
     "resource_reference_product_title": "แสดงชื่อจากสินค้าหลัก",
-    "resource_reference_product_variant_picker": "แสดงตัวเลือกสินค้าจากสินค้าหลัก"
+    "resource_reference_product_variant_picker": "แสดงตัวเลือกสินค้าจากสินค้าหลัก",
+    "product_media": "สื่อประกอบสินค้า",
+    "resource_reference_product_media": "แสดงสื่อจากสินค้าหลัก",
+    "section_link": "ลิงก์ไปยังส่วน"
   },
   "html_defaults": {
     "share_information_about_your": "<p>แชร์ข้อมูลเกี่ยวกับแบรนด์ของคุณให้ลูกค้าทราบ โดยอธิบายคุณสมบัติของสินค้า แชร์ประกาศ หรือกล่าวต้อนรับลูกค้าสู่ร้านค้าของคุณ</p>"
@@ -874,7 +878,7 @@
     "email_signup_button_label": "สมัครใช้งาน",
     "accordion_heading": "ส่วนหัวแบบแอคคอร์เดียน",
     "contact_form_button_label": "ส่ง",
-    "popup_link": "ลิงค์ป๊อปอัป",
+    "popup_link": "ลิงค์ป๊อปอัพ",
     "sign_up": "ลงทะเบียน",
     "welcome_to_our_store": "ยินดีต้อนรับสู่ร้านค้าของเรา",
     "be_bold": "โดดเด่น",

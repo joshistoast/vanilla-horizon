@@ -4,6 +4,7 @@
   <script
     src="{{ 'announcement-bar.js' | asset_url }}"
     type="module"
+    fetchpriority="low"
   ></script>
 {% endif %}
 
@@ -76,13 +77,10 @@
 
   .announcement-bar__slider slideshow-arrows {
     padding: 0;
-  }
-
-  .announcement-bar__slider slideshow-arrows[shape='none'] {
     mix-blend-mode: normal;
   }
 
-  .announcement-bar__slider slideshow-arrows .slideshow-control--shape-none {
+  .announcement-bar__slider slideshow-arrows .slideshow-control {
     color: var(--color-foreground);
   }
 

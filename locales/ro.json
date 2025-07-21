@@ -61,7 +61,8 @@
     "decrease_quantity": "Scade cantitatea",
     "increase_quantity": "Crește cantitatea",
     "quantity": "Cantitate",
-    "rating": "Evaluarea acestui produs este de {{ rating }} din 5"
+    "rating": "Evaluarea acestui produs este de {{ rating }} din 5",
+    "nested_product": "{{ product_title }} pentru {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Adaugă în coș",

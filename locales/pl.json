@@ -62,7 +62,8 @@
     "decrease_quantity": "Zmniejsz ilość",
     "increase_quantity": "Zwiększ ilość",
     "rating": "Ocena tego produktu to: {{ rating }} na 5",
-    "quantity": "Ilość"
+    "quantity": "Ilość",
+    "nested_product": "{{ product_title }}: {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Dodaj do koszyka",

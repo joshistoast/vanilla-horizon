@@ -192,7 +192,7 @@
     font-size: var(--font-size--lg);
     line-height: var(--line-height--display-loose);
     word-break: break-word;
-    background-color: rgb(from var(--color-foreground) r g b / 5%);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
     aspect-ratio: var(--resource-card-aspect-ratio, auto);
     border-radius: var(--resource-card-corner-radius);
     color: var(--color-foreground);
@@ -254,14 +254,14 @@
   }
 
   .resource-card__subtext {
-    color: rgba(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
     margin-block-start: 0;
   }
 
   .resource-card__subtext.paragraph {
     font-size: var(--font-size--body-sm);
     line-height: var(--line-height--body-tight);
-    color: rgba(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .resource-card:has(.resource-card__image--secondary) {

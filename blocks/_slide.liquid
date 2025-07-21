@@ -1,6 +1,7 @@
 
 
 {%- assign block_index = section.blocks | find_index: 'id', block.id -%}
+{%- assign section_index = section.index -%}
 
 {% capture children %}
   {% liquid
@@ -9,7 +10,7 @@
       assign preview_image = block.settings.video_1.preview_image
     endif
   %}
-  {% if section.settings.slide_height == 'adapt_image' and block_index == 1 and preview_image != blank %}
+  {% if section.settings.slide_height == 'adapt_image' and block_index == 0 and preview_image != blank %}
     {%
       # Great example of why it can be helpful for a section to be able to read the settings of its direct child blocks.
       # In this case, we want the section to be able to read the image aspect ratio of the first slide and apply it to the slideshow slides and slides.
@@ -33,15 +34,15 @@
         assign media_width_mobile = '100vw'
         assign sizes = '(min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
         assign lazy_sizes = 'auto, ' | append: sizes
-        assign widths = '300, 525, 750, 900, 1024, 1280, 1440, 1700, 1920, 2048, 2304, 2560, 2880, 3072, 3840'
+        assign widths = '832, 1200, 1600, 1920, 2560, 3840'
       %}
 
       {%- if block.settings.media_type_1 == 'image' -%}
-        {%- if block_index == 1 -%}
+        {%- if block_index == 0 and section_index == 1 -%}
           {{
             block.settings.image_1
             | image_url: width: 3840
-            | image_tag: height: height, sizes: sizes, widths: widths, loading: 'eager', class: 'slide__image'
+            | image_tag: height: height, sizes: sizes, widths: widths, loading: 'eager', class: 'slide__image', fetchpriority: 'high'
           }}
         {%- else -%}
           {{
@@ -51,9 +52,30 @@
           }}
         {%- endif -%}
       {%- else -%}
+        {%- if block.settings.video_1.preview_image -%}
+          {% liquid
+            assign loading_poster = 'lazy'
+            assign fetch_priority_poster = false
+            if block_index == 0 and section.index == 1
+              assign loading_poster = 'eager'
+              assign fetch_priority_poster = 'high'
+            endif
+          %}
+          {{
+            block.settings.video_1.preview_image
+            | image_url: width: 3840
+            | image_tag:
+              height: height,
+              sizes: sizes,
+              widths: widths,
+              loading: loading_poster,
+              class: 'slide__video-poster',
+              fetchpriority: fetch_priority_poster
+          }}
+        {%- endif -%}
         {{
           block.settings.video_1
-          | video_tag: image_size: '3840x', autoplay: true, loop: true, controls: false, muted: true, class: 'slide__video'
+          | video_tag: poster: nil, autoplay: true, loop: true, controls: false, muted: true, class: 'slide__video'
         }}
       {%- endif -%}
     {%- else -%}
@@ -119,11 +141,17 @@
   }
 
   .slide__image-container > .slide__image,
-  .slide__image-container > .slide__video {
+  .slide__image-container > .slide__video,
+  .slide__image-container > .slide__video-poster {
+    position: relative;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center center;
+  }
+
+  .slide__image-container > .slide__video-poster {
+    position: absolute;
   }
 {% endstylesheet %}
 

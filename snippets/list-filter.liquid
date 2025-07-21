@@ -431,16 +431,16 @@
   }
 
   .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
-    border-color: rgb(from var(--color-foreground) r g b / var(--opacity-40-60));
-    background-color: rgb(from var(--color-foreground) r g b / 5%);
+    border-color: rgb(var(--color-foreground-rgb) / var(--opacity-40-60));
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
   }
 
   .facets .checkbox:has(.checkbox__input:checked):not(:has(.checkbox__input:disabled)):hover .icon-checkmark {
-    background-color: rgb(from var(--color-foreground) r g b / 85%);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-85));
   }
 
   .facets .checkbox:not(:has(.checkbox__input:disabled)):hover .checkbox__label-text {
-    color: rgb(from var(--color-foreground) r g b / 90%);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-90));
   }
 
   .facets .checkbox .checkbox__label-text {
@@ -455,21 +455,22 @@
     --pill-label-height: var(--button-size-md);
     --pill-label-focus-outline-color: var(--color-foreground);
     --pill-label-color: var(--color-foreground);
+    --pill-label-color-rgb: var(--color-foreground-rgb);
     --pill-label-background-color: var(--color-background);
+    --pill-label-background-color-rgb: var(--color-background-rgb);
     --pill-label-border-opacity: var(--facets-low-opacity);
 
     display: inline-flex;
     position: relative;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 0 var(--pill-label-border-width)
-      rgb(from var(--pill-label-color) r g b / var(--opacity-10-25));
+    box-shadow: inset 0 0 0 var(--pill-label-border-width) rgb(var(--pill-label-color-rgb) / var(--opacity-10-25));
     border-radius: var(--pill-label-border-radius);
     height: var(--pill-label-height);
     width: 100%;
     padding-inline: var(--pill-label-padding-inline);
-    color: rgb(from var(--pill-label-color) r g b / 100%);
-    background-color: rgb(from var(--pill-label-background-color) r g b / 100%);
+    color: rgb(var(---pill-label-color-rgb));
+    background-color: rgb(var(--pill-label-background-color-rgb));
     cursor: pointer;
     transition: color var(--animation-speed) var(--animation-easing),
       background-color var(--animation-speed) var(--animation-easing);
@@ -485,6 +486,7 @@
       --pill-label-color: var(--color-background);
       --pill-label-background-color: var(--color-foreground);
       --pill-label-border-opacity: 0;
+
       font-weight: 500;
     }
 
@@ -526,7 +528,7 @@
 
   .facets__pill-label svg line {
     stroke-width: 1.5px;
-    stroke: rgb(from var(--color-foreground) r g b / var(--facets-low-opacity));
+    stroke: rgb(var(--color-foreground-rgb) / var(--facets-low-opacity));
   }
 
   .facets__pill-wrapper {
@@ -574,6 +576,7 @@
 
   .facets__inputs-wrapper .facets__inputs-list--swatches-grid {
     --columns: 2;
+
     display: grid;
     grid-template-columns: repeat(var(--columns), 1fr);
   }
@@ -610,14 +613,15 @@
   }
 
   .facets__inputs-wrapper .facets__inputs-list--swatches-grid .variant-option__button-label:has(:checked) {
-    color: rgb(from var(--color-foreground) r g b / 100%);
-    background-color: rgb(from var(--color-background) r g b / 100%);
+    color: rgb(var(--color-foreground-rgb));
+    background-color: rgb(var(--color-background-rgb));
     font-weight: 500;
     transition: font-weight 0.2s ease;
   }
 
   .facets .variant-option--swatches {
     --options-border-radius: var(--variant-picker-swatch-radius);
+
     width: auto;
   }
 
@@ -640,7 +644,7 @@
 
   .facets__status--swatches .swatch + .swatch {
     margin-left: calc(var(--variant-picker-swatch-width) / -3);
-    outline: 1px solid rgb(from var(--color-background) r g b / 100%);
+    outline: 1px solid rgb(var(--color-background-rgb));
   }
 
   .variant-option--images {
@@ -654,7 +658,7 @@
 
     border-radius: var(--image-facet-border-radius);
     box-shadow: inset 0 0 0 var(--image-facet-border-width)
-      rgb(from var(--color-foreground) r g b / var(--image-facet-border-opacity));
+      rgb(var(--color-foreground-rgb) / var(--image-facet-border-opacity));
 
     &:hover:not(:has(input:disabled)),
     &:has(input:checked) {
@@ -678,6 +682,7 @@
     &:has(input:disabled),
     &:has(input:disabled):hover {
       --image-facet-border-opacity: 0;
+
       opacity: var(--disabled-opacity);
       cursor: not-allowed;
 
@@ -692,7 +697,7 @@
       }
 
       .facets__image-wrapper {
-        border: var(--style-border-width) solid rgba(from var(--color-foreground) r g b / 0.3);
+        border: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-30));
         border-radius: var(--image-facet-border-radius);
       }
     }
@@ -745,7 +750,7 @@
     width: 100%;
     height: 100%;
     stroke-width: var(--border-width);
-    stroke: rgb(from var(--color-foreground) r g b / 0.3);
+    stroke: rgb(var(--color-foreground-rgb) / var(--opacity-5));
   }
 
   /* Position label text and handle overflow */

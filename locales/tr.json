@@ -60,7 +60,8 @@
     "decrease_quantity": "Adedi azalt",
     "increase_quantity": "Adedi artır",
     "quantity": "Adet",
-    "rating": "Bu ürünün puanı 5 üzerinden {{ rating }}"
+    "rating": "Bu ürünün puanı 5 üzerinden {{ rating }}",
+    "nested_product": "{{ parent_title }} için {{ product_title }}"
   },
   "actions": {
     "add_to_cart": "Sepete ekle",

@@ -9,7 +9,7 @@
   endif
   assign media_width_mobile = '100vw'
   assign sizes = '(min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
-  assign widths = '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'
+  assign widths = '832, 1200, 1600, 1920, 2560, 3840'
 
   assign has_image_1 = false
   assign has_image_2 = false
@@ -52,6 +52,12 @@
   if alpha == 1 and section.settings.toggle_overlay
     assign is_transparent = false
   endif
+
+  assign fetch_priority = 'auto'
+
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
 %}
 
 {% capture media %}
@@ -66,16 +72,37 @@
         height: section.settings.image_1.height,
         alt: section.settings.image_1.alt,
         class: 'hero__image',
-        sizes: sizes
+        sizes: sizes,
+        fetchpriority: fetch_priority
     }}
   {%- endif -%}
 
   {%- if has_video_1 -%}
     {% assign media_count = media_count | plus: 1 %}
+    {%- if section.settings.video_1.preview_image -%}
+      {% liquid
+        assign fetch_priority_poster = false
+        if section.index == 1
+          assign fetch_priority_poster = 'high'
+        endif
+      %}
+      {{
+        section.settings.video_1.preview_image
+        | image_url: width: 3840
+        | image_tag:
+          width: section.settings.video_1.preview_image.width,
+          widths: widths,
+          height: section.settings.video_1.preview_image.height,
+          alt: section.settings.video_1.alt,
+          class: 'hero__video-poster',
+          sizes: sizes,
+          fetchpriority: fetch_priority_poster
+      }}
+    {%- endif -%}
     {{
       section.settings.video_1
       | video_tag:
-        image_size: '3840x',
+        poster: nil,
         autoplay: true,
         loop: true,
         controls: false,
@@ -95,16 +122,30 @@
         height: section.settings.image_2.height,
         alt: section.settings.image_2.alt,
         class: 'hero__image',
-        sizes: sizes
+        sizes: sizes,
+        fetchpriority: fetch_priority
     }}
   {%- endif -%}
 
   {%- if has_video_2 -%}
     {% assign media_count = media_count | plus: 1 %}
+    {%- if section.settings.video_2.preview_image -%}
+      {{
+        section.settings.video_2.preview_image
+        | image_url: width: 3840
+        | image_tag:
+          width: section.settings.video_2.preview_image.width,
+          widths: widths,
+          height: section.settings.video_2.preview_image.height,
+          alt: section.settings.video_2.alt,
+          class: 'hero__video-poster',
+          sizes: sizes
+      }}
+    {%- endif -%}
     {{
       section.settings.video_2
       | video_tag:
-        image_size: '3840x',
+        poster: nil,
         autoplay: true,
         loop: true,
         controls: false,
@@ -256,14 +297,14 @@
 
   .hero[data-shopify-visual-preview] {
     --hero-min-height: 600px;
+
     min-height: 600px;
   }
 
   .hero__container {
     position: relative;
     overflow: hidden;
-    border: var(--hero-border-width) var(--hero-border-style)
-      rgba(from var(--color-border) r g b / var(--hero-border-opacity));
+    border: var(--hero-border-width) var(--hero-border-style) rgb(var(--color-border-rgb) / var(--hero-border-opacity));
     min-height: inherit;
     align-items: var(--vertical-alignment-mobile);
     justify-content: var(--horizontal-alignment);
@@ -306,6 +347,7 @@
       width: 100%;
       aspect-ratio: auto;
     }
+
     .hero__media-wrapper {
       /* When there are no blocks and the height is auto, allow the image to appear. */
       position: relative;
@@ -313,14 +355,19 @@
   }
 
   .hero__image,
-  .hero__video {
-    position: relative;
+  .hero__video,
+  .hero__video-poster {
     height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center center;
-    z-index: var(--layer-base);
     overflow: hidden;
+    position: relative;
+    z-index: var(--layer-base);
+  }
+
+  .hero__video-poster {
+    position: absolute;
   }
 
   .hero__link {
@@ -332,11 +379,8 @@
   .hero__media-wrapper,
   .hero__content-wrapper {
     pointer-events: none;
-    a,
-    button,
-    input,
-    textarea,
-    select {
+
+    :is(a, button, input, textarea, select) {
       pointer-events: auto;
     }
   }
@@ -438,17 +482,6 @@
   },
   "settings": [
     {
-      "type": "url",
-      "id": "link",
-      "label": "t:settings.link"
-    },
-    {
-      "type": "checkbox",
-      "id": "open_in_new_tab",
-      "label": "t:settings.open_new_tab",
-      "default": false
-    },
-    {
       "type": "header",
       "content": "t:content.media"
     },
@@ -511,6 +544,21 @@
       "id": "video_2",
       "label": "t:settings.video",
       "visible_if": "{{ section.settings.media_type_2 == 'video' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.section_link"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:settings.link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "t:settings.open_new_tab",
+      "default": false
     },
     {
       "type": "header",

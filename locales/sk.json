@@ -62,7 +62,8 @@
     "decrease_quantity": "Znížiť množstvo",
     "increase_quantity": "Zvýšiť množstvo",
     "rating": "Hodnotenie tohto produktu je {{ rating }} z 5",
-    "quantity": "Množstvo"
+    "quantity": "Množstvo",
+    "nested_product": "{{ product_title }} pre {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Pridať do košíka",

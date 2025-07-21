@@ -112,16 +112,7 @@
                 aria-selected="true"
               {% endif %}
             >
-              {{
-                media.preview_image
-                | image_url: width: 1024
-                | image_tag:
-                  loading: 'lazy',
-                  sizes: 'auto, 110, (min-width: 750px) 160',
-                  widths: '300, 375, 450, 525, 600, 675, 750, 768, 850, 900, 1024',
-                  alt: media.alt
-                | escape
-              }}
+              {{ media.preview_image | image_url: width: 144 | image_tag: loading: 'lazy', alt: media.alt | escape }}
 
               {% if media.media_type == 'video' or media.media_type == 'external_video' %}
                 <span class="slideshow-controls__thumbnail-badge">

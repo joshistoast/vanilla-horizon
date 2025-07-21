@@ -14,6 +14,7 @@
 <script
   src="{{ 'results-list.js' | asset_url }}"
   type="module"
+  fetchpriority="low"
 ></script>
 
 {% javascript %}
@@ -99,6 +100,7 @@
 {% stylesheet %}
   .main-collection-grid {
     grid-column: var(--grid-column--mobile);
+
     @media screen and (min-width: 750px) {
       grid-column: var(--grid-column--desktop);
     }
@@ -143,8 +145,7 @@
 
   :is(.collection-wrapper--full-width, .collection-wrapper--full-width-on-mobile)
     [product-grid-view='default']
-    .product-grid__item
-    .group-block {
+    .product-grid__card {
     @media screen and (max-width: 749px) {
       padding-inline-start: max(var(--padding-xs), var(--padding-inline-start));
       padding-inline-end: max(var(--padding-xs), var(--padding-inline-end));
@@ -153,11 +154,19 @@
 
   :is(.collection-wrapper--full-width, .collection-wrapper--full-width-on-mobile)
     [product-grid-view='mobile-single']
-    .product-grid__item
-    .group-block {
+    .product-grid__card {
     @media screen and (max-width: 749px) {
       padding-inline-start: max(var(--padding-xs), var(--padding-inline-start));
       padding-inline-end: max(var(--padding-xs), var(--padding-inline-end));
+    }
+  }
+
+  /* Make product media go edge-to-edge by using negative margins */
+  :is(.collection-wrapper--full-width) .card-gallery,
+  :is(.collection-wrapper--full-width-on-mobile) .card-gallery {
+    @media screen and (max-width: 749px) {
+      margin-inline-start: calc(-1 * max(var(--padding-xs), var(--padding-inline-start)));
+      margin-inline-end: calc(-1 * max(var(--padding-xs), var(--padding-inline-end)));
     }
   }
 {% endstylesheet %}

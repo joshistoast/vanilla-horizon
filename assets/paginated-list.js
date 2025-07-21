@@ -67,40 +67,56 @@ export default class PaginatedList extends Component {
   #observeViewMore() {
     const { viewMorePrevious, viewMoreNext } = this.refs;
 
-    if (!viewMorePrevious || !viewMoreNext) return;
+    // Return if neither element exists
+    if (!viewMorePrevious && !viewMoreNext) return;
 
-    this.infinityScrollObserver = new IntersectionObserver(
-      async (entries) => {
-        // Wait for any in-progress view transitions to finish
-        if (viewTransition.current) await viewTransition.current;
+    // Create observer if it doesn't exist
+    if (!this.infinityScrollObserver) {
+      this.infinityScrollObserver = new IntersectionObserver(
+        async (entries) => {
+          // Wait for any in-progress view transitions to finish
+          if (viewTransition.current) await viewTransition.current;
 
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            if (entry.target === viewMorePrevious) {
-              this.#renderPreviousPage();
-            } else {
-              this.#renderNextPage();
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              // Use current refs to check which element triggered
+              const { viewMorePrevious, viewMoreNext } = this.refs;
+
+              if (entry.target === viewMorePrevious) {
+                this.#renderPreviousPage();
+              } else if (entry.target === viewMoreNext) {
+                this.#renderNextPage();
+              }
             }
           }
+        },
+        {
+          rootMargin: '100px',
         }
-      },
-      {
-        rootMargin: '100px',
-      }
-    );
+      );
+    }
 
-    this.infinityScrollObserver.observe(viewMorePrevious);
-    this.infinityScrollObserver.observe(viewMoreNext);
+    // Observe the view more elements
+    if (viewMorePrevious) {
+      this.infinityScrollObserver.observe(viewMorePrevious);
+    }
+
+    if (viewMoreNext) {
+      this.infinityScrollObserver.observe(viewMoreNext);
+    }
   }
 
   /**
-   * @param {Object} pageInfo - The page info
-   * @param {number} pageInfo.page - The page number
+   * @param {{ page: number, url?: URL } | undefined} pageInfo - The page info
    * @returns {boolean} Whether to use the page
    */
   #shouldUsePage(pageInfo) {
     if (!pageInfo) return false;
-    if (pageInfo.page < 1) return false;
+
+    const { grid } = this.refs;
+    const lastPage = grid?.dataset.lastPage;
+
+    if (!lastPage || pageInfo.page < 1 || pageInfo.page > Number(lastPage)) return false;
 
     return true;
   }
@@ -111,17 +127,25 @@ export default class PaginatedList extends Component {
   async #fetchPage(type) {
     const page = this.#getPage(type);
 
-    if (!page || !this.#shouldUsePage(page)) return;
+    // Always resolve the promise, even if we can't fetch the page
+    const resolvePromise = () => {
+      if (type === 'next') {
+        this.#resolveNextPagePromise?.();
+        this.#resolveNextPagePromise = null;
+      } else {
+        this.#resolvePreviousPagePromise?.();
+        this.#resolvePreviousPagePromise = null;
+      }
+    };
+
+    if (!page || !this.#shouldUsePage(page)) {
+      // Resolve the promise even if we can't fetch
+      resolvePromise();
+      return;
+    }
 
     await this.#fetchSpecificPage(page.page, page.url);
-
-    if (type === 'next') {
-      this.#resolveNextPagePromise?.();
-      this.#resolveNextPagePromise = null;
-    } else {
-      this.#resolvePreviousPagePromise?.();
-      this.#resolvePreviousPagePromise = null;
-    }
+    resolvePromise();
   }
 
   /**
@@ -149,6 +173,7 @@ export default class PaginatedList extends Component {
     if (!grid) return;
 
     const nextPage = this.#getPage('next');
+
     if (!nextPage || !this.#shouldUsePage(nextPage)) return;
     let nextPageItemElements = this.#getGridForPage(nextPage.page);
 
@@ -156,6 +181,10 @@ export default class PaginatedList extends Component {
       const promise = new Promise((res) => {
         this.#resolveNextPagePromise = res;
       });
+
+      // Trigger the fetch for this page
+      this.#fetchPage('next');
+
       await promise;
       nextPageItemElements = this.#getGridForPage(nextPage.page);
       if (!nextPageItemElements) return;
@@ -185,6 +214,10 @@ export default class PaginatedList extends Component {
       const promise = new Promise((res) => {
         this.#resolvePreviousPagePromise = res;
       });
+
+      // Trigger the fetch for this page
+      this.#fetchPage('previous');
+
       await promise;
       previousPageItemElements = this.#getGridForPage(previousPage.page);
       if (!previousPageItemElements) return;
@@ -376,7 +409,8 @@ export default class PaginatedList extends Component {
 
     if (!targetCard) return;
 
-    const page = isPrevious ? Number(targetCard.dataset.page) - 1 : Number(targetCard.dataset.page) + 1;
+    const currentCardPage = Number(targetCard.dataset.page);
+    const page = isPrevious ? currentCardPage - 1 : currentCardPage + 1;
 
     const url = new URL(window.location.href);
     url.searchParams.set('page', page.toString());
@@ -424,8 +458,46 @@ export default class PaginatedList extends Component {
     this.#resolveNextPagePromise = null;
     this.#resolvePreviousPagePromise = null;
 
-    // After a filter update, pagination typically resets to page 1
-    // Fetch page 2 as the "next" page since page 1 is already visible
-    this.#fetchSpecificPage(2);
+    // Store the current lastPage value to detect when it changes
+    const currentLastPage = this.refs.grid?.dataset.lastPage;
+
+    // We need to wait for the DOM to be updated with the new filtered content
+    // Using mutation observer to detect when the grid actually updates
+    const observer = new MutationObserver((mutations) => {
+      // Check if data-last-page changed
+      const newLastPage = this.refs.grid?.dataset.lastPage;
+
+      if (newLastPage !== currentLastPage) {
+        observer.disconnect();
+
+        // Check if component is still connected
+        if (!this.isConnected) {
+          return;
+        }
+
+        // Now the DOM has been updated with the new filtered content
+        this.#observeViewMore();
+
+        // Fetch the next page
+        this.#fetchPage('next');
+      }
+    });
+
+    // Observe the grid for changes
+    const { grid } = this.refs;
+    if (grid) {
+      observer.observe(grid, {
+        attributes: true,
+        attributeFilter: ['data-last-page'],
+        childList: true, // Also watch for child changes in case the whole grid is replaced
+      });
+
+      // Set a timeout as a fallback in case the mutation never fires
+      setTimeout(() => {
+        if (observer) {
+          observer.disconnect();
+        }
+      }, 3000);
+    }
   };
 }

@@ -5,6 +5,30 @@
  */
 document.addEventListener('shopify:block:select', function (event) {
   if (event.target instanceof HTMLElement) {
+    // Check if the selected element is specifically a product-card block itself
+    // Not a child block within the product card
+
+    // First, remove data-no-navigation from any previously selected product cards
+    document.querySelectorAll('product-card[data-no-navigation]').forEach((card) => {
+      if (card instanceof HTMLElement) {
+        card.removeAttribute('data-no-navigation');
+      }
+    });
+
+    if (event.target.tagName === 'PRODUCT-CARD') {
+      const section = event.target.closest('.shopify-section');
+
+      if (section) {
+        const productCardsInSection = section.querySelectorAll('product-card');
+
+        productCardsInSection.forEach((card) => {
+          if (card instanceof HTMLElement) {
+            card.setAttribute('data-no-navigation', 'true');
+          }
+        });
+      }
+    }
+
     const slide = event.target.closest('slideshow-slide');
 
     if (slide) {
@@ -26,6 +50,11 @@ document.addEventListener('shopify:block:select', function (event) {
 
 document.addEventListener('shopify:block:deselect', function (event) {
   if (event.target instanceof HTMLElement) {
+    // Remove data-no-navigation when product card is deselected
+    if (event.target.tagName === 'PRODUCT-CARD') {
+      event.target.removeAttribute('data-no-navigation');
+    }
+
     /** @type {import('./slideshow').Slideshow | null} */
     const slideshow = event.target.closest('slideshow-component');
 

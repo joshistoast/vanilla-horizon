@@ -259,6 +259,7 @@
   body {
     --header-height: 0px;
     --header-group-height: var(--header-height);
+    --transparent-header-offset-boolean: 0; /* stylelint-disable-line declaration-property-value-disallowed-list */
   }
 
   body:has(> #header-group > header) {
@@ -272,8 +273,10 @@
   .header[transparent] {
     --language-button-background-color: transparent;
     --language-button-border-color: transparent;
+
     /* used to apply transparency to .header__row, will only ever be transparent or unset */
     --header-bg-color: transparent;
+
     /* used to display the appropriate logo based on transparency state */
     --header-logo-display: none;
     --header-logo-inverse-display: block;
@@ -282,33 +285,41 @@
     top: 0;
     left: 0;
     right: 0;
+
     /* transparent color scheme on .header should never apply its background color */
     background-color: transparent;
     z-index: var(--layer-overlay);
 
     &[transparent='not-sticky'][data-sticky-state='active'],
-    &:has(
-        .header__row:hover,
-        .mega-menu__list:is(:hover),
-        .header-menu:is([aria-expanded='true']),
-        nav[header-menu]:is(:focus-within),
-        .menu-list__link[data-animating],
-        .account-popover[open],
-        .localization-wrapper:not([hidden])
-      ) {
+    &:hover,
+    /* Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+    &:has(.header-menu[aria-expanded='true']),
+    &:has(nav[header-menu]:focus-within),
+    &:has(.menu-list__link[data-animating]),
+    &:has(.account-popover[open]),
+    &:has(.localization-wrapper:not([hidden])) {
       /* should be opaque, negate all transparent properties */
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
       --header-bg-color: unset;
       --color-foreground: inherit;
+      --color-foreground-rgb: inherit;
       --color-background: inherit;
+      --color-background-rgb: inherit;
       --color-border: inherit;
+      --color-border-rgb: inherit;
+
+      .header__row {
+        /* Faster transition for "in" animation */
+        transition: color var(--animation-values-fast), border-color var(--animation-values-fast),
+          background-color var(--animation-values-fast);
+      }
     }
 
     .header__row {
-      transition: color var(--animation-speed) var(--animation-easing),
-        border-color var(--animation-speed) var(--animation-easing),
-        background-color var(--animation-speed) var(--animation-easing);
+      /* Slower transition for "out" animation */
+      transition: color var(--animation-values-slow), border-color var(--animation-values-slow),
+        background-color var(--animation-values-slow);
     }
   }
 
@@ -318,7 +329,8 @@
       .account-popover[open],
       .localization-wrapper:not([hidden])
     )
-    .header__row:not(:hover):not(
+    .header__row:not(
+      :hover,
       :has(
           .header-menu[aria-expanded='true'],
           .menu-list__link[data-animating],
@@ -328,7 +340,9 @@
     ) {
     /* while transparent, header-row ignores its color-scheme settings, pull from the header-component */
     --color-foreground: inherit;
+    --color-foreground-rgb: inherit;
     --color-border: inherit;
+    --color-border-rgb: inherit;
     --color-primary-button-background: inherit;
     --color-primary-button-text: inherit;
   }
@@ -341,8 +355,11 @@
     )
     .header__row {
     --color-foreground: inherit;
+    --color-foreground-rgb: inherit;
     --color-background: inherit;
+    --color-background-rgb: inherit;
     --color-border: inherit;
+    --color-border-rgb: inherit;
   }
 
   .header-section {
@@ -356,6 +373,7 @@
   .header-section:has(> #header-component[sticky='always']),
   .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
     position: sticky;
+
     /* Use -1 instead of 0 so intersection observer can track sticky state */
     top: -1px;
     z-index: var(--layer-sticky);
@@ -377,6 +395,7 @@
 
   .header__row {
     position: relative;
+
     /* will default to bg from its color scheme unless --header-bg-color is transparent */
     background-color: var(--header-bg-color, var(--color-background));
   }
@@ -406,6 +425,7 @@
   .header__column {
     display: flex;
     align-items: center;
+
     /* on mobile, header__column nodes are ignored to create a new grid-template-area based on all visible content */
     @media screen and (max-width: 749px) {
       display: contents;
@@ -438,11 +458,6 @@
   }
 
   .header__columns {
-    display: grid;
-    grid-template-areas: 'left center right';
-    grid-gap: var(--gap-xl);
-    grid-template-columns: var(--header-template-columns);
-
     /* Three column layout */
     --header-left: 1fr;
     --header-center: auto;
@@ -451,6 +466,11 @@
 
     /* Mobile layout */
     --header-mobile-bookend: 44px;
+
+    display: grid;
+    grid-template-areas: 'left center right';
+    grid-gap: var(--gap-xl);
+    grid-template-columns: var(--header-template-columns);
 
     /* If menu is in center column */
     &:has(.header__column--center header-menu) {
@@ -462,8 +482,9 @@
     /* If there is no center column, make the column the menu is in grow eagerly */
     &:where(:not(:has(.header__column--center))) {
       @media screen and (min-width: 750px) {
-        grid-template-areas: 'left right';
         --header-template-columns: var(--header-left) var(--header-right);
+
+        grid-template-areas: 'left right';
       }
 
       /* If the header-menu is in the right column */
@@ -471,6 +492,7 @@
         --header-right: auto;
         --header-left: minmax(max-content, 1fr);
       }
+
       /* If the header-menu is in the left column */
       &:has(.header__column--left header-menu) {
         --header-left: auto;
@@ -481,6 +503,7 @@
     @media screen and (max-width: 749px) {
       --header-template-columns: var(--header-mobile-bookend) var(--header-mobile-bookend) 1fr
         var(--header-mobile-bookend) var(--header-mobile-bookend);
+
       grid-template-areas: 'leftA leftB center rightA rightB';
       grid-column: span 3;
       column-gap: 0;
@@ -538,6 +561,7 @@
     .header__row--top .header__columns {
       --padding-block-end: 0px;
     }
+
     .header__row--bottom .header__columns {
       --padding-block-start: 0px;
     }
@@ -551,13 +575,11 @@
   /* When the header is transparent, and when there is no header-section below it, offset the first main-section with
    * the height of the header
    */
-  body:has(> #header-group #header-component[transparent]):not(:has(> #header-group .header-section + .shopify-section))
-    > main
-    > .shopify-section:first-child
-    .section:not(.disable-section-top-offset) {
+
+  main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     &.spacing-style,
     .spacing-style {
-      --section-top-offset: var(--header-height);
+      --section-top-offset: calc(var(--header-height) * var(--transparent-header-offset-boolean));
 
       /* Any nested sections should not be offset */
       :is(.spacing-style, .inherit-spacing) {
@@ -567,7 +589,7 @@
 
     /* Make sticky content immediately stick to the top of the page */
     .sticky-content {
-      margin-top: calc(var(--header-height) * -1);
+      margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
     }
   }
 {% endstylesheet %}

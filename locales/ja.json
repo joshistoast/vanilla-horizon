@@ -60,7 +60,8 @@
     "decrease_quantity": "数量を減らす",
     "increase_quantity": "数量を増やす",
     "quantity": "数量",
-    "rating": "この商品の評価は、5段階中{{ rating }}です"
+    "rating": "この商品の評価は、5段階中{{ rating }}です",
+    "nested_product": "{{ parent_title }}向けの{{ product_title }}"
   },
   "actions": {
     "add_to_cart": "カートに追加",

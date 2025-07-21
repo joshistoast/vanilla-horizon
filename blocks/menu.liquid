@@ -30,6 +30,7 @@
         spacing-style
         {% if block.settings.inherit_color_scheme == false %} color-{{ color_scheme }}{% endif %}
       "
+      data-testid="menu-details"
       style="
         --spacing--size: {{ block.settings.menu_spacing }}px;
         {% render 'spacing-style', settings: block.settings %}

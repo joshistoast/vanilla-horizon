@@ -10,13 +10,14 @@
   @param {object} [section] - The section object.
   @param {object} [selected_product] - The currently selected product.
   @param {boolean} [first_3d_model] - Indicates if this is the first 3D model.
+  @param {boolean} [is_main_product_media] - Indicates if this is the main product image.
 
   @example
   {% render 'product-media', media: media, preview_image_only: false, loading: 'lazy' %}
 {%- enddoc -%}
 
 {% liquid
-  assign widths = widths | default: '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'
+  assign widths = widths | default: '400, 800, 1200, 1600, 2000'
 %}
 
 <div
@@ -26,10 +27,14 @@
 >
   {% liquid
     assign high_res_url = media.preview_image | image_url: width: 3840
+    assign fetch_priority = 'auto'
+    if is_main_product_media
+      assign fetch_priority = 'high'
+    endif
   %}
   {{
     media.preview_image
-    | image_url: width: 1946
+    | image_url: width: 2000
     | image_tag:
       widths: widths,
       alt: media.alt,
@@ -37,7 +42,8 @@
       loading: loading,
       class: 'product-media__image',
       transitionToProduct: settings.transition_to_main_product,
-      data_max_resolution: high_res_url
+      data_max_resolution: high_res_url,
+      fetchpriority: fetch_priority
   }}
 
   {% unless preview_image_only %}
@@ -54,7 +60,7 @@
           >
             {{
               media.preview_image
-              | image_url: width: 1946
+              | image_url: width: 2000
               | image_tag:
                 widths: widths,
                 alt: media.alt,

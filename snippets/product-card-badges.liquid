@@ -33,9 +33,10 @@
 
 {% stylesheet %}
   .product-badges {
+    --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
+
     position: absolute;
     z-index: var(--layer-flat);
-    --badge-inset: max(var(--padding-xs), calc((var(--border-radius) + var(--padding-xs)) * (1 - cos(45deg))));
   }
 
   .product-badges--bottom-left {
