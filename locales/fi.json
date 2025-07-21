@@ -60,7 +60,8 @@
     "decrease_quantity": "Pienennä määrää",
     "increase_quantity": "Suurenna määrää",
     "quantity": "Määrä",
-    "rating": "Tämän tuoteen tuotearvio on {{ rating }}/5"
+    "rating": "Tämän tuoteen tuotearvio on {{ rating }}/5",
+    "nested_product": "{{ product_title }} – {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Lisää ostoskoriin",

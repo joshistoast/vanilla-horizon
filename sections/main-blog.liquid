@@ -3,6 +3,7 @@
 <script
   src="{{ 'blog-posts-list.js' | asset_url }}"
   type="module"
+  fetchpriority="low"
 ></script>
 
 <blog-posts-list section-id="{{ section.id }}">
@@ -23,8 +24,8 @@
       <span ref="viewMorePrevious"></span>
       <div
         ref="grid"
-        last-page="{{ paginate.pages }}"
         class="blog-posts-container"
+        data-last-page="{{ paginate.pages }}"
       >
         {% for article in blog.articles %}
           <div
@@ -51,6 +52,7 @@
     --columns-gap: 36px;
     --rows-gap: 36px;
   }
+
   .blog-posts-container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -70,12 +72,14 @@
    * +------------+------------+-------------+
    */
   .blog-post-item {
-    grid-column: span 2;
     --blog-post-card-scale: 0.6;
 
+    grid-column: span 2;
+
     @media screen and (max-width: 749px) {
-      grid-column: span 6;
       --blog-post-card-scale: 0.5;
+
+      grid-column: span 6;
     }
   }
 
@@ -89,12 +93,14 @@
    */
   .blog-post-item:nth-child(2),
   .blog-post-item:nth-child(3) {
-    grid-column: span 3;
     --blog-post-card-scale: 0.8;
 
+    grid-column: span 3;
+
     @media screen and (max-width: 749px) {
-      grid-column: span 6;
       --blog-post-card-scale: 0.5;
+
+      grid-column: span 6;
     }
   }
 
@@ -107,17 +113,19 @@
    * +---------------------------------------+
    */
   .blog-post-item:first-child {
-    grid-column: span 6;
     --blog-post-card-scale: 1;
+
+    grid-column: span 6;
   }
 
   /**
    * When there's no image, the blog post item has a border.
    */
   .blog-post-item {
-    border: 1px solid rgba(from var(--color-foreground) r g b / 0.2);
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
     padding: 0 1rem 1rem;
   }
+
   .blog-post-item:has(.blog-post-card__image-container) {
     border: none;
     padding: 0;

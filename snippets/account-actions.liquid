@@ -24,6 +24,7 @@
         <script
           src="{{ 'account-login-actions.js' | asset_url }}"
           type="module"
+          fetchpriority="low"
         ></script>
         <account-login-actions class="account-actions__shop-login">
           {{ shop | login_button }}
@@ -107,6 +108,7 @@
   .account-actions__title {
     /* Ideally we set the font-size here, but specificity issues make this necessary */
     --font-h5--size: var(--font-size--lg);
+
     margin: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -117,7 +119,7 @@
     display: flex;
     align-items: center;
     gap: var(--gap-2xs);
-    color: rgb(from var(--color-foreground) r g b / 60%);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
     max-width: var(--account-actions-max-width);
     word-break: break-all;
   }

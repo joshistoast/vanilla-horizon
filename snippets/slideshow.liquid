@@ -5,14 +5,13 @@
   @param {object[]} slides - the slides of the slideshow
   @param {string} [ref] - the ref of the slideshow component
   @param {string} [class] - HTML class attribute of the slideshow component
-  @param {string} [header] - the header of the slideshow component
   @param {string} [controls] - the controls of the slideshow component
   @param {string} [style] - HTML style attribute of the slideshow component
   @param {boolean} [autoplay] - whether the slideshow will autoplay
   @param {number} [autoplay_speed] - the speed of the slideshow autoplay
   @param {boolean} [auto_hide_controls] - whether to hide slideshow-controls when the scroller is smaller than the viewport
   @param {boolean} [infinite] - whether the slideshow will loop
-  @param {number} [initial_slide] - the index of the initial slide
+  @param {number} [initial_slide] - the 0-based index of the initial slide, defaults to 0
   @param {string} [slideshow_gutters] - the gutter positions to render. Set width with CSS variables --gutter-slide-width
   @param {number} [slide_count] - the total number of slides
   @param {string} [slide_size] - the height of the slides
@@ -40,9 +39,7 @@
   {% if autoplay == true %}
     autoplay="{{ autoplay_speed }}" aria-live="polite"
   {% endif %}
-  {% if initial_slide != blank %}
-    initial-slide="{{ initial_slide }}"
-  {% endif %}
+  initial-slide="{{ initial_slide | default: 0 }}"
   {% if auto_hide_controls %}
     auto-hide-controls
   {% endif %}

@@ -489,7 +489,8 @@
     "reflection_opacity": "倒影不透明度",
     "show_second_image_on_hover": "在悬停时显示第二张图片",
     "media": "媒体文件",
-    "product_card_carousel": "显示轮播"
+    "product_card_carousel": "显示轮播",
+    "media_fit": "媒体适配"
   },
   "options": {
     "adapt_to_image": "适应图片",
@@ -850,19 +851,21 @@
     "app_required_for_ratings": "需要通过应用来进行产品评分。[了解详情](https://help.shopify.com/manual/apps)",
     "icon": "图标",
     "manage_store_name": "[管理商店名称](/admin/settings/general?edit=storeName)",
-    "resource_reference_collection_card": "显示父级版块的商品系列",
-    "resource_reference_collection_card_image": "显示父级商品系列的图片",
-    "resource_reference_collection_title": "显示父级商品系列的标题",
-    "resource_reference_product": "自动连接到父级产品",
-    "resource_reference_product_card": "显示父级版块的产品",
-    "resource_reference_product_inventory": "显示父级产品的库存",
-    "resource_reference_product_price": "显示父级产品的价格",
-    "resource_reference_product_recommendations": "显示基于父级产品的推荐",
-    "resource_reference_product_review": "显示父级产品的评论",
-    "resource_reference_product_swatches": "显示父级产品的色板",
-    "resource_reference_product_title": "显示父级产品的标题",
-    "resource_reference_product_variant_picker": "显示父级产品的多属性",
-    "resource_reference_product_media": "显示父级产品的媒体"
+    "resource_reference_collection_card": "显示父分区的产品系列",
+    "resource_reference_collection_card_image": "显示父产品系列的图片",
+    "resource_reference_collection_title": "显示父产品系列的标题",
+    "resource_reference_product": "自动连接到父产品",
+    "resource_reference_product_card": "显示父分区的产品",
+    "resource_reference_product_inventory": "显示父产品的库存",
+    "resource_reference_product_price": "显示父产品的价格",
+    "resource_reference_product_recommendations": "显示基于父产品的推荐",
+    "resource_reference_product_review": "显示父产品的评论",
+    "resource_reference_product_swatches": "显示父产品的样本",
+    "resource_reference_product_title": "显示父产品的标题",
+    "resource_reference_product_variant_picker": "显示父产品的多属性",
+    "resource_reference_product_media": "显示父产品的媒体文件",
+    "product_media": "产品媒体文件",
+    "section_link": "分区链接"
   },
   "html_defaults": {
     "share_information_about_your": "<p>与客户分享有关您品牌的信息。描述产品、发布公告或欢迎客户访问您的商店。</p>"

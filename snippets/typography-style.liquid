@@ -33,8 +33,26 @@
         endif
       endunless
     %}
-    {%- if settings.font_size != blank -%}
-      --font-size: {{ settings.font_size }};
+                {%- if settings.font_size != blank -%}
+      {%- liquid
+        assign font_size_rem = settings.font_size | split: 'rem' | first | times: 1.0
+        assign fluid_size_cutoff_rem = 3.0
+
+        if font_size_rem >= fluid_size_cutoff_rem
+          assign target_viewport = 1400
+          assign vw_value = font_size_rem | times: 16 | divided_by: target_viewport | times: 100
+
+          assign scale_factor = font_size_rem | divided_by: fluid_size_cutoff_rem
+          assign base_min_rem = 3.0
+          assign scaling_bonus_rem = scale_factor | minus: 1 | times: 0.25
+          assign dynamic_min_rem = base_min_rem | plus: scaling_bonus_rem
+        endif
+      -%}
+      {%- if font_size_rem >= fluid_size_cutoff_rem -%}
+        --font-size: clamp({{ dynamic_min_rem }}rem, {{ vw_value }}vw, {{ settings.font_size }});
+      {%- else -%}
+        --font-size: {{ settings.font_size }};
+      {%- endif -%}
     {%- endif -%}
     {%- if settings.weight != blank -%}
       --font-weight: {{ settings.weight }};

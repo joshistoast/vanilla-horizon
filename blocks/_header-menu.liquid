@@ -77,6 +77,7 @@
       <script
         src="{{ 'header-menu.js' | asset_url }}"
         type="module"
+        fetchpriority="low"
       ></script>
     </header-menu>
 {% endcase %}
@@ -218,7 +219,7 @@
   .menu-list:where(:has(.menu-list__list-item:focus-within)),
   .menu-list:where(:has(.menu-list__list-item:not([aria-hidden='true']) .menu-list__link--active)) {
     .menu-list__link {
-      color: rgb(from var(--menu-top-level-font-color) r g b / var(--opacity-subdued-text));
+      color: rgb(var(--menu-top-level-font-color-rgb) / var(--opacity-subdued-text));
     }
   }
 
@@ -230,10 +231,10 @@
   }
 
   .overflow-menu::part(list) {
-    gap: 0 var(--menu-horizontal-gap);
-
     /* Make sure focus outline is not cut off by overflow hidden */
     --focus-outline-size: calc(var(--focus-outline-offset) + var(--focus-outline-width));
+
+    gap: 0 var(--menu-horizontal-gap);
   }
 
   .overflow-menu {
@@ -252,8 +253,10 @@
     height: var(--submenu-height);
     background-color: var(--color-background);
     box-shadow: var(--shadow-popover);
-    clip-path: inset(0.5px 0 -100px 0);
-    transition: height var(--submenu-animation-speed) var(--ease-out-cubic);
+    clip-path: inset(0.5px 0 -100px 0); /* stylelint-disable-line */
+    opacity: var(--submenu-opacity, 1);
+    transition: height var(--submenu-animation-speed) var(--ease-out-cubic),
+      opacity var(--animation-speed-slow) var(--ease-out-cubic) var(--animation-speed-fast);
     z-index: calc(var(--layer-header-menu) - 1);
   }
 
@@ -280,14 +283,14 @@
 
     box-shadow: var(--shadow-drawer);
     visibility: hidden;
-    background-color: transparent;
+    background-color: var(--color-background);
     position: absolute;
     width: 100%;
     left: 0;
     top: calc(100% - 1px + var(--border-bottom-width));
     z-index: var(--layer-header-menu);
     padding-inline: var(--padding-inline);
-    clip-path: rect(0 100% var(--submenu-height) 0);
+    clip-path: rect(0 100% var(--submenu-height) 0); /* stylelint-disable-line */
     transition: clip-path var(--submenu-animation-speed) var(--ease-out-cubic);
   }
 
@@ -298,15 +301,17 @@
   /* Keep the submenus open when they are hovered */
   .menu-list__submenu:is(:hover),
   .overflow-menu::part(overflow):hover {
-    visibility: visible;
     --submenu-content-opacity: 1;
+
+    visibility: visible;
   }
 
   .menu-list__list-item:has([data-animating]) > .menu-list__submenu {
-    visibility: visible;
     --submenu-content-opacity: 0;
 
-    &:before {
+    visibility: visible;
+
+    &::before {
       height: 0;
     }
   }
@@ -321,6 +326,7 @@
 
   .overflow-menu::part(overflow) {
     --menu-top-level-font-size: var(--font-size--xlarge);
+
     display: grid;
     grid-template-columns: var(--full-page-grid-with-margins);
   }
@@ -338,6 +344,7 @@
 
   .menu-list__list-item:is([slot='overflow']) {
     --menu-top-level-font-color: var(--color-foreground);
+    --menu-top-level-font-color-rgb: var(--color-foreground-rgb);
 
     display: contents;
     white-space: normal;
@@ -553,7 +560,7 @@
   }
 
   .mega-menu__more-list-item .mega-menu__link {
-    color: rgb(from var(--menu-top-level-font-color) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--menu-top-level-font-color-rgb) / var(--opacity-subdued-text));
   }
 
   .mega-menu__more-list-item:where(:hover, .active) .mega-menu__link {

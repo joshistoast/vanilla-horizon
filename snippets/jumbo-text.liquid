@@ -55,9 +55,9 @@
   {% if text != blank %}
     <jumbo-text {{ attributes }}>{{ text }}</jumbo-text>
   {% else %}
+    <span class="visually-hidden">{{ shown_text }}</span>
     <jumbo-text
       {{ attributes }}
-      aria-label="{{ shown_text }}"
       data-text-effect="{{ block.settings.text_effect }}"
       data-animation-repeat="{{ block.settings.animation_repeat }}"
     >
@@ -70,6 +70,7 @@
           class="jumbo-text-line"
           style="--line-index: {{ forloop.index }};"
           data-testid="jumbo-text-line"
+          aria-hidden="true"
         >
           {%- assign chars = line | split: ' ' | join: ' ' | split: '' -%}
           {%- for char in chars -%}

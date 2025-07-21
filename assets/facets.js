@@ -445,10 +445,146 @@ if (!customElements.get('facet-remove-component')) {
  * Handles sorting filter functionality
  *
  * @typedef {Object} SortingFilterRefs
+ * @property {HTMLDetailsElement} details - The details element
+ * @property {HTMLElement} summary - The summary element
+ * @property {HTMLElement} listbox - The listbox element
  *
  * @extends {Component}
  */
 class SortingFilterComponent extends Component {
+  requiredRefs = ['details', 'summary', 'listbox'];
+
+  /**
+   * Handles keyboard navigation in the sorting dropdown
+   * @param {KeyboardEvent} event - The keyboard event
+   */
+  handleKeyDown = (event) => {
+    const { listbox } = this.refs;
+    if (!(listbox instanceof Element)) return;
+
+    const options = Array.from(listbox.querySelectorAll('[role="option"]'));
+    const currentFocused = options.find((option) => option instanceof HTMLElement && option.tabIndex === 0);
+    let newFocusIndex = currentFocused ? options.indexOf(currentFocused) : 0;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        newFocusIndex = Math.min(newFocusIndex + 1, options.length - 1);
+        this.#moveFocus(options, newFocusIndex);
+        break;
+
+      case 'ArrowUp':
+        event.preventDefault();
+        newFocusIndex = Math.max(newFocusIndex - 1, 0);
+        this.#moveFocus(options, newFocusIndex);
+        break;
+
+      case 'Enter':
+      case ' ':
+        if (event.target instanceof Element) {
+          const targetOption = event.target.closest('[role="option"]');
+          if (targetOption) {
+            event.preventDefault();
+            this.#selectOption(targetOption);
+          }
+        }
+        break;
+
+      case 'Escape':
+        event.preventDefault();
+        this.#closeDropdown();
+        break;
+    }
+  };
+
+  /**
+   * Handles details toggle event
+   */
+  handleToggle = () => {
+    const { details, summary, listbox } = this.refs;
+    if (!(details instanceof HTMLDetailsElement) || !(summary instanceof HTMLElement)) return;
+
+    const isOpen = details.open;
+    summary.setAttribute('aria-expanded', isOpen.toString());
+
+    if (isOpen && listbox instanceof Element) {
+      // Move focus to selected option when dropdown opens
+      const selectedOption = listbox.querySelector('[aria-selected="true"]');
+      if (selectedOption instanceof HTMLElement) {
+        selectedOption.focus();
+      }
+    }
+  };
+
+  /**
+   * Moves focus between options
+   * @param {Element[]} options - The option elements
+   * @param {number} newIndex - The index of the option to focus
+   */
+  #moveFocus(options, newIndex) {
+    // Remove tabindex from all options
+    options.forEach((option) => {
+      if (option instanceof HTMLElement) {
+        option.tabIndex = -1;
+      }
+    });
+
+    // Set tabindex and focus on new option
+    const targetOption = options[newIndex];
+    if (targetOption instanceof HTMLElement) {
+      targetOption.tabIndex = 0;
+      targetOption.focus();
+    }
+  }
+
+  /**
+   * Selects an option and triggers form submission
+   * @param {Element} option - The option element to select
+   */
+  #selectOption(option) {
+    const input = option.querySelector('input[type="radio"]');
+    if (input instanceof HTMLInputElement && option instanceof HTMLElement) {
+      // Update aria-selected states
+      this.querySelectorAll('[role="option"]').forEach((opt) => {
+        opt.setAttribute('aria-selected', 'false');
+      });
+      option.setAttribute('aria-selected', 'true');
+
+      // Trigger click on the input to ensure normal form behavior
+      input.click();
+
+      // Close dropdown and return focus (handles tabIndex reset)
+      this.#closeDropdown();
+    }
+  }
+
+  /**
+   * Closes the dropdown and returns focus to summary
+   */
+  #closeDropdown() {
+    const { details, summary } = this.refs;
+    if (details instanceof HTMLDetailsElement) {
+      // Reset focus to match the actual selected option
+      const options = this.querySelectorAll('[role="option"]');
+      const selectedOption = this.querySelector('[aria-selected="true"]');
+
+      options.forEach((opt) => {
+        if (opt instanceof HTMLElement) {
+          opt.tabIndex = -1;
+        }
+      });
+
+      if (selectedOption instanceof HTMLElement) {
+        selectedOption.tabIndex = 0;
+      }
+
+      details.open = false;
+      if (summary instanceof HTMLElement) {
+        summary.focus();
+      }
+    }
+  }
+
   /**
    * Updates filter and sorting
    * @param {Event} event - The change event
@@ -534,10 +670,6 @@ if (!customElements.get('sorting-filter-component')) {
  * @extends {Component<FacetStatusRefs>}
  */
 class FacetStatusComponent extends Component {
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
   /**
    * Updates the list summary
    * @param {HTMLInputElement[]} checkedInputElements - The checked input elements

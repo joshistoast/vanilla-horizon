@@ -489,7 +489,8 @@
     "transition_to_main_product": "Přechod z karty produktu na stránku produktu",
     "show_second_image_on_hover": "Zobrazit druhý obrázek po najetí myší/prstem",
     "media": "Média",
-    "product_card_carousel": "Zobrazit karusel"
+    "product_card_carousel": "Zobrazit karusel",
+    "media_fit": "Přizpůsobení média"
   },
   "options": {
     "adapt_to_image": "Přizpůsobení obrázku",
@@ -851,17 +852,20 @@
     "icon": "Ikona",
     "resource_reference_collection_card": "Zobrazí kolekci z nadřazené sekce",
     "resource_reference_collection_card_image": "Zobrazí obrázek z nadřazené kolekce",
-    "resource_reference_collection_title": "Zobrazí název z nadřazené kolekce",
-    "resource_reference_product": "Automaticky se připojí k nadřazenému produktu",
+    "resource_reference_collection_title": "Zobrazí nadpis z nadřazené kolekce",
+    "resource_reference_product": "Automaticky se spojí s nadřazeným produktem",
     "resource_reference_product_card": "Zobrazí produkt z nadřazené sekce",
-    "resource_reference_product_inventory": "Zobrazí zásoby z nadřazeného produktu",
-    "resource_reference_product_price": "Zobrazí cenu z nadřazeného produktu",
-    "resource_reference_product_recommendations": "Zobrazí doporučení na základě nadřazeného produktu",
-    "resource_reference_product_review": "Zobrazí recenze z nadřazeného produktu",
-    "resource_reference_product_swatches": "Zobrazí vzorky z nadřazeného produktu",
-    "resource_reference_product_title": "Zobrazí název z nadřazeného produktu",
-    "resource_reference_product_variant_picker": "Zobrazí varianty z nadřazeného produktu",
-    "resource_reference_product_media": "Zobrazí média z nadřazeného produktu"
+    "resource_reference_product_inventory": "Zobrazí skladové zásoby nadřazeného produktu",
+    "resource_reference_product_price": "Zobrazí cenu nadřazeného produktu",
+    "resource_reference_product_recommendations": "Zobrazí doporučení založená na nadřazeném produktu",
+    "resource_reference_product_review": "Zobrazí recenze nadřazeného produktu",
+    "resource_reference_product_swatches": "Zobrazí vzorníky z nadřazeného produktu",
+    "resource_reference_product_title": "Zobrazí nadpis z nadřazeného produktu",
+    "resource_reference_product_variant_picker": "Zobrazí varianty nadřazeného produktu",
+    "resource_reference_product_media": "Zobrazuje média z nadřazeného produktu",
+    "product_media": "Média produktu",
+    "manage_store_name": "[Spravovat název obchodu](/admin/settings/general?edit=storeName)",
+    "section_link": "Odkaz na sekci"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Informujte zákazníky o své značce. Zároveň můžete popsat některý z produktů, oznámit důležité informace nebo přivítat zákazníky ve svém obchodě.</p>"

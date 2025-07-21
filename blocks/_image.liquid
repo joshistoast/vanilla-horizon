@@ -46,6 +46,11 @@
 
 {% stylesheet %}
   image-block {
+    --image-height-basis: 10rem;
+    --image-height-small: calc(var(--image-height-basis) * 2);
+    --image-height-medium: calc(var(--image-height-basis) * 3);
+    --image-height-large: calc(var(--image-height-basis) * 4);
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,11 +59,6 @@
     max-width: calc(var(--image-height) * var(--ratio));
     height: var(--image-height);
     overflow: hidden;
-
-    --image-height-basis: 10rem;
-    --image-height-small: calc(var(--image-height-basis) * 2);
-    --image-height-medium: calc(var(--image-height-basis) * 3);
-    --image-height-large: calc(var(--image-height-basis) * 4);
 
     @media screen and (min-width: 750px) {
       --image-height-small: calc(var(--image-height-basis) * 2.5);

@@ -28,6 +28,7 @@
     --account-popover-transition-opacity: 0;
     --account-popover-transition-transform: translateY(-20px);
     --account-popover-transition-visibility: hidden;
+
     position: relative;
 
     &[open] {
@@ -54,6 +55,7 @@
   .account-popover__panel {
     border-radius: var(--style-border-radius-popover);
     position: absolute;
+
     /* Override the default offset. This needs to always be fixed to the parent element in this way. */
     inset-block-start: calc(100% + 10px) !important;
     inset-inline-end: 0;

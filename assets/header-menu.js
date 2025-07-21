@@ -2,8 +2,7 @@ import { Component } from '@theme/component';
 import { debounce, onDocumentReady } from '@theme/utilities';
 import { MegaMenuHoverEvent } from '@theme/events';
 
-const SHORT_ACTIVATE_DELAY = 0;
-const LONG_ACTIVATE_DELAY = 250;
+const ACTIVATE_DELAY = 0;
 const DEACTIVATE_DELAY = 350;
 
 /**
@@ -75,14 +74,9 @@ class HeaderMenu extends Component {
    */
   activate = (event) => {
     this.#debouncedDeactivate.cancel();
-    this.#shortDebouncedActivateHandler.cancel();
-    this.#longDebouncedActivateHandler.cancel();
+    this.#debouncedActivateHandler.cancel();
 
-    if (this.#state.activeItem) {
-      this.#shortDebouncedActivateHandler(event);
-    } else {
-      this.#longDebouncedActivateHandler(event);
-    }
+    this.#debouncedActivateHandler(event);
   };
 
   /**
@@ -126,18 +120,17 @@ class HeaderMenu extends Component {
     const submenuHeight = submenu ? Math.max(submenu.offsetHeight, overflowMenuHeight) : 0;
 
     this.style.setProperty('--submenu-height', `${submenuHeight}px`);
+    this.style.setProperty('--submenu-opacity', '1');
   };
 
-  #shortDebouncedActivateHandler = debounce(this.#activateHandler, SHORT_ACTIVATE_DELAY);
-  #longDebouncedActivateHandler = debounce(this.#activateHandler, LONG_ACTIVATE_DELAY);
+  #debouncedActivateHandler = debounce(this.#activateHandler, ACTIVATE_DELAY);
 
   /**
    * Deactivate the active item after a delay
    * @param {PointerEvent | FocusEvent} event
    */
   deactivate(event) {
-    this.#shortDebouncedActivateHandler.cancel();
-    this.#longDebouncedActivateHandler.cancel();
+    this.#debouncedActivateHandler.cancel();
 
     if (!(event.target instanceof Element)) return;
 
@@ -159,6 +152,7 @@ class HeaderMenu extends Component {
     if (this.overflowHovered) return;
 
     this.style.setProperty('--submenu-height', '0px');
+    this.style.setProperty('--submenu-opacity', '0');
     this.dataset.overflowExpanded = 'false';
 
     this.#state.activeItem = null;
@@ -166,9 +160,12 @@ class HeaderMenu extends Component {
     item.ariaExpanded = 'false';
     item.setAttribute('data-animating', '');
 
-    setTimeout(() => {
-      item.removeAttribute('data-animating');
-    }, this.animationDelay);
+    setTimeout(
+      () => {
+        item.removeAttribute('data-animating');
+      },
+      Math.max(0, this.animationDelay - 150)
+    ); // Start header transition 150ms before submenu finishes
   };
 
   /**

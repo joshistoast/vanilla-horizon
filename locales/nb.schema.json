@@ -489,7 +489,8 @@
     "transition_to_main_product": "Overgang fra produktkort til produktside",
     "show_second_image_on_hover": "Vis sekundærbilde når musepekeren beveges over",
     "media": "Medier",
-    "product_card_carousel": "Vis karusell"
+    "product_card_carousel": "Vis karusell",
+    "media_fit": "Medietilpasning"
   },
   "options": {
     "adapt_to_image": "Tilpass til bilde",
@@ -853,16 +854,18 @@
     "resource_reference_collection_card": "Viser samling fra overordnet seksjon",
     "resource_reference_collection_card_image": "Viser bilde fra overordnet samling",
     "resource_reference_collection_title": "Viser tittel fra overordnet samling",
-    "resource_reference_product": "Kobles automatisk til overordnet produkt",
+    "resource_reference_product": "Kobler automatisk til overordnet produkt",
     "resource_reference_product_card": "Viser produkt fra overordnet seksjon",
-    "resource_reference_product_inventory": "Viser lager fra overordnet produkt",
+    "resource_reference_product_inventory": "Viser lagerbeholdning fra overordnet produkt",
     "resource_reference_product_price": "Viser pris fra overordnet produkt",
     "resource_reference_product_recommendations": "Viser anbefalinger basert på overordnet produkt",
     "resource_reference_product_review": "Viser anmeldelser fra overordnet produkt",
-    "resource_reference_product_swatches": "Viser fargeprøver fra overordnet produkt",
+    "resource_reference_product_swatches": "Viser fargekart fra overordnet produkt",
     "resource_reference_product_title": "Viser tittel fra overordnet produkt",
     "resource_reference_product_variant_picker": "Viser varianter fra overordnet produkt",
-    "resource_reference_product_media": "Viser medier fra overordnet produkt"
+    "resource_reference_product_media": "Viser medier fra overordnet produkt",
+    "product_media": "Produktmedier",
+    "section_link": "Seksjonslenke"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Del informasjon om merkevaren din med kundene. Beskriv et produkt, gjør kunngjøringer eller ønsk kundene velkommen til butikken.</p>"

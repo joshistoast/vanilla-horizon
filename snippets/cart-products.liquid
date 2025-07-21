@@ -1,6 +1,7 @@
 <script
   src="{{ 'component-cart-items.js' | asset_url }}"
   type="module"
+  fetchpriority="low"
 ></script>
 
 <div
@@ -96,7 +97,7 @@
             {% for item in cart.items %}
               <tr
                 role="row"
-                class="cart-items__table-row"
+                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}"
                 ref="cartItemRows[]"
               >
                 <td
@@ -107,6 +108,12 @@
                   {% if item.image -%}
                     {% liquid
                       assign ratio = 1
+                      assign border_opacity = settings.cart_thumbnail_border_opacity | divided_by: 100.0
+                      assign border_override = '--border-width: [cart_thumbnail_border_width]px; --border-style: [cart_thumbnail_border_style]; --border-color: rgb(var(--color-border-rgb) / [cart_thumbnail_border_opacity]); --border-radius: [cart_thumbnail_border_radius]px;' | replace: '[cart_thumbnail_border_width]', settings.cart_thumbnail_border_width | replace: '[cart_thumbnail_border_style]', settings.cart_thumbnail_border | replace: '[cart_thumbnail_border_opacity]', border_opacity | replace: '[cart_thumbnail_border_radius]', settings.cart_thumbnail_border_radius
+
+                      if settings.cart_thumbnail_border_radius > 0
+                        assign border_override = border_override | append: ' overflow: hidden;'
+                      endif
                       if block.settings.image_ratio == 'portrait'
                         assign ratio = 0.8
                       elsif block.settings.image_ratio == 'adapt'
@@ -119,7 +126,7 @@
                       style="--ratio:{{ ratio }};"
                     >
                       {%- liquid
-                        echo item.image | image_url: width: 250 | image_tag: class: 'cart-items__media-image'
+                        echo item.image | image_url: width: 250 | image_tag: class: 'cart-items__media-image border-style', style: border_override
                       -%}
                     </a>
                   {%- endif %}
@@ -133,6 +140,9 @@
                     <a
                       href="{{ item.url }}"
                       class="cart-items__title"
+                      {% if item.parent_relationship.parent != null %}
+                        aria-label="{{ 'accessibility.nested_product' | t: product_title: item.product.title, parent_title: item.parent_relationship.parent.title | escape }}"
+                      {% endif %}
                     >
                       {{- item.product.title -}}
                     </a>
@@ -240,12 +250,16 @@
                   headers="quantity"
                 >
                   {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
+                  {% assign can_update_quantity = item.instructions.can_update_quantity
+                    | default: true, allow_false: true
+                  %}
                   {% render 'quantity-selector',
                     product: item.product,
                     in_cart_quantity: item.quantity,
                     line_index: item.index,
                     min: 0,
-                    class: 'cart-primary-typography'
+                    class: 'cart-primary-typography',
+                    can_update_quantity: can_update_quantity
                   %}
 
                   <button
@@ -253,6 +267,10 @@
                     type="button"
                     aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
                     on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
+                    {% assign can_remove = item.instructions.can_remove | default: true, allow_false: true %}
+                    {% if can_remove == false %}
+                      hidden
+                    {% endif %}
                   >
                     {{- 'icon-delete.svg' | inline_asset_content -}}
                     <span class="visually-hidden">Remove</span>
@@ -344,6 +362,11 @@
     margin-bottom: var(--margin-lg);
   }
 
+  .cart-items__table-row.cart-items__nested-line td:first-child {
+    width: 60%;
+    justify-self: right;
+  }
+
   html:active-view-transition-type(page-navigation) .cart-items__table-row {
     view-transition-name: none !important;
   }
@@ -377,6 +400,11 @@
     margin-bottom: var(--cart-items-gap);
   }
 
+  .cart-items--dividers .cart-items__table-row:has(+ .cart-items__nested-line) {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
   .cart-items--dividers .cart-items__table-row:last-child {
     border-block-end: none;
     padding-block-end: 0;
@@ -385,7 +413,7 @@
 
   .cart-items__details {
     grid-area: details;
-    color: rgb(from var(--color-foreground) r g b / 70%);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
   }
 
   .cart-items__details > * + *,
@@ -644,7 +672,7 @@
   }
 
   .cart-note__summary:hover {
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .cart-note__label {

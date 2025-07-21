@@ -60,7 +60,8 @@
     "decrease_quantity": "Minska kvantitet",
     "increase_quantity": "Öka kvantitet",
     "quantity": "Kvantitet",
-    "rating": "Betyget för den här produkten är {{ rating }} av 5"
+    "rating": "Betyget för den här produkten är {{ rating }} av 5",
+    "nested_product": "{{ product_title }} för {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Lägg till i varukorgen",

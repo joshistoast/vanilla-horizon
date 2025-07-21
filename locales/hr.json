@@ -61,7 +61,8 @@
     "decrease_quantity": "Smanji količinu",
     "increase_quantity": "Povećaj količinu",
     "quantity": "Količina",
-    "rating": "Ocjena ovog proizvoda je {{ rating }} od 5"
+    "rating": "Ocjena ovog proizvoda je {{ rating }} od 5",
+    "nested_product": "{{ product_title }} za {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Dodaj u košaricu",

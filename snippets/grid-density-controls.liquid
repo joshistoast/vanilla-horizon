@@ -162,18 +162,18 @@
   }
 
   .column-picker {
-    color: rgba(from var(--color-foreground) r g b / 50%);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-50));
     padding: var(--padding-2xs);
     border-radius: var(--style-border-radius-xs);
     transition: background-color var(--animation-speed) ease, color var(--animation-speed) ease;
   }
 
   .column-options__option:hover .column-picker {
-    background-color: rgba(from var(--color-foreground) r g b / 4%);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
   }
 
   .column-options__option-input:checked ~ .column-picker {
-    color: rgba(from var(--color-foreground) r g b / 100%);
-    background-color: rgba(from var(--color-foreground) r g b / 6%);
+    color: rgb(var(--color-foreground-rgb));
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
   }
 {% endstylesheet %}

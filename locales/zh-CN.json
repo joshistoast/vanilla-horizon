@@ -60,7 +60,8 @@
     "decrease_quantity": "减少数量",
     "increase_quantity": "增加数量",
     "quantity": "数量",
-    "rating": "此产品的评分是 {{ rating }}/5"
+    "rating": "此产品的评分是 {{ rating }}/5",
+    "nested_product": "{{ product_title }}（{{ parent_title }}）"
   },
   "actions": {
     "add_to_cart": "添加到购物车",

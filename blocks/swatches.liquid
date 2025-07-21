@@ -78,13 +78,13 @@
     align-self: center;
     align-items: center;
     justify-content: center;
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-40-60));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-40-60));
     background-color: transparent;
     padding: 0;
     border: 0;
     border-radius: 0;
 
-    &:before {
+    &::before {
       /* This doesn't work in Safari without the counter-reset. https://stackoverflow.com/a/40179718 */
       counter-reset: overflow-count var(--overflow-count);
       content: '+' counter(overflow-count);
@@ -94,7 +94,7 @@
   }
 
   .hidden-swatches__count:hover {
-    color: rgb(from var(--color-foreground) r g b / 100%);
+    color: var(--color-foreground-rgb);
   }
 {% endstylesheet %}
 

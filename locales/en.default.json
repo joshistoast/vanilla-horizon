@@ -27,6 +27,7 @@
     "inventory_status": "Inventory status",
     "localization_region_and_language": "Open region and language selector",
     "menu": "Menu",
+    "nested_product": "{{ product_title }} for {{ parent_title }}",
     "new_window": "Opens in a new window.",
     "open_cart_drawer": "Open cart",
     "open_search_modal": "Open search",

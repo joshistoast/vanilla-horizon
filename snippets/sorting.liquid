@@ -13,6 +13,7 @@
 <sorting-filter-component
   class="sorting-filter{% if filter_style == 'horizontal' %} sorting-filter__horizontal{% endif %}"
   on:change="/updateFilterAndSorting"
+  on:keydown="/handleKeyDown"
   {% if sort_position != blank %}
     data-testid="sorting-filter-component-{{ sort_position }}"
   {% endif %}
@@ -79,12 +80,21 @@
       data-default-sort-by="{{ default_sort_by }}"
       class="facets__panel {% if should_use_select_on_mobile %} mobile:hidden {% endif %}"
       data-auto-close-details="desktop,mobile"
+      on:toggle="/handleToggle"
     >
       <summary
         class="facets__summary"
         role="button"
+        aria-expanded="false"
+        aria-controls="sorting-options-{{ section_id }}"
+        ref="summary"
       >
-        <span class="facets__label">{{ 'actions.sort' | t }}</span>
+        <span
+          class="facets__label"
+          id="sort-label-{{ section_id }}"
+        >
+          {{- 'actions.sort' | t -}}
+        </span>
         <span
           class="facets__status h6 desktop:hidden"
         >
@@ -95,30 +105,42 @@
         </span>
       </summary>
       <floating-panel-component
+        id="sorting-options-{{ section_id }}"
         class="sorting-filter__options color-{{ settings.popover_color_scheme }}"
+        role="listbox"
+        aria-labelledby="sort-label-{{ section_id }}"
+        ref="listbox"
       >
         {% for option in results.sort_options %}
           <label
-            class="sorting-filter__option"
-            id="{{ option.value }}"
+            for="sort-option-{{ option.value }}-{{ section_id }}"
           >
-            <input
-              type="radio"
-              name="sort_by"
-              {% if suffix != blank %}
-                form="FacetFiltersForm--{{ section_id }}-{{ suffix }}"
-              {% endif %}
-              value="{{ option.value }}"
-              class="sorting-filter__input"
-              data-option-name="{{ option.name }}"
-              {% if option.value == sort_by %}
-                checked
-              {% endif %}
+            <div
+              class="sorting-filter__option"
+              role="option"
+              aria-selected="{% if option.value == sort_by %}true{% else %}false{% endif %}"
+              tabindex="{% if option.value == sort_by %}0{% else %}-1{% endif %}"
             >
-            <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">
-              {{- 'icon-checkmark.svg' | inline_asset_content -}}
-            </span>
-            <span class="sorting-filter__label">{{ option.name }}</span>
+              <input
+                type="radio"
+                name="sort_by"
+                id="sort-option-{{ option.value }}-{{ section_id }}"
+                {% if suffix != blank %}
+                  form="FacetFiltersForm--{{ section_id }}-{{ suffix }}"
+                {% endif %}
+                value="{{ option.value }}"
+                class="sorting-filter__input"
+                data-option-name="{{ option.name }}"
+                {% if option.value == sort_by %}
+                  checked
+                {% endif %}
+                aria-hidden="true"
+              >
+              <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">
+                {{- 'icon-checkmark.svg' | inline_asset_content -}}
+              </span>
+              <span class="sorting-filter__label">{{ option.name }}</span>
+            </div>
           </label>
         {% endfor %}
       </floating-panel-component>
@@ -167,6 +189,7 @@
     width: 100%;
     padding-inline-end: var(--icon-size-2xs);
     text-align: right;
+
     /* Needed for Safari */
     text-align-last: right;
   }
@@ -204,16 +227,20 @@
   }
 
   .sorting-filter__option {
+    cursor: pointer;
     display: grid;
     grid-template-columns: var(--icon-size-sm) 1fr;
     gap: var(--margin-2xs);
     min-width: 180px;
     padding: var(--padding-2xs) calc(var(--drawer-padding) / 2) var(--padding-2xs) var(--padding-2xs);
-    cursor: pointer;
 
     &:hover {
       border-radius: calc(var(--style-border-radius-popover) / 2);
-      background-color: rgb(from var(--color-foreground) r g b / 8%);
+      background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8));
+    }
+
+    &:focus {
+      border-radius: calc(var(--style-border-radius-popover) / 2);
     }
   }
 

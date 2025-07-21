@@ -48,7 +48,7 @@
   }
 
   .cart__tax-note {
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .cart__discount-label svg {
@@ -132,11 +132,17 @@
   @media screen and (max-width: 749px) {
     .inherit-parent-scheme--mobile {
       --color-background: inherit;
+      --color-background-rgb: inherit;
       --color-foreground: inherit;
+      --color-foreground-rgb: inherit;
       --color-primary: inherit;
+      --color-primary-rgb: inherit;
       --color-primary-hover: inherit;
+      --color-primary-hover-rgb: inherit;
       --color-border: inherit;
+      --color-border-rgb: inherit;
       --color-shadow: inherit;
+      --color-shadow-rgb: inherit;
       --color-foreground-heading: inherit;
       --color-primary-button-text: inherit;
       --color-primary-button-background: inherit;
@@ -151,6 +157,7 @@
       --color-secondary-button-hover-background: inherit;
       --color-secondary-button-hover-border: inherit;
       --color-input-text: inherit;
+      --color-input-text-rgb: inherit;
       --color-input-background: inherit;
     }
   }

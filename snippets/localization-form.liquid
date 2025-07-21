@@ -308,12 +308,14 @@
   .localization-form__list-item:hover,
   .localization-form__list-item:focus {
     --button-color: var(--color-primary-hover);
-    background-color: rgb(from var(--color-primary-hover) r g b / 8%);
+
+    background-color: rgb(var(--color-primary-hover-rgb) / var(--opacity-8));
   }
 
   .localization-form__list-item[aria-current='true'] {
     --button-color: var(--color-primary-active);
-    background-color: rgb(from var(--color-primary-hover) r g b / 10%);
+    
+    background-color: rgb(var(--color-primary-hover-rgb) / var(--opacity-10));
   }
 
   .localization-form__list-item-disabled {
@@ -371,7 +373,7 @@
   .dropdown-localization__button .icon-flag {
     width: var(--menu-localization-font-size, var(--icon-size-sm));
     height: var(--menu-localization-font-size, var(--icon-size-sm));
-    clip-path: circle(50%);
+    clip-path: circle(50%); /* stylelint-disable-line */
     background-position: center;
     background-size: cover;
     margin-inline-end: 4px;
@@ -407,8 +409,9 @@
     overflow-y: auto;
     white-space: nowrap;
 
-    /* Hide scrollbar which would cause extra right padding in Safari*/
+    /* Hide scrollbar which would cause extra right padding in Safari */
     scrollbar-width: none;
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -475,7 +478,7 @@
     }
 
     &:hover {
-      background-color: rgb(from var(--color-foreground) r g b / 8%);
+      background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8));
     }
 
     &[aria-current='true'] {
@@ -488,11 +491,11 @@
   .localization-form__list-item#no-results-message {
     grid-template-columns: 1fr;
     text-align: center;
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .is-searching .localization-form__list-item .country {
-    color: rgb(from var(--color-foreground) r g b / 80%);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-80));
   }
 
   .localization-form__list-item .country mark {
@@ -539,7 +542,7 @@
 
   .language-selector__label {
     flex-shrink: 0;
-    color: rgb(from var(--color-foreground) r g b / var(--opacity-subdued-text));
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
 
   .localization-form__select {
@@ -555,8 +558,9 @@
     text-overflow: ellipsis;
 
     &:focus-visible {
-      outline: var(--focus-outline-width) solid currentColor;
+      outline: var(--focus-outline-width) solid currentcolor;
     }
+
     &:focus {
       outline: none;
     }
@@ -572,7 +576,7 @@
   }
 
   dropdown-localization-component .localization-form__select:hover {
-    background-color: rgb(from var(--color-primary-hover) r g b / 8%);
+    background-color: rgb(var(--color-primary-hover-rgb) / var(--opacity-8));
   }
 
   .language-selector .svg-wrapper.icon-caret {

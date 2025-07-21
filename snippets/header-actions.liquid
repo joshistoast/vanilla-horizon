@@ -1,6 +1,7 @@
 <script
   type="module"
   src="{{ 'cart-icon.js' | asset_url }}"
+  fetchpriority="low"
 ></script>
 
 <header-actions
@@ -100,6 +101,11 @@
     padding-bottom: var(--gap-xl);
     border-bottom: var(--style-border-width) solid var(--color-border);
     margin-bottom: var(--gap-xl);
+  }
+
+  .cart-drawer__items .cart-items__table-row:has(+ .cart-items__nested-line) {
+    border-bottom: none;
+    margin-bottom: 0;
   }
 
   .cart-drawer__items .cart-items__table-row:last-child {
@@ -207,11 +213,11 @@
   }
 
   .header-actions__action {
+    --button-color: var(--color-foreground);
+
     cursor: pointer;
     display: flex;
     justify-content: center;
-
-    --button-color: var(--color-foreground);
   }
 
   .header-actions__action .svg-wrapper {
@@ -225,11 +231,13 @@
   }
 
   .header-actions__cart-icon {
-    position: relative;
     --cart-bubble-size: 20px;
     --cart-bubble-top: 4.5px;
     --cart-bubble-right: 2.5px;
+
+    position: relative;
   }
+
   .header-actions__cart-icon .cart-bubble {
     position: absolute;
     width: var(--cart-bubble-size, 20px);
@@ -254,7 +262,7 @@
   }
 
   .cart-drawer__heading .cart-bubble__background {
-    background-color: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
   }
 
   .cart-drawer__heading .cart-bubble__text {

@@ -35,7 +35,7 @@
 {% endif %}
 
 {% liquid
-  assign product = block.settings.product
+  assign product = closest.product
 
   assign lazy_image_sizes = 'auto, ' | append: image_sizes
 
@@ -69,12 +69,6 @@
 
   assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
   assign selected_variant_image = product.selected_or_first_available_variant.image.src
-  assign selected_variant_image_index = 0
-  for image in product.images
-    if image.src == selected_variant_image
-      assign selected_variant_image_index = forloop.index0
-    endif
-  endfor
 
   assign hover_behavior = 'carousel'
 
@@ -85,16 +79,6 @@
     endif
   endif
 %}
-
-{% capture placeholder_image %}
-  <placeholder-image data-block-id="{{ section.id }}-{{ block.id }}" data-type="product"></placeholder-image>
-{% endcapture %}
-{% capture placeholder_slide %}
-  {% render 'slideshow-slide', index: 1, children: placeholder_image, class: 'product-media-container card-gallery__placeholder' %}
-{% endcapture %}
-{% capture slideshow_placeholder %}
-  {% render 'slideshow', ref: 'slideshow', slides: placeholder_slide, slide_count: 1, attributes: 'disabled="true"' %}
-{% endcapture %}
 
 <div
   ref="cardGallery"
@@ -118,37 +102,32 @@
   data-image-ratio="{{ block.settings.image_ratio }}"
   {{ block.shopify_attributes }}
 >
-  {% assign all_media = product.media %}
-
-  {% comment %}
-    For combined listings, also make sure to include the featured media of the color variants so that the swatch picker
-    works as expected.
-  {% endcomment %}
-  {% for product_option in product.options_with_values %}
-    {% for product_option_value in product_option.values %}
-      {% if product_option_value.swatch %}
-        {% assign featured_media = product_option_value.variant.featured_media %}
-
-        {% comment %}
-          If the variant has no featured media, and we have a combined listing product, then fall back to using the
-          featured media of the child product that is linked to this option value.
-        {% endcomment %}
-        {% if featured_media == blank and product_option_value.product_url %}
-          {% assign featured_media = product_option_value.variant.product.featured_media %}
-        {% endif %}
-
-        {% assign existing_media = all_media | has: 'id', featured_media.id %}
-        {% unless existing_media %}
-          {% assign variant_featured_media = product_option_value.variant.product.media
-            | where: 'id', featured_media.id
-          %}
-          {% assign all_media = all_media | concat: variant_featured_media %}
-        {% endunless %}
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-
   {% liquid
+    assign all_media = product.media
+
+    # For combined listings: make sure to include the featured media of the color variants so that the swatch picker
+    # works as expected.
+    for product_option in product.options_with_values
+      for product_option_value in product_option.values
+        if product_option_value.swatch
+          assign featured_media = product_option_value.variant.featured_media
+
+          # If the variant has no featured media, and we have a combined listing product, then fall back to using the
+          # featured media of the child product that is linked to this option value.
+
+          if featured_media == blank and product_option_value.product_url
+            assign featured_media = product_option_value.variant.product.featured_media
+          endif
+
+          assign existing_media = all_media | has: 'id', featured_media.id
+          unless existing_media
+            assign variant_featured_media = product_option_value.variant.product.media | where: 'id', featured_media.id
+            assign all_media = all_media | concat: variant_featured_media
+          endunless
+        endif
+      endfor
+    endfor
+
     # Sort media so selected variant image comes first
     assign selected_media = all_media | where: 'src', selected_variant_image
     assign other_media = all_media | reject: 'src', selected_variant_image
@@ -199,7 +178,7 @@
     {% endif %}
     {% render 'slideshow',
       ref: 'slideshow',
-      initial_slide: selected_variant_image_index,
+      initial_slide: 0,
       slides: slides,
       slide_count: all_media.size,
       show_arrows: show_arrows,
@@ -210,6 +189,15 @@
       <span class="title-text">{{- product.title -}}</span>
     </product-title>
   {% elsif product == blank %}
+    {% capture placeholder_image %}
+      <placeholder-image data-block-id="{{ section.id }}-{{ block.id }}" data-type="product"></placeholder-image>
+    {% endcapture %}
+    {% capture placeholder_slide %}
+      {% render 'slideshow-slide', index: 1, children: placeholder_image, class: 'product-media-container card-gallery__placeholder' %}
+    {% endcapture %}
+    {% capture slideshow_placeholder %}
+      {% render 'slideshow', ref: 'slideshow', slides: placeholder_slide, slide_count: 1, attributes: 'disabled="true"' %}
+    {% endcapture %}
     {{ slideshow_placeholder }}
   {%- endif -%}
   {{ children }}
@@ -237,7 +225,7 @@
     line-height: var(--line-height--display-loose);
     word-break: break-word;
     color: var(--color-foreground);
-    background-color: rgb(from var(--color-foreground) r g b / 5%);
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
     aspect-ratio: var(--gallery-aspect-ratio);
     border-radius: var(--product-corner-radius);
     display: -webkit-box;

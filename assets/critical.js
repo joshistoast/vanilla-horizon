@@ -142,10 +142,11 @@ class OverflowList extends DeclarativeShadowElement {
         this.removeAttribute('defer');
         this.#reflowItems();
       };
+      const { schedule } = this;
 
       const idleCallback = typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout;
 
-      idleCallback(() => this.schedule(deferredReflow));
+      idleCallback(() => schedule(deferredReflow));
     } else {
       this.#reflowItems();
     }
@@ -158,7 +159,7 @@ class OverflowList extends DeclarativeShadowElement {
   get schedule() {
     return typeof Theme?.utilities?.scheduler?.schedule === 'function'
       ? Theme.utilities.scheduler.schedule
-      : requestAnimationFrame;
+      : /** @param {FrameRequestCallback} callback */ (callback) => requestAnimationFrame(callback);
   }
 
   #scheduled = false;
@@ -441,4 +442,23 @@ function calculateHeaderGroupHeight(
 
   document.body.style.setProperty('--header-height', `${headerHeight}px`);
   document.body.style.setProperty('--header-group-height', `${headerGroupHeight}px`);
+})();
+
+/**
+ * Updates CSS custom properties for transparent header offset calculation
+ * Avoids expensive :has() selectors
+ */
+(() => {
+  const header = document.querySelector('#header-component');
+  const headerGroup = document.querySelector('#header-group');
+  const hasHeaderSection = headerGroup?.querySelector('.header-section');
+  if (!hasHeaderSection || !header?.hasAttribute('transparent')) {
+    document.body.style.setProperty('--transparent-header-offset-boolean', '0');
+    return;
+  }
+
+  const hasImmediateSection = hasHeaderSection.nextElementSibling?.classList.contains('shopify-section');
+
+  const shouldApplyOffset = !hasImmediateSection ? '1' : '0';
+  document.body.style.setProperty('--transparent-header-offset-boolean', shouldApplyOffset);
 })();

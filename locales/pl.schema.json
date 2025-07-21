@@ -489,7 +489,8 @@
     "transition_to_main_product": "Przejście z karty produktu do strony produktu",
     "show_second_image_on_hover": "Pokaż drugi obraz po najechaniu kursorem",
     "media": "Multimedia",
-    "product_card_carousel": "Wyświetl karuzelę"
+    "product_card_carousel": "Wyświetl karuzelę",
+    "media_fit": "Dopasowanie multimediów"
   },
   "options": {
     "adapt_to_image": "Dostosuj do obrazu",
@@ -862,7 +863,9 @@
     "resource_reference_product_swatches": "Wyświetla próbki z produktu nadrzędnego",
     "resource_reference_product_title": "Wyświetla tytuł z produktu nadrzędnego",
     "resource_reference_product_variant_picker": "Wyświetla warianty z produktu nadrzędnego",
-    "resource_reference_product_media": "Wyświetla multimedia z produktu nadrzędnego"
+    "resource_reference_product_media": "Wyświetla multimedia z produktu nadrzędnego",
+    "product_media": "Multimedia produktu",
+    "section_link": "Link sekcji"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Udostępnij klientom informacje o swojej marce. Opisz produkt, udostępnij ogłoszenia lub przywitaj klientów w swoim sklepie.</p>"

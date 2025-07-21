@@ -19,6 +19,7 @@
 <script
   src="{{ 'collection-links.js' | asset_url }}"
   type="module"
+  fetchpriority="low"
 ></script>
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -85,7 +86,7 @@
             {% # theme-check-enable UniqueStaticBlockId %}
           {% endcapture %}
 
-          {% render 'slideshow-slide', children: slide, index: forloop.index0, selected: selected %}
+          {% render 'slideshow-slide', children: slide, index: forloop.index0 %}
         {% endfor %}
       {% endcapture %}
 

@@ -60,7 +60,8 @@
     "decrease_quantity": "Mennyiség csökkentése",
     "increase_quantity": "Mennyiség növelése",
     "quantity": "Mennyiség",
-    "rating": "A termék értékelése: {{ rating }} / 5"
+    "rating": "A termék értékelése: {{ rating }} / 5",
+    "nested_product": "{{ product_title }} – {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Hozzáadás a kosárhoz",

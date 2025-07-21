@@ -489,7 +489,8 @@
     "transition_to_main_product": "商品カードから商品ページへの遷移",
     "show_second_image_on_hover": "マウスオーバー時に2番目の画像を表示する",
     "media": "メディア",
-    "product_card_carousel": "カルーセルを表示する"
+    "product_card_carousel": "カルーセルを表示する",
+    "media_fit": "メディアフィット"
   },
   "options": {
     "adapt_to_image": "画像に合わせる",
@@ -850,19 +851,21 @@
     "app_required_for_ratings": "商品評価にはアプリが必要です。[詳しくはこちら](https://help.shopify.com/manual/apps)",
     "icon": "アイコン",
     "manage_store_name": "[ストア名の管理](/admin/settings/general?edit=storeName)",
-    "resource_reference_collection_card": "親セクションからコレクションを表示",
-    "resource_reference_collection_card_image": "親コレクションから画像を表示",
-    "resource_reference_collection_title": "親コレクションからタイトルを表示",
-    "resource_reference_product": "親商品に自動接続",
-    "resource_reference_product_card": "親セクションから商品を表示",
-    "resource_reference_product_inventory": "親商品から在庫を表示",
-    "resource_reference_product_price": "親商品から価格を表示",
-    "resource_reference_product_recommendations": "親商品に基づくおすすめを表示",
-    "resource_reference_product_review": "親商品からレビューを表示",
-    "resource_reference_product_swatches": "親商品からスウォッチを表示",
-    "resource_reference_product_title": "親商品からタイトルを表示",
-    "resource_reference_product_variant_picker": "親商品からバリエーションを表示",
-    "resource_reference_product_media": "親商品からメディアを表示"
+    "resource_reference_collection_card": "親セクションのコレクションを表示する",
+    "resource_reference_collection_card_image": "親コレクションの画像を表示する",
+    "resource_reference_collection_title": "親コレクションのタイトルを表示する",
+    "resource_reference_product": "親商品に自動接続する",
+    "resource_reference_product_card": "親セクションの商品を表示する",
+    "resource_reference_product_inventory": "親商品の在庫を表示する",
+    "resource_reference_product_price": "親商品の価格を表示する",
+    "resource_reference_product_recommendations": "親商品に基づく推奨事項を表示する",
+    "resource_reference_product_review": "親商品のレビューを表示する",
+    "resource_reference_product_swatches": "親商品の見本を表示する",
+    "resource_reference_product_title": "親商品のタイトルを表示する",
+    "resource_reference_product_variant_picker": "親商品のバリエーションを表示する",
+    "resource_reference_product_media": "親商品のメディアを表示",
+    "product_media": "商品メディア",
+    "section_link": "セクションリンク"
   },
   "html_defaults": {
     "share_information_about_your": "<p>ブランドに関する情報をお客様と共有します。商品を説明したり、告知をしたり、ストアへのお客様を歓迎したりします。</p>"

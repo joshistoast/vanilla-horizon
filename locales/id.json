@@ -60,7 +60,8 @@
     "decrease_quantity": "Kurangi jumlah",
     "increase_quantity": "Tambah jumlah",
     "quantity": "Jumlah",
-    "rating": "Peringkat produk ini adalah {{ rating }} dari 5"
+    "rating": "Peringkat produk ini adalah {{ rating }} dari 5",
+    "nested_product": "{{ product_title }} untuk {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Tambahkan ke keranjang",

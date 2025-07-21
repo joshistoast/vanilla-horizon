@@ -145,23 +145,25 @@
   .email-signup__input-group .email-signup__input--underline {
     --box-shadow-color: var(--color-input-border);
     --box-shadow-multiplier: 1;
+
     color: var(--color-input-text);
     background-color: transparent;
     padding: 12px 0;
     border: none;
     border-radius: 0;
-    box-shadow: 0px calc(var(--border-width) * var(--box-shadow-multiplier)) 0px var(--box-shadow-color);
+    box-shadow: 0 calc(var(--border-width) * var(--box-shadow-multiplier)) 0 var(--box-shadow-color);
     transition: box-shadow var(--animation-values);
 
     &:focus-visible {
       --box-shadow-multiplier: 1.75;
       --box-shadow-color: var(--color-input-text);
+
       outline: none;
     }
   }
 
   .email-signup__input::placeholder {
-    color: rgb(from var(--color-input-text) r g b / 70%);
+    color: rgb(var(--color-input-text-rgb) / var(--opacity-70));
   }
 
   .email-signup__input-group .email-signup__input--none {
@@ -188,6 +190,7 @@
 
   .email-signup__button--integrated {
     --button-offset: var(--margin-xs);
+
     position: absolute;
     height: calc(100% - (var(--button-offset) * 2) - (var(--border-width) * 2));
     right: calc(var(--button-offset) + var(--border-width));
@@ -215,8 +218,9 @@
   }
 
   .email-signup__input--underline + .email-signup__button--integrated {
-    right: 0;
     --button-offset: calc(10% - var(--border-width));
+
+    right: 0;
 
     &.email-signup__button--text.button-unstyled {
       padding: 0;
@@ -245,7 +249,7 @@
   }
 
   .email-signup__button.button-unstyled:hover {
-    color: rgb(from var(--color-input-text) r g b / 70%);
+    color: rgb(var(--color-input-text-rgb) / var(--opacity-70));
     cursor: pointer;
   }
 

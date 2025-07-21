@@ -19,10 +19,16 @@
   %}
 
   {%- if background_image != blank -%}
+    {% liquid
+      assign fetch_priority = 'auto'
+      if section and section.index == 1
+        assign fetch_priority = 'high'
+      endif
+    %}
     {{
       background_image
       | image_url: width: 3840
-      | image_tag: height: height, sizes: sizes, widths: widths, loading: 'eager'
+      | image_tag: height: height, sizes: sizes, widths: widths, loading: 'eager', fetchpriority: fetch_priority
     }}
   {%- else -%}
     <placeholder-image

@@ -295,9 +295,9 @@ export class ProductCard extends Component {
 
     if (!slideshow) return;
 
-    const defaultSlide = slideshow.defaultSlide;
-    const slideId = defaultSlide?.getAttribute('slide-id');
-    if (defaultSlide && slideshow.slides?.includes(defaultSlide) && slideId) {
+    const initialSlide = slideshow.initialSlide;
+    const slideId = initialSlide?.getAttribute('slide-id');
+    if (initialSlide && slideshow.slides?.includes(initialSlide) && slideId) {
       slideshow.select({ id: slideId }, undefined, { animate: false });
       return;
     } else if (!this.variantPicker?.selectedOption) {
@@ -330,6 +330,9 @@ export class ProductCard extends Component {
   navigateToProduct = (event) => {
     if (!(event.target instanceof Element)) return;
 
+    // Don't navigate if this product card is marked as no-navigation (e.g., in theme editor)
+    if (this.hasAttribute('data-no-navigation')) return;
+
     const interactiveElement = event.target.closest('button, input, label, select, a, [tabindex="1"]');
 
     // If the click was on an interactive element which is not the main link, do nothing.
@@ -350,7 +353,10 @@ export class ProductCard extends Component {
     if (parent && parent.dataset.page) {
       url.searchParams.set('page', parent.dataset.page);
     }
-    history.replaceState({}, '', url.toString());
+
+    if (!window.Shopify.designMode) {
+      history.replaceState({}, '', url.toString());
+    }
 
     this.#navigateToURL(event, linkURL);
   };

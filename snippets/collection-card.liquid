@@ -65,9 +65,10 @@
 
 {% stylesheet %}
   .collection-card {
+    --fixed-card-height: var(--height-small);
+
     width: 100%;
     position: relative;
-    --fixed-card-height: var(--height-small);
   }
 
   .collection-card > placeholder-image,
@@ -100,6 +101,7 @@
       pointer-events: auto;
     }
   }
+
   /* allow all blocks to be selectable in editor preview */
   .shopify-design-mode .collection-card__content * {
     pointer-events: auto;
@@ -120,6 +122,7 @@
   .collection-card__link {
     position: absolute;
     inset: 0;
+
     /* allows focus outline to have radius in supported browsers */
     border-radius: var(--border-radius);
   }

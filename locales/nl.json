@@ -60,7 +60,8 @@
     "decrease_quantity": "Aantal verlagen",
     "increase_quantity": "Aantal verhogen",
     "quantity": "Aantal",
-    "rating": "Beoordeling van dit product is {{ rating }} van 5"
+    "rating": "Beoordeling van dit product is {{ rating }} van 5",
+    "nested_product": "{{ product_title }} voor {{ parent_title }}"
   },
   "actions": {
     "add_to_cart": "Aan winkelwagen toevoegen",

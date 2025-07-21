@@ -10,6 +10,7 @@
 <script
   src="{{ 'facets.js' | asset_url }}"
   type="module"
+  fetchpriority="low"
 ></script>
 
 {%- liquid
@@ -344,7 +345,7 @@
         >
           <div
             class="facets__title-wrapper"
-            style="--color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-10-25));"
+            style="--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));"
           >
             <h2 class="facets-drawer__title h3">
               {{ 'blocks.filter' | t }}
@@ -510,8 +511,8 @@
     --facets-panel-height: 300px;
     --facets-grid-panel-width: 300px;
     --facets-clear-padding: var(--padding-md);
-    --facets-clear-shadow: 0 -4px 14px 0 rgba(from var(--color-foreground) r g b / var(--facets-low-opacity));
-    --facets-input-label-color: rgb(from var(--color-input-text) r g b / 60%);
+    --facets-clear-shadow: 0 -4px 14px 0 rgb(var(--color-foreground-rgb) / var(--facets-low-opacity));
+    --facets-input-label-color: rgb(var(--color-input-text-rgb) / var(--opacity-60));
     --facets-clear-all-min-width: 120px;
     --facets-see-results-min-width: 55%;
     --facets-mobile-gap: 22px;
@@ -593,7 +594,7 @@
   .facets.facets-controls-wrapper {
     @media screen and (min-width: 750px) {
       grid-column: column-1 / column-12;
-      color: rgb(from var(--color-foreground) r g b / 70%);
+      color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
       gap: 0 var(--facets-form-horizontal-gap);
       padding-bottom: var(--padding-xs);
     }
@@ -702,7 +703,7 @@
   .facets__summary .icon-caret {
     height: var(--icon-size-xs);
     width: var(--icon-size-xs);
-    color: rgb(from var(--color-foreground) r g b / var(--icon-opacity));
+    color: rgb(var(--color-foreground-rgb) / var(--icon-opacity));
     margin-block: var(--margin-2xs);
     transition: color var(--animation-speed) var(--animation-easing);
   }
@@ -800,6 +801,7 @@
 
   .facets__inputs-wrapper .facets__inputs-list--grid {
     --min-column-width: 20%;
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--min-column-width), 1fr));
     gap: var(--gap-sm);
@@ -942,6 +944,7 @@
   .facets__label {
     color: var(--color-foreground);
     cursor: pointer;
+
     @media screen and (min-width: 750px) {
       margin-inline-end: var(--margin-2xs);
     }
@@ -984,13 +987,13 @@
   }
 
   .facets-drawer__title {
+    --variant-picker-swatch-width: 32px;
+    --variant-picker-swatch-height: 32px;
+
     margin: 0;
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
-
-    --variant-picker-swatch-width: 32px;
-    --variant-picker-swatch-height: 32px;
 
     @media screen and (min-width: 750px) {
       --variant-picker-swatch-width: 26px;
@@ -1028,6 +1031,7 @@
     margin-block-end: 0;
     color: var(--color-foreground);
     height: fit-content;
+
     @media screen and (max-width: 749px) {
       display: none;
     }
