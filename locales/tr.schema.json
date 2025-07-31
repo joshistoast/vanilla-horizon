@@ -41,10 +41,10 @@
     "featured_product": "Ürün vurgusu",
     "icons_with_text": "Metin içeren simgeler",
     "marquee": "Kayan yazı",
-    "products_carousel": "Ürün listesi: Carousel",
-    "products_grid": "Ürün listesi: Izgara",
+    "products_carousel": "Öne çıkan koleksiyon: Carousel",
+    "products_grid": "Öne çıkan koleksiyon: Izgara",
     "alternating_content_rows": "Sırayla değişen satırlar",
-    "product_list": "Ürün listesi",
+    "product_list": "Öne çıkan koleksiyon",
     "spacer": "Aralayıcı",
     "accelerated_checkout": "Hızlı ödeme",
     "accordion": "Akordeon",
@@ -153,7 +153,7 @@
     "page_layout": "Sayfa düzeni",
     "policy_list": "Politika bağlantıları",
     "prices": "Fiyatlar",
-    "products_editorial": "Ürün listesi: Editoryal",
+    "products_editorial": "Öne çıkan koleksiyon: Editoryal",
     "social_link": "Sosyal medya bağlantısı",
     "split_showcase": "Split showcase",
     "variant_pickers": "Varyasyon seçiciler",
@@ -490,7 +490,8 @@
     "media": "Medya",
     "product_card_carousel": "Döngüyü göster",
     "show_second_image_on_hover": "Üzerine gelindiğinde ikinci görseli göster",
-    "media_fit": "Medya uyumu"
+    "media_fit": "Medya sığdırma",
+    "scroll_speed": "Sonraki duyuruya kaydır"
   },
   "options": {
     "adapt_to_image": "Görsele uyarla",
@@ -907,7 +908,7 @@
     "pills_usage": "Uygulanan filtreler, indirim kodları ve arama önerileri için kullanılır"
   },
   "categories": {
-    "product_list": "Ürün listesi",
+    "product_list": "Öne çıkan koleksiyon",
     "basic": "Basic",
     "collection": "Koleksiyon",
     "collection_list": "Koleksiyon listesi",

@@ -46,10 +46,7 @@
         %}
       {% else %}
         <div class="placeholder-image media-block__media border-style">
-          <placeholder-image
-            data-block-id="{{ section_id }}-{{ block.id }}"
-            data-type="general"
-          ></placeholder-image>
+          {{ 'detailed-apparel-1' | placeholder_svg_tag: 'hero__image' }}
         </div>
       {% endif %}
     {% endcapture %}
@@ -74,10 +71,7 @@
     %}
   {%- else -%}
     <div class="placeholder-image media-block__media border-style">
-      <placeholder-image
-        data-block-id="{{ section_id }}-{{ block.id }}"
-        data-type="general"
-      ></placeholder-image>
+      {{ 'hero-apparel-3' | placeholder_svg_tag }}
     </div>
   {%- endif -%}
 </div>

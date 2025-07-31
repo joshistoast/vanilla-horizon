@@ -85,6 +85,6 @@
     style="{% render 'menu-font-styles', settings: block.settings %}"
   >
     {% assign class = 'overflow-menu' | append: color_scheme_classes %}
-    {% render 'overflow-list', class: class, ref: 'overflowMenu', children: children, minimum-items: 2 %}
+    {% render 'overflow-list', class: class, ref: 'overflowMenu', children: children, minimum-items: 2, defer: true %}
   </div>
 </nav>

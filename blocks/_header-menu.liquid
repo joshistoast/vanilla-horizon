@@ -125,7 +125,7 @@
 
   /* Drawer menu featured content */
   .menu-drawer__featured-content {
-    z-index: var(--layer-lowest);
+    z-index: var(--layer-base);
     container-type: inline-size;
   }
 
@@ -447,6 +447,32 @@
     aspect-ratio: 16 / 9;
     margin-bottom: var(--padding-sm);
     object-fit: cover;
+    border-radius: var(--menu-image-border-radius);
+  }
+
+  /* Fix alignment for collection image mode links without images */
+  /* Target only top-level links (direct children of column > div) in collection image mode */
+  .mega-menu__grid:has(.mega-menu__link-image)
+    .mega-menu__column
+    > div
+    > .mega-menu__link:not(:has(.mega-menu__link-image)) {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 0;
+    padding-block: var(--padding-sm) 0;
+  }
+
+  .mega-menu__grid:has(.mega-menu__link-image)
+    .mega-menu__column
+    > div
+    > .mega-menu__link:not(:has(.mega-menu__link-image))::before {
+    content: '';
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-bottom: var(--padding-sm);
+    background-color: var(--color-foreground-muted);
+    opacity: 0.1;
     border-radius: var(--menu-image-border-radius);
   }
 

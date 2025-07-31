@@ -13,7 +13,7 @@
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
 
   if block.settings.hide_variants
-    assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+    assign variant_images = selected_product.media | where: 'attached_to_variant?', true | map: 'src'
   endif
 
   if block.settings.slideshow_controls_style == 'thumbnails'

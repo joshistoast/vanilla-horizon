@@ -1,16 +1,5 @@
 
 
-{% liquid
-  # Onboarding: When no products are available, we show placeholder items
-  assign products = ''
-  if request.design_mode and shop.products_count == 0
-    for i in (1..16)
-      assign products = products | append: ' ,'
-    endfor
-    assign products = products | split: ','
-  endif
-%}
-
 <script
   src="{{ 'results-list.js' | asset_url }}"
   type="module"
@@ -52,27 +41,9 @@
       results_size: collection.products_count
     %}
 
-    {% if request.design_mode and shop.products_count == 0 %}
-      {% paginate products by 24 %}
-        {% capture children %}
-          {% for product in products %}
-            <li
-              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-              data-page="{{ paginate.current_page }}"
-              data-product-id="{{ product.id }}"
-              data-view-transition-id="{{ product.id }}"
-              ref="cards[]"
-            >
-              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-            </li>
-          {% endfor %}
-        {% endcapture %}
-        {% render 'product-grid', section: section, children: children, products: products, paginate: paginate %}
-      {% endpaginate %}
-    {% else %}
-      {% paginate collection.products by 24 %}
-        {% capture children %}
-          {% for product in collection.products %}
+    {% paginate collection.products by 24 %}
+      {% capture children %}
+        {% for product in collection.products %}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
@@ -85,15 +56,15 @@
             {% # theme-check-enable %}
           </li>
         {% endfor %}
-        {% endcapture %}
-        {% render 'product-grid',
-          section: section,
-          children: children,
-          products: collection.products,
-          paginate: paginate
-        %}
-      {% endpaginate %}
-    {% endif %}
+      {% endcapture %}
+
+      {% render 'product-grid',
+        section: section,
+        children: children,
+        products: collection.products,
+        paginate: paginate
+      %}
+    {% endpaginate %}
   </div>
 </results-list>
 

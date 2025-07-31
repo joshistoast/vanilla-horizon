@@ -99,10 +99,15 @@
     "
     style="{% render 'border-override', settings: block.settings %}"
   >
-    <placeholder-image
-      data-block-id="{{ block.id }}"
-      data-type="general"
-    ></placeholder-image>
+    {% liquid
+      # Simple rotation through collection apparel placeholders (1-4)
+      # Extract index from parent block ID (e.g., "collection-card-3" -> "3")
+      assign block_parts = parent_block_id | split: '-'
+      assign collection_index = block_parts.last | default: 0
+      assign variant = collection_index | modulo: 4 | plus: 1
+      assign placeholder_name = 'collection-apparel-' | append: variant
+    %}
+    {{ placeholder_name | placeholder_svg_tag }}
   </div>
 {% endif %}
 

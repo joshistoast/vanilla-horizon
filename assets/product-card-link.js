@@ -1,5 +1,3 @@
-import { onAnimationEnd } from '@theme/utilities';
-
 // Create a new custom element for product links with images for transitions to PDP
 class ProductCardLink extends HTMLElement {
   connectedCallback() {
@@ -45,7 +43,14 @@ class ProductCardLink extends HTMLElement {
    * @param {HTMLImageElement} image
    */
   #setImageSrcset(image) {
-    if (this.featuredMediaUrl && !image.srcset.includes(this.featuredMediaUrl)) {
+    if (!this.featuredMediaUrl) return;
+
+    const currentImageUrl = new URL(image.currentSrc);
+
+    // Deliberately not using origin, as it includes the protocol, which is usually skipped for featured media
+    const currentImageRawUrl = currentImageUrl.host + currentImageUrl.pathname;
+
+    if (!this.featuredMediaUrl.includes(currentImageRawUrl)) {
       const imageFade = image.animate([{ opacity: 0.8 }, { opacity: 1 }], {
         duration: 125,
         easing: 'ease-in-out',

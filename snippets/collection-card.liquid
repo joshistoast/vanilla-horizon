@@ -45,22 +45,20 @@
   "
   {{- block.shopify_attributes -}}
 >
-  {% if collection != blank or request.design_mode %}
-    <a
-      class="collection-card__link"
-      {% unless onboarding %}
-        href="{{ collection.url }}"
-      {% endunless %}
-    >
-      <span class="visually-hidden">{{ collection.title }}</span>
-    </a>
-    <div class="collection-card__inner">
-      {{ card_image }}
-      <div class="collection-card__content layout-panel-flex--column">
-        {{ children }}
-      </div>
+  <a
+    class="collection-card__link"
+    {% unless onboarding %}
+      href="{{ collection.url }}"
+    {% endunless %}
+  >
+    <span class="visually-hidden">{{ collection.title }}</span>
+  </a>
+  <div class="collection-card__inner">
+    {{ card_image }}
+    <div class="collection-card__content layout-panel-flex--column">
+      {{ children }}
     </div>
-  {% endif %}
+  </div>
 </div>
 
 {% stylesheet %}
@@ -71,8 +69,7 @@
     position: relative;
   }
 
-  .collection-card > placeholder-image,
-  .collection-card > placeholder-image > img {
+  .collection-card > svg {
     height: 100%;
     width: 100%;
     aspect-ratio: var(--ratio);
@@ -161,7 +158,8 @@
     height: 100%;
   }
 
-  .collection-card__image placeholder-image {
+  .collection-card__image svg {
+    height: 100%;
     width: 100%;
   }
 

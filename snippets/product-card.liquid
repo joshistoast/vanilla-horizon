@@ -32,8 +32,52 @@
   assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block.settings.product_card_gap
 
+  # Logic to determine which variant URL to use (matching swatch selection logic)
+  assign variant_to_link = product.selected_or_first_available_variant
+  assign combined_listing_count = product.options_with_values | map: 'values' | map: 'product_url' | compact | size
+
+  unless combined_listing_count > 0
+    assign first_image = product.media.first
+    assign variant_images = product.images | where: 'attached_to_variant?', true
+    # Get swatchable options (options that have swatch values)
+    assign swatch_variant_picker = null
+    for option in product.options_with_values
+      assign swatch_count = option.values | map: 'swatch' | compact | size
+      if swatch_count > 0
+        assign swatch_variant_picker = option
+        break
+      endif
+    endfor
+
+    if swatch_variant_picker
+      assign swatch_count = swatch_variant_picker.values | map: 'swatch' | compact | size
+      assign no_swatch_selected = null
+
+      if swatch_count == 1
+        # Single swatch: use that variant
+        assign variant_to_link = swatch_variant_picker.values.first.variant
+      elsif swatch_count > 1
+        if first_image and variant_images contains first_image
+          # First image is a variant image - find which variant it belongs to
+          for option_value in swatch_variant_picker.values
+            if option_value.variant.featured_media.id == first_image.id
+              assign variant_to_link = option_value.variant
+              break
+            endif
+          endfor
+        elsif variant_images.size == 0
+          # No variants have images - use first swatch variant
+          assign variant_to_link = swatch_variant_picker.values.first.variant
+        else
+          assign no_swatch_selected = true
+        endif
+        # else: First image is NOT a variant image - keep default (selected_or_first_available_variant)
+      endif
+    endif
+  endunless
+
   if settings.transition_to_main_product
-    assign featured_image = product.selected_or_first_available_variant.featured_image
+    assign featured_image = variant_to_link.featured_image
     if featured_image == blank
       assign featured_image = product.featured_media.preview_image
     endif
@@ -63,11 +107,14 @@
   id="product-card-{{ block.id }}"
   data-product-transition="{{ settings.transition_to_main_product }}"
   {{ block.shopify_attributes }}
+  {% if no_swatch_selected %}
+    data-no-swatch-selected="true"
+  {% endif %}
 >
   <a
     id="{{ product_card_id | md5 }}"
     {% unless onboarding %}
-      href="{{ product.selected_or_first_available_variant.url }}"
+      href="{{ variant_to_link.url }}"
       on:click="/navigateToProduct"
     {% endunless %}
     class="product-card__link"
@@ -109,7 +156,8 @@
 {%- endif -%}
 
 {% stylesheet %}
-  product-card-link {
+  product-card-link,
+  :not(product-card-link) product-card {
     width: 100%;
   }
 
@@ -129,8 +177,18 @@
   }
 
   /* Hide "Add" button for single option product cards that show a swatches variant picker */
-  :is(.product-card):has(.quick-add__product-form-component--single-option):has(swatches-variant-picker-component)
+  :is(.product-card:not([data-no-swatch-selected])):has(.quick-add__product-form-component--single-option):has(
+      swatches-variant-picker-component
+    )
     .quick-add__button--choose {
+    display: none;
+  }
+
+  /* Hide "Add" button for single option product cards that show a swatches variant picker */
+  :is(.product-card[data-no-swatch-selected]):has(.quick-add__product-form-component--single-option):has(
+      swatches-variant-picker-component
+    )
+    add-to-cart-component {
     display: none;
   }
 
@@ -151,5 +209,23 @@
     & .quick-add__button--add {
       display: grid;
     }
+  }
+
+  .product-card[data-no-swatch-selected] slideshow-component[data-generic-media-size='1'] slideshow-arrows {
+    display: none;
+  }
+
+  .product-card[data-no-swatch-selected]
+    slideshow-component[data-generic-media-size='1']
+    slideshow-arrows:has(+ slideshow-slides slideshow-slide[variant-image]:not([hidden])) {
+    display: flex;
+  }
+
+  .product-card .variant-option__swatch svg {
+    display: none;
+  }
+
+  .product-card [data-available-count='0'] ~ svg {
+    display: block;
   }
 {% endstylesheet %}

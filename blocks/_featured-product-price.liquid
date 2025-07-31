@@ -25,7 +25,7 @@
 %}
 
 <product-price
-  class="text-right {{ block.settings.type_preset | default: 'h6' }} spacing-style{% if closest.product == blank and request.design_mode == false %} hidden{% endif %}"
+  class="text-right {{ block.settings.type_preset | default: 'h6' }} spacing-style"
   data-block-id="{{ block.id }}"
   data-product-id="{{ product.id }}"
   style="
@@ -34,7 +34,7 @@
   "
   {{ block.shopify_attributes }}
 >
-  {% if product.price_varies and has_swatches_only == false and price_min != blank and request.design_mode %}
+  {% if product.price_varies and has_swatches_only == false and price_min != blank %}
     <span class="price">{{ display_price }}</span>
   {% else %}
     {% render 'price',

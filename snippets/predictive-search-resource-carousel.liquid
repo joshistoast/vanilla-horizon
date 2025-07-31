@@ -19,12 +19,12 @@
 
 {% capture header %}
   <div class="predictive-search-results__resource-header">
-    <span
-      id="predictive-search-collections"
+    <h4
+      id="predictive-search-{{ resource_type }}"
       class="predictive-search-results__title"
     >
       {{ title }}
-    </span>
+    </h4>
 
     {% if resources.size >= 4 %}
       {%- render 'slideshow-controls',
@@ -59,7 +59,7 @@
        - Lift effect (4px upward movement)
        - Shadow (15px spread with -5px offset)
        Using 16px for better alignment with our spacing scale */
-    padding: 16px;
-    margin-block: -16px;
+    padding-block: var(--padding-xl);
+    margin-block: calc(-1 * var(--padding-xl));
   }
 {% endstylesheet %}

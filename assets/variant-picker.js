@@ -1,6 +1,7 @@
 import { Component } from '@theme/component';
 import { VariantSelectedEvent, VariantUpdateEvent } from '@theme/events';
 import { morph } from '@theme/morph';
+import { requestYieldCallback } from '@theme/utilities';
 
 /**
  * A custom element that manages a variant picker.
@@ -70,7 +71,9 @@ export default class VariantPicker extends Component {
     }
 
     if (url.href !== window.location.href) {
-      history.replaceState({}, '', url.toString());
+      requestYieldCallback(() => {
+        history.replaceState({}, '', url.toString());
+      });
     }
   }
 
@@ -179,7 +182,7 @@ export default class VariantPicker extends Component {
       })
       .catch((error) => {
         if (error.name === 'AbortError') {
-          console.log('Fetch aborted by user');
+          console.warn('Fetch aborted by user');
         } else {
           console.error(error);
         }

@@ -40,10 +40,11 @@
   </video-background-component>
 {%- else -%}
   <div class="{{ video_classes }}">
-    <placeholder-image
-      data-block-id="{{ section_id }}-{{ block_id }}"
-      data-type="general"
-    ></placeholder-image>
+    {%- assign placeholder_name = placeholder | default: 'hero-apparel-2' -%}
+    {%- if placeholder_name == blank -%}
+      {%- assign placeholder_name = 'hero-apparel-2' -%}
+    {%- endif -%}
+    {{ placeholder_name | placeholder_svg_tag }}
   </div>
 {%- endif -%}
 

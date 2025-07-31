@@ -291,14 +291,11 @@
     z-index: var(--layer-overlay);
 
     &[transparent='not-sticky'][data-sticky-state='active'],
-    &:hover,
-    /* Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
-    &:has(.header-menu[aria-expanded='true']),
-    &:has(nav[header-menu]:focus-within),
-    &:has(.menu-list__link[data-animating]),
-    &:has(.account-popover[open]),
-    &:has(.localization-wrapper:not([hidden])) {
-      /* should be opaque, negate all transparent properties */
+    /* Only show opaque background when hovering over menu items with children (mega menu)
+       Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+    &:has(.mega-menu__list:hover),
+    &:has(.menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating])),
+    &:has(.menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])) {
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
       --header-bg-color: unset;
@@ -323,19 +320,12 @@
     }
   }
 
-  :is(
-      .header[transparent]:not([data-sticky-state='active']),
-      .header[transparent='always'][data-sticky-state='active'],
-      .account-popover[open],
-      .localization-wrapper:not([hidden])
-    )
+  :is(.header[transparent]:not([data-sticky-state='active']), .header[transparent='always'][data-sticky-state='active'])
     .header__row:not(
-      :hover,
       :has(
-          .header-menu[aria-expanded='true'],
-          .menu-list__link[data-animating],
-          .account-popover[open],
-          .localization-wrapper:not([hidden])
+          .mega-menu__list:hover,
+          .menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating]),
+          .menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])
         )
     ) {
     /* while transparent, header-row ignores its color-scheme settings, pull from the header-component */
@@ -347,11 +337,13 @@
     --color-primary-button-text: inherit;
   }
 
+  .header--inherit-color-scheme-on-menu-open:has(.mega-menu__list:hover) .header__row,
   .header--inherit-color-scheme-on-menu-open:has(
-      .mega-menu__list:is(:hover),
-      .header-menu:is([aria-expanded='true']),
-      nav[header-menu]:is(:focus-within),
-      .menu-list__link[data-animating]
+      .menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating])
+    )
+    .header__row,
+  .header--inherit-color-scheme-on-menu-open:has(
+      .menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'], [data-animating])
     )
     .header__row {
     --color-foreground: inherit;
@@ -536,6 +528,39 @@
   /* Single column layout if there are no columns within */
   .header__columns:not(:has(.header__column)) {
     grid-template-columns: 1fr;
+  }
+
+  /* Column-specific dimming effect when any interactive element is hovered
+     Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
+  .header__column:has(header-menu:hover),
+  .header__column:has(.header-actions__action:hover),
+  .header__column:has(.dropdown-localization__button:hover),
+  .header__column:has(.header__icon--menu:hover) {
+    header-menu:not(:hover),
+    .header-actions__action:not(:hover),
+    .dropdown-localization__button:not(:hover),
+    .header__icon--menu:not(:hover) {
+      opacity: var(--opacity-subdued-text);
+      transition: opacity var(--animation-speed) var(--animation-easing);
+    }
+  }
+
+  /* Ensure smooth transitions for all interactive elements */
+  header-menu,
+  .header-actions__action,
+  .dropdown-localization__button,
+  .header__icon--menu {
+    transition: opacity var(--animation-speed) var(--animation-easing);
+  }
+
+  /* Extend hover area through padding to prevent flickering on actual menu items */
+  .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__link[aria-haspopup],
+  .menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__link,
+  .menu-list__list-item:where(:not([slot='overflow'])) > button.menu-list__link {
+    margin-block: calc(-2 * var(--header-padding));
+    padding-block: calc(2 * var(--header-padding));
+    margin-inline: calc(-1 * var(--gap-xl) / 2);
+    padding-inline: calc(var(--gap-xl) / 2);
   }
 
   /* Set header paddings based on height setting */

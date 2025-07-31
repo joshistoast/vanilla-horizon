@@ -42,8 +42,8 @@
     "contact_form": "Kontaktskjema",
     "featured_product": "Produkthøydepunkter",
     "icons_with_text": "Ikoner med tekst",
-    "products_carousel": "Produktliste: Karusell",
-    "products_grid": "Produktliste: Rutenett",
+    "products_carousel": "Utvalgt kolleksjon: Karusell",
+    "products_grid": "Utvalgt kolleksjon: Rutenett",
     "jumbo_text": "Jumbotekst",
     "accelerated_checkout": "Hurtigkasse",
     "accordion": "Trekkspill",
@@ -98,7 +98,7 @@
     "product_grid_main": "Produktrutenett",
     "product_image": "Produktbilde",
     "product_information": "Produktinformasjon",
-    "product_list": "Produktliste",
+    "product_list": "Utvalgt kolleksjon",
     "product_review_stars": "Stjerner i anmeldelse",
     "quantity": "Antall",
     "row": "Rad",
@@ -153,7 +153,7 @@
     "page_layout": "Sidelayout",
     "policy_list": "Koblinger til retningslinjer",
     "prices": "Priser",
-    "products_editorial": "Produktliste: Redaksjonell",
+    "products_editorial": "Utvalgt kolleksjon: Redaksjonell",
     "social_link": "Kobling til sosiale medier",
     "split_showcase": "Split-presentasjon",
     "variant_pickers": "Variantvelgere",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "Vis sekundærbilde når musepekeren beveges over",
     "media": "Medier",
     "product_card_carousel": "Vis karusell",
-    "media_fit": "Medietilpasning"
+    "media_fit": "Mediepassform",
+    "scroll_speed": "Rull til neste kunngjøring"
   },
   "options": {
     "adapt_to_image": "Tilpass til bilde",
@@ -907,7 +908,7 @@
     "hover_effects": "Gjelder produkt- og samlingskort"
   },
   "categories": {
-    "product_list": "Produktliste",
+    "product_list": "Utvalgt kolleksjon",
     "basic": "Basic",
     "collection": "Samling",
     "collection_list": "Liste over samlinger",

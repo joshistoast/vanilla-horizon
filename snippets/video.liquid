@@ -193,11 +193,7 @@
     {% if video_preview_image != blank and video_autoplay == false %}
       {{ video_preview_image | image_url: width: 1946 | image_tag: widths: widths, sizes: sizes, loading: loading }}
     {% else %}
-      <placeholder-image
-        class="placeholder-video"
-        data-block-id="{{ section_id }}-{{ block.id }}"
-        data-type="general"
-      ></placeholder-image>
+      {{ 'hero-apparel-3' | placeholder_svg_tag }}
     {% endif %}
     <span class="video-placeholder-wrapper__poster-icon icon-play">
       <span class="visually-hidden">{{ 'accessibility.play_video' | t }}</span>

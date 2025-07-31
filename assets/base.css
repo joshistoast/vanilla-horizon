@@ -725,6 +725,16 @@ body,
   color: var(--color, var(--color-foreground));
 }
 
+/* Ensure inputs with type presets maintain minimum 16px on mobile to prevent iOS zoom */
+@media screen and (max-width: 1200px) {
+  input.paragraph.paragraph,
+  input.paragraph.paragraph:not([type]),
+  textarea.paragraph.paragraph,
+  select.paragraph.paragraph {
+    font-size: max(1rem, var(--font-paragraph--size));
+  }
+}
+
 .paragraph > small {
   font-size: smaller;
 }
@@ -744,6 +754,14 @@ h1,
   color: var(--color, var(--font-h1-color));
 }
 
+@media screen and (max-width: 1200px) {
+  input.h1.h1,
+  textarea.h1.h1,
+  select.h1.h1 {
+    font-size: max(1rem, var(--font-h1--size));
+  }
+}
+
 h2,
 .h2.h2,
 .text-block.h2 > * {
@@ -755,6 +773,14 @@ h2,
   letter-spacing: var(--font-h2--letter-spacing);
   text-transform: var(--font-h2--case);
   color: var(--color, var(--font-h2-color));
+}
+
+@media screen and (max-width: 1200px) {
+  input.h2.h2,
+  textarea.h2.h2,
+  select.h2.h2 {
+    font-size: max(1rem, var(--font-h2--size));
+  }
 }
 
 h3,
@@ -771,6 +797,14 @@ h3,
   color: var(--color, var(--font-h3-color));
 }
 
+@media screen and (max-width: 1200px) {
+  input.h3,
+  textarea.h3,
+  select.h3 {
+    font-size: max(1rem, var(--font-h3--size));
+  }
+}
+
 h4,
 .h4.h4,
 .text-block.h4 > * {
@@ -782,6 +816,14 @@ h4,
   letter-spacing: var(--font-h4--letter-spacing);
   text-transform: var(--font-h4--case);
   color: var(--color, var(--font-h4-color));
+}
+
+@media screen and (max-width: 1200px) {
+  input.h4.h4,
+  textarea.h4.h4,
+  select.h4.h4 {
+    font-size: max(1rem, var(--font-h4--size));
+  }
 }
 
 h5,
@@ -797,6 +839,14 @@ h5,
   color: var(--color, var(--font-h5-color));
 }
 
+@media screen and (max-width: 1200px) {
+  input.h5.h5,
+  textarea.h5.h5,
+  select.h5.h5 {
+    font-size: max(1rem, var(--font-h5--size));
+  }
+}
+
 h6,
 .h6.h6,
 .text-block.h6 > * {
@@ -808,6 +858,14 @@ h6,
   letter-spacing: var(--font-h6--letter-spacing);
   text-transform: var(--font-h6--case);
   color: var(--color, var(--font-h6-color));
+}
+
+@media screen and (max-width: 1200px) {
+  input.h6.h6,
+  textarea.h6.h6,
+  select.h6.h6 {
+    font-size: max(1rem, var(--font-h6--size));
+  }
 }
 
 :first-child:is(.h1, .h2, .h3, .h4, .h5, .h6) {
@@ -3485,6 +3543,25 @@ slideshow-component[autoplay] slideshow-controls {
   }
 }
 
+/* Slideshow control shape styles */
+.button-unstyled.slideshow-control.slideshow-control--shape-square,
+.button-unstyled.slideshow-control.slideshow-control--shape-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+}
+
+.button-unstyled.slideshow-control.slideshow-control--shape-circle {
+  border-radius: 50%;
+}
+
+.button-unstyled.slideshow-control.slideshow-control--shape-square {
+  border-radius: 0;
+}
+
 .slideshow-control .icon-caret {
   rotate: -90deg;
 }
@@ -3605,6 +3682,11 @@ slideshow-arrows {
     justify-content: space-between;
     align-items: center;
   }
+}
+
+slideshow-arrows:has(.slideshow-control--shape-square),
+slideshow-arrows:has(.slideshow-control--shape-circle) {
+  mix-blend-mode: normal;
 }
 
 slideshow-component[disabled='true'] slideshow-arrows {
@@ -4089,12 +4171,6 @@ text-component {
   }
 }
 
-/* These are sections with placeholders that we don't want to have appear on the storefront when empty */
-.shopify-section:has(.in-onboarding-state) {
-  /* stylelint-disable-next-line declaration-no-important */
-  display: none !important;
-}
-
 .product-card:hover,
 .collection-card:hover,
 .resource-card:hover,
@@ -4115,4 +4191,35 @@ text-component {
   z-index: auto;
   transform: none;
   box-shadow: none;
+}
+
+/* Prevent iOS zoom on input focus by ensuring minimum 16px font size on mobile */
+@media screen and (max-width: 1200px) {
+  input,
+  textarea,
+  select,
+  /* Higher specificity to override type preset classes like .paragraph, .h1, etc. */
+  .paragraph.paragraph input,
+  .paragraph.paragraph textarea,
+  .paragraph.paragraph select,
+  .h1.h1 input,
+  .h1.h1 textarea,
+  .h1.h1 select,
+  .h2.h2 input,
+  .h2.h2 textarea,
+  .h2.h2 select,
+  .h3.h3 input,
+  .h3.h3 textarea,
+  .h3.h3 select,
+  .h4.h4 input,
+  .h4.h4 textarea,
+  .h4.h4 select,
+  .h5.h5 input,
+  .h5.h5 textarea,
+  .h5.h5 select,
+  .h6.h6 input,
+  .h6.h6 textarea,
+  .h6.h6 select {
+    font-size: max(1rem, 100%);
+  }
 }

@@ -42,9 +42,9 @@
     "contact_form": "Modulo di contatto",
     "featured_product": "Prodotti in evidenza",
     "icons_with_text": "Icone con testo",
-    "products_carousel": "Elenco dei prodotti: carosello",
-    "products_grid": "Elenco dei prodotti: griglia",
-    "product_list": "Elenco dei prodotti",
+    "products_carousel": "Collezione in evidenza: Carosello",
+    "products_grid": "Collezione in evidenza: Griglia",
+    "product_list": "Collezione in evidenza",
     "spacer": "Spaziatore",
     "accelerated_checkout": "Check-out veloce",
     "accordion": "Accordion",
@@ -155,7 +155,7 @@
     "policy_list": "Link alle informative",
     "prices": "Prezzi",
     "product_list_button": "Pulsante Visualizza tutto",
-    "products_editorial": "Elenco dei prodotti: editoriale",
+    "products_editorial": "Collezione in evidenza: Editoriale",
     "social_link": "Link ai social",
     "split_showcase": "Split Showcase",
     "variant_pickers": "Selettori di varianti",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "Mostra seconda immagine al passaggio del mouse",
     "media": "Contenuti multimediali",
     "product_card_carousel": "Mostra carosello",
-    "media_fit": "Adattamento dei media"
+    "media_fit": "Adattamento dei contenuti multimediali",
+    "scroll_speed": "Scorri al prossimo annuncio"
   },
   "options": {
     "adapt_to_image": "Adatta a immagine",
@@ -907,7 +908,7 @@
     "hover_effects": "Si applica alle schede di prodotti e collezioni"
   },
   "categories": {
-    "product_list": "Elenco dei prodotti",
+    "product_list": "Collezione in evidenza",
     "basic": "Base",
     "collection": "Collezione",
     "collection_list": "Elenco delle collezioni",
