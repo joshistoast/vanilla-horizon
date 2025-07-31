@@ -54,10 +54,7 @@
     }}
   {%- else -%}
     <div class="placeholder-image border-style size-style" style="{{ image_border_style }}">
-      <placeholder-image
-        data-block-id="{{ block.id }}"
-        data-type="general"
-      ></placeholder-image>
+      {{ 'detailed-apparel-1' | placeholder_svg_tag: 'hero__image' }}
     </div>
   {%- endif -%}
 {% endcapture %}

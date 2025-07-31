@@ -21,7 +21,7 @@
       class="recently-viewed-wrapper"
       ref="recentlyViewedWrapper"
     >
-      <span
+      <h4
         class="predictive-search-results__title"
         ref="recentlyViewedTitle[]"
       >
@@ -33,7 +33,7 @@
         >
           {{ 'actions.clear' | t }}
         </button>
-      </span>
+      </h4>
       <ul
         class="predictive-search-results__list predictive-search-results__wrapper-products list-unstyled"
         role="listbox"
@@ -82,9 +82,9 @@
       </ul>
     </div>
   {% else %}
-    <span class="predictive-search-results__title">
+    <h4 class="predictive-search-results__title">
       {{ title }}
-    </span>
+    </h4>
     <ul
       class="predictive-search-results__list predictive-search-results__wrapper-products list-unstyled"
       role="listbox"
@@ -93,39 +93,20 @@
       {% liquid
         assign limit = limit | default: 8
       %}
-      {% if order_ids != blank %}
-        {% for _id in order_ids %}
-          {% assign int_id = _id | times: 1 %}
-          {% assign product = products | find: 'id', int_id %}
-          <li
-            class="predictive-search-results__card predictive-search-results__card--product"
-            ref="resultsItems[]"
-          >
-            {% render 'resource-card',
-              resource_type: 'product',
-              resource: product,
-              image_width: 500,
-              image_hover: true,
-              image_aspect_ratio: '4 / 5'
-            %}
-          </li>
-        {% endfor %}
-      {% else %}
-        {% for product in products limit: limit %}
-          <li
-            class="predictive-search-results__card predictive-search-results__card--product"
-            ref="resultsItems[]"
-          >
-            {% render 'resource-card',
-              resource_type: 'product',
-              resource: product,
-              image_width: 500,
-              image_hover: true,
-              image_aspect_ratio: '4 / 5'
-            %}
-          </li>
-        {% endfor %}
-      {% endif %}
+      {% for product in products limit: limit %}
+        <li
+          class="predictive-search-results__card predictive-search-results__card--product"
+          ref="resultsItems[]"
+        >
+          {% render 'resource-card',
+            resource_type: 'product',
+            resource: product,
+            image_width: 500,
+            image_hover: true,
+            image_aspect_ratio: '4 / 5'
+          %}
+        </li>
+      {% endfor %}
     </ul>
   {% endif %}
 </div>

@@ -79,7 +79,12 @@
         }}
       {%- endif -%}
     {%- else -%}
-      <placeholder-image data-block-id="{{ block.id }}" data-type="general"></placeholder-image>
+      {%- liquid
+        assign modulo_result = block_index | modulo: 2
+        assign placeholder_variant = 2 | minus: modulo_result
+        assign placeholder_name = 'hero-apparel-' | append: placeholder_variant
+      -%}
+      {{ placeholder_name | placeholder_svg_tag: 'slide__image' }}
     {%- endif -%}
   </div>
   <div

@@ -3,7 +3,7 @@
   @param {string} [suffix] - The suffix to add to the collection title
 {%- enddoc -%}
 
-{% if closest.collection == blank and request.design_mode %}
+{% if closest.collection == blank %}
   {% assign collection_title = 'placeholders.collection_title' | t %}
 {% elsif closest.collection != blank %}
   {% assign collection_title = closest.collection.title %}

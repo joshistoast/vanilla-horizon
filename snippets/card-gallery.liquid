@@ -6,6 +6,7 @@
   @param [children] - Additional content rendered below the card gallery
   @param [section] - The section object the snippet is rendered in
   @param [block] - The block object the snippet is rendered in
+  @param [has_applied_colour_filter] - Whether there's an applied colour filter
 {%- enddoc -%}
 
 {% liquid
@@ -82,10 +83,7 @@
 
 <div
   ref="cardGallery"
-  class="
-    card-gallery card-gallery-{{ block.id }} spacing-style border-style
-    {% if closest.product == blank and request.design_mode == false %}hidden{% endif %}
-  "
+  class="card-gallery card-gallery-{{ block.id }} spacing-style border-style"
   style="
     {% render 'border-override', settings: block.settings %}
     {% render 'spacing-style', settings: block.settings %}
@@ -137,15 +135,23 @@
     if all_media_sorted.size > variant_images.size
       assign has_generic_media = true
     endif
+    assign generic_media_size = all_media.size | minus: variant_images.size
+
+    assign combined_listing_count = product.options_with_values | map: 'values' | map: 'product_url' | compact | size
+    if combined_listing_count == 0
+      assign media_list_to_show = all_media
+    else
+      assign media_list_to_show = all_media_sorted
+    endif
   %}
 
   {%- if all_media.size > 0 -%}
-    {% if all_media.size > 2 and hover_behavior == 'carousel' %}
+    {% if all_media.size > 2 and hover_behavior == 'carousel' and has_generic_media %}
       {% assign show_arrows = true %}
     {% endif %}
 
     {% capture slides %}
-      {% for media in all_media_sorted %}
+      {% for media in media_list_to_show %}
         {% assign loading = 'lazy' %}
         {% assign sizes = lazy_image_sizes %}
 
@@ -161,20 +167,32 @@
         {% capture class %}
           product-media-container media-fit product-media-container--{{ media.media_type }}{% if constrain_to_viewport %} constrain-height{% endif %}
         {% endcapture %}
+
         {% assign hidden = false %}
+
         {% if variant_images contains media.src %}
           {% assign attributes = 'variant-image' %}
-          {% unless forloop.first and media.src == selected_variant_image or has_generic_media == false %}
+          {% if combined_listing_count > 0 %}
+            {% unless forloop.first and media.src == selected_variant_image or has_generic_media == false %}
+              {% assign hidden = true %}
+            {% endunless %}
+          {% elsif has_applied_colour_filter %}
+            {% unless media.src == selected_variant_image %}
+              {% assign hidden = true %}
+            {% endunless %}
+          {% elsif forloop.first == false %}
             {% assign hidden = true %}
-          {% endunless %}
+          {% endif %}
         {% endif %}
         {% render 'slideshow-slide', slide_id: media.id, index: forloop.index, children: slideshow_children, class: class, attributes: attributes, hidden: hidden, media_fit: media_fit %}
       {% endfor %}
     {% endcapture %}
 
-    {% assign slideshow_attributes = '' %}
+    {% assign slideshow_attributes = 'data-generic-media-size="[generic_media_size]"'
+      | replace: '[generic_media_size]', generic_media_size
+    %}
     {% if hover_behavior == 'none' or settings.product_card_carousel == false %}
-      {% assign slideshow_attributes = 'disabled="true"' %}
+      {% assign slideshow_attributes = slideshow_attributes | append: ' disabled="true"' %}
     {% endif %}
     {% render 'slideshow',
       ref: 'slideshow',
@@ -190,7 +208,14 @@
     </product-title>
   {% elsif product == blank %}
     {% capture placeholder_image %}
-      <placeholder-image data-block-id="{{ section.id }}-{{ block.id }}" data-type="product"></placeholder-image>
+      {% liquid
+        # Extract index from block ID (e.g., "product-card-3" -> "3")
+        assign block_parts = block.id | split: '-'
+        assign placeholder_index = block_parts.last | default: 0
+        assign variant = placeholder_index | modulo: 3 | plus: 1
+        assign placeholder_name = 'product-apparel-' | append: variant
+      %}
+      {{ placeholder_name | placeholder_svg_tag: 'placeholder-image' }}
     {% endcapture %}
     {% capture placeholder_slide %}
       {% render 'slideshow-slide', index: 1, children: placeholder_image, class: 'product-media-container card-gallery__placeholder' %}
@@ -215,7 +240,7 @@
     width: 100%;
   }
 
-  .card-gallery placeholder-image {
+  .card-gallery svg {
     aspect-ratio: var(--gallery-aspect-ratio, var(--ratio));
   }
 

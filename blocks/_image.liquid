@@ -4,6 +4,7 @@
   Renders an image block.
 
   @param {string} [loading] - The html loading attribute
+  @param {string} [placeholder] - The placeholder image name to use when no image is provided, defaults to 'hero-apparel-2'
 {%- enddoc -%}
 
 {% assign image = closest.collection.featured_image | default: closest.product.featured_image %}
@@ -37,10 +38,7 @@
     style="--border-radius: {{ block.settings.border_radius }}px;"
     {{ block.shopify_attributes }}
   >
-    <placeholder-image
-      data-block-id="{{ block.id }}"
-      data-type="general"
-    ></placeholder-image>
+    {{ placeholder | default: 'hero-apparel-2' | placeholder_svg_tag: 'hero__image' }}
   </image-block>
 {% endif %}
 

@@ -36,8 +36,8 @@
     "primary_button": "Primární tlačítko",
     "secondary_button": "Sekundární tlačítko",
     "popovers": "Místní okna",
-    "products_carousel": "Seznam produktů: Karusel",
-    "products_grid": "Seznam produktů: Mřížka",
+    "products_carousel": "Doporučená kolekce: Karusel",
+    "products_grid": "Doporučená kolekce: Mřížka",
     "marquee": "Běžící text",
     "alternating_content_rows": "Střídavé řádky",
     "pull_quote": "Vytažený citát",
@@ -121,7 +121,7 @@
     "faq_section": "Nejčastější dotazy",
     "hero": "Hero (hlavní banner)",
     "jumbo_text": "Text Jumbo",
-    "product_list": "Seznam produktů",
+    "product_list": "Doporučená kolekce",
     "spacer": "Rozestup",
     "view_all_button": "Zobrazit vše",
     "video_section": "Video",
@@ -153,7 +153,7 @@
     "page_layout": "Rozvržení stránky",
     "policy_list": "Odkazy na zásady",
     "prices": "Ceny",
-    "products_editorial": "Seznam produktů: Úvodník",
+    "products_editorial": "Doporučená kolekce: Úvodník",
     "social_link": "Odkaz na sociální sítě",
     "split_showcase": "Rozdělená prezentace",
     "variant_pickers": "Výběry varianty",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "Zobrazit druhý obrázek po najetí myší/prstem",
     "media": "Média",
     "product_card_carousel": "Zobrazit karusel",
-    "media_fit": "Přizpůsobení média"
+    "media_fit": "Přizpůsobení multimédií",
+    "scroll_speed": "Přejít na další oznámení"
   },
   "options": {
     "adapt_to_image": "Přizpůsobení obrázku",
@@ -907,7 +908,7 @@
     "pills_usage": "Používá se pro použité filtry, slevové kódy a návrhy vyhledávání"
   },
   "categories": {
-    "product_list": "Seznam produktů",
+    "product_list": "Doporučená kolekce",
     "basic": "Basic",
     "collection": "Kolekce",
     "collection_list": "Seznam kolekcí",

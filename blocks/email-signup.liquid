@@ -128,6 +128,11 @@
     border-color: var(--color-input-border);
   }
 
+  .email-signup__input.paragraph {
+    color: var(--color-input-text);
+    outline-color: var(--color-input-background);
+  }
+
   .email-signup__button {
     white-space: nowrap;
     padding: 0;
@@ -176,6 +181,19 @@
   .email-signup__input:has(+ .email-signup__button--integrated) {
     @media screen and (max-width: 749px) {
       text-align: left;
+    }
+  }
+
+  .email-signup__button-icon {
+    fill: currentcolor;
+    padding: 5px;
+
+    @media screen and (max-width: 749px) {
+      padding: 0;
+      align-self: center;
+      justify-self: center;
+      width: var(--icon-size-lg);
+      height: var(--icon-size-lg);
     }
   }
 
@@ -251,19 +269,6 @@
   .email-signup__button.button-unstyled:hover {
     color: rgb(var(--color-input-text-rgb) / var(--opacity-70));
     cursor: pointer;
-  }
-
-  .email-signup__button-icon {
-    fill: currentcolor;
-    padding: 5px;
-
-    @media screen and (max-width: 749px) {
-      padding: 0;
-      align-self: center;
-      justify-self: center;
-      width: var(--icon-size-lg);
-      height: var(--icon-size-lg);
-    }
   }
 
   .email-signup__message {

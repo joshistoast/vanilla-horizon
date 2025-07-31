@@ -2,7 +2,7 @@ import { morph } from '@theme/morph';
 import { Component } from '@theme/component';
 import { CartUpdateEvent, ThemeEvents } from '@theme/events';
 import { DialogComponent, DialogCloseEvent } from '@theme/dialog';
-import { mediaQueryLarge, isMobileBreakpoint } from '@theme/utilities';
+import { mediaQueryLarge, isMobileBreakpoint, getIOSVersion } from '@theme/utilities';
 
 export class QuickAddComponent extends Component {
   /** @type {AbortController | null} */
@@ -169,12 +169,15 @@ class QuickAddDialog extends DialogComponent {
 
     this.addEventListener(ThemeEvents.cartUpdate, this.handleCartUpdate, { signal: this.#abortController.signal });
     this.addEventListener(ThemeEvents.variantUpdate, this.#updateProductTitleLink);
+
+    this.addEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
     this.#abortController.abort();
+    this.removeEventListener(DialogCloseEvent.eventName, this.#handleDialogClose);
   }
 
   /**
@@ -197,6 +200,27 @@ class QuickAddDialog extends DialogComponent {
 
     if (viewMoreDetailsLink) viewMoreDetailsLink.href = anchorElement.href;
     if (mobileProductTitle) mobileProductTitle.href = anchorElement.href;
+  };
+
+  #handleDialogClose = () => {
+    const iosVersion = getIOSVersion();
+    /**
+     * This is a patch to solve an issue with the UI freezing when the dialog is closed.
+     * To reproduce it, use iOS 16.0.
+     */
+    if (!iosVersion || iosVersion.major >= 17 || (iosVersion.major === 16 && iosVersion.minor >= 4)) return;
+
+    requestAnimationFrame(() => {
+      /** @type {HTMLElement | null} */
+      const grid = document.querySelector('#ResultsList [product-grid-view]');
+      if (grid) {
+        const currentWidth = grid.getBoundingClientRect().width;
+        grid.style.width = `${currentWidth - 1}px`;
+        requestAnimationFrame(() => {
+          grid.style.width = '';
+        });
+      }
+    });
   };
 }
 

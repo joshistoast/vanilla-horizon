@@ -372,33 +372,29 @@ class PredictiveSearchComponent extends Component {
     // Get the initial height before the results are rendered
     const abortController = this.#createAbortController();
 
-    try {
-      const resultsMarkup = await this.#getRecentlyViewedProductsMarkup();
-      if (!resultsMarkup) return;
+    const resultsMarkup = await this.#getRecentlyViewedProductsMarkup();
+    if (!resultsMarkup) return;
 
-      const parsedNextPage = new DOMParser().parseFromString(resultsMarkup, 'text/html');
-      const recentlyViewedProductsHtml = parsedNextPage.getElementById('predictive-search-products');
-      if (!recentlyViewedProductsHtml) return;
+    const parsedNextPage = new DOMParser().parseFromString(resultsMarkup, 'text/html');
+    const recentlyViewedProductsHtml = parsedNextPage.getElementById('predictive-search-products');
+    if (!recentlyViewedProductsHtml) return;
 
-      for (const child of recentlyViewedProductsHtml.children) {
-        if (child instanceof HTMLElement) {
-          child.setAttribute('ref', 'recentlyViewedWrapper');
-        }
+    for (const child of recentlyViewedProductsHtml.children) {
+      if (child instanceof HTMLElement) {
+        child.setAttribute('ref', 'recentlyViewedWrapper');
       }
-
-      const collectionElement = predictiveSearchResults.querySelector('#predictive-search-products');
-      if (!collectionElement) return;
-
-      if (this.refs.recentlyViewedWrapper) {
-        this.refs.recentlyViewedWrapper.remove();
-      }
-
-      if (abortController.signal.aborted) return;
-      // Prepend the recently viewed products to the collection
-      collectionElement.prepend(...recentlyViewedProductsHtml.children);
-    } catch (error) {
-      throw error;
     }
+
+    const collectionElement = predictiveSearchResults.querySelector('#predictive-search-products');
+    if (!collectionElement) return;
+
+    if (this.refs.recentlyViewedWrapper) {
+      this.refs.recentlyViewedWrapper.remove();
+    }
+
+    if (abortController.signal.aborted) return;
+    // Prepend the recently viewed products to the collection
+    collectionElement.prepend(...recentlyViewedProductsHtml.children);
   };
 
   #hideResetButton() {

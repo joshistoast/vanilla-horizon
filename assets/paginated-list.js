@@ -463,7 +463,7 @@ export default class PaginatedList extends Component {
 
     // We need to wait for the DOM to be updated with the new filtered content
     // Using mutation observer to detect when the grid actually updates
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver(() => {
       // Check if data-last-page changed
       const newLastPage = this.refs.grid?.dataset.lastPage;
 

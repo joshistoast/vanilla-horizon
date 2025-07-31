@@ -37,9 +37,6 @@
     section-resource-list
     spacing-style
     gap-style
-    {% if request.design_mode == false and section.settings.collection == blank %}
-      in-onboarding-state
-    {% endif %}
   "
   style="
     --column-count-mobile: {{ section.settings.mobile_columns }};
@@ -519,7 +516,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "adapt",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -696,7 +693,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "adapt",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -878,7 +875,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "adapt",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,

@@ -24,12 +24,7 @@
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
-  class="
-    section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style
-    {% if section.settings.collection_list == blank and request.design_mode == false %}
-      in-onboarding-state
-    {% endif %}
-  "
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style"
   style="{% render 'spacing-style', settings: section.settings %}"
 >
   <collection-links-component

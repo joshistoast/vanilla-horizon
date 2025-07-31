@@ -63,13 +63,11 @@
         assign products = recommendations.products
 
         if closest.product == blank
-          if request.design_mode or request.visual_preview_mode
-            # Onboarding mode: Show placeholder products
-            for i in (1..block.settings.max_products)
-              assign products = products | append: ', '
-              assign products = products | split: ','
-            endfor
-          endif
+          # Onboarding mode: Show placeholder products
+          for i in (1..block.settings.max_products)
+            assign products = products | append: ', '
+            assign products = products | split: ','
+          endfor
         elsif recommendations.performed and recommendations.products_count == 0
           # No recommendations found, pull from catalog
           if block.settings.recommendation_type == 'related'
@@ -410,7 +408,7 @@
             "product-card-gallery": {
               "type": "_product-card-gallery",
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "adapt",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,

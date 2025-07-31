@@ -6,6 +6,18 @@ export const requestIdleCallback =
   typeof window.requestIdleCallback == 'function' ? window.requestIdleCallback : setTimeout;
 
 /**
+ * Executes a callback in a separate task after the next frame.
+ * Using to defer non-critical tasks until after the interaction is complete.
+ * @see https://web.dev/articles/optimize-inp#yield_to_allow_rendering_work_to_occur_sooner
+ * @param {() => any} callback - The callback to execute
+ */
+export const requestYieldCallback = (callback) => {
+  requestAnimationFrame(() => {
+    setTimeout(callback, 0);
+  });
+};
+
+/**
  * Check if the browser supports View Transitions API
  * @returns {boolean} True if the browser supports View Transitions API, false otherwise
  */
@@ -438,6 +450,23 @@ export function getVisibleElements(root, elements, ratio = 1, axis) {
 
     return isWithinX && isWithinY;
   });
+}
+
+export function getIOSVersion() {
+  const { userAgent } = navigator;
+  const isIOS = /(iPhone|iPad)/i.test(userAgent);
+
+  if (!isIOS) return null;
+
+  const version = userAgent.match(/OS ([\d_]+)/)?.[1];
+  const [major, minor] = version?.split('_') || [];
+  if (!version || !major) return null;
+
+  return {
+    fullString: version.replace('_', '.'),
+    major: parseInt(major, 10),
+    minor: minor ? parseInt(minor, 10) : 0,
+  };
 }
 
 /**

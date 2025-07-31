@@ -42,10 +42,10 @@
     "contact_form": "Formularz kontaktowy",
     "featured_product": "Główne cechy produktu",
     "icons_with_text": "Ikony z tekstem",
-    "product_list": "Lista produktów",
+    "product_list": "Polecana kolekcja",
     "spacer": "Rozdzielacz",
-    "products_carousel": "Lista produktów: karuzela",
-    "products_grid": "Lista produktów: siatka",
+    "products_carousel": "Polecana kolekcja: karuzela",
+    "products_grid": "Polecana kolekcja: siatka",
     "accelerated_checkout": "Przyspieszona realizacja zakupu",
     "accordion": "Akordeon",
     "accordion_row": "Rząd akordeonu",
@@ -153,7 +153,7 @@
     "page_layout": "Układ strony",
     "policy_list": "Linki do polityki",
     "prices": "Ceny",
-    "products_editorial": "Lista produktów: układ redakcyjny",
+    "products_editorial": "Polecana kolekcja: materiał redakcyjny",
     "social_link": "Link do mediów społecznościowych",
     "split_showcase": "Podzielona prezentacja",
     "variant_pickers": "Selektory wariantów",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "Pokaż drugi obraz po najechaniu kursorem",
     "media": "Multimedia",
     "product_card_carousel": "Wyświetl karuzelę",
-    "media_fit": "Dopasowanie multimediów"
+    "media_fit": "Dopasowanie multimediów",
+    "scroll_speed": "Czas do następnego ogłoszenia"
   },
   "options": {
     "adapt_to_image": "Dostosuj do obrazu",
@@ -907,7 +908,7 @@
     "pills_usage": "Używane przez zastosowane filtry, kody rabatowe i sugestie wyszukiwania"
   },
   "categories": {
-    "product_list": "Lista produktów",
+    "product_list": "Polecana kolekcja",
     "basic": "Basic",
     "collection": "Kolekcja",
     "collection_list": "Lista kolekcji",

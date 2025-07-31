@@ -51,9 +51,6 @@
     section-resource-list
     spacing-style
     gap-style
-    {% if section.settings.collection_list == blank and request.design_mode == false %}
-      in-onboarding-state
-    {% endif %}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -526,7 +523,10 @@
             "collection-card-image": {
               "type": "_collection-card-image",
               "name": "t:names.collection_card_image",
-              "static": true
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt"
+              }
             },
             "collection-title": {
               "type": "collection-title",
@@ -635,7 +635,10 @@
             "collection-card-image": {
               "type": "_collection-card-image",
               "name": "t:names.collection_card_image",
-              "static": true
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt"
+              }
             },
             "collection-title": {
               "type": "collection-title",
@@ -760,7 +763,10 @@
             "collection-card-image": {
               "type": "_collection-card-image",
               "name": "t:names.collection_card_image",
-              "static": true
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt"
+              }
             },
             "collection-title": {
               "type": "collection-title",
@@ -923,7 +929,7 @@
               "name": "t:names.collection_card_image",
               "static": true,
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "adapt",
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",

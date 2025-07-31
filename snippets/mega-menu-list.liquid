@@ -27,7 +27,9 @@
 
   if menu_content_type == 'collection_images'
     assign collection_links = parent_link.links | where: 'type', 'collection_link'
-    if collection_links.size != parent_link.links.size
+    assign catalog_links = parent_link.links | where: 'type', 'catalog_link'
+    assign collection_list_links = parent_link.links | where: 'type', 'collections_link'
+    if collection_links.size == 0 and catalog_links.size == 0 and collection_list_links.size == 0
       assign menu_content_type = 'text'
     endif
   endif
@@ -35,6 +37,8 @@
   if menu_content_type == 'featured_collections'
     if parent_link.type == 'collection_link'
       assign collection_handles = parent_link.object.handle | append: ','
+    elsif parent_link.type == 'catalog_link' or parent_link.type == 'collections_link'
+      assign collection_handles = 'all' | append: ','
     endif
     assign collection_links = parent_link.links | where: 'type', 'collection_link'
     for collection_link in collection_links
@@ -45,6 +49,8 @@
   if menu_content_type == 'featured_products'
     if parent_link.type == 'collection_link'
       assign collection_object = parent_link.object
+    elsif parent_link.type == 'catalog_link' or parent_link.type == 'collections_link'
+      assign collection_object = collections.all
     else
       assign menu_content_type = 'text'
     endif
@@ -87,11 +93,7 @@
         class="mega-menu__link {% if link.links != blank %}mega-menu__link--parent{% endif %}"
       >
         {% if menu_content_type == 'collection_images' %}
-          {{
-            link.object.featured_image
-            | image_url: width: 1024
-            | image_tag: loading: 'lazy', class: 'mega-menu__link-image', sizes: 'auto'
-          }}
+          {% render 'link-featured-image', link: link, class: 'mega-menu__link-image' %}
         {% endif %}
         <span
           class="mega-menu__link-title"
@@ -253,6 +255,11 @@
     </span>
   {% when 'featured_collections' %}
     {% assign collection_handles = collection_handles | split: ',' | uniq %}
+
+    {% if collection_handles.size == 1 %}
+      {% assign max_featured_collections = 1 %}
+    {% endif %}
+
     <span
       class="mega-menu__content"
       style="--menu-content-columns-desktop: {{ max_collection_columns }}; --menu-content-columns-tablet: {{ max_collection_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
@@ -262,9 +269,14 @@
         style="--menu-content-columns-desktop: {{ max_featured_collections }}; --menu-content-columns-tablet: {{ max_featured_collections_tablet }};"
       >
         {% for handle in collection_handles limit: max_featured_collections %}
+          {% if handle == 'all' %}
+            {% assign collection_object = collections.all %}
+          {% else %}
+            {% assign collection_object = collections[handle] %}
+          {% endif %}
           <li class="mega-menu__content-list-item{% if forloop.index > max_featured_collections_tablet %} mega-menu__content-list-item--hidden-tablet{% endif %}">
             {% render 'resource-card',
-              resource: collections[handle],
+              resource: collection_object,
               resource_type: 'collection',
               style: 'overlay',
               image_aspect_ratio: content_aspect_ratio

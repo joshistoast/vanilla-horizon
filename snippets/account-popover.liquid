@@ -5,43 +5,25 @@
 
   @param {string} [settings.popover_color_scheme] - The color scheme for the popover panel.
 {%- enddoc -%}
-
-<details
+<anchored-popover-component
+  data-close-on-resize="true"
   class="account-popover mobile:hidden"
-  data-auto-close-details="desktop"
 >
-  <summary class="account-popover__summary">
-    {% render 'account-button', tag: 'span' %}
-  </summary>
-  <floating-panel-component
+  {% render 'account-button' with 'account-popover' as popover_id %}
+  <div
     class="account-popover__panel details-content color-{{ settings.popover_color_scheme }}"
+    id="account-popover"
+    popover="auto"
+    ref="popover"
   >
     {% render 'account-actions' %}
-  </floating-panel-component>
-</details>
+  </div>
+</anchored-popover-component>
 
 {% stylesheet %}
   .account-popover {
-    --account-popover-layer: var(--layer-temporary);
     --account-popover-min-width: 22rem;
     --account-actions-max-width: 22rem;
-    --account-popover-transition-opacity: 0;
-    --account-popover-transition-transform: translateY(-20px);
-    --account-popover-transition-visibility: hidden;
-
-    position: relative;
-
-    &[open] {
-      --account-popover-transition-opacity: 1;
-      --account-popover-transition-transform: translateY(0);
-      --account-popover-transition-visibility: visible;
-    }
-
-    &::details-content {
-      transition: content-visibility 0.3s ease-in-out;
-      transition-behavior: allow-discrete;
-      content-visibility: var(--account-popover-transition-visibility);
-    }
   }
 
   .account-popover__summary {
@@ -53,21 +35,41 @@
   }
 
   .account-popover__panel {
+    --account-popover-opacity: 0;
+    --account-popover-y: 20px;
     border-radius: var(--style-border-radius-popover);
-    position: absolute;
+    margin: 0;
+    top: var(--header-height);
+    left: unset;
+    right: calc(var(--anchor-right) * 1px);
 
-    /* Override the default offset. This needs to always be fixed to the parent element in this way. */
-    inset-block-start: calc(100% + 10px) !important;
-    inset-inline-end: 0;
     width: max-content;
     min-width: var(--account-popover-min-width);
-    z-index: var(--account-popover-layer);
     box-shadow: var(--shadow-popover);
     border: var(--style-border-popover);
     background-color: var(--color-background);
     overflow-y: hidden;
-    opacity: var(--account-popover-transition-opacity);
-    transform: var(--account-popover-transition-transform);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: var(--account-popover-opacity);
+    translate: 0 var(--account-popover-y);
+    transition-property: display, opacity, translate;
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-out-quad);
+    transition-behavior: allow-discrete;
+
+    &:popover-open {
+      --account-popover-opacity: 1;
+      --account-popover-y: 0px;
+    }
+  }
+
+  @starting-style {
+    .account-popover__panel {
+      --account-popover-opacity: 0;
+      --account-popover-y: 20px;
+    }
+    .account-popover__panel:popover-open {
+      --account-popover-opacity: 0;
+      --account-popover-y: 20px;
+    }
   }
 {% endstylesheet %}

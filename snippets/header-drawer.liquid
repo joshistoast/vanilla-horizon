@@ -119,8 +119,10 @@
                       {% liquid
                         assign render_link_image = false
                         if block.settings.menu_style == 'collection_images'
+                          assign catalog_links = link.links | where: 'type', 'catalog_link'
+                          assign collection_list_links = link.links | where: 'type', 'collections_link'
                           assign collection_links = link.links | where: 'type', 'collection_link'
-                          if collection_links.size == link.links.size
+                          if catalog_links.size > 0 or collection_list_links.size > 0 or collection_links.size > 0
                             assign render_link_image = true
                           endif
                         endif
@@ -144,11 +146,7 @@
                               {% endif %}
                             >
                               {% if render_link_image %}
-                                {{
-                                  childlink.object.featured_image
-                                  | image_url: width: 1024
-                                  | image_tag: loading: 'lazy', class: 'menu-drawer__link-image', sizes: 'auto'
-                                }}
+                                {% render 'link-featured-image', link: childlink, class: 'menu-drawer__link-image' %}
                               {% endif %}
                               <span class="menu-drawer__menu-item-text">{{ childlink.title | escape }}</span>
                             </a>
@@ -174,8 +172,10 @@
                   {% liquid
                     assign render_link_image = false
                     if block.settings.menu_style == 'collection_images'
+                      assign catalog_links = link.links | where: 'type', 'catalog_link'
+                      assign collection_list_links = link.links | where: 'type', 'collections_link'
                       assign collection_links = link.links | where: 'type', 'collection_link'
-                      if collection_links.size == link.links.size
+                      if catalog_links.size > 0 or collection_list_links.size > 0 or collection_links.size > 0
                         assign render_link_image = true
                       endif
                     endif
@@ -195,11 +195,7 @@
                           class="menu-drawer__menu-item menu-drawer__menu-item--child menu-drawer__animated-element focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                         >
                           {% if render_link_image %}
-                            {{
-                              childlink.object.featured_image
-                              | image_url: width: 1024
-                              | image_tag: loading: 'lazy', class: 'menu-drawer__link-image', sizes: 'auto'
-                            }}
+                            {% render 'link-featured-image', link: childlink, class: 'menu-drawer__link-image' %}
                           {% endif %}
                           <span class="menu-drawer__menu-item-text">{{ childlink.title | escape }}</span>
                         </a>
@@ -285,8 +281,10 @@
                         {% liquid
                           assign render_link_image = false
                           if block.settings.menu_style == 'collection_images'
+                            assign catalog_links = link.links | where: 'type', 'catalog_link'
+                            assign collection_list_links = link.links | where: 'type', 'collections_link'
                             assign collection_links = link.links | where: 'type', 'collection_link'
-                            if collection_links.size == link.links.size
+                            if catalog_links.size > 0 or collection_list_links.size > 0 or collection_links.size > 0
                               assign render_link_image = true
                             endif
                           endif
@@ -321,11 +319,10 @@
                                   {% endif %}
                                 >
                                   {% if render_link_image and link.levels == 1 %}
-                                    {{
-                                      childlink.object.featured_image
-                                      | image_url: width: 1024
-                                      | image_tag: loading: 'lazy', class: 'menu-drawer__link-image', sizes: 'auto'
-                                    }}
+                                    {% render 'link-featured-image',
+                                      link: childlink,
+                                      class: 'menu-drawer__link-image'
+                                    %}
                                   {% endif %}
                                   <span class="menu-drawer__menu-item-text">
                                     {{- childlink.title | escape -}}
@@ -360,8 +357,10 @@
                                       {% liquid
                                         assign render_link_image = false
                                         if block.settings.menu_style == 'collection_images'
+                                          assign catalog_links = childlink.links | where: 'type', 'catalog_link'
+                                          assign collection_list_links = childlink.links | where: 'type', 'collections_link'
                                           assign collection_links = childlink.links | where: 'type', 'collection_link'
-                                          if collection_links.size == childlink.links.size
+                                          if catalog_links.size > 0 or collection_list_links.size > 0 or collection_links.size > 0
                                             assign render_link_image = true
                                           endif
                                         endif
@@ -385,14 +384,10 @@
                                               {% endif %}
                                             >
                                               {% if render_link_image %}
-                                                {{
-                                                  grandchildlink.object.featured_image
-                                                  | image_url: width: 1024
-                                                  | image_tag:
-                                                    loading: 'lazy',
-                                                    class: 'menu-drawer__link-image',
-                                                    sizes: 'auto'
-                                                }}
+                                                {% render 'link-featured-image',
+                                                  link: grandchildlink,
+                                                  class: 'menu-drawer__link-image'
+                                                %}
                                               {% endif %}
                                               <span class="menu-drawer__menu-item-text">
                                                 {{- grandchildlink.title | escape -}}
@@ -417,8 +412,10 @@
                                   {% liquid
                                     assign render_link_image = false
                                     if block.settings.menu_style == 'collection_images'
+                                      assign catalog_links = childlink.links | where: 'type', 'catalog_link'
+                                      assign collection_list_links = childlink.links | where: 'type', 'collections_link'
                                       assign collection_links = childlink.links | where: 'type', 'collection_link'
-                                      if collection_links.size == childlink.links.size
+                                      if catalog_links.size > 0 or collection_list_links.size > 0 or collection_links.size > 0
                                         assign render_link_image = true
                                       endif
                                     endif
@@ -442,14 +439,10 @@
                                           {% endif %}
                                         >
                                           {% if render_link_image %}
-                                            {{
-                                              grandchildlink.object.featured_image
-                                              | image_url: width: 1024
-                                              | image_tag:
-                                                loading: 'lazy',
-                                                class: 'menu-drawer__link-image',
-                                                sizes: 'auto'
-                                            }}
+                                            {% render 'link-featured-image',
+                                              link: grandchildlink,
+                                              class: 'menu-drawer__link-image'
+                                            %}
                                           {% endif %}
                                           <span class="menu-drawer__menu-item-text">
                                             {{- grandchildlink.title | escape -}}
@@ -558,8 +551,16 @@
         endif
 
         if block.settings.menu_style == 'featured_products'
-          assign collection_linklist = linklist.links | where: 'type', 'collection_link' | first
-          assign top_level_featured_products = collection_linklist.object.products
+          for link in linklist.links
+            if link.type == 'collection_link'
+              assign collection_linklist = link
+              assign top_level_featured_products = collection_linklist.object.products
+              break
+            elsif link.type == 'catalog_link' or link.type == 'collections_link'
+              assign top_level_featured_products = collections.all.products
+              break
+            endif
+          endfor
         endif
       -%}
       {% if top_level_featured_collections.size > 0 or top_level_featured_products.size > 0 %}
@@ -943,6 +944,28 @@
     object-fit: cover;
   }
 
+  /* Fix alignment for collection image mode links without images in drawer */
+  /* Target menu items in grids that have images */
+  .menu-drawer__menu--grid:has(.menu-drawer__link-image) .menu-drawer__menu-item:not(:has(> .menu-drawer__link-image)) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    row-gap: var(--padding-3xs);
+    padding: 0;
+  }
+
+  .menu-drawer__menu--grid:has(.menu-drawer__link-image)
+    .menu-drawer__menu-item:not(:has(> .menu-drawer__link-image))::before {
+    content: '';
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-foreground-muted);
+    opacity: 0.1;
+    border-radius: var(--menu-image-border-radius);
+  }
+
   .menu-drawer__close-button {
     background-color: transparent;
     color: var(--color-foreground);
@@ -994,6 +1017,7 @@
     margin: 0;
     padding-block: var(--padding-lg);
     padding-inline-start: var(--padding-xl);
+    flex-shrink: 0;
   }
 
   .menu-drawer__list-item--divider .menu-drawer__menu-item > .svg-wrapper {
@@ -1089,9 +1113,5 @@
       opacity: 0;
       transform: translateX(-1rem);
     }
-  }
-
-  .menu-drawer__menu-item > .svg-wrapper {
-    flex-shrink: 0;
   }
 {% endstylesheet %}

@@ -35,7 +35,7 @@
     ref="productCardLink"
   >
     {% render 'variant-quick-add', product_resource: product %}
-    {% render 'variant-swatches', product_resource: product %}
+    {% render 'variant-swatches', product_resource: product, has_option_selected: true %}
 
     <product-price>
       {% render 'price', product_resource: product, show_unit_price: true %}

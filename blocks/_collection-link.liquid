@@ -30,7 +30,11 @@
 {% endcapture %}
 
 {% capture image_block %}
-  {% content_for 'block', type: '_image', id: 'image', loading: loading %}
+  {%- liquid
+    assign placeholder_variant = index | modulo: 4 | plus: 1
+    assign placeholder_name = 'collection-apparel-' | append: placeholder_variant
+  -%}
+  {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
 {% endcapture %}
 
 {% if image_only %}

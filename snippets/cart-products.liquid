@@ -99,6 +99,8 @@
                 role="row"
                 class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}"
                 ref="cartItemRows[]"
+                data-parent-key="{{ item.parent_relationship.parent.key }}"
+                data-key="{{ item.key }}"
               >
                 <td
                   class="cart-items__media"

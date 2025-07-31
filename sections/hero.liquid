@@ -155,11 +155,7 @@
   {%- endif -%}
 
   {% if has_media == false and is_transparent %}
-    <placeholder-image
-      class="hero__image"
-      data-block-id="{{ section.id }}"
-      data-type="general"
-    ></placeholder-image>
+    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image' }}
   {%- endif -%}
 {% endcapture %}
 
@@ -191,11 +187,7 @@
     }}
   {% endif %}
   {% if has_media == false and is_transparent %}
-    <placeholder-image
-      class="hero__image"
-      data-block-id="{{ section.id }}"
-      data-type="general"
-    ></placeholder-image>
+    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image' }}
   {% endif %}
 {% endcapture %}
 
@@ -423,7 +415,8 @@
     overflow: hidden;
   }
 
-  .hero__blurred-image img {
+  .hero__blurred-image img,
+  .hero__blurred-image svg {
     position: absolute;
     inset: 0;
     width: 100%;

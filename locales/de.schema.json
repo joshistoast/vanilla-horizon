@@ -37,8 +37,8 @@
     "secondary_button": "Sekundäre Schaltfläche",
     "popovers": "Pop-overs",
     "marquee": "Marquee",
-    "products_carousel": "Produktliste: Karussell",
-    "products_grid": "Produktliste: Raster",
+    "products_carousel": "Vorgestellte Kollektion: Karussell",
+    "products_grid": "Vorgestellte Kollektion: Raster",
     "pull_quote": "Zitat",
     "contact_form": "Kontaktformular",
     "featured_product": "Produkthighlight",
@@ -121,7 +121,7 @@
     "utilities": "Hilfsprogramme",
     "video_section": "Video",
     "spacer": "Abstandhalter",
-    "product_list": "Produktliste",
+    "product_list": "Vorgestellte Kollektion",
     "jumbo_text": "Text im Großformat",
     "search_input": "Sucheingabe",
     "search_results": "Suchergebnisse",
@@ -153,7 +153,7 @@
     "page_layout": "Seitenlayout",
     "policy_list": "Links zu Richtlinien",
     "prices": "Preise",
-    "products_editorial": "Produktliste: Editorial",
+    "products_editorial": "Vorgestellte Kollektion: Redaktionell",
     "social_link": "Social-Media-Link",
     "split_showcase": "Split Showcase",
     "variant_pickers": "Variantenauswahl",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "Hover-Effekt mit zweitem Bild",
     "media": "Medien",
     "product_card_carousel": "Karussell anzeigen",
-    "media_fit": "Medienanpassung"
+    "media_fit": "Medienanpassung",
+    "scroll_speed": "Zeit bis zur nächsten Ankündigung"
   },
   "options": {
     "adapt_to_image": "An Bild anpassen",
@@ -907,7 +908,7 @@
     "pills_usage": "Für angewandte Filter, Rabattcodes und Suchvorschläge"
   },
   "categories": {
-    "product_list": "Produktliste",
+    "product_list": "Vorgestellte Kollektion",
     "basic": "Basic",
     "collection": "Kollektion",
     "collection_list": "Kollektionsliste",

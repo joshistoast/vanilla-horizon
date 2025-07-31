@@ -38,10 +38,10 @@
     "popovers": "Pop-overs",
     "marquee": "Marquee",
     "alternating_content_rows": "Afwisselende rijen",
-    "product_list": "Productlijst",
+    "product_list": "Uitgelichte collectie",
     "spacer": "Opvulling",
-    "products_carousel": "Productlijst: Carrousel",
-    "products_grid": "Productlijst: Raster",
+    "products_carousel": "Uitgelichte collectie: Carrousel",
+    "products_grid": "Uitgelichte collectie: Raster",
     "pull_quote": "Citaat ophalen",
     "contact_form": "Contactformulier",
     "featured_product": "Uitgelichte producten",
@@ -155,7 +155,7 @@
     "policy_list": "Links naar beleid",
     "prices": "Prijzen",
     "product_list_button": "Knop Alles weergeven",
-    "products_editorial": "Productlijst: redactioneel",
+    "products_editorial": "Uitgelichte collectie: Redactioneel",
     "social_link": "Socialmedia-link",
     "split_showcase": "Split showcase",
     "variant_pickers": "Variantkiezers",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "Tweede afbeelding weergeven als je de aanwijzer erboven beweegt",
     "media": "Media",
     "product_card_carousel": "Carrousel weergeven",
-    "media_fit": "Media-aanpassing"
+    "media_fit": "Mediafit",
+    "scroll_speed": "Tijd tot de volgende aankondiging"
   },
   "options": {
     "adapt_to_image": "Aanpassen aan afbeelding",
@@ -907,7 +908,7 @@
     "hover_effects": "Van toepassing op product- en collectiekaarten"
   },
   "categories": {
-    "product_list": "Productlijst",
+    "product_list": "Uitgelichte collectie",
     "basic": "Basis",
     "collection": "Collectie",
     "collection_list": "Collectielijst",

@@ -2,6 +2,8 @@
   Renders an account button.
 
   @param {string} [tag] - The tag to use
+  @param {string} [popover_id] - The id of the popover to target
+  @param {string} [popover_action] - The id of the popover to target
   @param {string} [attributes] - Additional attributes to add to the tag
 {%- enddoc -%}
 
@@ -9,6 +11,11 @@
 <{{ tag }}
   class="account-button header-actions__action"
   aria-label="{{ 'accessibility.account' | t }}"
+  {%- if popover_id -%}
+    popovertarget="{{ popover_id }}"
+    popovertargetaction="{{ popover_action | default: 'toggle' }}"
+  {%- endif -%}
+  ref="trigger"
   {{ attributes }}
 >
   {%- if customer.has_avatar? -%}

@@ -42,10 +42,10 @@
     "contact_form": "お問い合わせフォーム",
     "featured_product": "商品のハイライト",
     "icons_with_text": "テキスト付きアイコン",
-    "product_list": "商品リスト",
+    "product_list": "注目のコレクション",
     "spacer": "スペーサー",
-    "products_carousel": "商品リスト：カルーセル",
-    "products_grid": "商品リスト：グリッド",
+    "products_carousel": "注目のコレクション：カルーセル",
+    "products_grid": "注目のコレクション：グリッド",
     "accelerated_checkout": "簡単なチェックアウト",
     "accordion": "アコーディオン",
     "accordion_row": "アコーディオンの行",
@@ -153,7 +153,7 @@
     "page_layout": "ページレイアウト",
     "policy_list": "ポリシーリンク",
     "prices": "価格",
-    "products_editorial": "商品リスト: エディトリアル",
+    "products_editorial": "注目のコレクション：エディトリアル",
     "social_link": "ソーシャルリンク",
     "split_showcase": "Split showcase",
     "variant_pickers": "バリエーションピッカー",
@@ -490,7 +490,8 @@
     "show_second_image_on_hover": "マウスオーバー時に2番目の画像を表示する",
     "media": "メディア",
     "product_card_carousel": "カルーセルを表示する",
-    "media_fit": "メディアフィット"
+    "media_fit": "適合したメディア",
+    "scroll_speed": "次のお知らせにスクロール"
   },
   "options": {
     "adapt_to_image": "画像に合わせる",
@@ -907,7 +908,7 @@
     "pills_usage": "適用されたフィルター、割引コード、検索候補に使用されます"
   },
   "categories": {
-    "product_list": "商品リスト",
+    "product_list": "注目のコレクション",
     "basic": "Basic Shopify",
     "collection": "コレクション",
     "collection_list": "コレクションリスト",
