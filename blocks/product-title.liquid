@@ -6,7 +6,14 @@
   {% render 'text', fallback_text: product_title, block: block %}
 {% elsif closest.product != blank %}
   {% assign product_title = '<p>' | append: closest.product.title | append: '</p>' %}
-  {% render 'text', fallback_text: product_title, block: block %}
+  <a
+    class="contents user-select-text"
+    ref="productTitleLink"
+    href="{% render 'product-card-variant-url', product: closest.product %}"
+    aria-hidden="true"
+  >
+    {% render 'text', fallback_text: product_title, block: block %}
+  </a>
 {% endif %}
 
 {% schema %}
