@@ -1,7 +1,8 @@
 
+{% assign block_settings = block.settings %}
 
 <accordion-custom
-  {% if block.settings.open_by_default %}
+  {% if block_settings.open_by_default %}
     open-by-default-on-desktop
     open-by-default-on-mobile
   {% endif %}
@@ -13,12 +14,12 @@
   >
     <summary class="details__header">
       {% render 'icon-or-image',
-        icon: block.settings.icon,
-        image_upload: block.settings.image_upload,
-        width: block.settings.width,
+        icon: block_settings.icon,
+        image_upload: block_settings.image_upload,
+        width: block_settings.width,
         class_name: 'details__icon'
       %}
-      {{ block.settings.heading }}
+      {{ block_settings.heading }}
       <span class="svg-wrapper icon-caret icon-animated">
         {{- 'icon-caret.svg' | inline_asset_content -}}
       </span>
