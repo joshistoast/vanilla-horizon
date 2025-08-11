@@ -6,6 +6,8 @@
   @param {object} image - The image object
 {%- enddoc -%}
 
+{%- assign block_settings = block.settings -%}
+
 <img
   srcset="
     {% if image.width >= 350 %}{{ image | image_url: width: 350 }} 350w,{% endif %}
@@ -23,9 +25,9 @@
   class="
     border-style
     blog-post-card__image
-    blog-post-card__image--{{ block.settings.height }}
+    blog-post-card__image--{{ block_settings.height }}
   "
-  style="{% render 'border-override', settings: block.settings %}"
+  style="{% render 'border-override', settings: block_settings %}"
 >
 
 {% stylesheet %}
