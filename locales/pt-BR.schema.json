@@ -493,7 +493,8 @@
     "product_card_carousel": "Mostrar carrossel",
     "media_fit": "Ajuste da mídia",
     "scroll_speed": "Tempo para o próximo comunicado",
-    "show_powered_by_shopify": "Mostrar \"Powered by Shopify\""
+    "show_powered_by_shopify": "Mostrar \"Powered by Shopify\"",
+    "gift_card_form": "Formulário de cartão-presente"
   },
   "options": {
     "adapt_to_image": "Adaptar à imagem",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "Exibe variantes do produto principal",
     "resource_reference_product_media": "Exibe a mídia do produto principal",
     "product_media": "Mídias do produto",
-    "section_link": "Link da seção"
+    "section_link": "Link da seção",
+    "gift_card_form_description": "Os clientes podem enviar cartões-presente para o e-mail do destinatário com uma mensagem pessoal. [Saiba mais](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Compartilhe informações sobre a marca com clientes. Descreva um produto, faça comunicados ou dê as boas-vindas aos clientes na loja.</p>"

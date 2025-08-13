@@ -2083,19 +2083,23 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
 
 .unit-price {
   display: block;
-  font-size: 0.85em;
+  font-size: min(0.85em, var(--font-paragraph--size));
   color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+}
+
+.tax-note.tax-note.tax-note {
+  font-size: min(0.85em, var(--font-paragraph--size));
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+}
+
+product-price.text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) > *:not(.tax-note) {
+  margin-block: 0;
 }
 
 .compare-at-price {
   opacity: 0.4;
   text-decoration-line: line-through;
   text-decoration-thickness: 1.5px;
-}
-
-.tax-note,
-.unit-price {
-  color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
 }
 
 .card-gallery {
@@ -2342,6 +2346,7 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
   color: var(--color-input-text);
   border: none;
   outline: none;
+  font-size: var(--font-paragraph--size);
 
   &:autofill {
     background-color: var(--color-input-background);

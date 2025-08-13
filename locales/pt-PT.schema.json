@@ -493,7 +493,8 @@
     "product_card_carousel": "Mostrar carrossel",
     "media_fit": "Ajuste do conteúdo multimédia",
     "scroll_speed": "Deslocar para o próximo anúncio",
-    "show_powered_by_shopify": "Mostrar \"Powered by Shopify\""
+    "show_powered_by_shopify": "Mostrar \"Powered by Shopify\"",
+    "gift_card_form": "Formulário de cartão de oferta"
   },
   "options": {
     "adapt_to_image": "Adaptar à imagem",
@@ -868,7 +869,8 @@
     "resource_reference_product_media": "Mostra o conteúdo multimédia do produto principal",
     "product_media": "Conteúdo multimédia do produto",
     "manage_store_name": "[Gerir o nome da loja](/admin/settings/general?edit=storeName)",
-    "section_link": "Ligação para a secção"
+    "section_link": "Ligação para a secção",
+    "gift_card_form_description": "Os clientes podem enviar cartões de oferta para o e-mail de um destinatário com uma mensagem pessoal. [Saber mais](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Partilhe informações sobre a sua marca com os clientes. Descreva um produto, faça comunicados ou dê as boas-vindas aos clientes da loja.</p>"

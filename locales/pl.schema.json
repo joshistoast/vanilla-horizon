@@ -493,7 +493,8 @@
     "product_card_carousel": "Wyświetl karuzelę",
     "media_fit": "Dopasowanie multimediów",
     "scroll_speed": "Czas do następnego ogłoszenia",
-    "show_powered_by_shopify": "Pokaż \"Powered by Shopify\""
+    "show_powered_by_shopify": "Pokaż \"Powered by Shopify\"",
+    "gift_card_form": "Formularz karty prezentowej"
   },
   "options": {
     "adapt_to_image": "Dostosuj do obrazu",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "Wyświetla warianty z produktu nadrzędnego",
     "resource_reference_product_media": "Wyświetla multimedia z produktu nadrzędnego",
     "product_media": "Multimedia produktu",
-    "section_link": "Link sekcji"
+    "section_link": "Link sekcji",
+    "gift_card_form_description": "Klienci mogą wysyłać karty prezentowe na adres e-mail odbiorcy wraz z osobistą wiadomością. [Dowiedz się więcej](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Udostępnij klientom informacje o swojej marce. Opisz produkt, udostępnij ogłoszenia lub przywitaj klientów w swoim sklepie.</p>"

@@ -33,7 +33,7 @@
         endif
       endunless
     %}
-                {%- if settings.font_size != blank -%}
+    {%- if settings.font_size != blank -%}
       {%- liquid
         assign font_size_rem = settings.font_size | split: 'rem' | first | times: 1.0
         assign fluid_size_cutoff_rem = 3.0

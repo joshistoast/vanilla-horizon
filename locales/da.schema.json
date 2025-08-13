@@ -493,7 +493,8 @@
     "product_card_carousel": "Vis karrusel",
     "media_fit": "Medietilpasning",
     "scroll_speed": "Tid til næste meddelelse",
-    "show_powered_by_shopify": "Vis \"Powered by Shopify\""
+    "show_powered_by_shopify": "Vis \"Powered by Shopify\"",
+    "gift_card_form": "Gavekortformular"
   },
   "options": {
     "adapt_to_image": "Tilpas til billede",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "Viser varianter fra overordnet produkt",
     "resource_reference_product_media": "Viser medie fra overordnet produkt",
     "product_media": "Produktmedier",
-    "section_link": "Afsnitslink"
+    "section_link": "Afsnitslink",
+    "gift_card_form_description": "Kunder kan sende gavekort til en modtagers mailadresse med en personlig besked. [Få mere at vide](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Del oplysninger om dit brand med dine kunder. Beskriv et produkt, del meddelelser, eller byd velkommen til din butik.</p>"

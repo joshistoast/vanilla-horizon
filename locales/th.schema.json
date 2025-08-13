@@ -493,7 +493,8 @@
     "product_card_carousel": "แสดงภาพสไลด์",
     "media_fit": "ปรับขนาดสื่อให้พอดี",
     "scroll_speed": "ระยะเวลาจนถึงการประกาศครั้งถัดไป",
-    "show_powered_by_shopify": "แสดง \"Powered by Shopify\""
+    "show_powered_by_shopify": "แสดง \"Powered by Shopify\"",
+    "gift_card_form": "แบบฟอร์มบัตรของขวัญ"
   },
   "options": {
     "adapt_to_image": "ปรับตามรูปภาพ",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "แสดงตัวเลือกสินค้าจากสินค้าหลัก",
     "product_media": "สื่อประกอบสินค้า",
     "resource_reference_product_media": "แสดงสื่อจากสินค้าหลัก",
-    "section_link": "ลิงก์ไปยังส่วน"
+    "section_link": "ลิงก์ไปยังส่วน",
+    "gift_card_form_description": "ลูกค้าสามารถส่งบัตรของขวัญไปยังอีเมลของผู้รับพร้อมข้อความส่วนตัวได้ [ดูข้อมูลเพิ่มเติม](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>แชร์ข้อมูลเกี่ยวกับแบรนด์ของคุณให้ลูกค้าทราบ โดยอธิบายคุณสมบัติของสินค้า แชร์ประกาศ หรือกล่าวต้อนรับลูกค้าสู่ร้านค้าของคุณ</p>"

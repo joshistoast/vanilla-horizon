@@ -32,7 +32,6 @@
       on:blur="/deactivate"
       on:pointerenter="/activate"
       on:pointerleave="/deactivate"
-      on:touchstart="/handleTouchStart"
     >
       <a
         href="{{ link.url }}"
@@ -74,7 +73,6 @@
     on:blur="/deactivate"
     on:pointerenter="/activate"
     on:pointerleave="/deactivate"
-    on:touchstart="/handleTouchStart"
   >
     <button role="menuitem" class="button menu-list__link button-unstyled">
       <span class="menu-list__link-title">{{ 'actions.more' | t }}</span>
