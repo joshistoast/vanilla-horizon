@@ -493,7 +493,8 @@
     "show_second_image_on_hover": "Afficher la deuxième image au passage de la souris",
     "media_fit": "Taille des supports multimédia",
     "scroll_speed": "Délai avant l’annonce suivante",
-    "show_powered_by_shopify": "Afficher « Propulsé par Shopify »"
+    "show_powered_by_shopify": "Afficher « Propulsé par Shopify »",
+    "gift_card_form": "Formulaire de carte-cadeau"
   },
   "options": {
     "adapt_to_image": "Adapter à l’image",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "Affiche les variantes à partir du produit parent",
     "resource_reference_product_media": "Affiche les supports multimédias du produit parent",
     "product_media": "Support multimédia du produit",
-    "section_link": "Lien vers la section"
+    "section_link": "Lien vers la section",
+    "gift_card_form_description": "Les clients peuvent envoyer des cartes-cadeaux à l’adresse e-mail d’un destinataire avec un message personnel. [En savoir plus](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Partagez des informations sur votre marque. Décrivez un produit, partagez des annonces ou souhaitez la bienvenue à vos clients dans votre boutique.</p>"

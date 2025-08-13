@@ -493,7 +493,8 @@
     "product_card_carousel": "Mostra carosello",
     "media_fit": "Adattamento dei contenuti multimediali",
     "scroll_speed": "Scorri al prossimo annuncio",
-    "show_powered_by_shopify": "Mostrare la frase \"Powered by Shopify\"."
+    "show_powered_by_shopify": "Mostrare la frase \"Powered by Shopify\".",
+    "gift_card_form": "Modulo buono regalo"
   },
   "options": {
     "adapt_to_image": "Adatta a immagine",
@@ -867,7 +868,8 @@
     "resource_reference_product_variant_picker": "Visualizza le varianti dal prodotto padre",
     "resource_reference_product_media": "Visualizza i contenuti multimediali dal prodotto padre",
     "product_media": "Contenuti multimediali prodotto",
-    "section_link": "Link alla sezione"
+    "section_link": "Link alla sezione",
+    "gift_card_form_description": "I clienti possono inviare buoni regalo all'indirizzo email del destinatario con un messaggio personale. [Maggiori informazioni](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Condividi informazioni sul tuo brand con i clienti. Descrivi un prodotto, condividi gli annunci o dai il benvenuto ai clienti nel tuo negozio.</p>"

@@ -64,6 +64,9 @@
           ref="variantId"
           value="{{ product.selected_or_first_available_variant.id }}"
         >
+        {%- if block_settings.gift_card_form and product.gift_card? -%}
+          {%- render 'gift-card-recipient-form', product: product, form: form, section: section, block: block -%}
+        {%- endif -%}
         <div
           class="product-form-buttons spacing-style{% if block_settings.stacking %} product-form-buttons--stacked{% endif %}"
           style="{% render 'spacing-style', settings: block_settings %}"
@@ -76,18 +79,21 @@
             can_add_to_cart: can_add_to_cart,
             add_to_cart_text: add_to_cart_text
           %}
-          <span
-            class="product-form-text__error hidden"
-            ref="addToCartTextError"
-          >
-            <span class="svg-wrapper product-form-icon--error">
-              {{- 'icon-error.svg' | inline_asset_content -}}
+          {%- unless block_settings.gift_card_form and product.gift_card? -%}
+            <span
+              class="product-form-text__error hidden"
+              ref="addToCartTextError"
+            >
+              <span class="svg-wrapper product-form-icon--error">
+                {{- 'icon-error.svg' | inline_asset_content -}}
+              </span>
             </span>
-          </span>
+          {%- endunless -%}
           {% content_for 'block',
             type: 'accelerated-checkout',
             id: 'accelerated-checkout',
-            can_add_to_cart: can_add_to_cart
+            can_add_to_cart: can_add_to_cart,
+            form_obj: form
           %}
         </div>
       {%- endform -%}
@@ -395,6 +401,16 @@
       "id": "show_pickup_availability",
       "label": "t:settings.show_pickup_availability",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_card_form",
+      "label": "t:settings.gift_card_form",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "t:content.gift_card_form_description"
     },
     {
       "type": "header",

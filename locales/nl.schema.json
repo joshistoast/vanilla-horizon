@@ -493,7 +493,8 @@
     "product_card_carousel": "Carrousel weergeven",
     "media_fit": "Mediafit",
     "scroll_speed": "Tijd tot de volgende aankondiging",
-    "show_powered_by_shopify": "\"Powered by Shopify\" weergeven"
+    "show_powered_by_shopify": "\"Powered by Shopify\" weergeven",
+    "gift_card_form": "Cadeaubonformulier"
   },
   "options": {
     "adapt_to_image": "Aanpassen aan afbeelding",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "Geeft varianten uit bovenliggend product weer",
     "resource_reference_product_media": "Geeft media van bovenliggend product weer",
     "product_media": "Productmedia",
-    "section_link": "Sectielink"
+    "section_link": "Sectielink",
+    "gift_card_form_description": "Klanten kunnen cadeaubonnen met een persoonlijk bericht naar het e-mailadres van een ontvanger sturen. [Meer informatie](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Deel informatie over je merk met klanten. Beschrijf een product, doe aankondigingen of verwelkom klanten in je winkel.</p>"

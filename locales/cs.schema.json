@@ -493,7 +493,8 @@
     "product_card_carousel": "Zobrazit karusel",
     "media_fit": "Přizpůsobení multimédií",
     "scroll_speed": "Přejít na další oznámení",
-    "show_powered_by_shopify": "Zobrazit \"Powered by Shopify\""
+    "show_powered_by_shopify": "Zobrazit \"Powered by Shopify\"",
+    "gift_card_form": "Formulář dárkové karty"
   },
   "options": {
     "adapt_to_image": "Přizpůsobení obrázku",
@@ -868,7 +869,8 @@
     "resource_reference_product_media": "Zobrazuje média z nadřazeného produktu",
     "product_media": "Média produktu",
     "manage_store_name": "[Spravovat název obchodu](/admin/settings/general?edit=storeName)",
-    "section_link": "Odkaz na sekci"
+    "section_link": "Odkaz na sekci",
+    "gift_card_form_description": "Zákazníci můžou zaslat dárkové karty s osobním vzkazem na e-mail příjemce. [Zjistit více](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Informujte zákazníky o své značce. Zároveň můžete popsat některý z produktů, oznámit důležité informace nebo přivítat zákazníky ve svém obchodě.</p>"

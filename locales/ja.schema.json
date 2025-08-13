@@ -493,7 +493,8 @@
     "product_card_carousel": "カルーセルを表示する",
     "media_fit": "適合したメディア",
     "scroll_speed": "次のお知らせにスクロール",
-    "show_powered_by_shopify": "「Powered by Shopify」を表示"
+    "show_powered_by_shopify": "「Powered by Shopify」を表示",
+    "gift_card_form": "ギフトカード形式"
   },
   "options": {
     "adapt_to_image": "画像に合わせる",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "親商品のバリエーションを表示する",
     "resource_reference_product_media": "親商品のメディアを表示",
     "product_media": "商品メディア",
-    "section_link": "セクションリンク"
+    "section_link": "セクションリンク",
+    "gift_card_form_description": "お客様は受取人に、個人的なメッセージとともにギフトカードを添えて送ることができます。[詳しくはこちら](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>ブランドに関する情報をお客様と共有します。商品を説明したり、告知をしたり、ストアへのお客様を歓迎したりします。</p>"

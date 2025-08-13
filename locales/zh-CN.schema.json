@@ -493,7 +493,8 @@
     "product_card_carousel": "显示轮播",
     "media_fit": "媒体文件适应",
     "scroll_speed": "下次公告时间",
-    "show_powered_by_shopify": "显示\"由 Shopify 提供技术支持\""
+    "show_powered_by_shopify": "显示\"由 Shopify 提供技术支持\"",
+    "gift_card_form": "礼品卡"
   },
   "options": {
     "adapt_to_image": "适应图片",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "显示父产品的多属性",
     "resource_reference_product_media": "显示父产品的媒体文件",
     "product_media": "产品媒体文件",
-    "section_link": "分区链接"
+    "section_link": "分区链接",
+    "gift_card_form_description": "客户可通过私人消息将礼品卡发送至收件人电子邮件。[详细了解](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>与客户分享有关您品牌的信息。描述产品、发布公告或欢迎客户访问您的商店。</p>"

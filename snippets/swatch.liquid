@@ -21,7 +21,7 @@
   elsif swatch.color
     assign swatch_value = 'rgb(' | append: swatch.color.rgb | append: ')'
   endif
-  assign classes =
+
   case mode
     when 'unscaled'
       assign extra_classes = ' swatch--unscaled'

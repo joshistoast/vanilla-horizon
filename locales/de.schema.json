@@ -493,7 +493,8 @@
     "product_card_carousel": "Karussell anzeigen",
     "media_fit": "Medienanpassung",
     "scroll_speed": "Zeit bis zur nächsten Ankündigung",
-    "show_powered_by_shopify": "\"Powered by Shopify\" anzeigen"
+    "show_powered_by_shopify": "\"Powered by Shopify\" anzeigen",
+    "gift_card_form": "Gutscheinformular"
   },
   "options": {
     "adapt_to_image": "An Bild anpassen",
@@ -868,7 +869,8 @@
     "resource_reference_product_title": "Zeigt Titel aus übergeordnetem Produkt an",
     "resource_reference_product_variant_picker": "Zeigt Varianten aus übergeordnetem Produkt an",
     "product_media": "Produktmedien",
-    "section_link": "Abschnitts-Link"
+    "section_link": "Abschnitts-Link",
+    "gift_card_form_description": "Kunden können Gutscheine per E-Mail mit einer persönlichen Nachricht an den Empfänger senden. [Mehr Informationen](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Teile Infos über deine Marke mit deinen Kunden. Beschreibe ein Produkt, kündige etwas an oder heiße Kunden willkommen.</p>"

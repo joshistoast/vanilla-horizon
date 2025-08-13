@@ -469,7 +469,7 @@
     height: var(--pill-label-height);
     width: 100%;
     padding-inline: var(--pill-label-padding-inline);
-    color: rgb(var(---pill-label-color-rgb));
+    color: rgb(var(--pill-label-color-rgb));
     background-color: rgb(var(--pill-label-background-color-rgb));
     cursor: pointer;
     transition: color var(--animation-speed) var(--animation-easing),
@@ -483,8 +483,8 @@
 
   .facets__pill-input {
     &:checked + .facets__pill-label {
-      --pill-label-color: var(--color-background);
-      --pill-label-background-color: var(--color-foreground);
+      --pill-label-color-rgb: var(--color-background-rgb);
+      --pill-label-background-color-rgb: var(--color-foreground-rgb);
       --pill-label-border-opacity: 0;
 
       font-weight: 500;

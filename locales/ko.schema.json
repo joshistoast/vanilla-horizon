@@ -493,7 +493,8 @@
     "product_card_carousel": "캐러셀 표시",
     "media_fit": "미디어 맞춤",
     "scroll_speed": "다음 공지사항으로 스크롤",
-    "show_powered_by_shopify": "\"Powered by Shopify\" 표시"
+    "show_powered_by_shopify": "\"Powered by Shopify\" 표시",
+    "gift_card_form": "기프트 카드 양식"
   },
   "options": {
     "adapt_to_image": "이미지에 맞춤",
@@ -867,7 +868,8 @@
     "resource_reference_product_variant_picker": "상위 제품의 이형 상품을 표시합니다",
     "resource_reference_product_media": "상위 제품의 미디어를 표시합니다",
     "product_media": "제품 미디어",
-    "section_link": "섹션 링크"
+    "section_link": "섹션 링크",
+    "gift_card_form_description": "고객은 수신자의 이메일로 개인 메시지와 함께 기프트 카드를 보낼 수 있습니다. [자세히 알아보기](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>고객과 브랜드 정보를 공유하세요. 제품을 설명하고 공지 사항을 제공하고, 스토어를 방문하는 고객을 환영할 수 있습니다.</p>"

@@ -493,7 +493,8 @@
     "show_second_image_on_hover": "Üzerine gelindiğinde ikinci görseli göster",
     "media_fit": "Medya sığdırma",
     "scroll_speed": "Sonraki duyuruya kaydır",
-    "show_powered_by_shopify": "\"Shopify tarafından desteklenmektedir\" ibaresini göster"
+    "show_powered_by_shopify": "\"Shopify tarafından desteklenmektedir\" ibaresini göster",
+    "gift_card_form": "Hediye kartı formu"
   },
   "options": {
     "adapt_to_image": "Görsele uyarla",
@@ -867,7 +868,8 @@
     "resource_reference_product_variant_picker": "Ana üründeki varyasyonları görüntüler",
     "resource_reference_product_media": "Ana üründeki medyayı görüntüler",
     "product_media": "Ürün medyası",
-    "section_link": "Bölüm bağlantısı"
+    "section_link": "Bölüm bağlantısı",
+    "gift_card_form_description": "Müşteriler kişisel mesaj ekleyerek alıcının e-posta adresine hediye kartı gönderebilir. [Daha fazla bilgi edinin](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Müşterilerinizle markanız hakkında bilgi paylaşın. Ürün açıklaması girin, duyuru paylaşın veya mağazanıza gelen müşterileri karşılayın.</p>"

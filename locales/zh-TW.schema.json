@@ -493,7 +493,8 @@
     "product_card_carousel": "顯示輪播",
     "media_fit": "多媒體檔案最適大小",
     "scroll_speed": "捲動到下一個公告",
-    "show_powered_by_shopify": "顯示「由 Shopify 提供技術支援」"
+    "show_powered_by_shopify": "顯示「由 Shopify 提供技術支援」",
+    "gift_card_form": "禮品卡表單"
   },
   "options": {
     "adapt_to_image": "配合圖片",
@@ -868,7 +869,8 @@
     "resource_reference_product_variant_picker": "顯示上層商品的子類",
     "resource_reference_product_media": "顯示上層商品的多媒體檔案",
     "product_media": "商品多媒體檔案",
-    "section_link": "區段連結"
+    "section_link": "區段連結",
+    "gift_card_form_description": "顧客將禮品卡傳送至收件人電子郵件時可附上個人化訊息。[瞭解詳情](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>和顧客分享品牌資訊、描述商品、進行公告，或歡迎顧客光臨您的商店。</p>"

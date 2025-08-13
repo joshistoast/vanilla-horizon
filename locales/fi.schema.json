@@ -493,7 +493,8 @@
     "show_second_image_on_hover": "Näytä toinen kuva osoitettaessa",
     "media_fit": "Median sovitus",
     "scroll_speed": "Aikaa seuraavaan ilmoitukseen",
-    "show_powered_by_shopify": "Näytä Powered by Shopify"
+    "show_powered_by_shopify": "Näytä Powered by Shopify",
+    "gift_card_form": "Lahjakorttilomake"
   },
   "options": {
     "adapt_to_image": "Sovita kuvaan",
@@ -867,7 +868,8 @@
     "resource_reference_product_variant_picker": "Esittää ylätason tuotteen versioita",
     "resource_reference_product_media": "Näyttää mediaa ylätason tuotteesta",
     "product_media": "Tuotemediat",
-    "section_link": "Osiolinkki"
+    "section_link": "Osiolinkki",
+    "gift_card_form_description": "Asiakkaat voivat lähettää lahjakortteja vastaanottajille sähköpostitse henkilökohtaisen viestin kera. [Lue lisää](https://help.shopify.com/manual/products/gift-card-products)"
   },
   "html_defaults": {
     "share_information_about_your": "<p>Kerro brändiäsi koskevia tietoja asiakkaillesi. Kuvaile tuotetta, jaa ilmoituksia tai toivota asiakkaat tervetulleiksi kauppaasi.</p>"

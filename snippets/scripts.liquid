@@ -195,6 +195,11 @@
   type="module"
   fetchpriority="low"
 ></script>
+<script
+  src="{{ 'gift-card-recipient-form.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
 
 {% if localization.available_countries.size > 1 or localization.available_languages.size > 1 %}
   <script
@@ -242,6 +247,9 @@
     translations: {
       placeholder_image: `{{ 'content.placeholder_image' | t }}`,
       added: `{{ 'actions.added' | t }}`,
+      recipient_form_fields_visible: `{{ 'content.recipient_form_fields_visible' | t }}`,
+      recipient_form_fields_hidden: `{{ 'content.recipient_form_fields_hidden' | t }}`,
+      recipient_form_error: `{{ 'content.recipient_form_error' | t }}`,
     },
     routes: {
       cart_add_url: '{{ routes.cart_add_url | append: '.js' }}',

@@ -152,13 +152,17 @@ export class CartErrorEvent extends Event {
    * Creates a new CartErrorEvent
    * @param {string} sourceId - The id of the element the action was triggered from
    * @param {string} message - A message from the server response
+   * @param {Object} description - Description from the server response
+   * @param {Object} errors - Errors from the server response
    */
-  constructor(sourceId, message) {
+  constructor(sourceId, message, description, errors) {
     super(ThemeEvents.cartError, { bubbles: true });
     this.detail = {
       sourceId,
       data: {
         message,
+        errors,
+        description,
       },
     };
   }

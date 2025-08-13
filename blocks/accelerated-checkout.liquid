@@ -5,9 +5,10 @@
   Intended for product-form.liquid block.
 
   @param {string} can_add_to_cart - Whether the product can be added to the cart
+  @param form_obj - The form object
 
   @example
-  {% content_for 'block', type: 'accelerated-checkout', id: 'accelerated-checkout', can_add_to_cart: can_add_to_cart %}
+  {% content_for 'block', type: 'accelerated-checkout', id: 'accelerated-checkout', can_add_to_cart: can_add_to_cart, form_obj: form %}
 {%- enddoc -%}
 
 {% liquid
@@ -28,10 +29,8 @@
     hidden
   {% endunless %}
 >
-  {% if product != blank %}
-    {%- form 'product', product -%}
-      {{ form | payment_button }}
-    {%- endform -%}
+  {% if product != blank and form_obj != blank %}
+    {{ form_obj | payment_button }}
   {% endif %}
 </div>
 

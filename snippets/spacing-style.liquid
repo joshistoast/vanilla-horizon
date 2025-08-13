@@ -1,49 +1,54 @@
-{%- comment -%}
+{%- doc -%}
+  Renders CSS variables for spacing (padding and margin) styles with responsive scaling.
   Intended for blocks and sections that provide values for all the referenced settings.
 
-  <div class="spacing-style" style="{%  render 'spacing-style', settings: section.settings %}">
+  @param {object} settings - The block or section settings object containing spacing values
+  @param {string} [suffix] - Optional suffix to append to setting keys (e.g., '-mobile')
+  @param {number} [scale_min] - Value above which spacing scaling will be applied. Default: 20
+  @param {boolean} [disable_scaling] - If true, disables scaling and outputs original values. Default: false
 
-   Accepts:
-      settings: {block.settings || section.settings}
-      suffix: {string}
-      scale_min {number}: Value above which spacing scaling will be applied. Default: 20
-      disable_scaling {boolean}: Disable scaling. Default: false
-{%- endcomment -%}
+  @example
+  <div class="spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+{%- enddoc -%}
 {%- liquid
-  assign properties = 'padding,margin' | split: ','
-  assign directions = 'block,inline' | split: ','
-  assign edges = ',start,end' | split: ','
   assign min = scale_min | default: 20
+  assign scaling_enabled = true
+  if disable_scaling == true
+    assign scaling_enabled = false
+  endif
+
+  if suffix != blank
+    assign suffix_with_dash = suffix | prepend: '-'
+  endif
+
+  assign keys = 'padding-block,padding-block-start,padding-block-end,padding-inline,padding-inline-start,padding-inline-end,margin-block,margin-block-start,margin-block-end,margin-inline,margin-inline-start,margin-inline-end' | split: ','
+
+  for key in keys
+    if suffix != blank
+      assign lookup_key = key | append: suffix_with_dash
+    else
+      assign lookup_key = key
+    endif
+
+    assign value = settings[lookup_key]
+
+    if value != blank
+      echo '--'
+      echo key
+      echo ': '
+
+      if scaling_enabled and value > min
+        echo 'max('
+        echo min
+        echo 'px, calc(var(--spacing-scale) * '
+        echo value
+        echo 'px))'
+      else
+        echo value
+        echo 'px'
+      endif
+
+      echo ';'
+    endif
+  endfor
 -%}
-{%- capture variables -%}
-  {%- for property in properties -%}
-    {%- for direction in directions -%}
-      {%- for edge in edges -%}
-        {%-liquid
-          assign name = property | append: '-' | append: direction
-
-          if edge != blank
-            assign name = name | append: '-' | append: edge
-          endif
-
-          assign setting_id = name
-
-          if suffix != blank
-            assign setting_id = setting_id | append: '-' | append: suffix
-          endif
-
-          assign value = settings[setting_id]
-         -%}
-
-        {%- if value != blank -%}
-          {%- if disable_scaling != true and value > min -%}
-            --{{ name }}: max({{ min }}px, calc(var(--spacing-scale) * {{ value }}px));
-          {%- else -%}
-            --{{ name }}: {{ value }}px;
-          {%- endif -%}
-        {%- endif -%}
-      {%- endfor -%}
-    {%- endfor -%}
-  {%- endfor -%}
-{%- endcapture -%}
-{{- variables | strip | strip_newlines -}}
