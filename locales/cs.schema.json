@@ -35,9 +35,9 @@
     "inputs": "Vstupy",
     "primary_button": "Primární tlačítko",
     "secondary_button": "Sekundární tlačítko",
-    "popovers": "Místní okna",
-    "products_carousel": "Doporučená kolekce: Karusel",
-    "products_grid": "Doporučená kolekce: Mřížka",
+    "popovers_and_modals": "Místní okna a modály",
+    "products_carousel": "Propagovaná kolekce: karusel",
+    "products_grid": "Propagovaná kolekce: mřížka",
     "marquee": "Běžící text",
     "alternating_content_rows": "Střídavé řádky",
     "pull_quote": "Vytažený citát",
@@ -121,7 +121,7 @@
     "faq_section": "Nejčastější dotazy",
     "hero": "Hero (hlavní banner)",
     "jumbo_text": "Text Jumbo",
-    "product_list": "Doporučená kolekce",
+    "product_list": "Propagovaná kolekce",
     "spacer": "Rozestup",
     "view_all_button": "Zobrazit vše",
     "video_section": "Video",
@@ -153,7 +153,7 @@
     "page_layout": "Rozvržení stránky",
     "policy_list": "Odkazy na zásady",
     "prices": "Ceny",
-    "products_editorial": "Doporučená kolekce: Úvodník",
+    "products_editorial": "Propagovaná kolekce: úvodník",
     "social_link": "Odkaz na sociální sítě",
     "split_showcase": "Rozdělená prezentace",
     "variant_pickers": "Výběry varianty",
@@ -163,7 +163,10 @@
     "product_inventory": "Skladové zásoby produktu",
     "pills": "Kulaté přepínače",
     "description": "Popis",
-    "featured_image": "Propagovaný obrázek"
+    "featured_image": "Propagovaný obrázek",
+    "multicolumn": "Vícesloupec",
+    "rich_text_section": "Formát RTF",
+    "product_custom_property": "Zvláštní pokyny"
   },
   "settings": {
     "alignment": "Zarovnání",
@@ -492,9 +495,34 @@
     "media": "Média",
     "product_card_carousel": "Zobrazit karusel",
     "media_fit": "Přizpůsobení multimédií",
-    "scroll_speed": "Přejít na další oznámení",
-    "show_powered_by_shopify": "Zobrazit \"Powered by Shopify\"",
-    "gift_card_form": "Formulář dárkové karty"
+    "scroll_speed": "Čas do dalšího oznámení",
+    "show_powered_by_shopify": "Zobrazit „Powered by Shopify“",
+    "gift_card_form": "Formulář dárkové karty",
+    "seller_note_open_by_default": "Otevřít poznámku pro prodejce ve výchozím nastavení",
+    "add_to_cart_animation": "Přidat do košíku",
+    "product_custom_property": {
+      "heading": "Nadpis",
+      "description": "Popis",
+      "key": "Název vlastnosti",
+      "key_info": "Musí být jedinečný pro každý blok. Zobrazuje se v košíku, při pokladně a v detailech objednávky.",
+      "placeholder_text": "Zástupný text",
+      "default_heading": "Přizpůsobte svůj produkt",
+      "default_placeholder": "Zadejte zvláštní pokyny",
+      "default_property_key": "Zvláštní pokyny",
+      "max_length": "Maximální počet znaků",
+      "required": "Vstup je nutný pro přidání položky do košíku",
+      "input_type": "Typ vstupu",
+      "input_type_text": "Text",
+      "input_type_checkbox": "Zaškrtávací pole",
+      "content_settings": "Nastavení obsahu",
+      "buyers_input": "Vstup kupujícího",
+      "checkbox_label": "Popisek zaškrtávacího pole",
+      "default_checkbox_label": "Zahrnout dárkové balení",
+      "heading_preset": "Nadpis",
+      "description_preset": "Popis",
+      "input_preset": "Vstup",
+      "checkbox_preset": "Popisek zaškrtávacího pole"
+    }
   },
   "options": {
     "adapt_to_image": "Přizpůsobení obrázku",
@@ -838,7 +866,6 @@
     "carousel": "Karusel",
     "colors": "Barvy",
     "collection_page": "Stránka s kolekcemi",
-    "copyright_info": "Zjistěte, jak [upravit své prohlášení o autorských právech ](https://help.shopify.com/manual/online-store/themes/customizing-themes/remove-powered-by-shopify-message)",
     "customer_account": "Zákaznický účet",
     "edit_empty_state_collection_in_theme_settings": "Prázdné kolekce upravujte v [nastavení motivu](/editor?context=theme&category=search)",
     "home_page": "Domovská stránka",
@@ -870,7 +897,9 @@
     "product_media": "Média produktu",
     "manage_store_name": "[Spravovat název obchodu](/admin/settings/general?edit=storeName)",
     "section_link": "Odkaz na sekci",
-    "gift_card_form_description": "Zákazníci můžou zaslat dárkové karty s osobním vzkazem na e-mail příjemce. [Zjistit více](https://help.shopify.com/manual/products/gift-card-products)"
+    "gift_card_form_description": "Zákazníci můžou zaslat dárkové karty s osobním vzkazem na e-mail příjemce. [Zjistit více](https://help.shopify.com/manual/products/gift-card-products)",
+    "heading": "Nadpis",
+    "resource_reference_product_custom_property": "Přidejte přizpůsobitelná vstupní pole pro shromažďování vlastních informací, které budou přidány k této položce objednávky a později viditelné v jejích podrobnostech."
   },
   "html_defaults": {
     "share_information_about_your": "<p>Informujte zákazníky o své značce. Zároveň můžete popsat některý z produktů, oznámit důležité informace nebo přivítat zákazníky ve svém obchodě.</p>"
@@ -909,10 +938,11 @@
     "custom_liquid": "Přidejte fragmenty aplikací nebo jiný kód a vytvořte pokročilá přizpůsobení. [Zjistit více](https://shopify.dev/docs/api/liquid)",
     "applies_on_image_only": "Platí pouze pro obrázky",
     "hover_effects": "Platí pro karty produktů a kolekcí",
-    "pills_usage": "Používá se pro použité filtry, slevové kódy a návrhy vyhledávání"
+    "pills_usage": "Používá se pro použité filtry, slevové kódy a návrhy vyhledávání",
+    "hide_logo_on_home_page_help": "Pokud je aktivní plovoucí záhlaví, logo zůstane viditelné."
   },
   "categories": {
-    "product_list": "Doporučená kolekce",
+    "product_list": "Propagovaná kolekce",
     "basic": "Basic",
     "collection": "Kolekce",
     "collection_list": "Seznam kolekcí",

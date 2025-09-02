@@ -6,6 +6,11 @@
   style="{% render 'size-style', settings: block_settings %}{% render 'spacing-style', settings: block_settings %}"
   {{ block.shopify_attributes }}
 >
+  {% if block_settings.heading != blank %}
+    <div class="email-signup__heading {{ block_settings.heading_preset }}">
+      {{ block_settings.heading | escape }}
+    </div>
+  {% endif %}
   {%- form 'customer', class: 'email-signup__form spacing-style' %}
     <div
       class="email-signup__input-group {% if block_settings.inherit_color_scheme == false %}color-{{ block_settings.color_scheme }}{% endif %}"
@@ -97,6 +102,10 @@
     @media screen and (max-width: 749px) {
       width: 100%;
     }
+  }
+
+  .email-signup__heading {
+    padding-block: var(--padding-sm);
   }
 
   .email-signup__form {
@@ -324,6 +333,56 @@
       "id": "inherit_color_scheme",
       "label": "t:settings.inherit_color_scheme",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.text"
+    },
+    {
+      "type": "select",
+      "id": "heading_preset",
+      "label": "t:settings.type_preset",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "h3",
+      "info": "t:info.edit_presets_in_theme_settings"
     },
     {
       "type": "color_scheme",

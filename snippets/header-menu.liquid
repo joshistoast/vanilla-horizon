@@ -35,6 +35,7 @@
     >
       <a
         href="{{ link.url }}"
+        data-skip-node-update="true"
         class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
         {%- if link.links != blank -%}
           aria-controls="submenu-{{ forloop.index }}"
@@ -54,6 +55,7 @@
           >
             {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
             {% render 'mega-menu',
+              section: section,
               parent_link: link,
               id: list_id,
               menu_content_type: menu_content_type,

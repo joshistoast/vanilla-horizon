@@ -87,9 +87,6 @@
   </div>
 {% elsif plain_text != blank %}
   <{{ element }} {{ attributes }}>
-    {% comment %}
-      Not using block_settings.text here because live replacement in editor doesn't work as well.
-    {% endcomment %}
     {{ block.settings.text }}
   </{{ element }}>
 {% endif %}

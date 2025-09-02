@@ -39,7 +39,9 @@
       {% if settings.show_cart_note %}
         {% render 'cart-note' %}
       {% endif %}
-
+      {% if settings.show_cart_note and settings.show_add_discount_code %}
+        <div class="cart-actions__divider"></div>
+      {% endif %}
       {% if settings.show_add_discount_code %}
         {% render 'cart-discount', section_id: section.id %}
       {% endif %}
@@ -108,10 +110,14 @@
   .cart-actions {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-2xs);
+    gap: var(--gap-sm);
     border-block: 1px solid var(--color-border);
     padding-block: var(--padding-sm);
     margin-block-start: var(--margin-3xs);
+  }
+
+  .cart-actions__divider {
+    border-block-start: 1px solid var(--color-border);
   }
 
   .cart__summary-totals:not(:has(.cart-actions)) {

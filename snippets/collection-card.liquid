@@ -37,6 +37,9 @@
     {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}
   "
   data-block-id="{{ block.id }}"
+  {% if onboarding %}
+    data-placeholder="true"
+  {% endif %}
   style="
     {% render 'border-override', settings: block_settings %}
     --horizontal-alignment: {{ block_settings.horizontal_alignment }};

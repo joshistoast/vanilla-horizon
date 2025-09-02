@@ -63,6 +63,7 @@
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
+          pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
           value="{{ form.email }}"
           {% if form.errors contains 'email' %}
             aria-invalid="true"
@@ -362,14 +363,30 @@
       outline-color: var(--color-input-background);
     }
   }
-  /* Date picker calendar icon cursor */
+
+  /* Date picker calendar icon
+   * Safari doesn't show the icon and Firefox correctly applies the color from the input field.
+   * Webkit browsers need the mask-image trick to use the correct icon color.
+   */
   .field--send-on .recipient-fields__input::-webkit-calendar-picker-indicator {
     cursor: pointer;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' %3E%3Cg%3E%3Cpath d='M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-image: none;
+    background-color: currentColor;
+    mask-type: match-source;
   }
 
   /* For Webkit browsers - text cursor for input area */
   .field--send-on .recipient-fields__input::-webkit-datetime-edit {
     cursor: text;
+  }
+
+  .field--send-on .recipient-fields__input::-webkit-datetime-edit-year-field,
+  .field--send-on .recipient-fields__input::-webkit-datetime-edit-month-field,
+  .field--send-on .recipient-fields__input::-webkit-datetime-edit-day-field {
+    /* Override the disabled color */
+    color: var(--color-input-text);
   }
 
   /* Fallback for other browsers */
@@ -382,10 +399,5 @@
     .field--send-on .recipient-fields__input {
       cursor: pointer;
     }
-  }
-
-  .field--send-on .recipient-fields__input:hover::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 1;
   }
 {% endstylesheet %}

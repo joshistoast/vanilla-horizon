@@ -622,6 +622,13 @@
   }
 {% endstylesheet %}
 
+{% unless request.design_mode %}
+  <script type="module">
+    import { hydrate } from '@theme/section-hydration';
+    hydrate('{{ section.id }}');
+  </script>
+{% endunless %}
+
 {% schema %}
 {
   "name": "t:names.header",

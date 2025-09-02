@@ -42,7 +42,7 @@
   {{ block.shopify_attributes }}
 >
   {%- if product != blank -%}
-    {%- assign product_form_id = 'BuyButtons-ProductForm-' | append: block.id -%}
+    {%- assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id -%}
     <product-form-component
       data-section-id="{{ section.id }}"
       data-product-id="{{ product.id }}"
@@ -57,7 +57,7 @@
         aria-atomic="true"
         ref="liveRegion"
       ></div>
-      {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+      {%- form 'product', product, id: product_form_id, data-type: 'add-to-cart-form' -%}
         <input
           type="hidden"
           name="id"

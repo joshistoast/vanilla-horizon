@@ -14,11 +14,13 @@
       "@theme/recently-viewed-products": "{{ 'recently-viewed-products.js' | asset_url }}",
       "@theme/scrolling": "{{ 'scrolling.js' | asset_url }}",
       "@theme/section-renderer": "{{ 'section-renderer.js' | asset_url }}",
+      "@theme/section-hydration": "{{ 'section-hydration.js' | asset_url }}",
       "@theme/utilities": "{{ 'utilities.js' | asset_url }}",
       "@theme/variant-picker": "{{ 'variant-picker.js' | asset_url }}",
       "@theme/media-gallery": "{{ 'media-gallery.js' | asset_url }}",
       "@theme/quick-add": "{{ 'quick-add.js' | asset_url }}",
-      "@theme/paginated-list-aspect-ratio": "{{ 'paginated-list-aspect-ratio.js' | asset_url }}"
+      "@theme/paginated-list-aspect-ratio": "{{ 'paginated-list-aspect-ratio.js' | asset_url }}",
+      "@theme/popover-polyfill": "{{ 'popover-polyfill.js' | asset_url }}"
     }
   }
 </script>
@@ -51,6 +53,11 @@
 <link
   rel="modulepreload"
   href="{{ 'section-renderer.js' | asset_url }}"
+  fetchpriority="low"
+>
+<link
+  rel="modulepreload"
+  href="{{ 'section-hydration.js' | asset_url }}"
   fetchpriority="low"
 >
 <link
@@ -98,6 +105,11 @@
   href="{{ 'events.js' | asset_url }}"
   fetchpriority="low"
 >
+<script
+  src="{{ 'popover-polyfill.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
 <script
   src="{{ 'quick-add.js' | asset_url }}"
   type="module"
