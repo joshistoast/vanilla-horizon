@@ -261,6 +261,19 @@ export function onDocumentLoaded(callback) {
 }
 
 /**
+ * Check if the DOM is ready and call the callback when it is.
+ * This fires when the DOM is fully parsed but before all resources are loaded.
+ * @param {() => void} callback The function to call when the DOM is ready.
+ */
+export function onDocumentReady(callback) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', callback);
+  } else {
+    callback();
+  }
+}
+
+/**
  * Wait for all animations to finish before calling the callback.
  * @param {Element | Element[]} elements The element(s) whose animations to wait for.
  * @param {() => void} [callback] The function to call when all animations are finished.

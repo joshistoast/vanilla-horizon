@@ -80,7 +80,7 @@
   endif
 
   assign onboarding = false
-  if product.id == empty
+  if product.id == empty or product == blank
     assign onboarding = true
   endif
 %}
@@ -90,6 +90,9 @@
     data-product-id="{{ product.id }}"
     data-featured-media-url="{{ featured_media_url }}"
     data-product-transition="{{ settings.transition_to_main_product }}"
+    {% if onboarding %}
+      data-placeholder="true"
+    {% endif %}
   >
 {%- endif -%}
 <product-card
@@ -101,6 +104,9 @@
   {{ block.shopify_attributes }}
   {% if no_swatch_selected %}
     data-no-swatch-selected="true"
+  {% endif %}
+  {% if onboarding %}
+    data-placeholder="true"
   {% endif %}
 >
   <a

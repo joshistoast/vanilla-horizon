@@ -54,12 +54,19 @@ const MORPH_OPTIONS = {
 
       // Special case for elements that need to keep their style
       const elements = ['floating-panel-component'];
+      const ids = ['account-popover'];
 
       for (const element of elements) {
         const tagName = element.toUpperCase();
         if (oldNode.tagName === tagName && newNode.tagName === tagName) {
           const oldStyle = oldNode.getAttribute('style');
 
+          if (oldStyle) newNode.setAttribute('style', oldStyle);
+        }
+      }
+      for (const id of ids) {
+        if (oldNode.id === id && newNode.id === id) {
+          const oldStyle = oldNode.getAttribute('style');
           if (oldStyle) newNode.setAttribute('style', oldStyle);
         }
       }

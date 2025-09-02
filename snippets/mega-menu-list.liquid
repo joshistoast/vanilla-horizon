@@ -9,6 +9,7 @@
   @param {string} [menu_content_type] - Type of content: 'featured_products', 'featured_collections', 'collection_images', or 'text'.
   @param {number} [content_aspect_ratio] - Aspect ratio for content images.
   @param {number} [image_border_radius] - Border radius for content images.
+  @param {object} [section] - The section object.
 
   @example
   {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
@@ -24,6 +25,11 @@
   assign links_before_wrap = 10
   assign max_menu_columns = grid_columns_count | default: 6
   assign max_menu_columns_tablet = grid_columns_count_tablet | default: 4
+
+  assign eager_loading = false
+  if section.index == blank
+    assign eager_loading = true
+  endif
 
   if menu_content_type == 'collection_images'
     assign collection_links = parent_link.links | where: 'type', 'collection_link'
@@ -184,7 +190,11 @@
       assign max_product_columns = max_menu_columns | minus: column_count | at_most: max_products
     endif
 
-    assign max_product_columns = max_product_columns | at_most: collection_object.products.size
+    if eager_loading
+      assign max_product_columns = max_product_columns | at_most: collection_object.products_count
+    else
+      assign max_product_columns = 0
+    endif
 
     assign max_featured_products = max_product_columns
     assign max_menu_columns = max_menu_columns | minus: max_product_columns
@@ -198,7 +208,7 @@
       assign max_product_columns_tablet = max_menu_columns_tablet | minus: column_count | at_most: max_products_tablet
     endif
 
-    assign max_product_columns_tablet = max_product_columns_tablet | at_most: collection_object.products.size
+    assign max_product_columns_tablet = max_product_columns_tablet | at_most: max_product_columns
 
     assign max_featured_products_tablet = max_product_columns_tablet
     assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_product_columns_tablet
@@ -265,19 +275,21 @@
       <ul
         class="mega-menu__content-list mega-menu__content-list--products list-unstyled"
       >
-        {% paginate collection_object.products by max_featured_products %}
-          {% for item in collection_object.products %}
-            <li class="mega-menu__content-list-item {% if forloop.index > max_featured_products_tablet %} mega-menu__content-list-item--hidden-tablet{% endif %}">
-              {% render 'resource-card',
-                resource: item,
-                resource_type: 'product',
-                image_hover: true,
-                image_aspect_ratio: content_aspect_ratio,
-                image_sizes: image_sizes
-              %}
-            </li>
-          {% endfor %}
-        {% endpaginate %}
+        {% if eager_loading %}
+          {% paginate collection_object.products by max_featured_products %}
+            {% for item in collection_object.products %}
+              <li class="mega-menu__content-list-item {% if forloop.index > max_featured_products_tablet %} mega-menu__content-list-item--hidden-tablet{% endif %}">
+                {% render 'resource-card',
+                  resource: item,
+                  resource_type: 'product',
+                  image_hover: true,
+                  image_aspect_ratio: content_aspect_ratio,
+                  image_sizes: image_sizes
+                %}
+              </li>
+            {% endfor %}
+          {% endpaginate %}
+        {% endif %}
       </ul>
     </span>
   {% when 'featured_collections' %}

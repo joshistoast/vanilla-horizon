@@ -27,10 +27,7 @@
     aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
   >
     <p class="announcement-bar__text">
-      {% comment %}
-        Not using block_settings.text here because live replacement in editor doesn't work as well.
-      {% endcomment %}
-      {{ block_settings.text }}
+      {{ block.settings.text }}
     </p>
 
     {% if block_settings.link != blank %}
