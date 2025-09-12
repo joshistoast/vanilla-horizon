@@ -1,19 +1,95 @@
-
-
 {%- doc -%}
-  Renders a heading block.
+  Featured Blog Posts Title Block
 
-  @param {string} text
+  Renders a blog title with text styling options.
+  Uses the blog title from section settings or placeholder text.
+
+  Block receives:
+  - block.settings: All configured settings from the schema
+  - section.settings.blog: The parent section's blog setting
+
+  @example
+  {% content_for 'block', type: '_featured-blog-posts-title', id: 'blog-title' %}
 {%- enddoc -%}
 
-{% render 'text', width: '100%', block: block, fallback_text: text %}
 
-{% # theme-check-disable %}
+
+{% liquid
+  if closest.blog != blank
+    assign blog_title = closest.blog.title
+  elsif section.settings.blog != blank
+    assign blog_title = section.settings.blog.title
+  else
+    assign blog_title = 'placeholders.blog_posts' | t
+  endif
+%}
+
+{% capture blog_title_text %}
+  <h3>{{ blog_title }}</h3>
+{% endcapture %}
+
+{% render 'text', fallback_text: blog_title_text, block: block %}
+
 {% schema %}
 {
-  "name": "t:names.heading",
-  "tag": null,
+  "name": "t:names.title",
   "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:settings.text"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit"
+        },
+        {
+          "value": "100%",
+          "label": "t:options.fill"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "t:settings.max_width",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "t:options.narrow"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "none",
+          "label": "t:options.none"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left",
+      "visible_if": "{{ block.settings.width == '100%' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
     {
       "type": "select",
       "id": "type_preset",
@@ -56,7 +132,6 @@
           "label": "t:options.custom"
         }
       ],
-      "default": "rte",
       "info": "t:info.edit_presets_in_theme_settings"
     },
     {
@@ -262,31 +337,32 @@
       "visible_if": "{{ block.settings.type_preset != 'rte' }}"
     },
     {
-      "type": "richtext",
-      "id": "text",
-      "label": "t:settings.text",
-      "visible_if": "{{ block.settings.read_only != true }}"
+      "type": "header",
+      "content": "t:content.appearance"
     },
     {
       "type": "checkbox",
-      "id": "read_only",
-      "label": "t:settings.read_only",
-      "visible_if": "{{ false }}",
+      "id": "background",
+      "label": "t:settings.background",
       "default": false
     },
     {
-      "type": "text_alignment",
-      "id": "alignment",
-      "label": "t:settings.alignment",
-      "default": "left",
-      "visible_if": "{{ block.settings.show_alignment != false }}"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "alpha": true,
+      "default": "#00000026",
+      "visible_if": "{{ block.settings.background }}"
     },
     {
-      "type": "checkbox",
-      "id": "show_alignment",
-      "label": "t:settings.show_alignment",
-      "default": true,
-      "visible_if": "{{ false }}"
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "default": 0,
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "visible_if": "{{ block.settings.background }}"
     },
     {
       "type": "header",
@@ -335,4 +411,3 @@
   ]
 }
 {% endschema %}
-{% # theme-check-enable %}

@@ -31,6 +31,7 @@
     if is_main_product_media
       assign fetch_priority = 'high'
     endif
+    assign focal_point_style = '--focal-point: ' | append: media.presentation.focal_point | append: ';'
   %}
   {{
     media.preview_image
@@ -43,7 +44,8 @@
       class: 'product-media__image',
       transitionToProduct: settings.transition_to_main_product,
       data_max_resolution: high_res_url,
-      fetchpriority: fetch_priority
+      fetchpriority: fetch_priority,
+      style: focal_point_style
   }}
 
   {% unless preview_image_only %}
@@ -136,6 +138,10 @@
     aspect-ratio: var(--gallery-aspect-ratio, var(--ratio));
     min-height: 0;
     min-width: 0;
+  }
+
+  .product-media__image {
+    object-position: var(--focal-point, center center);
   }
 
   /*** Media border-radius feature ****/
